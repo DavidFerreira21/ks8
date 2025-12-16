@@ -6,3 +6,5 @@ down:
 
 install-nginx:
 	kubectl apply -k ingress-nginx
+
+	
