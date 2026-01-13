@@ -16,7 +16,7 @@ Repositório dedicado aos meus estudos do curso **Kubernetes**. Aqui registro re
 
 1. **Configure o ambiente** seguindo o guia do Kind para garantir que o cluster local está funcionando.
 2. **Abra a aula desejada** pelo link no índice acima para revisar conteúdos e executar os exercícios.
-3. **Execute os comandos** descritos em cada README diretamente no cluster Kind (makefile oferece atalhos como `make up`, `make nodes` e `make down`).
+3. **Execute os comandos** descritos em cada README diretamente no cluster Kind (makefile oferece atalhos como `make up`, `make test`, `make install-nginx` e `make down`).
 
 ## Ambiente adotado
 
@@ -24,8 +24,3 @@ Repositório dedicado aos meus estudos do curso **Kubernetes**. Aqui registro re
 - `kind` configurado via `kind-config.yaml` para criar um cluster com um control-plane e dois workers.
 - `kubectl` instalado localmente, com contexto `kind-dev` configurado após `make up`.
 
-## Próximos passos
-
-- Documentar as aulas seguintes do curso e incluir novos exemplos de manifests.
-- Adicionar notas de troubleshooting e soluções para erros comuns.
-- Registrar exercícios extras envolvendo ingress, serviços e objetos avançados.
