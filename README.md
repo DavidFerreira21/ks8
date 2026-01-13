@@ -5,9 +5,12 @@ Repositório dedicado aos meus estudos do curso **Kubernetes**. Aqui registro re
 ## Estrutura do repositório
 
 - [Guia rápido de instalação do Kind no WSL](install-kind.md) — passo a passo para preparar o ambiente com Docker Desktop + WSL + Kind.
-- [Aula 01 - Fundamentos e primeiros passos](aula-01/README.md) — anotações completas da primeira aula, cobrindo conceitos centrais e primeiros comandos.
+- [Resumo](resume.md) — resumo geral dos objetos e conceitos vistos nos estudos.
+- [Fundamentos](aula-01/README.md) — anotações completas da primeira aula, cobrindo conceitos centrais e primeiros comandos.
+- [Pod](2-pod/README.md) — comandos para criar, inspecionar e diagnosticar Pods.
+- [Deployment](3-deployment/README.md) — aplicacao, estrategias e rollout de Deployments.
+- [ReplicaSet,DaemonSet,Probs](4-replicaSet e daemonSet/README.md) — comandos e casos de uso de ReplicaSet e DaemonSet.
 
-Novas pastas serão adicionadas conforme eu avançar nas demais aulas do treinamento.
 
 ## Como utilizar
 

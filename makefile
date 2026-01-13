@@ -4,6 +4,10 @@ up:
 down:
 	kind delete cluster --name dev
 
+test:
+	kubectl apply -f test-deploy.yaml
+	
+
 Config-bash:
 	sudo apt-get install bash-completion 
 	kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
@@ -11,6 +15,6 @@ Config-bash:
 	echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 
 install-nginx:
-	kubectl apply -k ingress-nginx
+	kubectl apply -f ingress-nginx/ingress-nginx.yaml
 
 	
