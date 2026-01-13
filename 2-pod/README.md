@@ -1,6 +1,18 @@
 # Pods
 
-Guia rapido de comandos para criar, inspecionar e diagnosticar Pods.
+## Indice
+
+- [O que e um Pod](#o-que-e-um-pod)
+- [Consultar Pods](#consultar-pods)
+- [Criar e remover Pods](#criar-e-remover-pods)
+- [Logs](#logs)
+- [Acesso ao container](#acesso-ao-container)
+- [Limites de CPU e memoria](#limites-de-cpu-e-memoria)
+- [Volume EmptyDir no Pod](#volume-emptydir-no-pod)
+
+## O que e um Pod:
+
+O Pod e a menor unidade do Kubernetes. Ele pode conter um ou mais containers que compartilham rede e volumes.
 
 ## Consultar Pods
 
@@ -36,10 +48,16 @@ kubectl apply -f pod.yaml
 kubectl apply -f pod-mult-container.yaml
 ```
 
-- Remover um Pod
+- Remover um Pod pelo nome
 
 ```bash
 kubectl delete pod <nome-do-pod>
+```
+
+- Remover o Pod definido em um arquivo
+
+```bash
+kubectl delete -f pod.yaml
 ```
 
 ## Logs
