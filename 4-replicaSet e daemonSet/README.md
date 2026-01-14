@@ -1,4 +1,4 @@
-# ReplicaSet,Daemonsets e Probs
+# ReplicaSet, DaemonSet e StatefulSet
 
 ## Indice
 
@@ -7,6 +7,8 @@
 - [O que e um DaemonSet](#o-que-e-um-daemonset)
 - [Casos de uso comuns](#casos-de-uso-comuns)
 - [Comandos (DaemonSet)](#comandos-daemonset)
+- [O que e um StatefulSet](#o-que-e-um-statefulset)
+- [Comandos (StatefulSet)](#comandos-statefulset)
 
 ## O que e um ReplicaSet:
 
@@ -98,4 +100,54 @@ kubectl delete daemonset node-exporter
 
 ```bash
 kubectl delete -f node-exporter-daemonset.yaml
+```
+
+## O que e um StatefulSet:
+
+StatefulSet e um controlador projetado para aplicacoes stateful. Ele garante identidade fixa para cada Pod (nome previsivel), ordem de criacao/remocao e volumes persistentes exclusivos por replica.
+
+Isso e fundamental para apps como bancos de dados (PostgreSQL, MongoDB) e sistemas distribuidos (Kafka, Zookeeper).
+
+## Comandos (StatefulSet)
+
+- Aplicar o manifesto do StatefulSet (Service headless + StatefulSet)
+
+```bash
+kubectl apply -f statefulset.yaml
+```
+
+- Listar StatefulSets
+
+```bash
+kubectl get statefulset
+```
+
+- Detalhar um StatefulSet
+
+```bash
+kubectl describe statefulset nginx-stateful
+```
+
+- Listar os Pods do StatefulSet
+
+```bash
+kubectl get pods -l app=nginx-stateful
+```
+
+- Listar PVCs criados pelo StatefulSet
+
+```bash
+kubectl get pvc
+```
+
+- Remover o StatefulSet pelo nome
+
+```bash
+kubectl delete statefulset nginx-stateful
+```
+
+- Remover o StatefulSet definido em um arquivo
+
+```bash
+kubectl delete -f statefulset.yaml
 ```
