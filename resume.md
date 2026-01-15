@@ -29,6 +29,7 @@ Este arquivo reune os principais conceitos e objetos vistos no repositorio ate a
 - Rollout/Rollback: atualizacoes controladas de Deployments.
 - Estrategias de deployment: RollingUpdate e Recreate (inclui maxSurge e maxUnavailable).
 - DaemonSet: garante um Pod por no (ex: agentes de monitoramento).
+- StatefulSet: identidade fixa, ordem de criacao/remocao e volumes exclusivos por replica.
 
 ## Rede e exposicao
 
@@ -38,7 +39,7 @@ Este arquivo reune os principais conceitos e objetos vistos no repositorio ate a
 
 ## Saude e observabilidade
 
-- Probes: liveness e readiness para checar vida e prontidao do container.
+- Probes: liveness, readiness e startup para vida, prontidao e inicializacao.
 - Logs: saida dos Pods para diagnostico.
 - Events: eventos do cluster para troubleshooting.
 
