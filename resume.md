@@ -36,6 +36,7 @@ Este arquivo reune os principais conceitos e objetos vistos no repositorio ate a
 - Service: endpoint estavel para Pods (ClusterIP, NodePort, LoadBalancer).
 - Ingress: regras HTTP/HTTPS para expor servicos.
 - Ingress Controller: componente que implementa o Ingress (ex: ingress-nginx).
+- ingress-nginx: manifestos para subir o controller no Kind.
 
 ## Saude e observabilidade
 
@@ -46,9 +47,16 @@ Este arquivo reune os principais conceitos e objetos vistos no repositorio ate a
 ## Recursos e armazenamento
 
 - Requests e limits: minimo e maximo de CPU e memoria para containers.
-- Volumes: mecanismos de armazenamento para Pods.
+- Volumes: mecanismos de armazenamento para Pods (temporarios ou persistentes).
+- StorageClass: define classes de armazenamento e provisionamento.
+- volumeBindingMode: controla quando o PV e associado ao PVC (ex: WaitForFirstConsumer).
+- PersistentVolume (PV): recurso de armazenamento no cluster.
+- PersistentVolumeClaim (PVC): pedido de armazenamento feito por Pods.
+- AccessModes: RWO, ROX e RWX conforme o tipo de uso.
+- ReclaimPolicy: Retain/Delete define o que ocorre ao remover o PVC.
 - EmptyDir: volume temporario para compartilhamento entre containers.
 - HostPath: monta diretorios do no dentro do Pod (ex: /proc e /sys no DaemonSet).
+- NFS: armazenamento compartilhado via servidor NFS.
 
 ## Politicas de agendamento e rede do no
 
@@ -64,6 +72,9 @@ Este arquivo reune os principais conceitos e objetos vistos no repositorio ate a
 - Kustomize: compoe manifests e aplica patches (ex: ingress-nginx).
 - Kind/Minikube: criacao de clusters locais para estudo e testes.
 - kind-config.yaml: define o cluster local (control-plane e workers).
+- Makefile: atalhos para subir, validar e remover o cluster Kind.
+- install-kind.md: guia de instalacao do Kind no WSL.
+- Tools.md: referencia rapida de ferramentas externas (ex: Crane, FreeLens).
 
 ## Operacao basica
 
