@@ -182,6 +182,17 @@ TCP|Inbound|30000-32767|NodePort|Services All
 
 - **Services**: É uma forma de você expor a comunicação através de um *ClusterIP*, *NodePort* ou *LoadBalancer* para distribuir as requisições entre os diversos Pods daquele Deployment. Funciona como um balanceador de carga.
 
+- **Volumes**: Mecanismos de armazenamento que permitem compartilhar dados entre containers no mesmo Pod e manter dados persistentes além do ciclo de vida do Pod. Podem ser efêmeros (ex: *emptyDir*) ou persistentes via PV/PVC e StorageClass.
+
+- **Probes**: Checagens de saúde configuradas nos containers para o Kubernetes saber quando reiniciar (*liveness*), quando enviar tráfego (*readiness*) e quando dar tempo extra para inicialização (*startup*). Ajudam a manter disponibilidade e estabilidade.
+
+- **Ingress**: Camada HTTP/HTTPS que define regras de roteamento para expor serviços externamente com hostnames, paths, TLS e outros recursos. Depende de um Ingress Controller para funcionar.
+
+- **Secrets**: Armazenam dados sensíveis como senhas, tokens e chaves em base64. Podem ser montados como volume ou injetados via variáveis de ambiente, evitando hardcode nos manifests.
+
+- **Configmap**: Armazena configurações não sensíveis em pares chave/valor. Pode ser usado para injetar arquivos ou variáveis de ambiente nos Pods, separando configuração da imagem da aplicação.
+
+
 
 ### Kubectl: instalacao e customizacao
 
@@ -216,166 +227,3 @@ Para cenários que utilizam Docker Desktop/WSL ou pipelines de CI, o Kind (Kuber
 
 
 
-### Primeiros passos no k8s
-
-
-##### Verificando os namespaces e pods
-
-O k8s organiza tudo dentro de *namespaces*. Por meio deles, podem ser realizadas limitações de segurança e de recursos dentro do *cluster*, tais como *pods*, *replication controllers* e diversos outros. Para visualizar os *namespaces* disponíveis no *cluster*, digite:
-
-```
-kubectl get namespaces
-```
- 
-Vamos listar os *pods* do *namespace* **kube-system** utilizando o comando a seguir.
-
-```
-kubectl get pod -n kube-system
-```
- 
-Será que há algum *pod* escondido em algum *namespace*? É possível listar todos os *pods* de todos os *namespaces* com o comando a seguir.
-
-```
-kubectl get pods -A
-```
- 
-Há a possibilidade ainda, de utilizar o comando com a opção ```-o wide```, que disponibiliza maiores informações sobre o recurso, inclusive em qual nó o *pod* está sendo executado. Exemplo:
-
-```
-kubectl get pods -A -o wide
-```
- 
-##### Executando nosso primeiro pod no k8s
-
-Iremos iniciar o nosso primeiro *pod* no k8s. Para isso, executaremos o comando a seguir.
-
-```
-kubectl run nginx --image nginx
-
-pod/nginx created
-```
- 
-Listando os *pods* com ``kubectl get pods``, obteremos a seguinte saída.
-
-```
-NAME    READY   STATUS    RESTARTS   AGE
-nginx   1/1     Running   0          66s
-```
- 
-Vamos agora remover o nosso *pod* com o seguinte comando.
-
-```
-kubectl delete pod nginx
-```
-
-A saída deve ser algo como:
-
-```
-pod "nginx" deleted
-```
-
-
-##### Executando nosso primeiro pod no k8s
-
-
-Uma outra forma de criar um pod ou qualquer outro objeto no Kubernetes é através da utilizaçâo de uma arquivo manifesto, que é uma arquivo em formato YAML onde você passa todas as definições do seu objeto. Mas pra frente vamos falar muito mais sobre como construir arquivos manifesto, mas agora eu quero que você conheça a opção ``--dry-run`` do ``kubectl``, pos com ele podemos simular a criação de um resource e ainda ter um manifesto criado automaticamente. 
-
-Exemplos:
-
-Para a criação do template de um *pod*:
-
-```
-kubectl run meu-nginx --image nginx --dry-run=client -o yaml > pod-template.yaml
-```
-
-Aqui estamos utilizando ainda o parametro '-o', utilizando para modificar a saída para o formato YAML.
-
-Para a criação do *template* de um *deployment*:
-
-Com o arquivo gerado em mãos, agora você consegue criar um pod utilizando o manifesto que criamos da seguinte forma:
-
-```
-kubectl apply -f pod-template.yaml
-```
-
-Não se preocupe por enquanto com o parametro 'apply', nós ainda vamos falar com mais detalhes sobre ele, nesse momento o importante é você saber que ele é utilizado para criar novos resources através de arquivos manifestos.
-
-
-#### Expondo o pod e criando um Service
-
-Dispositivos fora do *cluster*, por padrão, não conseguem acessar os *pods* criados, como é comum em outros sistemas de contêineres. Para expor um *pod*, execute o comando a seguir.
-
-```
-kubectl expose pod nginx
-```
-
-Será apresentada a seguinte mensagem de erro:
-
-```
-error: couldn't find port via --port flag or introspection
-See 'kubectl expose -h' for help and examples
-```
-
-O erro ocorre devido ao fato do k8s não saber qual é a porta de destino do contêiner que deve ser exposta (no caso, a 80/TCP). Para configurá-la, vamos primeiramente remover o nosso *pod* antigo:
-
-```
-kubectl delete -f pod-template.yaml
-```
-
-Agora vamos executar novamente o comando para a criação do pod utilizando o parametro 'dry-run', porém agora vamos adicionar o parametro '--port' para dizer qual a porta que o container está escutando, lembrando que estamos utilizando o nginx nesse exemplo, um webserver que escuta por padrão na porta 80.
-
-
-
-```
-kubectl run meu-nginx --image nginx --port 80 --dry-run=client -o yaml > pod-template.yaml
-kubectl create -f pod-template.yaml
-```
-
-Liste os pods.
-
-```
-kubectl get pods
-
-NAME    READY   STATUS    RESTARTS   AGE
-meu-nginx   1/1     Running   0          32s
-```
-
-O comando a seguir cria um objeto do k8s chamado de *Service*, que é utilizado justamente para expor *pods* para acesso externo.
-
-```
-kubectl expose pod meu-nginx
-```
-
-Podemos listar todos os *services* com o comando a seguir.
-
-```
-kubectl get services
-
-NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
-kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   8d
-nginx        ClusterIP   10.105.41.192   <none>        80/TCP    2m30s
-```
-
-Como é possível observar, há dois *services* no nosso *cluster*: o primeiro é para uso do próprio k8s, enquanto o segundo foi o quê acabamos de criar. 
-
-
-#### Limpando tudo e indo para casa
-
-Para mostrar todos os recursos recém criados, pode-se utilizar uma das seguintes opções a seguir.
-
-```
-kubectl get all
-
-kubectl get pod,service
-
-kubectl get pod,svc
-```
-
-Note que o k8s nos disponibiliza algumas abreviações de seus recursos. Com o tempo você irá se familiar com elas. Para apagar os recursos criados, você pode executar os seguintes comandos.
-
-```
-kubectl delete -f pod-template.yaml
-kubectl delete service nginx
-```
-
-Liste novamente os recursos para ver se os mesmos ainda estão presentes.
