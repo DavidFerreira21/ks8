@@ -11,7 +11,8 @@ Repositorio dedicado aos meus estudos do curso **Kubernetes**. Aqui registro res
 - [Deployment](3-deployment/README.md) — aplicacao, estrategias e rollout de Deployments.
 - [ReplicaSet, DaemonSet e StatefulSet](4-replicaSet-daemonSet-statefulSet/README.md) — casos de uso e manifests.
 - [Probes](5-probes/README.md) — liveness, readiness e startup probes.
-- [Volumes](6-Volumes/README.md) — StorageClass, PV, PVC e uso em Pods.
+- [Volumes](6-volumes/README.md) — StorageClass, PV, PVC e uso em Pods.
+- [Services](7-services/README.md) — tipos de Service e exposicao de Pods.
 
 ## Como utilizar
 

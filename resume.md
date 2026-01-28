@@ -34,6 +34,9 @@ Este arquivo reune os principais conceitos e objetos vistos no repositorio ate a
 ## Rede e exposicao
 
 - Service: endpoint estavel para Pods (ClusterIP, NodePort, LoadBalancer).
+- ExternalName: alias DNS para servicos externos sem endpoints locais.
+- Headless Service: `clusterIP: None` para expor IPs dos Pods via DNS (comum em StatefulSet).
+- Endpoints: lista de IPs/portas dos Pods associados ao Service.
 - Ingress: regras HTTP/HTTPS para expor servicos.
 - Ingress Controller: componente que implementa o Ingress (ex: ingress-nginx).
 - ingress-nginx: manifestos para subir o controller no Kind.
