@@ -1,9 +1,38 @@
 # Guia rápido: Kind no WSL com Docker Desktop
 
-## Pré-requisitos
-- Habilitar o WSL no Windows e definir o Ubuntu como distro padrão
-- Instalar o Docker Desktop no Windows
-- Habilitar o recurso **WSL Integration** do Docker Desktop para a distro Ubuntu
+## Pré-requisitos (Windows)
+### 1) Instalar/ativar o WSL e definir o Ubuntu como padrão
+Abra o PowerShell como Administrador e execute:
+```powershell
+wsl --install
+wsl --set-default-version 2
+wsl --install -d Ubuntu
+```
+Defina o Ubuntu como distro padrão:
+```powershell
+wsl --set-default Ubuntu
+```
+Reinicie o Windows se for solicitado.
+
+### 2) Instalar o Docker Desktop
+1. Baixe e instale o Docker Desktop para Windows.
+2. Abra o Docker Desktop e finalize o onboarding.
+
+### 3) Habilitar WSL Integration no Docker Desktop
+No Docker Desktop:
+1. **Settings** → **Resources** → **WSL Integration**
+2. Marque **Enable integration with my default WSL distro**
+3. Ative a integração para **Ubuntu**
+4. Clique em **Apply & Restart**
+
+### 4) Validar WSL + Docker dentro do Ubuntu
+Abra o Ubuntu (WSL) e rode:
+```bash
+wsl --list --verbose
+docker version
+docker ps
+```
+Siga adiante somente se o Docker estiver respondendo sem erros dentro do Ubuntu.
 
 ## Instalar o Kind
 ```bash
@@ -22,12 +51,23 @@ Siga apenas se ambos os comandos executarem sem erros.
 ## Criar o cluster Kind
 1. Confira `kind-config.yaml` (exemplo abaixo) e ajuste se necessário:
    ```yaml
-   kind: Cluster
-   apiVersion: kind.x-k8s.io/v1alpha4
    nodes:
-     - role: control-plane
-     - role: worker
-     - role: worker
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "ingress-ready=true"
+
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 80
+      - containerPort: 443
+        hostPort: 443
+
+  - role: worker
+  - role: worker
    ```
 2. Suba o cluster: `make up` (atalho para `kind create cluster --name dev --config kind-config.yaml`).
 3. Valide o contexto `kind-dev`:
