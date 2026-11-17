@@ -1,57 +1,72 @@
-# Camada 04 — Platform Engineering e GitOps
+# 🔀 Camada 04 · Platform Engineering e GitOps
 
-[← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
+[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [🧪 Labs](../../docs/labs.md)
 
-> 🔀 **CAMADA 04 · TRILHA KUBERNETES**  
-> Explore reconciliação, extensibilidade, políticas e GitOps.
+> **Objetivo da camada**  
+> Entender como Kubernetes pode oferecer APIs declarativas, reconciliação, políticas e GitOps como capacidades de uma plataforma.
 
-### Acesso rápido
-
-[**🗺️ Roadmap**](../../docs/roadmap.md) · [**🧪 Laboratórios**](../../docs/labs.md) · [**🎨 Convenção visual**](../../docs/infograficos.md)
+**8 conceitos planejados** · **roteiro de estudo** · **laboratórios a implementar**
 
 ---
 
-**Objetivo:** evoluir dos recursos nativos do Kubernetes para extensibilidade, políticas, automação, GitOps e uma abordagem de plataforma como produto.
+## 🧭 Mapa de capacidades da plataforma
 
-## Roteiro de estudo
+| **EXTENSIBILIDADE** | **ENTREGA DECLARATIVA** |
+| :--- | :--- |
+| 🧩 **Novos tipos de recursos e controladores.**<br>CRDs e Operators ampliam o comportamento da API.<br><br>[**Custom Resources →**](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) | 🔁 **Git e estado desejado.**<br>Argo CD reconcilia workloads; Crossplane aplica o mesmo modelo a recursos de infraestrutura.<br><br>[**GitOps / Argo CD →**](https://argo-cd.readthedocs.io/en/stable/) |
+| **SEGURANÇA E SEGREDOS** | **CAPACIDADE E OBSERVABILIDADE** |
+| 🛡️ **Políticas e integrações externas.**<br>Kyverno estabelece guardrails; External Secrets gerencia sincronização de segredos.<br><br>[**Kyverno →**](https://kyverno.io/docs/) | 📈 **Nós e sinais operacionais.**<br>Karpenter provisiona capacidade em ambientes compatíveis; observabilidade explica o comportamento dos sistemas.<br><br>[**OpenTelemetry →**](https://opentelemetry.io/docs/) |
 
-| Tópico | Conceito principal | Situação |
+## 📚 Catálogo de tecnologias e conceitos
+
+### 🧩 Extensibilidade da API
+
+| Conceito | Papel na plataforma | Documentação |
 | --- | --- | --- |
-| CRDs e Custom Controllers | Estender a API e reconciliar novos recursos | Aula/lab a estruturar |
-| Operators | Automatizar operações de ciclo de vida | Aula/lab a estruturar |
-| Argo CD e GitOps | Git como fonte declarativa do estado desejado | Aula/lab a estruturar |
-| Crossplane | APIs de infraestrutura e composições | Aula/lab a estruturar |
-| Kyverno e Policy as Code | Guardrails declarativos | Aula/lab a estruturar |
-| External Secrets Operator | Sincronização controlada de segredos externos | Aula/lab a estruturar |
-| Karpenter | Provisionamento dinâmico de nós | Estudo conceitual primeiro; demanda ambiente compatível |
-| Observabilidade | Métricas, logs, traces e alertas | Aula/lab a estruturar |
+| **CRD e Custom Controllers** | Criar novos recursos e reconciliar estados | [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) |
+| **Kubernetes Operators** | Encapsular conhecimento operacional em controladores | [Operator Pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) |
 
-## Evolução prática sugerida (ainda não implementada)
+### 🔁 GitOps e infraestrutura declarativa
 
-- Instalar Argo CD no ambiente local e reconciliar uma aplicação de exemplo.
-- Criar uma política Kyverno para exigir labels.
-- Explorar um recurso customizado e o comportamento de seu controller.
-- Demonstrar Crossplane com um provider adequado ao laboratório, sem exigir uma conta cloud nos exercícios iniciais.
-- Instrumentar uma aplicação e observar métricas, logs e traces.
+| Conceito | Papel na plataforma | Documentação |
+| --- | --- | --- |
+| **Argo CD e GitOps** | Sincronizar configuração declarativa a partir do Git | [Argo CD](https://argo-cd.readthedocs.io/en/stable/) |
+| **Crossplane** | Compor APIs de infraestrutura e reconciliar recursos | [Crossplane](https://docs.crossplane.io/) |
 
-**Princípio do lab:** primeiro entender a reconciliação e observar seu funcionamento; somente depois adicionar automação e camadas de abstração. Exercícios que exigem serviços externos devem ter pré-requisitos explícitos.
+### 🛡️ Governança, operação e automação
 
-## Referências oficiais
+| Conceito | Papel na plataforma | Documentação |
+| --- | --- | --- |
+| **Kyverno e Policy as Code** | Aplicar e auditar políticas declarativas | [Kyverno](https://kyverno.io/docs/) |
+| **External Secrets Operator** | Sincronizar dados de provedores de segredos | [External Secrets](https://external-secrets.io/latest/) |
+| **Karpenter** | Provisionar nós conforme demanda e restrições em provedores compatíveis | [Karpenter](https://karpenter.sh/docs/) |
+| **Observabilidade** | Correlacionar métricas, logs e traces | [OpenTelemetry](https://opentelemetry.io/docs/) |
 
-- [Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)
-- [Operator Pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
-- [Argo CD](https://argo-cd.readthedocs.io/en/stable/)
-- [Crossplane](https://docs.crossplane.io/)
-- [Kyverno](https://kyverno.io/docs/)
-- [External Secrets Operator](https://external-secrets.io/latest/)
-- [Karpenter](https://karpenter.sh/docs/)
-- [OpenTelemetry](https://opentelemetry.io/docs/)
+**Estado atual:** estas são **páginas de orientação e referências**, não labs implementados. A camada não pressupõe que todos os componentes funcionem no Kind sem dependências adicionais.
 
-**Voltar ao** [Roadmap](../../docs/roadmap.md).
+## 🧪 Evolução prática sugerida
 
+| Fase | O que construir | Aprendizado principal |
+| :---: | --- | --- |
+| **01** | Argo CD reconciliando uma aplicação local | Estado desejado e drift |
+| **02** | Policy com Kyverno para labels obrigatórias | Guardrails declarativos |
+| **03** | CRD simples com controller ou Operator de exemplo | API estendida e reconciliação |
+| **04** | Crossplane com provider apropriado para ambiente local | Recursos compostos e APIs de plataforma |
+| **05** | Pipeline de sinais e instrumentação de aplicação | Métricas, logs, traces e diagnóstico |
+
+> **Princípio:** primeiro observar a reconciliação, depois automatizar. Crossplane e Karpenter exigem requisitos específicos; evite associar credenciais de nuvem a exercícios locais sem necessidade.
+
+## 🎯 Checklist de aprendizado
+
+- [ ] Explicar por que CRDs sozinhas não executam reconciliação.
+- [ ] Diferenciar GitOps de uma pipeline imperativa de deploy.
+- [ ] Identificar o papel de Policy as Code e gestão de segredos.
+- [ ] Descrever como uma plataforma oferece capacidades reutilizáveis em vez de expor apenas ferramentas.
+
+## 🎨 Material visual
+
+A coleção de infográficos foi produzida, mas os PNGs ainda não estão no GitHub. Confira a [convenção de publicação e revisão](../../docs/infograficos.md).
 
 ---
 
-### Continue estudando
-
-[← 03 · Arquitetura](../03-arquitetura/README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [⌂ Voltar ao início](../../README.md)
+[**← 03 · Arquitetura**](../03-arquitetura/README.md) · [↑ Roadmap](../../docs/roadmap.md) · **[⌂ Voltar ao início](../../README.md)**
