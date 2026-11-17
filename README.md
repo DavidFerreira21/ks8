@@ -2,17 +2,17 @@
 
 # ☸️ Kubernetes Visual Guide
 
-**Da primeira aplicação ao Platform Engineering — uma trilha prática e visual em português.**
+**Dos fundamentos às ferramentas do ecossistema Kubernetes — uma trilha prática e visual em português.**
 
-Aprenda os conceitos, execute laboratórios com **Kind**, investigue o comportamento do cluster e avance até **GitOps e extensibilidade**.
+Aprenda os conceitos, execute laboratórios com **Kind**, investigue o comportamento do cluster e avance até **extensibilidade, GitOps e ferramentas cloud-native**.
 
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Learning%20Path-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
-![Tópicos](https://img.shields.io/badge/44%20t%C3%B3picos-planejados-334155?style=flat-square)
+![Tópicos](https://img.shields.io/badge/52%20aulas-no%20cat%C3%A1logo-334155?style=flat-square)
 ![Camadas](https://img.shields.io/badge/4%20camadas-de%20estudo-0F766E?style=flat-square)
 ![Ambiente](https://img.shields.io/badge/Labs-Kind-8B5CF6?style=flat-square)
 ![Status](https://img.shields.io/badge/Projeto-em%20evolu%C3%A7%C3%A3o-D97706?style=flat-square)
 
-[**Começar a estudar**](docs/roadmap.md) · [**Preparar o Kind**](install-kind.md) · [**Explorar os labs**](docs/labs.md)
+[**Catálogo de 52 aulas**](docs/catalogo.md) · [**Começar a estudar**](docs/roadmap.md) · [**Preparar o Kind**](install-kind.md) · [**Explorar os labs**](docs/labs.md)
 
 </div>
 
@@ -20,18 +20,18 @@ Aprenda os conceitos, execute laboratórios com **Kind**, investigue o comportam
 
 ## 🧭 Escolha sua trilha
 
-Quatro camadas complementares: **usar → operar → compreender → construir uma plataforma**.
+Quatro camadas complementares: **usar → operar → compreender → explorar ferramentas**.
 
 | **01 · Fundamentos** | **02 · Operação e Segurança** |
 | :--- | :--- |
 | 📦 **Workloads, configuração e acesso**<br>Pods, Deployments, Services, Probes, Volumes e mais.<br><br>**[Explorar fundamentos →](trilhas/01-fundamentos/README.md)** | 🛡️ **Confiabilidade e governança**<br>RBAC, NetworkPolicy, Scheduling, Quotas e PDB.<br><br>**[Explorar operação →](trilhas/02-operacao-seguranca/README.md)** |
 
 
-| **03 · Arquitetura e Infraestrutura** | **04 · Platform Engineering e GitOps** |
+| **03 · Arquitetura e Infraestrutura** | **04 · Ferramentas do Ecossistema** |
 | :--- | :--- |
-| 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🔀 **Kubernetes como plataforma**<br>CRDs, Operators, Argo CD, Crossplane, Kyverno e observabilidade.<br><br>**[Explorar Platform Engineering →](trilhas/04-platform-engineering/README.md)** |
+| 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🧰 **Ferramentas cloud-native**<br>Argo CD, Crossplane, Kyverno, External Secrets, Karpenter, Cilium e Prometheus/Grafana.<br><br>**[Explorar ferramentas →](trilhas/04-platform-engineering/README.md)** |
 
-> **Como interpretar a trilha:** os **44 tópicos** são a coleção planejada de conceitos e infográficos; nem todos possuem laboratório executável. Os PNGs ilustrados **ainda serão publicados** no repositório. As páginas mostram o estado real de cada exercício.
+> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados e outros planejados; nem todos possuem laboratório executável. Os PNGs ilustrados **ainda serão publicados** no repositório. As páginas mostram o estado real de cada exercício.
 
 ## 🚀 Comece em 3 passos
 
@@ -60,7 +60,7 @@ make lab-down    # Remove apenas os recursos do lab
 | [RBAC mínimo](trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md) | ServiceAccount, Role, RoleBinding e permissões | 🧪 Manifestos disponíveis |
 | [Quotas e limites](trilhas/02-operacao-seguranca/labs/quota-namespace/README.md) | LimitRange e rejeição por ResourceQuota | 🧪 Manifestos disponíveis |
 | [Arquitetura](trilhas/03-arquitetura/README.md) | Observação dos componentes internos | 📘 Roteiro conceitual |
-| [Platform Engineering](trilhas/04-platform-engineering/README.md) | GitOps, extensibilidade e políticas | 📘 Roteiro conceitual |
+| [Ferramentas do ecossistema](trilhas/04-platform-engineering/README.md) | GitOps, governança, networking e observabilidade | 📘 Roteiro conceitual |
 
 **Legenda:** 🧪 possui exemplos/arquivos de lab (execução real ainda precisa ser validada) · 📘 conteúdo ou roteiro de estudo · 🚧 planejado.
 
@@ -69,7 +69,7 @@ make lab-down    # Remove apenas os recursos do lab
 Consulte as explicações, os comandos e os manifests que complementam os guias da trilha. Todo esse material faz parte do mesmo percurso de estudo.
 
 <details>
-<summary><strong>Mostrar o índice das aulas originais</strong></summary>
+<summary><strong>Mostrar anotações e exemplos complementares</strong></summary>
 
 | Aula | Conteúdo |
 | --- | --- |
