@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.06 — Jobs e CronJobs](images/jobs-cronjobs.png)
+
+> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+
+
 ## O que você vai aprender
 
 Job executa Pods até atingir a conclusão desejada; CronJob cria Jobs seguindo uma expressão cron.
@@ -22,9 +29,7 @@ Crie Job simples, observe completions e logs; depois agende CronJob e inspecione
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
 
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 
