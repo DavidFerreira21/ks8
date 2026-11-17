@@ -4,6 +4,13 @@
 
 > **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../5-probes/README.md).
 
+## 🎨 Infográfico
+
+![01.05 — Probes — Liveness, Readiness e Startup](images/probes.png)
+
+> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+
+
 ## Objetivo
 
 Distinguir verificações de inicialização, prontidão e saúde dos containers.
@@ -18,7 +25,6 @@ Distinguir verificações de inicialização, prontidão e saúde dos containers
 
 Consulte as [anotações e exemplos práticos](../../../5-probes/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
 
-**Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
 ## Laboratório e observação
 
