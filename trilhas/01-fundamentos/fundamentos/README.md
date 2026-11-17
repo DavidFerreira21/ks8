@@ -2,7 +2,7 @@
 
 [← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
 
-> **Migração progressiva:** este é o ponto de entrada da aula. A explicação e os exercícios originais seguem preservados em [1-fundamentos/README.md](../../../1-fundamentos/README.md). Não movemos nem alteramos os manifests existentes neste PR.
+> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [1-fundamentos/README.md](../../../1-fundamentos/README.md).
 
 ## Objetivo
 
@@ -16,7 +16,7 @@ Conhecer containers, kubectl, o cluster Kubernetes e os primeiros objetos.
 
 ## Estude o conceito
 
-Leia a [aula original](../../../1-fundamentos/README.md), que contém os exemplos, explicações e comandos já presentes na trilha.
+Consulte as [anotações e exemplos práticos](../../../1-fundamentos/README.md), que contém os exemplos, explicações e comandos já presentes na trilha.
 
 **Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
@@ -24,7 +24,7 @@ Leia a [aula original](../../../1-fundamentos/README.md), que contém os exemplo
 
 **Pré-requisito:** [Kind configurado](../../../install-kind.md) e contexto correto selecionado. Confira `kubectl config current-context` antes de executar comandos que alterem o cluster.
 
-Use os manifests e exemplos da [aula original](../../../1-fundamentos/README.md). Para observar o cluster:
+Utilize os manifests e exemplos das [anotações e exemplos práticos](../../../1-fundamentos/README.md). Para observar o cluster:
 
 ```bash
 kubectl config current-context
