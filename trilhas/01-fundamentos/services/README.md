@@ -42,3 +42,10 @@ Também há um [lab integrado Pod → Deployment → Service](../labs/primeira-a
 - [Kubernetes — Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 
 **Próximo passo:** revise [os demais tópicos da camada](../README.md) e avance para [Operação e Segurança](../../02-operacao-seguranca/README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../probes/README.md) · [↑ Voltar à camada](../README.md) · Fim da camada ✓
