@@ -19,18 +19,18 @@
 
 ## 📚 Catálogo de conceitos
 
-Os links **Estudar** abrem as páginas novas; **Aula original** mantém acesso aos exemplos já produzidos. Temas sem página própria ficam identificados como planejados, sem sugerir que um lab exista.
+Os links **Estudar** apresentam o roteiro do conceito; **Anotações e exemplos** dão acesso às explicações, comandos e manifests complementares. Temas sem página própria ficam identificados como planejados, sem sugerir que um lab exista.
 
 ### Workloads · como executar aplicações
 
 | Conceito | Guia | Experiência prática |
 | --- | --- | --- |
-| **01. Fundamentos** | [📖 Estudar](fundamentos/README.md) | [Aula original](../../1-fundamentos/README.md) |
-| **02. Pods** | [📖 Estudar](pods/README.md) | [Aula original](../../2-pod/README.md) |
-| **03. Deployments** | [📖 Estudar](deployments/README.md) | [Aula original](../../3-deployment/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| **04. Services** | [📖 Estudar](services/README.md) | [Aula original](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| **05. ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Aula original](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| **06. Probes** | [📖 Estudar](probes/README.md) | [Aula original](../../5-probes/README.md) |
+| **01. Fundamentos** | [📖 Estudar](fundamentos/README.md) | [Anotações e exemplos](../../1-fundamentos/README.md) |
+| **02. Pods** | [📖 Estudar](pods/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
+| **03. Deployments** | [📖 Estudar](deployments/README.md) | [Anotações e exemplos](../../3-deployment/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
+| **04. Services** | [📖 Estudar](services/README.md) | [Anotações e exemplos](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
+| **05. ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações e exemplos](../../4-replicaSet-daemonSet-statefulSet/README.md) |
+| **06. Probes** | [📖 Estudar](probes/README.md) | [Anotações e exemplos](../../5-probes/README.md) |
 
 ### Configuração, recursos e acesso · aprofundamento
 
@@ -53,7 +53,7 @@ Os links **Estudar** abrem as páginas novas; **Aula original** mantém acesso a
 | **Ambiente** | Kind local, namespace de laboratório isolado. |
 | **Começar** | **[Abrir laboratório →](labs/primeira-aplicacao/README.md)** |
 
-> **Importante:** manifests e roteiro estão disponíveis, mas a execução ponta a ponta no Kind ainda precisa de validação. O material de Volumes citado em índices históricos continua sem um README original localizado; não foi recriado neste ajuste visual.
+> **Importante:** manifests e roteiro estão disponíveis, mas a execução ponta a ponta no Kind ainda precisa de validação. O conteúdo de Volumes ainda não tem uma página completa identificada no repositório; os conceitos disponíveis continuam acessíveis pelo resumo.
 
 ## 🎯 Checklist de aprendizado
 
