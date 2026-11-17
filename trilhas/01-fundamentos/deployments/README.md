@@ -1,57 +1,90 @@
-# Deployments
+# 01.06 · Deployments
 
-[← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
+[⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../3-deployment/README.md).
+> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
 
 ## 🎨 Infográfico
 
 ![01.06 — Deployments](images/deployments.png)
 
-> A imagem ilustra o conceito; consulte a documentação oficial para detalhes técnicos.
+## 📖 Aula teórica
 
+## Controle declarativo de aplicações sem estado
 
-## Objetivo
+O **Deployment** gerencia a implantação e atualização de aplicações por meio de **ReplicaSets**. Você declara a quantidade de réplicas e um template de Pod; o controller compara o estado observado e cria, escala ou substitui ReplicaSets até aproximar-se da especificação.
 
-Entender como um Deployment gerencia ReplicaSets, réplicas e atualizações.
+A relação mais importante é:
 
-## Ao concluir, você deverá conseguir
-
-- Criar e inspecionar um Deployment
-- Observar a relação Deployment → ReplicaSet → Pods
-- Executar rollout e rollback de forma controlada
-
-## Estude o conceito
-
-Consulte as [anotações e exemplos práticos](../../../3-deployment/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
-
-
-## Laboratório e observação
-
-**Pré-requisito:** [Kind configurado](../../../install-kind.md) e contexto correto selecionado. Confira `kubectl config current-context` antes de executar comandos que alterem o cluster.
-
-Utilize os manifests e exemplos das [anotações e exemplos práticos](../../../3-deployment/README.md). Para observar o cluster:
-
-```bash
-kubectl get deployment,rs,pods
-kubectl rollout status deployment/<nome>
-kubectl rollout history deployment/<nome>
-kubectl rollout undo deployment/<nome>
+```text
+Deployment (estratégia e template)
+    └── ReplicaSet (quantidade desejada)
+          ├── Pod
+          ├── Pod
+          └── Pod
 ```
 
-> Substitua os valores entre `<...>` pelos recursos realmente criados. Os comandos acima são referências para estudo; a execução não foi testada neste PR.
+Excluir manualmente um Pod gerenciado normalmente faz o controller providenciar outro. Já excluir o **Deployment** tem implicações diferentes para os recursos dependentes, conforme a política de propagação da exclusão.
 
-Também há um [lab integrado Pod → Deployment → Service](../labs/primeira-aplicacao/README.md) com arquivos completos e procedimentos de validação.
+## Exemplo interpretado
 
-## Documentação oficial
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-demo
+  template:
+    metadata:
+      labels:
+        app: web-demo
+    spec:
+      containers:
+        - name: web
+          image: nginx:stable
+          ports:
+            - containerPort: 80
+```
 
-- [Kubernetes — Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+`selector.matchLabels` precisa corresponder às labels do template. `replicas: 3` representa o estado desejado, não a garantia de três Pods prontos imediatamente.
 
-**Próximo tópico:** [ReplicaSet, DaemonSet e StatefulSet](../controladores/README.md).
+## Atualização, rollout e rollback
 
+A estratégia padrão **RollingUpdate** substitui Pods de forma gradual; `maxSurge` e `maxUnavailable` controlam capacidade adicional e indisponibilidade durante a troca. `Recreate` termina os Pods antigos antes de criar os novos.
+
+```bash
+kubectl get deployments,replicasets,pods
+kubectl rollout status deployment/web-demo
+kubectl rollout history deployment/web-demo
+kubectl describe deployment web-demo
+```
+
+Os comandos acima pressupõem que o Deployment exista. Uma mudança de imagem no template cria uma nova revisão; **rollback** requer uma revisão anterior válida.
+
+## O que monitorar?
+
+Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, investigue readiness, imagem, recursos disponíveis e eventos; a aceitação do YAML pela API não garante uma atualização concluída.
+
+## 🧪 Aplicação prática
+
+**Lab existente:** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
+
+**Anotações e exemplos complementares:** [consultar material já existente](../../../3-deployment/README.md). Os conteúdos anteriores foram preservados.
+
+## ✅ Revisão do aprendizado
+
+- Qual problema este conceito resolve?
+- Que campos ou estados da API permitem verificar o comportamento real?
+- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+
+## 🔗 Referência oficial
+
+[Documentação Kubernetes — Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 ---
 
-### Navegação
-
-[← Anterior](../pods/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../controladores/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: ReplicaSet, DaemonSet e StatefulSet →](../controladores/README.md)
