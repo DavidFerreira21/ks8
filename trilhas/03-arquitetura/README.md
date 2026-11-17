@@ -2,6 +2,15 @@
 
 [← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
 
+> 🧩 **CAMADA 03 · TRILHA KUBERNETES**  
+> Investigue os componentes do Control Plane, dos Workers e da rede.
+
+### Acesso rápido
+
+[**⚙️ Topologia Kind**](../../kind-config.yaml) · [**📚 Fundamentos legados**](../../1-fundamentos/README.md) · [**🗺️ Roadmap**](../../docs/roadmap.md)
+
+---
+
 **Objetivo:** entender como o cluster funciona internamente, separando responsabilidades do Control Plane, dos nós e das integrações de rede e armazenamento.
 
 ## Roteiro de estudo
@@ -44,3 +53,10 @@ O [módulo original de Fundamentos](../../1-fundamentos/README.md) já introduz 
 - [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
 
 **Próxima camada:** [Platform Engineering e GitOps](../04-platform-engineering/README.md).
+
+
+---
+
+### Continue estudando
+
+[← 02 · Operação e Segurança](../02-operacao-seguranca/README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [04 · Platform Engineering →](../04-platform-engineering/README.md)

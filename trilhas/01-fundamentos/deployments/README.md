@@ -42,3 +42,10 @@ Também há um [lab integrado Pod → Deployment → Service](../labs/primeira-a
 - [Kubernetes — Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 **Próximo tópico:** [ReplicaSet, DaemonSet e StatefulSet](../controladores/README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../pods/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../controladores/README.md)

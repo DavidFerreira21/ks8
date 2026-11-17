@@ -31,3 +31,10 @@ O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG
 - [Documentação Kubernetes — RBAC e ServiceAccount](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 
 **Próxima etapa:** [índice completo da Camada 02](../README.md).
+
+
+---
+
+### Navegação
+
+← Primeiro tópico · [↑ Voltar à camada](../README.md) · [Próximo →](../jobs-cronjobs/README.md)

@@ -31,3 +31,10 @@ O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG
 - [Documentação Kubernetes — Init Containers e Sidecars](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 
 **Próxima etapa:** [índice completo da Camada 02](../README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../priorityclass-preemption/README.md) · [↑ Voltar à camada](../README.md) · Fim da camada ✓

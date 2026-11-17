@@ -2,6 +2,15 @@
 
 [← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
 
+> 🛡️ **CAMADA 02 · TRILHA KUBERNETES**  
+> Aprenda a controlar acesso, consumo, agendamento e resiliência.
+
+### Acesso rápido
+
+[**🔐 Lab RBAC**](labs/rbac-minimo/README.md) · [**📏 Lab ResourceQuota**](labs/quota-namespace/README.md) · [**🧪 Guia de labs**](../../docs/labs.md)
+
+---
+
 **Objetivo:** executar aplicações com controles claros de acesso, consumo, agendamento, conectividade e disponibilidade. Recomendação: terminar o [lab de primeira aplicação](../01-fundamentos/labs/primeira-aplicacao/README.md) antes de avançar.
 
 ## Conteúdos
@@ -52,3 +61,10 @@ A coleção visual tem imagens para os nove tópicos desta camada. **Os PNGs ain
 - [Pod Disruptions](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
 
 **Próxima camada:** [Arquitetura e infraestrutura](../03-arquitetura/README.md).
+
+
+---
+
+### Continue estudando
+
+[← 01 · Fundamentos](../01-fundamentos/README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [03 · Arquitetura →](../03-arquitetura/README.md)

@@ -31,3 +31,10 @@ O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG
 - [Documentação Kubernetes — ResourceQuota e LimitRange](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
 
 **Próxima etapa:** [índice completo da Camada 02](../README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../taints-tolerations-affinity/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../pdb/README.md)

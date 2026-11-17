@@ -1,63 +1,111 @@
-# Kubernetes Visual Guide — Estudos e Labs (ks8)
+<div align="center">
 
-Uma trilha de Kubernetes em português, organizada para conectar **conceitos**, **arquitetura**, **exercícios práticos** e **documentação oficial**.
+# ☸️ Kubernetes Visual Guide
 
-> **Em evolução:** a nova navegação está organizada em quatro camadas. As aulas e os manifests originais continuam nos mesmos caminhos; a migração e a inclusão dos infográficos acontecerão em etapas posteriores.
+**Da primeira aplicação ao Platform Engineering — uma trilha prática e visual em português.**
 
-## Comece por aqui
+Aprenda os conceitos, execute laboratórios com **Kind**, investigue o comportamento do cluster e avance até **GitOps e extensibilidade**.
 
-1. Consulte o [roadmap de aprendizado](docs/roadmap.md).
-2. Prepare o [ambiente Kind no WSL](install-kind.md) e confira o [kind-config.yaml](kind-config.yaml).
-3. Escolha uma camada e avance pelos tópicos.
-4. Execute os labs existentes e compare o resultado com os comandos de diagnóstico.
-5. Aprofunde o tema usando as referências oficiais de cada guia.
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Learning%20Path-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
+![Tópicos](https://img.shields.io/badge/44%20t%C3%B3picos-planejados-334155?style=flat-square)
+![Camadas](https://img.shields.io/badge/4%20camadas-de%20estudo-0F766E?style=flat-square)
+![Ambiente](https://img.shields.io/badge/Labs-Kind-8B5CF6?style=flat-square)
+![Status](https://img.shields.io/badge/Projeto-em%20evolu%C3%A7%C3%A3o-D97706?style=flat-square)
 
-## Trilha de aprendizado
+[**Começar a estudar**](docs/roadmap.md) · [**Preparar o Kind**](install-kind.md) · [**Explorar os labs**](docs/labs.md)
 
-| Camada | O que você vai aprender | Acessar |
-| --- | --- | --- |
-| **01 — Fundamentos** | Pods, Deployments, Services, Probes, Volumes e outros objetos essenciais | [Estudar](trilhas/01-fundamentos/README.md) |
-| **02 — Operação e segurança** | RBAC, NetworkPolicy, agendamento, quotas e resiliência | [Estudar](trilhas/02-operacao-seguranca/README.md) |
-| **03 — Arquitetura** | API Server, etcd, Scheduler, kubelet, rede, storage e componentes internos | [Estudar](trilhas/03-arquitetura/README.md) |
-| **04 — Platform Engineering** | CRDs, Operators, Argo CD, Crossplane, Kyverno, GitOps e observabilidade | [Estudar](trilhas/04-platform-engineering/README.md) |
-
-**[Ver o roadmap completo](docs/roadmap.md)**
-
-## Aulas e laboratórios existentes
-
-Estes links continuam apontando para as pastas originais. O conteúdo será reorganizado gradualmente, **sem descartar os exercícios**.
-
-| Aula existente | Conteúdo |
-| --- | --- |
-| [Fundamentos](1-fundamentos/README.md) | Conceitos e primeiros comandos |
-| [Pods](2-pod/README.md) | Criar, inspecionar e diagnosticar Pods |
-| [Deployment](3-deployment/README.md) | Réplicas, estratégias e rollout |
-| [ReplicaSet, DaemonSet e StatefulSet](4-replicaSet-daemonSet-statefulSet/README.md) | Modelos de controladores e manifests |
-| [Probes](5-probes/README.md) | Liveness, readiness e startup |
-| Volumes | Caminho original do README pendente de conferência durante a migração |
-| [Services](7-services/README.md) | Tipos de Service e exposição de aplicações |
-
-Também estão disponíveis o [resumo dos conceitos](resume.md) e o [guia de instalação](install-kind.md).
-
-## Ambiente de laboratório
-
-O repositório utiliza **Kind**, com configuração de um **Control Plane e dois Worker Nodes**, conforme o [manifest do cluster](kind-config.yaml). O guia atual descreve Windows, WSL2, Ubuntu e Docker Desktop.
-
-O repositório agora inclui um [Makefile](Makefile) com alvos de criação do cluster, validação estática, diagnóstico e execução do laboratório integrado. Consulte o [guia dos laboratórios](docs/labs.md) para pré-requisitos, comandos, limitações e limpeza segura. O laboratório deve ser testado localmente no Kind antes de considerar sua execução validada.
-
-## Como serão as novas aulas
-
-Cada tema passará a trazer, conforme aplicável: **objetivo e pré-requisitos → explicação e diagrama → YAML/comandos → validação → experimento → troubleshooting → limpeza → referências oficiais**.
-
-A trilha visual foi planejada com 44 temas. **Os infográficos ainda não foram adicionados aos diretórios do GitHub**; esta etapa estabelece a navegação que irá recebê-los.
-
-## Fontes oficiais
-
-- [Documentação Kubernetes](https://kubernetes.io/docs/home/)
-- [Conceitos Kubernetes](https://kubernetes.io/docs/concepts/)
-- [Tutoriais Kubernetes](https://kubernetes.io/docs/tutorials/)
-- [Kind](https://kind.sigs.k8s.io/)
+</div>
 
 ---
 
-**Próximo passo da evolução do repositório:** validar a execução no Kind, ampliar os exercícios para os demais módulos e integrar os infográficos por tópico.
+## 🧭 Escolha sua trilha
+
+Quatro camadas complementares: **usar → operar → compreender → construir uma plataforma**.
+
+| **01 · Fundamentos** | **02 · Operação e Segurança** |
+| :--- | :--- |
+| 📦 **Workloads, configuração e acesso**<br>Pods, Deployments, Services, Probes, Volumes e mais.<br><br>**[Explorar fundamentos →](trilhas/01-fundamentos/README.md)** | 🛡️ **Confiabilidade e governança**<br>RBAC, NetworkPolicy, Scheduling, Quotas e PDB.<br><br>**[Explorar operação →](trilhas/02-operacao-seguranca/README.md)** |
+
+
+| **03 · Arquitetura e Infraestrutura** | **04 · Platform Engineering e GitOps** |
+| :--- | :--- |
+| 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🔀 **Kubernetes como plataforma**<br>CRDs, Operators, Argo CD, Crossplane, Kyverno e observabilidade.<br><br>**[Explorar Platform Engineering →](trilhas/04-platform-engineering/README.md)** |
+
+> **Como interpretar a trilha:** os **44 tópicos** são a coleção planejada de conceitos e infográficos; nem todos possuem laboratório executável. Os PNGs ilustrados **ainda serão publicados** no repositório. As páginas mostram o estado real de cada exercício.
+
+## 🚀 Comece em 3 passos
+
+| Passo | Sua ação | Material |
+| :---: | --- | --- |
+| **01** | Configure o cluster local com um Control Plane e dois Workers | [Guia Kind + WSL](install-kind.md) |
+| **02** | Crie uma aplicação, observe as réplicas e exponha via Service | [Lab Pod → Deployment → Service](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) |
+| **03** | Aprenda a validar, diagnosticar e limpar os recursos com segurança | [Guia de labs e Makefile](docs/labs.md) |
+
+```bash
+make up          # Cria o cluster Kind local
+make nodes       # Confere os nós
+make validate    # Executa validação estática dos exemplos
+make lab-up      # Aplica Deployment e Service do primeiro lab
+make lab-test    # Verifica rollout e recursos do lab
+make lab-down    # Remove apenas os recursos do lab
+```
+
+> **Antes de executar:** confira `kubectl config current-context`. `make down` é diferente de `make lab-down`: o primeiro apaga o cluster Kind inteiro.
+
+## 🧪 Laboratórios disponíveis
+
+| Laboratório | O que demonstra | Situação |
+| --- | --- | --- |
+| [Primeira aplicação](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) | Pod, Deployment, ReplicaSet, Service e reconciliação | 🧪 Manifestos disponíveis |
+| [RBAC mínimo](trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md) | ServiceAccount, Role, RoleBinding e permissões | 🧪 Manifestos disponíveis |
+| [Quotas e limites](trilhas/02-operacao-seguranca/labs/quota-namespace/README.md) | LimitRange e rejeição por ResourceQuota | 🧪 Manifestos disponíveis |
+| [Arquitetura](trilhas/03-arquitetura/README.md) | Observação dos componentes internos | 📘 Roteiro conceitual |
+| [Platform Engineering](trilhas/04-platform-engineering/README.md) | GitOps, extensibilidade e políticas | 📘 Roteiro conceitual |
+
+**Legenda:** 🧪 possui exemplos/arquivos de lab (execução real ainda precisa ser validada) · 📘 conteúdo ou roteiro de estudo · 🚧 planejado.
+
+## 📚 Aulas originais preservadas
+
+Os exemplos e os manifests anteriores continuam acessíveis. A nova navegação não substitui o conteúdo legado.
+
+<details>
+<summary><strong>Mostrar o índice das aulas originais</strong></summary>
+
+| Aula | Conteúdo |
+| --- | --- |
+| [Fundamentos](1-fundamentos/README.md) | Conceitos, cluster e primeiros comandos |
+| [Pods](2-pod/README.md) | Criação, inspeção e diagnóstico |
+| [Deployment](3-deployment/README.md) | Estratégias, rollout e rollback |
+| [ReplicaSet, DaemonSet e StatefulSet](4-replicaSet-daemonSet-statefulSet/README.md) | Controladores e manifests |
+| [Probes](5-probes/README.md) | Startup, readiness e liveness |
+| Volumes | Material original ainda não localizado para vinculação |
+| [Services](7-services/README.md) | Tipos de exposição e descoberta |
+
+[Resumo de conceitos](resume.md) · [Configuração do Kind](kind-config.yaml)
+
+</details>
+
+## 🗺️ Como usar este repositório
+
+**Leia → aplique → observe → experimente → investigue → limpe.**
+
+- **Conceito:** entenda o comportamento esperado e os objetos envolvidos.
+- **Prática:** execute um lab quando disponível; não apenas copie o YAML.
+- **Observação:** compare estado desejado, eventos e recursos criados.
+- **Aprofundamento:** use as fontes oficiais vinculadas em cada módulo.
+
+[**Ver o roadmap completo →**](docs/roadmap.md) · [**Entender a convenção visual →**](docs/infograficos.md)
+
+## 🔗 Fontes oficiais
+
+[Documentação Kubernetes](https://kubernetes.io/docs/home/) · [Kubernetes Concepts](https://kubernetes.io/docs/concepts/) · [Kubernetes Tutorials](https://kubernetes.io/docs/tutorials/) · [Kind](https://kind.sigs.k8s.io/)
+
+---
+
+<div align="center">
+
+**Construído para aprender Kubernetes na prática — e entender o porquê de cada comando.**
+
+[↑ Voltar ao início](README.md)
+
+</div>

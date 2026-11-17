@@ -41,3 +41,10 @@ Os exercícios com falhas intencionais e critérios de aceitação serão padron
 - [Kubernetes — Probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
 
 **Próximo tópico:** [Services](../services/README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../controladores/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../services/README.md)
