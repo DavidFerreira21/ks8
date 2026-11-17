@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.13 — NetworkPolicy](images/networkpolicy.png)
+
+> A imagem ilustra o conceito; consulte a documentação oficial para detalhes técnicos.
+
+
 ## O que você vai aprender
 
 Define quais conexões de entrada e saída são permitidas para Pods selecionados. É aplicada pelo plugin de rede, não apenas pela existência do YAML.
@@ -22,9 +29,6 @@ Compare conectividade antes/depois de política em cluster com CNI que implement
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
-
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 
