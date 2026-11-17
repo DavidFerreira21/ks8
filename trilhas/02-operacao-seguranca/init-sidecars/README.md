@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.05 — Init Containers e Sidecars](../init-containers-sidecars/images/init-containers-sidecars.png)
+
+> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+
+
 ## O que você vai aprender
 
 Init containers convencionais concluem tarefas antes da aplicação. Sidecars nativos são definidos como init containers com restartPolicy Always e continuam ativos durante a execução da aplicação.
@@ -22,9 +29,7 @@ Compare um init container de preparação com um sidecar que permanece em execu�
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
 
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 
