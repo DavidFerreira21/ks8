@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.11 — PodDisruptionBudget (PDB)](images/pdb.png)
+
+> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+
+
 ## O que você vai aprender
 
 PDB limita quantos Pods podem ficar indisponíveis por interrupções voluntárias que usam a Eviction API, como um drain.
@@ -22,9 +29,7 @@ Use um Deployment com três réplicas e minAvailable: 2; consulte disruptionsAll
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
 
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 
