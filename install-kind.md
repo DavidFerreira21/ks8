@@ -1,91 +1,89 @@
-# Guia rápido: Kind no WSL com Docker Desktop
+# Guia de ambiente — Kind no WSL2
 
-## Pré-requisitos (Windows)
-### 1) Instalar/ativar o WSL e definir o Ubuntu como padrão
-Abra o PowerShell como Administrador e execute:
+[← Início](README.md) · [Comandos dos labs](docs/labs.md)
+
+Este documento prepara o laboratório local com Windows + WSL2 (Ubuntu) + Docker Desktop, Kind e kubectl. Confira as versões mais recentes nos links oficiais; o comando de instalação abaixo não fixa uma versão para não perpetuar um release obsoleto.
+
+## 1. Preparar WSL2 no Windows
+
+**Execute no PowerShell do Windows, como Administrador**:
+
 ```powershell
-wsl --install
-wsl --set-default-version 2
 wsl --install -d Ubuntu
-```
-Defina o Ubuntu como distro padrão:
-```powershell
+wsl --set-default-version 2
 wsl --set-default Ubuntu
-```
-Reinicie o Windows se for solicitado.
-
-### 2) Instalar o Docker Desktop
-1. Baixe e instale o Docker Desktop para Windows.
-2. Abra o Docker Desktop e finalize o onboarding.
-
-### 3) Habilitar WSL Integration no Docker Desktop
-No Docker Desktop:
-1. **Settings** → **Resources** → **WSL Integration**
-2. Marque **Enable integration with my default WSL distro**
-3. Ative a integração para **Ubuntu**
-4. Clique em **Apply & Restart**
-
-### 4) Validar WSL + Docker dentro do Ubuntu
-Abra o Ubuntu (WSL) e rode:
-```bash
 wsl --list --verbose
+```
+
+Reinicie o Windows se solicitado. Abra **Ubuntu (WSL)** para os próximos comandos Linux.
+
+## 2. Preparar Docker Desktop
+
+Instale [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/) e habilite **Settings → Resources → WSL Integration** para Ubuntu.
+
+No terminal do **Ubuntu (WSL)**, confirme:
+
+```bash
 docker version
 docker ps
 ```
-Siga adiante somente se o Docker estiver respondendo sem erros dentro do Ubuntu.
 
-## Instalar o Kind
+Os dois comandos precisam funcionar antes de criar o cluster.
+
+## 3. Instalar Kind e kubectl
+
+Siga as instruções oficiais para seu sistema e arquitetura:
+
+- [Kind — Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start/)
+- [kubectl — Instalação](https://kubernetes.io/docs/tasks/tools/)
+
+Confirme os binários:
+
 ```bash
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64
-chmod +x kind
-sudo mv kind /usr/local/bin/kind
+kind version
+kubectl version --client
 ```
 
-## Validar Docker + Kind
+## 4. Criar o cluster
+
+Execute na **raiz do repositório**:
+
 ```bash
-docker ps        # verifica se o Docker Engine está rodando
-kind version     # confirma se o Kind está acessível
-```
-Siga apenas se ambos os comandos executarem sem erros.
-
-## Criar o cluster Kind
-1. Confira `kind-config.yaml` (exemplo abaixo) e ajuste se necessário:
-   ```yaml
-   nodes:
-  - role: control-plane
-    kubeadmConfigPatches:
-      - |
-        kind: InitConfiguration
-        nodeRegistration:
-          kubeletExtraArgs:
-            node-labels: "ingress-ready=true"
-
-    extraPortMappings:
-      - containerPort: 80
-        hostPort: 80
-      - containerPort: 443
-        hostPort: 443
-
-  - role: worker
-  - role: worker
-   ```
-2. Suba o cluster: `make up` (atalho para `kind create cluster --name dev --config kind-config.yaml`).
-3. Valide o contexto `kind-dev`:
-   ```bash
-   kubectl cluster-info --context kind-dev
-   kubectl get nodes
-   ```
-
-## Instalar o Ingress NGINX
-```bash
-make install-nginx    # usa o kustomize em ingress-nginx/
-# ou diretamente:
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+make help
+make up
+kubectl config current-context
+make nodes
 ```
 
-## Comandos úteis do Makefile
+O Makefile cria um cluster Kind chamado `dev` (contexto esperado: `kind-dev`) usando [kind-config.yaml](kind-config.yaml). A configuração tem um nó Control Plane, dois Workers e mapeamento das portas 80/443 para experimentos futuros.
+
+Se quiser criar sem o Makefile:
+
 ```bash
-make nodes   # exibe os nós do cluster
-make down    # exclui o cluster (kind delete cluster --name dev)
+kind create cluster --name dev --config kind-config.yaml
+kubectl get nodes --context kind-dev
 ```
-Utilize `make down` ao final dos testes para liberar recursos.
+
+## 5. Executar o primeiro lab
+
+```bash
+python3 -m pip install 'PyYAML>=6,<7'
+make validate
+make lab-up
+make lab-test
+bash scripts/lab-diagnostics.sh
+make lab-down
+```
+
+> `make lab-up` aplica **Deployment e Service**, não o Pod individual. Para seguir a sequência didática completa, veja o [lab Pod → Deployment → Service](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md).
+
+## 6. Limpeza
+
+- `make lab-down` remove somente Deployment e Service do exemplo e preserva `k8s-lab`.
+- `make down` **apaga o cluster Kind `dev` inteiro**, incluindo seus recursos e dados. Execute apenas se não precisar mais dele.
+
+## 7. Ingress
+
+O cluster tem portas 80/443 mapeadas, mas **não instala automaticamente um Ingress Controller**. O exercício de Ingress será padronizado em um laboratório separado; não dependa de um antigo alvo `make install-nginx`, pois ele não foi implementado nesta etapa.
+
+Referências: [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) e [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/).
