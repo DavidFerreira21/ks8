@@ -1,62 +1,78 @@
-# Camada 03 — Arquitetura e infraestrutura
+# 🧩 Camada 03 · Arquitetura e infraestrutura
 
-[← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
+[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [⚙️ Kind](../../kind-config.yaml)
 
-> 🧩 **CAMADA 03 · TRILHA KUBERNETES**  
-> Investigue os componentes do Control Plane, dos Workers e da rede.
+> **Objetivo da camada**  
+> Investigar como Control Plane, Workers, rede e armazenamento cooperam para transformar objetos declarativos em aplicações executadas.
 
-### Acesso rápido
-
-[**⚙️ Topologia Kind**](../../kind-config.yaml) · [**📚 Fundamentos legados**](../../1-fundamentos/README.md) · [**🗺️ Roadmap**](../../docs/roadmap.md)
+**14 temas planejados** · **visão arquitetural e referências oficiais** · **labs de observação em planejamento**
 
 ---
 
-**Objetivo:** entender como o cluster funciona internamente, separando responsabilidades do Control Plane, dos nós e das integrações de rede e armazenamento.
+## 🧭 Mapa dos componentes
 
-## Roteiro de estudo
+| **CONTROL PLANE** | **WORKER NODES** |
+| :--- | :--- |
+| 🎛️ **Decidem, coordenam e reconciliam.**<br>API Server, etcd, Scheduler e Controller Manager.<br><br>[**Conhecer os componentes oficiais →**](https://kubernetes.io/docs/concepts/overview/components/) | ⚙️ **Executam e conectam os Pods.**<br>kubelet, container runtime e mecanismos de rede.<br><br>[**Explorar a arquitetura de nós →**](https://kubernetes.io/docs/concepts/architecture/nodes/) |
+| **REDE E DESCOBERTA** | **ARMAZENAMENTO E EXTENSÃO** |
+| 🌐 CNI, Service networking, CoreDNS, Gateway API e opções de dataplane.<br><br>[**Entender a rede →**](https://kubernetes.io/docs/concepts/cluster-administration/networking/) | 💾 CSI, provisionamento de volumes, Kustomize e Helm.<br><br>[**Conceitos de storage →**](https://kubernetes.io/docs/concepts/storage/) |
 
-| Grupo | Componente ou conceito | O que observar |
+## 📚 Catálogo de arquitetura
+
+### 🎛️ Control Plane — decisão e reconciliação
+
+| Componente | Responsabilidade | Referência |
 | --- | --- | --- |
-| Visão geral | Arquitetura do cluster | Relação entre Control Plane e Workers |
-| Control Plane | kube-apiserver | API, autenticação, autorização e admission |
-| Control Plane | etcd | Persistência e consistência do estado do cluster |
-| Control Plane | kube-scheduler | Escolha do nó para Pods pendentes |
-| Control Plane | kube-controller-manager | Loops de reconciliação |
-| Integração cloud | cloud-controller-manager | Integração com APIs do provedor, quando presente |
-| Worker | kubelet | Execução e status dos Pods no nó |
-| Worker | Container Runtime | Execução de containers via CRI |
-| Rede | kube-proxy e eBPF | Diferentes implementações do encaminhamento para Services |
-| Rede | CNI e comunicação | Rede dos Pods e conectividade entre nós |
-| Rede | CoreDNS e Service Discovery | Resolução de nomes dos Services |
-| Armazenamento | CSI e Storage | Integração com sistemas de armazenamento |
-| Entrada | Gateway API | Recursos para roteamento de tráfego |
-| Manifests | Kustomize e Helm | Customização e empacotamento de configurações |
+| **Arquitetura do cluster** | Fluxo entre Control Plane e Workers | [Visão geral](https://kubernetes.io/docs/concepts/overview/components/) |
+| **kube-apiserver** | Interface da API, autenticação, autorização e admission | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver) |
+| **etcd** | Persistência consistente do estado de configuração do cluster | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#etcd) |
+| **kube-scheduler** | Escolha de nó para Pods ainda não agendados | [Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) |
+| **kube-controller-manager** | Loops de controle e reconciliação | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager) |
+| **cloud-controller-manager** | Integração com recursos de um provedor cloud, quando disponível | [Cloud Controller Manager](https://kubernetes.io/docs/concepts/architecture/cloud-controller/) |
 
-O [módulo original de Fundamentos](../../1-fundamentos/README.md) já introduz parte da arquitetura. Aqui o estudo será aprofundado por componente, sem duplicar a aula introdutória.
+### ⚙️ Workers — execução de containers
 
-## Labs de observação sugeridos (ainda não implementados)
+| Componente | Responsabilidade | Referência |
+| --- | --- | --- |
+| **kubelet** | Agente que gerencia Pods atribuídos ao nó | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#kubelet) |
+| **Container Runtime** | Execução de containers via CRI | [Container Runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) |
 
-1. Localizar componentes do Control Plane no Kind e inspecionar os Pods de sistema.
-2. Observar um Pod Pending e os eventos de scheduling.
-3. Relacionar o status de um Pod ao kubelet do nó escolhido.
-4. Consultar a resolução DNS de um Service a partir de um Pod.
-5. Comparar a abstração Service com o dataplane implementado pelo cluster.
+### 🌐 Rede, storage e configuração
 
-> **Atenção:** componentes gerenciados, como o cloud-controller-manager, podem não estar disponíveis no Kind. Os labs distinguirão demonstração local de estudo conceitual.
+| Componente | Responsabilidade | Referência |
+| --- | --- | --- |
+| **kube-proxy e eBPF** | Implementações possíveis do dataplane para Services; variam por cluster | [Service Virtual IPs](https://kubernetes.io/docs/reference/networking/virtual-ips/) |
+| **CNI e comunicação** | Rede dos Pods e conectividade entre nós | [Networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/) |
+| **CoreDNS e Service Discovery** | Resolução de nomes dentro do cluster | [DNS for Services](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) |
+| **CSI e Storage** | Integração e provisionamento de armazenamento | [CSI](https://kubernetes.io/docs/concepts/storage/volumes/#csi) |
+| **Gateway API** | APIs de roteamento e configuração de tráfego | [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) |
+| **Kustomize e Helm** | Customização e empacotamento de manifests | [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) · [Helm](https://helm.sh/docs/) |
 
-## Referências oficiais
+> **Status:** estes tópicos estão reunidos como roteiro de arquitetura e links oficiais. Ainda não existem páginas individuais ou labs executáveis desta camada no repositório.
 
-- [Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components/)
-- [Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)
-- [Cluster Networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
-- [Storage](https://kubernetes.io/docs/concepts/storage/)
-- [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
+## 🔎 Observação guiada — próximos labs
 
-**Próxima camada:** [Platform Engineering e GitOps](../04-platform-engineering/README.md).
+| Etapa | Pergunta para investigar | Ponto de observação |
+| :---: | --- | --- |
+| **01** | Onde ficam os componentes do Control Plane no Kind? | Pods do namespace `kube-system` |
+| **02** | O que acontece com um Pod sem nó elegível? | Pending e eventos de scheduling |
+| **03** | Como identificar em qual Worker um Pod roda? | `kubectl get pods -o wide` e Node |
+| **04** | Como um Service é descoberto por DNS? | CoreDNS e consultas internas |
+| **05** | Qual a diferença entre Service e implementação do dataplane? | kube-proxy ou solução alternativa instalada |
 
+Esses são **roteiros de investigação**, não scripts testados. O cloud-controller-manager pode não existir no Kind, e a implementação de rede depende da configuração do cluster.
+
+## 🎯 Checklist de aprendizado
+
+- [ ] Explicar o fluxo `kubectl → API Server → controllers/scheduler → kubelet`.
+- [ ] Distinguir estado persistido no etcd e execução dos containers.
+- [ ] Identificar responsabilidades de CNI, CoreDNS, kube-proxy e CSI.
+- [ ] Descrever as diferenças entre arquitetura local e gerenciada em cloud.
+
+## 🔗 Materiais relacionados
+
+[Fundamentos originais](../../1-fundamentos/README.md) · [Topologia Kind](../../kind-config.yaml) · [Documentação Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components/)
 
 ---
 
-### Continue estudando
-
-[← 02 · Operação e Segurança](../02-operacao-seguranca/README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [04 · Platform Engineering →](../04-platform-engineering/README.md)
+[**← 02 · Operação e Segurança**](../02-operacao-seguranca/README.md) · [↑ Roadmap](../../docs/roadmap.md) · **[04 · Platform Engineering →](../04-platform-engineering/README.md)**
