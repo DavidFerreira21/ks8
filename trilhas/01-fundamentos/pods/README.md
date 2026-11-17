@@ -2,7 +2,7 @@
 
 [← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
 
-> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [2-pod/README.md](../../../2-pod/README.md).
+> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../2-pod/README.md).
 
 ## Objetivo
 
@@ -16,7 +16,7 @@ Compreender a menor unidade implantável do Kubernetes e seus containers.
 
 ## Estude o conceito
 
-Consulte as [anotações e exemplos práticos](../../../2-pod/README.md), que contém os exemplos, explicações e comandos já presentes na trilha.
+Consulte as [anotações e exemplos práticos](../../../2-pod/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
 
 **Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
