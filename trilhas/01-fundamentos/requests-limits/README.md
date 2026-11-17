@@ -1,25 +1,77 @@
 # 01.04 · Requests e Limits
 
-[↑ Camada 01](../README.md) · [📚 Catálogo completo](../../../docs/catalogo.md)
+[⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
 
 ## 🎨 Infográfico
 
 ![01.04 — Requests e Limits](images/requests-limits.png)
 
-> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
-
 ## 📖 Aula teórica
 
-**Em preparação.** Esta página já apresenta o infográfico da aula 01.04, mas a explicação aprofundada, os exemplos e as referências técnicas ainda serão acrescentados.
+## Por que declarar recursos?
 
-## 🧪 Laboratório / observação
+O scheduler precisa conhecer a demanda de recursos dos Pods para decidir onde executá-los. Em `resources`, **requests** descrevem a quantidade solicitada para o agendamento; **limits** estabelecem limites de consumo aplicados em tempo de execução quando suportados pelo recurso e runtime.
 
-**Planejado.** O roteiro reproduzível, os comandos de validação e os critérios de sucesso ainda não estão disponíveis. Não há execução de lab validada para este tema nesta página.
+Não são sinônimos de reserva física rígida. O scheduler considera requests; o consumo real pode variar. Para CPU, atingir um limite costuma resultar em **throttling**. Para memória, exceder o limite pode levar à finalização do processo (**OOMKilled**) e reinicialização conforme a política do Pod.
 
-## 🔎 Diagnóstico e conclusão
+## CPU e memória têm unidades diferentes
 
-Nesta etapa, utilize o infográfico como visão geral; o diagnóstico guiado e a revisão final de aprendizado serão desenvolvidos junto à aula.
+| Exemplo | Interpretação |
+| --- | --- |
+| `cpu: 250m` | 0,25 CPU |
+| `cpu: "1"` | 1 CPU |
+| `memory: 128Mi` | 128 mebibytes |
+| `memory: 1Gi` | 1 gibibyte |
+
+Em geral, configure requests a partir de medições realistas; um limite de CPU muito restritivo pode afetar latência, e um limite de memória abaixo do pico pode causar reinícios.
+
+## Exemplo explicado
+
+```yaml
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+```
+
+Este trecho pertence a um item de `spec.containers[]`, não ao nível superior do Pod. O scheduler considera o request e o runtime aplica os limites correspondentes.
+
+## Efeitos no comportamento do cluster
+
+- **Pod Pending:** pode indicar falta de capacidade para atender requests, mas também envolve affinity, taints, quotas e outros motivos.
+- **OOMKilled:** indica encerramento de container por uso de memória; confirme pelo estado anterior.
+- **QoS:** a combinação de requests/limits influencia a classe `Guaranteed`, `Burstable` ou `BestEffort`, explorada em Operação.
+- **HPA:** para utilização percentual de CPU, requests adequados são essenciais ao cálculo do alvo.
+
+```bash
+kubectl describe nodes
+kubectl get resourcequota -A
+kubectl top pods -A
+```
+
+`kubectl top` requer métricas disponíveis no cluster. **Pergunta de revisão:** por que aumentar o limit de memória não aumenta automaticamente a capacidade do nó?
+
+## 🧪 Aplicação prática
+
+**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
+
+**Anotações e exemplos complementares:** [consultar material já existente](../../../2-pod/README.md). Os conteúdos anteriores foram preservados.
+
+## ✅ Revisão do aprendizado
+
+- Qual problema este conceito resolve?
+- Que campos ou estados da API permitem verificar o comportamento real?
+- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+
+## 🔗 Referência oficial
+
+[Documentação Kubernetes — Requests e Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 
 ---
 
-[↑ Índice da camada](../README.md) · [📚 Catálogo de 52 aulas](../../../docs/catalogo.md)
+[↑ Índice da camada](../README.md) · [Próxima: Probes →](../probes/README.md)
