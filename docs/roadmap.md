@@ -55,7 +55,7 @@ Esses marcos são **objetivos de aprendizado**, não certificações de execuç�
 | 📚 Consultar conceitos históricos | [Resumo do projeto](../resume.md) |
 | 🎨 Preparar infográficos | [Convenção visual](infograficos.md) |
 
-> **Estado do projeto:** os conteúdos legados permanecem nos caminhos originais. As aulas novas e os manifests são preservados como material de estudo, e **não há comprovação de execução dos labs em cluster real** apenas pela presença dos arquivos.
+> **Estado do projeto:** as anotações e os exemplos práticos continuam disponíveis nas suas páginas atuais, integrados à trilha de estudo, e **não há comprovação de execução dos labs em cluster real** apenas pela presença dos arquivos.
 
 ## Padrão de uma aula completa
 
