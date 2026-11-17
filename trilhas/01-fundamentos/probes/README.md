@@ -2,7 +2,7 @@
 
 [← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
 
-> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [5-probes/README.md](../../../5-probes/README.md).
+> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../5-probes/README.md).
 
 ## Objetivo
 
@@ -16,7 +16,7 @@ Distinguir verificações de inicialização, prontidão e saúde dos containers
 
 ## Estude o conceito
 
-Consulte as [anotações e exemplos práticos](../../../5-probes/README.md), que contém os exemplos, explicações e comandos já presentes na trilha.
+Consulte as [anotações e exemplos práticos](../../../5-probes/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
 
 **Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
