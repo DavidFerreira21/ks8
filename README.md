@@ -25,6 +25,8 @@ Quatro camadas complementares: **usar → operar → compreender → construir u
 | **01 · Fundamentos** | **02 · Operação e Segurança** |
 | :--- | :--- |
 | 📦 **Workloads, configuração e acesso**<br>Pods, Deployments, Services, Probes, Volumes e mais.<br><br>**[Explorar fundamentos →](trilhas/01-fundamentos/README.md)** | 🛡️ **Confiabilidade e governança**<br>RBAC, NetworkPolicy, Scheduling, Quotas e PDB.<br><br>**[Explorar operação →](trilhas/02-operacao-seguranca/README.md)** |
+
+
 | **03 · Arquitetura e Infraestrutura** | **04 · Platform Engineering e GitOps** |
 | :--- | :--- |
 | 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🔀 **Kubernetes como plataforma**<br>CRDs, Operators, Argo CD, Crossplane, Kyverno e observabilidade.<br><br>**[Explorar Platform Engineering →](trilhas/04-platform-engineering/README.md)** |
@@ -104,6 +106,6 @@ Os exemplos e os manifests anteriores continuam acessíveis. A nova navegação 
 
 **Construído para aprender Kubernetes na prática — e entender o porquê de cada comando.**
 
-[↑ Voltar ao início](#️-kubernetes-visual-guide)
+[↑ Voltar ao início](README.md)
 
 </div>
