@@ -24,7 +24,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | Aula | Conceito | Aula teórica | Material de apoio |
 | --- | --- | --- | --- |
 | 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [Anotações e exemplos](../../1-fundamentos/README.md) |
-| 01.02 | **Namespaces** | 🚧 Planejada | — |
+| 01.02 | **Namespaces** | [🎨 Infográfico · teoria em preparação](namespaces/README.md) | — |
 | 01.03 | **Pods** | [📖 Estudar](pods/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
 | 01.04 | **Requests e Limits** | [🎨 Infográfico · teoria em preparação](requests-limits/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
 | 01.05 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [Anotações e exemplos](../../5-probes/README.md) |
@@ -32,11 +32,11 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | 01.07 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações e exemplos](../../4-replicaSet-daemonSet-statefulSet/README.md) |
 | 01.08 | **Estratégias avançadas de Deployment** | [🎨 Infográfico · teoria em preparação](estrategias-deployment/README.md) | — |
 | 01.09 | **Services** | [📖 Estudar](services/README.md) | [Anotações e exemplos](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| 01.10 | **ConfigMaps** | 🚧 Planejada | — |
+| 01.10 | **ConfigMaps** | [🎨 Infográfico · teoria em preparação](configmaps/README.md) | — |
 | 01.11 | **Secrets** | [🎨 Infográfico · teoria em preparação](secrets/README.md) | — |
 | 01.12 | **Volumes** | [🎨 Infográfico · teoria em preparação](volumes/README.md) | — |
 | 01.13 | **Ingress** | [🎨 Infográfico · teoria em preparação](ingress/README.md) | — |
-| 01.14 | **Horizontal Pod Autoscaler (HPA)** | 🚧 Planejada | — |
+| 01.14 | **Horizontal Pod Autoscaler (HPA)** | [🎨 Infográfico · teoria em preparação](hpa/README.md) | — |
 
 ## 🧪 Laboratório em destaque
 
