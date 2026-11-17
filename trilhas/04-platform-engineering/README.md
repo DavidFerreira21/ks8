@@ -1,72 +1,57 @@
-# 🔀 Camada 04 · Platform Engineering e GitOps
+# 🧰 Camada 04 · Ferramentas do ecossistema Kubernetes
 
 [⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [🧪 Labs](../../docs/labs.md)
 
 > **Objetivo da camada**  
-> Entender como Kubernetes pode oferecer APIs declarativas, reconciliação, políticas e GitOps como capacidades de uma plataforma.
+> Conhecer sete conjuntos de ferramentas relevantes do ecossistema cloud-native e compreender quais problemas resolvem no Kubernetes. O estudo aprofundado de Platform Engineering como disciplina pertence ao laboratório dedicado.
 
-**8 conceitos planejados** · **roteiro de estudo** · **laboratórios a implementar**
+**7 temas planejados** · **roteiro de ferramentas** · **labs introdutórios ainda não implementados**
 
 ---
 
-## 🧭 Mapa de capacidades da plataforma
+## 🧭 Mapa de capacidades
 
-| **EXTENSIBILIDADE** | **ENTREGA DECLARATIVA** |
+| **ENTREGA E INFRAESTRUTURA** | **GOVERNANÇA E SEGREDOS** |
 | :--- | :--- |
-| 🧩 **Novos tipos de recursos e controladores.**<br>CRDs e Operators ampliam o comportamento da API.<br><br>[**Custom Resources →**](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) | 🔁 **Git e estado desejado.**<br>Argo CD reconcilia workloads; Crossplane aplica o mesmo modelo a recursos de infraestrutura.<br><br>[**GitOps / Argo CD →**](https://argo-cd.readthedocs.io/en/stable/) |
-| **SEGURANÇA E SEGREDOS** | **CAPACIDADE E OBSERVABILIDADE** |
-| 🛡️ **Políticas e integrações externas.**<br>Kyverno estabelece guardrails; External Secrets gerencia sincronização de segredos.<br><br>[**Kyverno →**](https://kyverno.io/docs/) | 📈 **Nós e sinais operacionais.**<br>Karpenter provisiona capacidade em ambientes compatíveis; observabilidade explica o comportamento dos sistemas.<br><br>[**OpenTelemetry →**](https://opentelemetry.io/docs/) |
+| 🔁 **GitOps e reconciliação**<br>Argo CD aplica configurações declarativas. Crossplane estende Kubernetes para recursos de infraestrutura. | 🛡️ **Políticas e integrações**<br>Kyverno aplica políticas; External Secrets Operator sincroniza segredos externos. |
+| **CAPACIDADE E REDE** | **OBSERVABILIDADE** |
+| ☁️ **Nódulos e conectividade**<br>Karpenter ajusta capacidade em clouds compatíveis. Cilium combina networking, eBPF e políticas. | 📊 **Sinais operacionais**<br>Prometheus coleta métricas; Grafana permite explorá-las em dashboards e alertas. |
 
-## 📚 Catálogo de tecnologias e conceitos
+## 📚 Sete ferramentas para conhecer — ordem de estudo
 
-### 🧩 Extensibilidade da API
+| Aula | Ferramenta | Capacidade | Referência |
+| --- | --- | --- | --- |
+| 04.01 | **Argo CD** | GitOps e entrega contínua | [Documentação](https://argo-cd.readthedocs.io/en/stable/) |
+| 04.02 | **Crossplane** | Infraestrutura declarativa via Kubernetes | [Documentação](https://docs.crossplane.io/) |
+| 04.03 | **Kyverno** | Policy as Code e governança | [Documentação](https://kyverno.io/docs/) |
+| 04.04 | **External Secrets Operator** | Integração com provedores de segredos | [Documentação](https://external-secrets.io/latest/) |
+| 04.05 | **Karpenter** | Provisionamento e autoscaling de nós | [Documentação](https://karpenter.sh/docs/) |
+| 04.06 | **Cilium** | Networking, eBPF e segurança | [Documentação](https://docs.cilium.io/) |
+| 04.07 | **Prometheus + Grafana** | Métricas, dashboards e alertas | [Prometheus](https://prometheus.io/docs/) · [Grafana](https://grafana.com/docs/) |
 
-| Conceito | Papel na plataforma | Documentação |
+**Pré-requisito recomendado:** estudar [CRDs e Custom Resources](../03-arquitetura/crds-custom-resources/README.md) e [Custom Controllers e Operators](../03-arquitetura/custom-controllers-operators/README.md), na Camada 03, antes de aprofundar Crossplane e outros operadores.
+
+## 🧪 Ideias de laboratórios introdutórios
+
+| Ferramenta | Experimento proposto | Observação |
 | --- | --- | --- |
-| **CRD e Custom Controllers** | Criar novos recursos e reconciliar estados | [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) |
-| **Kubernetes Operators** | Encapsular conhecimento operacional em controladores | [Operator Pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) |
+| Argo CD | Sincronizar um Deployment a partir de Git | Estado desejado e drift |
+| Crossplane | Declarar e reconciliar recurso de exemplo | Escolher provider apropriado ao ambiente |
+| Kyverno | Impedir criação de recurso sem label | Admission e política |
+| External Secrets | Sincronizar um segredo de provedor de testes | Evitar credenciais de produção |
+| Karpenter | Inspecionar NodePool e escalabilidade | Requer cloud/provedor compatível; não é lab Kind puro |
+| Cilium | Validar políticas de rede e observar fluxos | Exige CNI configurado |
+| Prometheus + Grafana | Coletar métricas e construir dashboard | Diferenciar métricas, logs e traces |
 
-### 🔁 GitOps e infraestrutura declarativa
-
-| Conceito | Papel na plataforma | Documentação |
-| --- | --- | --- |
-| **Argo CD e GitOps** | Sincronizar configuração declarativa a partir do Git | [Argo CD](https://argo-cd.readthedocs.io/en/stable/) |
-| **Crossplane** | Compor APIs de infraestrutura e reconciliar recursos | [Crossplane](https://docs.crossplane.io/) |
-
-### 🛡️ Governança, operação e automação
-
-| Conceito | Papel na plataforma | Documentação |
-| --- | --- | --- |
-| **Kyverno e Policy as Code** | Aplicar e auditar políticas declarativas | [Kyverno](https://kyverno.io/docs/) |
-| **External Secrets Operator** | Sincronizar dados de provedores de segredos | [External Secrets](https://external-secrets.io/latest/) |
-| **Karpenter** | Provisionar nós conforme demanda e restrições em provedores compatíveis | [Karpenter](https://karpenter.sh/docs/) |
-| **Observabilidade** | Correlacionar métricas, logs e traces | [OpenTelemetry](https://opentelemetry.io/docs/) |
-
-**Estado atual:** estas são **páginas de orientação e referências**, não labs implementados. A camada não pressupõe que todos os componentes funcionem no Kind sem dependências adicionais.
-
-## 🧪 Evolução prática sugerida
-
-| Fase | O que construir | Aprendizado principal |
-| :---: | --- | --- |
-| **01** | Argo CD reconciliando uma aplicação local | Estado desejado e drift |
-| **02** | Policy com Kyverno para labels obrigatórias | Guardrails declarativos |
-| **03** | CRD simples com controller ou Operator de exemplo | API estendida e reconciliação |
-| **04** | Crossplane com provider apropriado para ambiente local | Recursos compostos e APIs de plataforma |
-| **05** | Pipeline de sinais e instrumentação de aplicação | Métricas, logs, traces e diagnóstico |
-
-> **Princípio:** primeiro observar a reconciliação, depois automatizar. Crossplane e Karpenter exigem requisitos específicos; evite associar credenciais de nuvem a exercícios locais sem necessidade.
+> **Status:** este é um catálogo de estudo. Os sete labs não foram implementados nem testados neste PR; os infográficos gerados fora do GitHub ainda dependem de upload e revisão.
 
 ## 🎯 Checklist de aprendizado
 
-- [ ] Explicar por que CRDs sozinhas não executam reconciliação.
-- [ ] Diferenciar GitOps de uma pipeline imperativa de deploy.
-- [ ] Identificar o papel de Policy as Code e gestão de segredos.
-- [ ] Descrever como uma plataforma oferece capacidades reutilizáveis em vez de expor apenas ferramentas.
-
-## 🎨 Material visual
-
-A coleção de infográficos foi produzida, mas os PNGs ainda não estão no GitHub. Confira a [convenção de publicação e revisão](../../docs/infograficos.md).
+- [ ] Associar cada ferramenta ao problema que resolve.
+- [ ] Explicar a diferença entre sincronização GitOps e reconciliação de recursos externos.
+- [ ] Reconhecer políticas, sincronização de segredos, rede e escalabilidade como capacidades distintas.
+- [ ] Identificar quais ferramentas podem ser experimentadas localmente e quais requerem cloud.
 
 ---
 
-[**← 03 · Arquitetura**](../03-arquitetura/README.md) · [↑ Roadmap](../../docs/roadmap.md) · **[⌂ Voltar ao início](../../README.md)**
+[**← 03 · Arquitetura**](../03-arquitetura/README.md) · [↑ Roadmap](../../docs/roadmap.md) · [⌂ Início](../../README.md)
