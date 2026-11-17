@@ -31,3 +31,10 @@ O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG
 - [Documentação Kubernetes — Taints, Tolerations e Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 
 **Próxima etapa:** [índice completo da Camada 02](../README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../labels-selectors-annotations/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../resourcequota-limitrange/README.md)
