@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.09 — PriorityClass e Preemption](images/priorityclass-preemption.png)
+
+> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+
+
 ## O que você vai aprender
 
 PriorityClass atribui prioridade de agendamento a Pods. Sob pressão por capacidade, o Scheduler pode preemptar Pods de menor prioridade, conforme política.
@@ -22,9 +29,7 @@ Simule escassez de CPU em laboratório isolado e inspecione Pending e eventos; n
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
 
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 
