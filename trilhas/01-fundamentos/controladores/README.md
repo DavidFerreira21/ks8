@@ -2,7 +2,7 @@
 
 [← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
 
-> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [4-replicaSet-daemonSet-statefulSet/README.md](../../../4-replicaSet-daemonSet-statefulSet/README.md).
+> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../4-replicaSet-daemonSet-statefulSet/README.md).
 
 ## Objetivo
 
@@ -16,7 +16,7 @@ Comparar três mecanismos de controle de Pods com requisitos de execução difer
 
 ## Estude o conceito
 
-Consulte as [anotações e exemplos práticos](../../../4-replicaSet-daemonSet-statefulSet/README.md), que contém os exemplos, explicações e comandos já presentes na trilha.
+Consulte as [anotações e exemplos práticos](../../../4-replicaSet-daemonSet-statefulSet/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
 
 **Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
