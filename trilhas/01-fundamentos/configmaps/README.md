@@ -1,6 +1,8 @@
 # 01.10 · ConfigMaps
 
-[↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+[⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
 
 ## 🎨 Infográfico
 
@@ -8,29 +10,71 @@
 
 ## 📖 Aula teórica
 
-**Em preparação.** Um ConfigMap permite separar dados de configuração não sensíveis da imagem da aplicação. Pods podem consumir esses valores como variáveis de ambiente ou arquivos montados.
+## Separar configuração do artefato de aplicação
 
-Não utilize ConfigMaps para senhas e credenciais; consulte a [aula de Secrets](../secrets/README.md).
+Um **ConfigMap** armazena configurações **não sensíveis**, geralmente em pares chave-valor ou arquivos. Isso permite publicar uma mesma imagem de aplicação em ambientes diferentes, variando parâmetros sem reconstruí-la.
 
-[Referência oficial — ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/)
+É um objeto com escopo de namespace; referências a ConfigMaps feitas por Pods normalmente precisam apontar para ConfigMaps do mesmo namespace.
 
-## 🧪 Prática e observação
+## Como os containers consomem valores?
 
-Experimento inicial sugerido (ainda não validado como laboratório completo):
+| Forma | Como funciona | Atualização |
+| --- | --- | --- |
+| `env` com `configMapKeyRef` | Injeta uma chave como variável de ambiente | Não altera a variável de um processo já iniciado |
+| `envFrom` | Injeta múltiplas chaves como variáveis | Requer reiniciar/recriar o Pod para atualizar as variáveis |
+| Volume de ConfigMap | Monta chaves como arquivos | Pode refletir alterações eventualmente, com restrições; `subPath` não atualiza automaticamente |
 
-```bash
-kubectl config current-context
-kubectl create configmap aula-config --from-literal=APP_MODE=demo
-kubectl get configmap aula-config -o yaml
-kubectl delete configmap aula-config
+## Exemplo de definição
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_MODE: "dev"
+  API_URL: "https://api.example.invalid"
 ```
 
-> Confirme o contexto e namespace antes de executar. Não utilize dados sensíveis neste exercício.
+## Exemplo de uso no Pod
 
-## 🔎 Diagnóstico e conclusão
+```yaml
+env:
+  - name: APP_MODE
+    valueFrom:
+      configMapKeyRef:
+        name: app-config
+        key: APP_MODE
+```
 
-Compare a configuração armazenada com o modo como um Pod a consome. O lab de consumo via `envFrom` e volume ainda será desenvolvido.
+O segundo trecho pertence a um container, em `spec.containers[].env`. A API não injeta valores em containers arbitrários: a configuração deve estar referenciada no template do Pod.
+
+## Cuidados e diagnóstico
+
+Não coloque senhas, tokens ou chaves em ConfigMap. Para esses dados, estude Secrets e o gerenciamento seguro de credenciais. Evite depender de atualização imediata de arquivos montados, sobretudo quando o aplicativo mantém configurações em cache.
+
+```bash
+kubectl get configmaps
+kubectl describe configmap app-config
+kubectl get configmap app-config -o yaml
+```
+
+O objeto `app-config` precisa existir. Se a variável não aparece no Pod, confira namespace, chave, referência e se o Pod foi recriado após a alteração.
+
+## 🧪 Aplicação prática
+
+**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
+
+## ✅ Revisão do aprendizado
+
+- Qual problema este conceito resolve?
+- Que campos ou estados da API permitem verificar o comportamento real?
+- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+
+## 🔗 Referência oficial
+
+[Documentação Kubernetes — ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
 
 ---
 
-[← Services](../services/README.md) · [↑ Camada 01](../README.md) · [Próxima: Secrets →](../secrets/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Secrets →](../secrets/README.md)
