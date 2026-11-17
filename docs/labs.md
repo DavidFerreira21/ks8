@@ -24,13 +24,20 @@ A partir da raiz do repositório:
 | `make up` | Cria o cluster Kind somente se não existir |
 | `make nodes` | Inspeciona os Nodes do contexto esperado |
 | `make status` | Exibe recursos do namespace de laboratório |
-| `make validate` | Confere sintaxe e invariantes básicas de quatro manifests |
+| `make validate` | Confere YAML e invariantes selecionadas dos exemplos das Camadas 01 e 02 |
 | `make lab-up` | Cria namespace, Deployment e Service do lab integrado |
 | `make lab-test` | Aguarda rollout e inspeciona Service/EndpointSlices |
 | `make lab-down` | Exclui apenas Deployment e Service do lab |
 | `make down` | Exclui o cluster Kind local `dev` (ação destrutiva) |
 
 `make lab-up` **não** executa a etapa manual de Pod individual do lab integrado, para preservar a sequência didática. Execute essa etapa a partir do [README do laboratório](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md).
+
+## Camada 02 — Operação e Segurança
+
+- [RBAC e ServiceAccount](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
+- [ResourceQuota e LimitRange](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md): defaults de recursos e rejeição intencional por quota.
+
+Esses dois laboratórios são **manuais** e têm namespace próprio. Não foram adicionados aos alvos `make lab-*`, que continuam exclusivos do lab da primeira aplicação. O comando `make validate` passa a validar também a estrutura YAML dos novos exemplos.
 
 ## Diagnóstico
 
