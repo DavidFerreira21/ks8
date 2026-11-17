@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Investigar como Control Plane, Workers, rede e armazenamento cooperam para transformar objetos declarativos em aplicações executadas.
 
-**17 temas no catálogo (2 guias publicados)** · **visão arquitetural e referências oficiais** · **labs de observação em planejamento**
+**17 temas no catálogo · 17 infográficos vinculados · 2 guias teóricos em evolução** · **visão arquitetural e referências oficiais** · **labs de observação em planejamento**
 
 ---
 
@@ -19,29 +19,29 @@
 
 ## 📚 Catálogo de arquitetura — ordem de estudo
 
-Os números refletem a sequência didática. **Guias próprios** existem, nesta camada, apenas para 03.06 e 03.07; as demais entradas continuam com referências oficiais e aulas detalhadas planejadas.
+Os números refletem a sequência didática. **Páginas visuais** existem para os 17 temas. Os guias de CRDs e Controllers já têm conteúdo teórico introdutório; as demais páginas possuem o infográfico e aguardam aprofundamento.
 
 | Aula | Conceito | O que aprender | Material |
 | --- | --- | --- | --- |
-| 03.01 | Arquitetura do Cluster Kubernetes | Control Plane e Workers | [Referência](https://kubernetes.io/docs/concepts/overview/components/) |
-| 03.02 | kube-apiserver | API, autenticação e autorização | [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver) |
-| 03.03 | etcd | Persistência do estado | [Referência](https://kubernetes.io/docs/concepts/overview/components/#etcd) |
-| 03.04 | Admission Controllers | Validação e mutação de requisições | [Referência](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) |
-| 03.05 | kube-controller-manager | Loops de reconciliação nativos | [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager) |
+| 03.01 | Arquitetura do Cluster Kubernetes | Control Plane e Workers | [🎨 Infográfico](arquitetura-cluster/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/) |
+| 03.02 | kube-apiserver | API, autenticação e autorização | [🎨 Infográfico](kube-apiserver/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver) |
+| 03.03 | etcd | Persistência do estado | [🎨 Infográfico](etcd/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#etcd) |
+| 03.04 | Admission Controllers | Validação e mutação de requisições | [🎨 Infográfico](admission-controllers/README.md) · [Referência](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) |
+| 03.05 | kube-controller-manager | Loops de reconciliação nativos | [🎨 Infográfico](kube-controller-manager/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager) |
 | **03.06** | **CRDs e Custom Resources** | **Estender a API Kubernetes** | **[📖 Estudar](crds-custom-resources/README.md)** |
 | **03.07** | **Custom Controllers e Operators** | **Implementar reconciliação própria** | **[📖 Estudar](custom-controllers-operators/README.md)** |
-| 03.08 | kube-scheduler | Agendamento de Pods | [Referência](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) |
-| 03.09 | cloud-controller-manager | Integração com provedores cloud | [Referência](https://kubernetes.io/docs/concepts/architecture/cloud-controller/) |
-| 03.10 | kubelet | Agente em cada nó | [Referência](https://kubernetes.io/docs/concepts/overview/components/#kubelet) |
-| 03.11 | Container Runtime | Execução via CRI | [Referência](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) |
-| 03.12 | CNI e comunicação de rede | Conectividade dos Pods | [Referência](https://kubernetes.io/docs/concepts/cluster-administration/networking/) |
-| 03.13 | kube-proxy e eBPF | Dataplane de Services | [Referência](https://kubernetes.io/docs/reference/networking/virtual-ips/) |
-| 03.14 | CoreDNS e Service Discovery | DNS de serviços e Pods | [Referência](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) |
-| 03.15 | CSI e Storage | Integração de volumes e drivers | [Referência](https://kubernetes.io/docs/concepts/storage/volumes/#csi) |
-| 03.16 | Gateway API | APIs de roteamento de tráfego | [Referência](https://gateway-api.sigs.k8s.io/) |
-| 03.17 | Kustomize e Helm | Customização e empacotamento | [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) · [Helm](https://helm.sh/docs/) |
+| 03.08 | kube-scheduler | Agendamento de Pods | [🎨 Infográfico](kube-scheduler/README.md) · [Referência](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) |
+| 03.09 | cloud-controller-manager | Integração com provedores cloud | [🎨 Infográfico](cloud-controller-manager/README.md) · [Referência](https://kubernetes.io/docs/concepts/architecture/cloud-controller/) |
+| 03.10 | kubelet | Agente em cada nó | [🎨 Infográfico](kubelet/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#kubelet) |
+| 03.11 | Container Runtime | Execução via CRI | [🎨 Infográfico](container-runtime/README.md) · [Referência](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) |
+| 03.12 | CNI e comunicação de rede | Conectividade dos Pods | [🎨 Infográfico](cni-comunicacao/README.md) · [Referência](https://kubernetes.io/docs/concepts/cluster-administration/networking/) |
+| 03.13 | kube-proxy e eBPF | Dataplane de Services | [🎨 Infográfico](kube-proxy-ebpf/README.md) · [Referência](https://kubernetes.io/docs/reference/networking/virtual-ips/) |
+| 03.14 | CoreDNS e Service Discovery | DNS de serviços e Pods | [🎨 Infográfico](coredns/README.md) · [Referência](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) |
+| 03.15 | CSI e Storage | Integração de volumes e drivers | [🎨 Infográfico](csi-storage/README.md) · [Referência](https://kubernetes.io/docs/concepts/storage/volumes/#csi) |
+| 03.16 | Gateway API | APIs de roteamento de tráfego | [🎨 Infográfico](gateway-api/README.md) · [Referência](https://gateway-api.sigs.k8s.io/) |
+| 03.17 | Kustomize e Helm | Customização e empacotamento | [🎨 Infográfico](kustomize-helm/README.md) · [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) · [Helm](https://helm.sh/docs/) |
 
-> **Status:** 17 tópicos catalogados; dois guias de introdução publicados. Os labs de observação, CRDs e controllers ainda são roteiros, não exercícios validados.
+> **Status:** 17 infográficos publicados e vinculados às páginas; dois guias de introdução com teoria. Os labs de observação, CRDs e controllers ainda são roteiros, não exercícios validados.
 
 ## 🔎 Observação guiada — próximos labs
 
