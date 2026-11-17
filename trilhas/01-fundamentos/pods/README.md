@@ -42,3 +42,10 @@ Também há um [lab integrado Pod → Deployment → Service](../labs/primeira-a
 - [Kubernetes — Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
 
 **Próximo tópico:** [Deployments](../deployments/README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../fundamentos/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../deployments/README.md)
