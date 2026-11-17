@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.01 — Labels, Selectors e Annotations](images/labels-selectors-annotations.png)
+
+> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+
+
 ## O que você vai aprender
 
 Labels identificam e agrupam recursos, Selectors filtram recursos com base nessas labels, Annotations adicionam metadados não destinados à seleção.
@@ -22,9 +29,7 @@ Use kubectl get pods -l app=web --show-labels e compare seletores que correspond
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
 
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 
