@@ -31,3 +31,10 @@ O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG
 - [Documentação Kubernetes — PriorityClass e Preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)
 
 **Próxima etapa:** [índice completo da Camada 02](../README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../pdb/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../init-sidecars/README.md)
