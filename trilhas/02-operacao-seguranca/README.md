@@ -1,70 +1,79 @@
-# Camada 02 — Operação, governança e segurança
+# 🛡️ Camada 02 · Operação, governança e segurança
 
-[← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
+[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [🧪 Labs](../../docs/labs.md)
 
-> 🛡️ **CAMADA 02 · TRILHA KUBERNETES**  
-> Aprenda a controlar acesso, consumo, agendamento e resiliência.
+> **Objetivo da camada**  
+> Executar workloads com controles de acesso, limites de consumo, agendamento previsível e disponibilidade.
 
-### Acesso rápido
-
-[**🔐 Lab RBAC**](labs/rbac-minimo/README.md) · [**📏 Lab ResourceQuota**](labs/quota-namespace/README.md) · [**🧪 Guia de labs**](../../docs/labs.md)
+**9 temas com guias publicados** · **2 labs com manifests** · **exercícios adicionais planejados**
 
 ---
 
-**Objetivo:** executar aplicações com controles claros de acesso, consumo, agendamento, conectividade e disponibilidade. Recomendação: terminar o [lab de primeira aplicação](../01-fundamentos/labs/primeira-aplicacao/README.md) antes de avançar.
+## 🧭 Por onde começar?
 
-## Conteúdos
+| **01 · Identidade e permissões** | **02 · Governança de recursos** |
+| :--- | :--- |
+| 🔐 Descubra quem pode ler, criar ou excluir recursos. Aplique menor privilégio com ServiceAccount e RBAC.<br><br>**[Estudar RBAC →](rbac-serviceaccount/README.md)** | 📏 Observe defaults de recursos e limites por namespace.<br><br>**[Estudar ResourceQuota →](resourcequota-limitrange/README.md)** |
+| **03 · Agendamento e resiliência** | **04 · Tráfego e execução** |
+| 🧩 Investigue Taints, Affinity, PDB e prioridades.<br><br>**[Estudar scheduling →](taints-tolerations-affinity/README.md)** | 🌐 Explore NetworkPolicy, Jobs, CronJobs e padrões de containers.<br><br>**[Estudar NetworkPolicy →](networkpolicy/README.md)** |
 
-| Tópico | Guia | Prática |
+## 📚 Catálogo de conceitos
+
+### 🔐 Acesso e governança
+
+| Tópico | Para aprender | Prática |
 | --- | --- | --- |
-| RBAC e ServiceAccount | [Estudar](rbac-serviceaccount/README.md) | [Lab mínimo](labs/rbac-minimo/README.md) |
-| Jobs e CronJobs | [Estudar](jobs-cronjobs/README.md) | Roteiro de laboratório futuro |
-| NetworkPolicy | [Estudar](networkpolicy/README.md) | Requer CNI com enforcement |
-| Labels, Selectors e Annotations | [Estudar](labels-selectors-annotations/README.md) | Exemplos de seleção |
-| Taints, Tolerations e Node Affinity | [Estudar](taints-tolerations-affinity/README.md) | Roteiro de scheduling |
-| ResourceQuota e LimitRange | [Estudar](resourcequota-limitrange/README.md) | [Lab de quota](labs/quota-namespace/README.md) |
-| PodDisruptionBudget (PDB) | [Estudar](pdb/README.md) | Roteiro de resiliência |
-| PriorityClass e Preemption | [Estudar](priorityclass-preemption/README.md) | Roteiro de prioridades |
-| Init Containers e Sidecars | [Estudar](init-sidecars/README.md) | Roteiro de ciclo de vida |
+| **RBAC e ServiceAccount** | [📖 Guia](rbac-serviceaccount/README.md) | [🧪 Lab de menor privilégio](labs/rbac-minimo/README.md) |
+| **ResourceQuota e LimitRange** | [📖 Guia](resourcequota-limitrange/README.md) | [🧪 Lab de quota](labs/quota-namespace/README.md) |
+| **Labels, Selectors e Annotations** | [📖 Guia](labels-selectors-annotations/README.md) | Exemplos e comandos de seleção |
 
-Os nove guias seguem o formato **conceito → funcionamento → experimento → observação → documentação oficial**.
+### 🧩 Scheduling e disponibilidade
 
-## Laboratórios disponíveis
+| Tópico | Para aprender | Prática |
+| --- | --- | --- |
+| **Taints, Tolerations e Node Affinity** | [📖 Guia](taints-tolerations-affinity/README.md) | 🚧 Lab futuro |
+| **PodDisruptionBudget (PDB)** | [📖 Guia](pdb/README.md) | 🚧 Lab futuro |
+| **PriorityClass e Preemption** | [📖 Guia](priorityclass-preemption/README.md) | 🚧 Lab futuro |
 
-### 1. RBAC e ServiceAccount
+### 🌐 Rede e execução
 
-[Executar laboratório de menor privilégio](labs/rbac-minimo/README.md): cria ServiceAccount, Role e RoleBinding em namespace isolado; usa `kubectl auth can-i --as=...` para demonstrar permissão concedida e negada.
+| Tópico | Para aprender | Prática |
+| --- | --- | --- |
+| **NetworkPolicy** | [📖 Guia](networkpolicy/README.md) | ⚠️ Lab exige CNI com enforcement |
+| **Jobs e CronJobs** | [📖 Guia](jobs-cronjobs/README.md) | 🚧 Lab futuro |
+| **Init Containers e Sidecars** | [📖 Guia](init-sidecars/README.md) | 🚧 Lab futuro; [base em Pods](../../2-pod/README.md) |
 
-### 2. ResourceQuota e LimitRange
+## 🧪 Labs disponíveis agora
 
-[Executar laboratório de quota por namespace](labs/quota-namespace/README.md): configura defaults para containers, admite o primeiro Pod e demonstra rejeição intencional do segundo por exceder a quota.
+| **🔐 RBAC · Menor privilégio** | **📏 ResourceQuota · Controle por namespace** |
+| :--- | :--- |
+| Crie ServiceAccount, Role e RoleBinding. Compare permissões concedidas e negadas com `kubectl auth can-i`.<br><br>**[Executar lab RBAC →](labs/rbac-minimo/README.md)** | Configure LimitRange e ResourceQuota, admita um Pod e observe a rejeição intencional de um segundo.<br><br>**[Executar lab de Quotas →](labs/quota-namespace/README.md)** |
 
-> **Ambiente:** os labs foram preparados para Kind local. Os comandos precisam ser executados e validados no cluster; os testes no GitHub Actions checam apenas aspectos estáticos dos YAMLs.
+> **Ambiente de teste:** Kind local. Os manifests foram adicionados à trilha, mas **os exercícios ainda precisam de validação real no cluster**. O CI faz verificações estáticas; não executa esses labs.
 
-## Próximos exercícios sugeridos
+## 🔎 Experimentos para a próxima evolução
 
-- **Rede:** NetworkPolicy com tráfego permitido/bloqueado, após configurar CNI que implemente enforcement. O Kind padrão não atende automaticamente a esse requisito.
-- **Resiliência:** Deployment com PDB e teste de Eviction API durante manutenção.
-- **Scheduling:** Node Affinity e Taints/Tolerations em Workers rotulados.
-- **Prioridades:** PriorityClass e análise de comportamento sob falta de recursos.
+| Domínio | Experimento proposto | Pré-requisito |
+| --- | --- | --- |
+| **NetworkPolicy** | Comparar comunicação permitida e bloqueada | Plugin CNI com suporte a policies |
+| **Resiliência** | Observar `disruptionsAllowed` em um PDB | Ambiente de testes para evictions |
+| **Scheduling** | Comparar Pod com e sem affinity/tolerations | Workers com labels e taints controlados |
+| **Prioridades** | Investigar Pods Pending sob pressão de recursos | Cluster descartável |
 
-## Infográficos
+## 🎯 Checklist de aprendizado
 
-A coleção visual tem imagens para os nove tópicos desta camada. **Os PNGs ainda não estão no repositório.** Consulte a [convenção para integração de imagens](../../docs/infograficos.md).
+- [ ] Explicar a diferença entre ServiceAccount, Role e RoleBinding.
+- [ ] Interpretar uma criação negada pela ResourceQuota.
+- [ ] Distinguir permissão de agendamento de preferência de nó.
+- [ ] Explicar quando PDB restringe interrupções voluntárias.
+- [ ] Identificar a dependência do CNI para aplicar NetworkPolicy.
 
-## Referências oficiais
+## 🎨 Coleção visual e fontes
 
-- [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
-- [NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
-- [ResourceQuota](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
-- [Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/)
-- [Pod Disruptions](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
+Os infográficos desses nove conceitos **ainda não foram enviados ao GitHub**. Confira a [convenção para integração](../../docs/infograficos.md).
 
-**Próxima camada:** [Arquitetura e infraestrutura](../03-arquitetura/README.md).
-
+[RBAC oficial](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) · [Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/) · [NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/) · [ResourceQuota](https://kubernetes.io/docs/concepts/policy/resource-quotas/) · [Pod Disruptions](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
 
 ---
 
-### Continue estudando
-
-[← 01 · Fundamentos](../01-fundamentos/README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [03 · Arquitetura →](../03-arquitetura/README.md)
+[**← 01 · Fundamentos**](../01-fundamentos/README.md) · [↑ Roadmap](../../docs/roadmap.md) · **[03 · Arquitetura →](../03-arquitetura/README.md)**
