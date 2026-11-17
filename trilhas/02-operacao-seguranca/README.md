@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Executar workloads com controles de acesso, limites de consumo, agendamento previsível e disponibilidade.
 
-**14 aulas no catálogo · 9 guias publicados** · **2 labs com manifests** · **exercícios adicionais planejados**
+**14 aulas no catálogo · 9 guias teóricos · infográficos publicados progressivamente** · **2 labs com manifests** · **exercícios adicionais planejados**
 
 ---
 
@@ -25,18 +25,18 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | --- | --- | --- | --- |
 | 02.01 | **Labels, Selectors e Annotations** | [📖 Estudar](labels-selectors-annotations/README.md) | — |
 | 02.02 | **RBAC e ServiceAccount** | [📖 Estudar](rbac-serviceaccount/README.md) | — · [🧪 Lab](labs/rbac-minimo/README.md) |
-| 02.03 | **SecurityContext e Pod Security Admission** | 🚧 Planejada | — |
+| 02.03 | **SecurityContext e Pod Security Admission** | [🎨 Infográfico · teoria em preparação](securitycontext-pod-security/README.md) | — |
 | 02.04 | **ResourceQuota e LimitRange** | [📖 Estudar](resourcequota-limitrange/README.md) | — · [🧪 Lab](labs/quota-namespace/README.md) |
 | 02.05 | **Init Containers e Sidecars** | [📖 Estudar](init-sidecars/README.md) | — |
 | 02.06 | **Jobs e CronJobs** | [📖 Estudar](jobs-cronjobs/README.md) | — |
 | 02.07 | **Taints, Tolerations e Node Affinity** | [📖 Estudar](taints-tolerations-affinity/README.md) | — |
-| 02.08 | **Topology Spread Constraints** | 🚧 Planejada | — |
+| 02.08 | **Topology Spread Constraints** | [🎨 Infográfico · teoria em preparação](topology-spread/README.md) | — |
 | 02.09 | **PriorityClass e Preemption** | [📖 Estudar](priorityclass-preemption/README.md) | — |
-| 02.10 | **QoS Classes e Eviction** | 🚧 Planejada | — |
+| 02.10 | **QoS Classes e Eviction** | [🎨 Infográfico · teoria em preparação](qos-eviction/README.md) | — |
 | 02.11 | **PodDisruptionBudget (PDB)** | [📖 Estudar](pdb/README.md) | — |
-| 02.12 | **Node Maintenance — Cordon, Drain e Uncordon** | 🚧 Planejada | — |
+| 02.12 | **Node Maintenance — Cordon, Drain e Uncordon** | [🎨 Infográfico · teoria em preparação](node-maintenance/README.md) | — |
 | 02.13 | **NetworkPolicy** | [📖 Estudar](networkpolicy/README.md) | — |
-| 02.14 | **Kubernetes Troubleshooting** | 🚧 Planejada | — |
+| 02.14 | **Kubernetes Troubleshooting** | [🎨 Infográfico · teoria em preparação](troubleshooting/README.md) | — |
 
 ## 🧪 Labs disponíveis agora
 

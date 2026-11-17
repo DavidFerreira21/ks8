@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.04 — ResourceQuota e LimitRange](images/resourcequota-limitrange.png)
+
+> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+
+
 ## O que você vai aprender
 
 ResourceQuota limita consumo agregado por namespace. LimitRange define mínimos, máximos e defaults por container/Pod, quando configurados.
@@ -22,9 +29,7 @@ Aplique quota e defaults em namespace isolado; crie um Pod aceito e tente excede
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
 
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 

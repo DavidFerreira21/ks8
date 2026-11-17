@@ -4,6 +4,13 @@
 
 > **Objetivo:** entender como estender a API Kubernetes com novos tipos de recursos e diferenciá-los dos controladores que atuam sobre eles.
 
+## 🎨 Infográfico
+
+![03.06 — CRDs e Custom Resources](images/crds-custom-resources.png)
+
+> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+
+
 ## 📖 Conceito
 
 Uma **CustomResourceDefinition (CRD)** registra um novo tipo de recurso na API Kubernetes. Uma **Custom Resource (CR)** é uma instância desse tipo, declarada e consultada com as ferramentas usuais do cluster.

@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Conhecer sete conjuntos de ferramentas relevantes do ecossistema cloud-native e compreender quais problemas resolvem no Kubernetes. O estudo aprofundado de Platform Engineering como disciplina pertence ao laboratório dedicado.
 
-**7 temas planejados** · **roteiro de ferramentas** · **labs introdutórios ainda não implementados**
+**7 infográficos publicados** · **roteiro de ferramentas** · **labs introdutórios ainda não implementados**
 
 ---
 
@@ -21,13 +21,13 @@
 
 | Aula | Ferramenta | Capacidade | Referência |
 | --- | --- | --- | --- |
-| 04.01 | **Argo CD** | GitOps e entrega contínua | [Documentação](https://argo-cd.readthedocs.io/en/stable/) |
-| 04.02 | **Crossplane** | Infraestrutura declarativa via Kubernetes | [Documentação](https://docs.crossplane.io/) |
-| 04.03 | **Kyverno** | Policy as Code e governança | [Documentação](https://kyverno.io/docs/) |
-| 04.04 | **External Secrets Operator** | Integração com provedores de segredos | [Documentação](https://external-secrets.io/latest/) |
-| 04.05 | **Karpenter** | Provisionamento e autoscaling de nós | [Documentação](https://karpenter.sh/docs/) |
-| 04.06 | **Cilium** | Networking, eBPF e segurança | [Documentação](https://docs.cilium.io/) |
-| 04.07 | **Prometheus + Grafana** | Métricas, dashboards e alertas | [Prometheus](https://prometheus.io/docs/) · [Grafana](https://grafana.com/docs/) |
+| 04.01 | **[Argo CD](argo-cd/README.md)** | GitOps e entrega contínua | [Documentação](https://argo-cd.readthedocs.io/en/stable/) |
+| 04.02 | **[Crossplane](crossplane/README.md)** | Infraestrutura declarativa via Kubernetes | [Documentação](https://docs.crossplane.io/) |
+| 04.03 | **[Kyverno](kyverno/README.md)** | Policy as Code e governança | [Documentação](https://kyverno.io/docs/) |
+| 04.04 | **[External Secrets Operator](external-secrets-operator/README.md)** | Integração com provedores de segredos | [Documentação](https://external-secrets.io/latest/) |
+| 04.05 | **[Karpenter](karpenter/README.md)** | Provisionamento e autoscaling de nós | [Documentação](https://karpenter.sh/docs/) |
+| 04.06 | **[Cilium](cilium/README.md)** | Networking, eBPF e segurança | [Documentação](https://docs.cilium.io/) |
+| 04.07 | **[Prometheus + Grafana](prometheus-grafana/README.md)** | Métricas, dashboards e alertas | [Prometheus](https://prometheus.io/docs/) · [Grafana](https://grafana.com/docs/) |
 
 **Pré-requisito recomendado:** estudar [CRDs e Custom Resources](../03-arquitetura/crds-custom-resources/README.md) e [Custom Controllers e Operators](../03-arquitetura/custom-controllers-operators/README.md), na Camada 03, antes de aprofundar Crossplane e outros operadores.
 
@@ -43,7 +43,7 @@
 | Cilium | Validar políticas de rede e observar fluxos | Exige CNI configurado |
 | Prometheus + Grafana | Coletar métricas e construir dashboard | Diferenciar métricas, logs e traces |
 
-> **Status:** este é um catálogo de estudo. Os sete labs não foram implementados nem testados neste PR; os infográficos gerados fora do GitHub ainda dependem de upload e revisão.
+> **Status:** este é um catálogo de estudo. Os sete labs não foram implementados nem testados neste PR; os sete infográficos estão publicados nas páginas respectivas; a revisão técnica e os laboratórios completos permanecem pendentes.
 
 ## 🎯 Checklist de aprendizado
 

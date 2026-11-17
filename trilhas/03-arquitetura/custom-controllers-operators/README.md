@@ -4,6 +4,13 @@
 
 > **Objetivo:** entender o padrão de reconciliação e como controladores personalizados e Operators automatizam a operação de recursos no Kubernetes.
 
+## 🎨 Infográfico
+
+![03.07 — Custom Controllers e Operators](images/custom-controllers-operators.png)
+
+> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+
+
 ## 📖 Conceito
 
 Um **Controller** observa o estado atual de recursos e toma medidas para aproximá-lo do estado desejado. Um **Custom Controller** aplica esse princípio a uma necessidade específica — frequentemente a tipos registrados por CRDs.

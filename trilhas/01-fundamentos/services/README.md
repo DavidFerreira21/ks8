@@ -4,6 +4,13 @@
 
 > **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../7-services/README.md).
 
+## 🎨 Infográfico
+
+![01.09 — Services](images/services.png)
+
+> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+
+
 ## Objetivo
 
 Conectar clientes a Pods por um ponto de acesso estável, com descoberta via DNS.
@@ -18,7 +25,6 @@ Conectar clientes a Pods por um ponto de acesso estável, com descoberta via DNS
 
 Consulte as [anotações e exemplos práticos](../../../7-services/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
 
-**Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
 ## Laboratório e observação
 

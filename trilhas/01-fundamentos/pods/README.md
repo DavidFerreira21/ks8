@@ -4,6 +4,13 @@
 
 > **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../2-pod/README.md).
 
+## 🎨 Infográfico
+
+![01.03 — Pods](images/pods.png)
+
+> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+
+
 ## Objetivo
 
 Compreender a menor unidade implantável do Kubernetes e seus containers.
@@ -18,7 +25,6 @@ Compreender a menor unidade implantável do Kubernetes e seus containers.
 
 Consulte as [anotações e exemplos práticos](../../../2-pod/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
 
-**Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
 ## Laboratório e observação
 
