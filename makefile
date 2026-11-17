@@ -1,72 +1,65 @@
-.PHONY: all up down test-deploy config-bash install-nginx install-argocd configure-argocd-ingress apply-argocd-test-app
+SHELL := /bin/bash
+.DEFAULT_GOAL := help
 
-all:
-	$(MAKE) up
-	$(MAKE) install-nginx
-	$(MAKE) install-argocd
-	$(MAKE) configure-argocd-ingress
-	$(MAKE) apply-argocd-test-app
+CLUSTER_NAME ?= dev
+KIND_CONFIG ?= kind-config.yaml
+KUBE_CONTEXT ?= kind-$(CLUSTER_NAME)
+LAB_DIR := trilhas/01-fundamentos/labs/primeira-aplicacao
+LAB_NAMESPACE := k8s-lab
 
-up:
-	@if kind get clusters | grep -qx "dev"; then \
-		echo "Cluster 'dev' ja existe. Pulando criacao."; \
+.PHONY: help check-tools check-context up nodes status down validate lab-up lab-test lab-down
+
+help: ## Exibe os alvos disponíveis
+	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z_-]+:.*## / {printf "  %-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+check-tools: ## Verifica as ferramentas necessárias
+	@command -v kind >/dev/null || (echo "kind não encontrado" >&2; exit 1)
+	@command -v kubectl >/dev/null || (echo "kubectl não encontrado" >&2; exit 1)
+	@command -v docker >/dev/null || (echo "docker não encontrado" >&2; exit 1)
+	@docker info >/dev/null 2>&1 || (echo "Docker não está respondendo" >&2; exit 1)
+
+check-context: ## Confere o contexto Kubernetes antes de alterar workloads
+	@command -v kubectl >/dev/null || (echo "kubectl não encontrado" >&2; exit 1)
+	@current="$$(kubectl config current-context 2>/dev/null)"; \
+	  if [[ "$$current" != "$(KUBE_CONTEXT)" ]]; then \
+	    echo "Contexto $$current inesperado; esperado: $(KUBE_CONTEXT)" >&2; \
+	    exit 1; \
+	  fi
+
+up: check-tools ## Cria o cluster Kind local, se ainda não existir
+	@if kind get clusters | grep -Fxq "$(CLUSTER_NAME)"; then \
+	  echo "Cluster Kind $(CLUSTER_NAME) já existe"; \
 	else \
-		kind create cluster --name dev --config kind-config.yaml; \
+	  kind create cluster --name "$(CLUSTER_NAME)" --config "$(KIND_CONFIG)"; \
 	fi
 
-down:
-	kind delete cluster --name dev
+nodes: check-context ## Mostra os nós do cluster do lab
+	@kubectl get nodes -o wide
 
-test-deploy:
-	kubectl apply -f test-deploy.yaml
-	kubectl get pods -l app=http-echo
-	kubectl get endpoints http-echo-svc
-	
+status: check-context ## Lista Pods e Services do namespace de lab
+	@kubectl get pods,services -n "$(LAB_NAMESPACE)" --ignore-not-found
 
-config-bash:
-	sudo apt-get install bash-completion 
-	kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
-	echo 'alias k=kubectl' >>~/.bashrc
-	echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
-
-install-nginx:
-	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-	kubectl -n ingress-nginx patch deploy ingress-nginx-controller --type='json' -p='[{"op":"add","path":"/spec/template/spec/nodeSelector","value":{"ingress-ready":"true","kubernetes.io/os":"linux"}}]'
-	kubectl -n ingress-nginx patch deploy ingress-nginx-controller --type='json' -p='[{"op":"add","path":"/spec/template/spec/containers/0/ports/0/hostPort","value":80},{"op":"add","path":"/spec/template/spec/containers/0/ports/1/hostPort","value":443}]'
-	kubectl wait --namespace ingress-nginx --for=condition=Ready pod --selector=app.kubernetes.io/component=controller --timeout=180s
-
-install-argocd:
-	kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
-	kubectl apply --server-side -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-	kubectl -n argocd patch configmap argocd-cmd-params-cm --type merge -p '{"data":{"server.insecure":"true"}}'
-	kubectl -n argocd rollout restart deployment argocd-server
-	@echo "Aguardando pods do Argo CD serem criados..."
-	@attempts=0; \
-	until [ $$attempts -ge 150 ] || kubectl -n argocd get pods -o name | grep -q .; do \
-		attempts=$$((attempts+1)); \
-		sleep 2; \
-	done; \
-	if [ $$attempts -ge 150 ]; then \
-		echo "Timeout aguardando pods do Argo CD no namespace argocd."; \
-		kubectl -n argocd get all; \
-		exit 1; \
+down: ## Remove somente o cluster Kind identificado por CLUSTER_NAME
+	@command -v kind >/dev/null || (echo "kind não encontrado" >&2; exit 1)
+	@if kind get clusters | grep -Fxq "$(CLUSTER_NAME)"; then \
+	  kind delete cluster --name "$(CLUSTER_NAME)"; \
+	else \
+	  echo "Cluster Kind $(CLUSTER_NAME) não encontrado"; \
 	fi
-	kubectl -n argocd wait --for=condition=Ready pod --all --timeout=600s
-	kubectl -n argocd rollout status deployment/argocd-server --timeout=300s
-	@echo "Aguardando secret inicial do Argo CD..."
-	@until kubectl -n argocd get secret argocd-initial-admin-secret >/dev/null 2>&1; do sleep 2; done
-	@echo "Argo CD admin password:"
-	@kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 
-configure-argocd-ingress:
-	kubectl apply -f argo/argocd-ingress.yaml
+validate: ## Validação estática dos manifests do lab (sem cluster)
+	@python3 scripts/validate_manifests.py
 
-apply-argocd-test-app:
-	kubectl apply -f argo/test-app-application.yaml
+lab-up: check-context ## Aplica Deployment e Service do laboratório integrado
+	@kubectl create namespace "$(LAB_NAMESPACE)" --dry-run=client -o yaml | kubectl apply -f -
+	@kubectl apply -f "$(LAB_DIR)/deployment.yaml" -f "$(LAB_DIR)/service.yaml"
 
-	
-	
-	
+lab-test: check-context ## Espera o Deployment ficar pronto e verifica Service
+	@kubectl rollout status deployment/web -n "$(LAB_NAMESPACE)" --timeout=180s
+	@kubectl get deployment web -n "$(LAB_NAMESPACE)"
+	@kubectl get service web -n "$(LAB_NAMESPACE)"
+	@kubectl get endpointslices -n "$(LAB_NAMESPACE)" -l kubernetes.io/service-name=web
 
-
-	
+lab-down: check-context ## Remove somente Deployment e Service criados pelo laboratório
+	@kubectl delete -f "$(LAB_DIR)/service.yaml" -f "$(LAB_DIR)/deployment.yaml" --ignore-not-found
+	@echo "Namespace $(LAB_NAMESPACE) preservado; remova-o manualmente se estiver vazio."
