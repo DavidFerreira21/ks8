@@ -43,7 +43,7 @@ Também estão disponíveis o [resumo dos conceitos](resume.md) e o [guia de ins
 
 O repositório utiliza **Kind**, com configuração de um **Control Plane e dois Worker Nodes**, conforme o [manifest do cluster](kind-config.yaml). O guia atual descreve Windows, WSL2, Ubuntu e Docker Desktop.
 
-Algumas instruções antigas citam comandos `make`; a existência e a compatibilidade desses alvos ainda precisam ser verificadas na padronização dos labs. Antes disso, use os comandos explícitos disponíveis nas aulas ou o [guia de instalação](install-kind.md), observando as versões indicadas.
+O repositório agora inclui um [Makefile](Makefile) com alvos de criação do cluster, validação estática, diagnóstico e execução do laboratório integrado. Consulte o [guia dos laboratórios](docs/labs.md) para pré-requisitos, comandos, limitações e limpeza segura. O laboratório deve ser testado localmente no Kind antes de considerar sua execução validada.
 
 ## Como serão as novas aulas
 
@@ -60,4 +60,4 @@ A trilha visual foi planejada com 44 temas. **Os infográficos ainda não foram 
 
 ---
 
-**Próximo passo da evolução do repositório:** migrar o conteúdo existente para os novos diretórios, revisar os laboratórios e integrar os infográficos por tópico.
+**Próximo passo da evolução do repositório:** validar a execução no Kind, ampliar os exercícios para os demais módulos e integrar os infográficos por tópico.
