@@ -1,56 +1,75 @@
-# Probes
+# 01.05 · Probes — Liveness, Readiness e Startup
 
-[← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
+[⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../5-probes/README.md).
+> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
 
 ## 🎨 Infográfico
 
 ![01.05 — Probes — Liveness, Readiness e Startup](images/probes.png)
 
-> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+## 📖 Aula teórica
 
+## Saúde do processo não é prontidão da aplicação
 
-## Objetivo
+As probes são verificações executadas pelo **kubelet** para responder a perguntas diferentes. Um processo pode estar vivo, mas ainda não conseguir atender requisições; uma aplicação pode precisar de tempo para iniciar antes de ser testada.
 
-Distinguir verificações de inicialização, prontidão e saúde dos containers.
+| Probe | Pergunta | Efeito quando falha repetidamente |
+| --- | --- | --- |
+| `livenessProbe` | O processo continua saudável? | O kubelet reinicia o container |
+| `readinessProbe` | Pode receber tráfego agora? | O Pod deixa de ser considerado pronto para o Service |
+| `startupProbe` | A inicialização terminou? | Protege liveness/readiness até ter sucesso; se exceder o limite de falhas, reinicia o container |
 
-## Ao concluir, você deverá conseguir
+O kubelet pode verificar com `httpGet`, `tcpSocket`, `exec` e, conforme a versão/configuração, gRPC. Escolha um teste que reflita **a propriedade que deseja medir**.
 
-- Distinguir liveness, readiness e startup
-- Inspecionar eventos e condições do Pod
-- Observar o efeito da readiness sobre os destinos de um Service
+## Exemplo de comportamento
 
-## Estude o conceito
+```yaml
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 2
+  periodSeconds: 5
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
 
-Consulte as [anotações e exemplos práticos](../../../5-probes/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
+Este trecho pertence a um container e pressupõe que o aplicativo responda corretamente em `/ready`. Uma readiness falhando pode deixar o Pod `Running` e `Ready=False`, sem causar restart.
 
+## Anti-padrões comuns
 
-## Laboratório e observação
+- Usar **liveness** para validar dependências externas instáveis pode criar loops de reinicialização.
+- Apontar uma probe a um endpoint inexistente causa falha mesmo que o processo esteja saudável.
+- Configurar tempos agressivos para startup lento gera reinícios prematuros.
+- Desabilitar readiness em uma aplicação que precisa de warm-up pode encaminhar tráfego cedo demais.
 
-**Pré-requisito:** [Kind configurado](../../../install-kind.md) e contexto correto selecionado. Confira `kubectl config current-context` antes de executar comandos que alterem o cluster.
-
-Utilize os manifests e exemplos das [anotações e exemplos práticos](../../../5-probes/README.md). Para observar o cluster:
+## O que observar
 
 ```bash
 kubectl get pods
-kubectl describe pod <nome-do-pod>
+kubectl describe pod <pod>
 kubectl get endpointslices
 ```
 
-> Substitua os valores entre `<...>` pelos recursos realmente criados. Os comandos acima são referências para estudo; a execução não foi testada neste PR.
+Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos endpoints. **Experimento mental:** se um Pod atende liveness mas falha readiness, ele deve continuar executando? Sim; apenas deixa de estar pronto para receber tráfego através dos Services que respeitam essa condição.
 
-Os exercícios com falhas intencionais e critérios de aceitação serão padronizados nas próximas etapas.
+## 🧪 Aplicação prática
 
-## Documentação oficial
+**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
 
-- [Kubernetes — Probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
+**Anotações e exemplos complementares:** [consultar material já existente](../../../5-probes/README.md). Os conteúdos anteriores foram preservados.
 
-**Próximo tópico:** [Services](../services/README.md).
+## ✅ Revisão do aprendizado
 
+- Qual problema este conceito resolve?
+- Que campos ou estados da API permitem verificar o comportamento real?
+- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+
+## 🔗 Referência oficial
+
+[Documentação Kubernetes — Probes — Liveness, Readiness e Startup](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
 
 ---
 
-### Navegação
-
-[← Anterior](../controladores/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../services/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Deployments →](../deployments/README.md)
