@@ -42,3 +42,10 @@ Os exercícios com falhas intencionais e critérios de aceitação serão padron
 - [Kubernetes — Fundamentos](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
 
 **Próximo tópico:** [Pods](../pods/README.md).
+
+
+---
+
+### Navegação
+
+← Primeiro tópico · [↑ Voltar à camada](../README.md) · [Próximo →](../pods/README.md)
