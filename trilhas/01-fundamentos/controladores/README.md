@@ -42,3 +42,10 @@ Os exercícios com falhas intencionais e critérios de aceitação serão padron
 - [Kubernetes — ReplicaSet, DaemonSet e StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/)
 
 **Próximo tópico:** [Probes](../probes/README.md).
+
+
+---
+
+### Navegação
+
+[← Anterior](../deployments/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../probes/README.md)
