@@ -2,7 +2,7 @@
 
 [← Início](../README.md) · [Roadmap](roadmap.md)
 
-A coleção visual terá **52 infográficos previstos no catálogo**, distribuídos nas quatro camadas da trilha. **46 PNGs já foram enviados ao repositório e vinculados às páginas respectivas.** Seis aulas ainda não têm imagem localizada; não criamos arquivos substitutos. A revisão visual e técnica das imagens permanece recomendada. A referência de temas e sequência está no [catálogo de 52 aulas](catalogo.md).
+A coleção visual tem **52 infográficos**, distribuídos nas quatro camadas da trilha. **Todos os 52 PNGs estão no repositório e vinculados às páginas respectivas.** A revisão visual e técnica permanece recomendada. A referência de temas e sequência está no [catálogo de 52 aulas](catalogo.md).
 
 ## Identidade visual
 
@@ -32,4 +32,4 @@ A mesma convenção se aplica às demais camadas. Não criar diretórios vazios:
 4. Vincular o PNG no README do conceito usando caminho relativo.
 5. Registrar a referência oficial junto ao material e revisar diferenças entre versões de Kubernetes.
 
-**Status:** 46 infográficos publicados, seis ausentes. Esta atualização conecta os PNGs existentes aos READMEs; não cria novas imagens.
+**Status:** 52 infográficos publicados e vinculados. Os seis últimos foram movidos da raiz para seus diretórios de aula e padronizados sem modificar seu conteúdo binário.
