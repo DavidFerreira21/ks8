@@ -1,57 +1,81 @@
-# Services
+# 01.09 · Services
 
-[← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
+[⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../7-services/README.md).
+> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
 
 ## 🎨 Infográfico
 
 ![01.09 — Services](images/services.png)
 
-> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+## 📖 Aula teórica
 
+## O problema da identidade de rede dos Pods
 
-## Objetivo
+Pods são efêmeros: quando substituídos, seus endereços IP podem mudar. Um **Service** oferece um ponto de acesso lógico e estável para um conjunto de backends; normalmente identifica Pods por **labels e selectors** e usa **EndpointSlices** para representar destinos elegíveis.
 
-Conectar clientes a Pods por um ponto de acesso estável, com descoberta via DNS.
+Um Service **não cria Pods** nem garante que estejam prontos. Se o seletor não corresponder às labels ou se os Pods não estiverem prontos, pode existir um Service sem destinos utilizáveis.
 
-## Ao concluir, você deverá conseguir
+## Tipos de Service
 
-- Criar Services e observar seus tipos
-- Inspecionar seletores e EndpointSlices
-- Consultar DNS interno e entender Headless Services
+| Tipo | Característica | Uso típico |
+| --- | --- | --- |
+| **ClusterIP** | Endereço virtual acessível internamente | Comunicação entre aplicações |
+| **NodePort** | Expõe uma porta nos nós do cluster | Acesso externo simples ou integração |
+| **LoadBalancer** | Solicita integração com load balancer externo quando suportado | Exposição por provedor cloud |
+| **ExternalName** | Alias DNS para outro nome | Apontar para serviço externo |
 
-## Estude o conceito
+O **Headless Service** (`clusterIP: None`) não cria um ClusterIP virtual, permitindo descoberta DNS de endpoints; costuma ser utilizado com StatefulSets. O comportamento de LoadBalancer depende do provedor: Kind puro não provisiona automaticamente um balanceador externo.
 
-Consulte as [anotações e exemplos práticos](../../../7-services/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
+## Exemplo explicado
 
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 8080
+```
 
-## Laboratório e observação
+`port` é a porta oferecida pelo Service; `targetPort` é a porta de destino no Pod. O Service seleciona Pods com `app=web`. O DNS costuma seguir o formato `web-svc.<namespace>.svc.cluster.local`.
 
-**Pré-requisito:** [Kind configurado](../../../install-kind.md) e contexto correto selecionado. Confira `kubectl config current-context` antes de executar comandos que alterem o cluster.
+## Fluxo de rede e diagnóstico
 
-Utilize os manifests e exemplos das [anotações e exemplos práticos](../../../7-services/README.md). Para observar o cluster:
+```text
+Cliente → DNS/Service → dataplane de rede → Pod de destino
+```
 
 ```bash
 kubectl get services
-kubectl describe service <nome>
-kubectl get endpointslices -l kubernetes.io/service-name=<nome>
 kubectl get pods --show-labels
+kubectl get endpointslices -l kubernetes.io/service-name=web-svc
+kubectl describe service web-svc
 ```
 
-> Substitua os valores entre `<...>` pelos recursos realmente criados. Os comandos acima são referências para estudo; a execução não foi testada neste PR.
+Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver endpoints, investigue labels, readiness e selectors antes de culpar DNS ou CNI.
 
-Também há um [lab integrado Pod → Deployment → Service](../labs/primeira-aplicacao/README.md) com arquivos completos e procedimentos de validação.
+## 🧪 Aplicação prática
 
-## Documentação oficial
+**Lab existente:** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
 
-- [Kubernetes — Services](https://kubernetes.io/docs/concepts/services-networking/service/)
+**Anotações e exemplos complementares:** [consultar material já existente](../../../7-services/README.md). Os conteúdos anteriores foram preservados.
 
-**Próximo passo:** revise [os demais tópicos da camada](../README.md) e avance para [Operação e Segurança](../../02-operacao-seguranca/README.md).
+## ✅ Revisão do aprendizado
 
+- Qual problema este conceito resolve?
+- Que campos ou estados da API permitem verificar o comportamento real?
+- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+
+## 🔗 Referência oficial
+
+[Documentação Kubernetes — Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 
 ---
 
-### Navegação
-
-[← Anterior](../probes/README.md) · [↑ Voltar à camada](../README.md) · Fim da camada ✓
+[↑ Índice da camada](../README.md) · [Próxima: ConfigMaps →](../configmaps/README.md)
