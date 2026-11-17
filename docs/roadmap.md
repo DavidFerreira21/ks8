@@ -2,7 +2,7 @@
 
 [⌂ Início](../README.md) · [📚 Catálogo de 52 aulas](catalogo.md) · [🧪 Labs](labs.md) · [☸️ Kind](../install-kind.md)
 
-> **Sua jornada:** fundamentos → operação → arquitetura → ferramentas do ecossistema. As 52 aulas compõem o [catálogo curricular](catalogo.md); **laboratórios são adicionados progressivamente; 46 PNGs já estão integrados**.
+> **Sua jornada:** fundamentos → operação → arquitetura → ferramentas do ecossistema. As 52 aulas compõem o [catálogo curricular](catalogo.md); **laboratórios são adicionados progressivamente; 52 PNGs já estão integrados**.
 
 ## Visão geral da jornada
 
