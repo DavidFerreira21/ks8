@@ -1,19 +1,19 @@
 # 🗺️ Roadmap · Kubernetes Visual Guide
 
-[⌂ Início](../README.md) · [🧪 Labs](labs.md) · [☸️ Kind](../install-kind.md)
+[⌂ Início](../README.md) · [📚 Catálogo de 52 aulas](catalogo.md) · [🧪 Labs](labs.md) · [☸️ Kind](../install-kind.md)
 
-> **Sua jornada:** fundamentos → operação → arquitetura → Platform Engineering. Os 44 conceitos compõem o catálogo visual; **laboratórios e PNGs são adicionados progressivamente**.
+> **Sua jornada:** fundamentos → operação → arquitetura → ferramentas do ecossistema. As 52 aulas compõem o [catálogo curricular](catalogo.md); **laboratórios e PNGs são adicionados progressivamente**.
 
 ## Visão geral da jornada
 
 | **01 · Fundamentos** | **02 · Operação e Segurança** |
 | :--- | :--- |
-| 📦 **13 temas**<br>Crie e exponha aplicações. Aprenda os objetos mais usados.<br><br>[**Entrar na Camada 01 →**](../trilhas/01-fundamentos/README.md) | 🛡️ **9 temas**<br>Controle quem acessa, onde executa e quanto consome.<br><br>[**Entrar na Camada 02 →**](../trilhas/02-operacao-seguranca/README.md) |
+| 📦 **14 aulas**<br>Crie e exponha aplicações. Aprenda os objetos mais usados.<br><br>[**Entrar na Camada 01 →**](../trilhas/01-fundamentos/README.md) | 🛡️ **14 aulas**<br>Controle quem acessa, onde executa e quanto consome.<br><br>[**Entrar na Camada 02 →**](../trilhas/02-operacao-seguranca/README.md) |
 
 
-| **03 · Arquitetura e Infraestrutura** | **04 · Platform Engineering e GitOps** |
+| **03 · Arquitetura e Infraestrutura** | **04 · Ferramentas do ecossistema** |
 | :--- | :--- |
-| 🧩 **14 temas**<br>Investigue Control Plane, Workers, rede e storage.<br><br>[**Entrar na Camada 03 →**](../trilhas/03-arquitetura/README.md) | 🔀 **8 temas**<br>Trabalhe com reconciliação, extensibilidade e políticas.<br><br>[**Entrar na Camada 04 →**](../trilhas/04-platform-engineering/README.md) |
+| 🧩 **17 aulas**<br>Investigue Control Plane, Workers, rede e storage.<br><br>[**Entrar na Camada 03 →**](../trilhas/03-arquitetura/README.md) | 🧰 **7 aulas**<br>Conheça ferramentas para GitOps, governança, rede e observabilidade.<br><br>[**Entrar na Camada 04 →**](../trilhas/04-platform-engineering/README.md) |
 
 ## Método de estudo
 
@@ -41,7 +41,7 @@ REFERÊNCIAS  ←  LIMPEZA  ←  DIAGNÓSTICO / EXPERIMENTO
 
 **Após a Camada 03:** você explica os componentes internos do Kubernetes e como eles colaboram.
 
-**Após a Camada 04:** você compreende extensibilidade e GitOps como fundamentos de uma plataforma.
+**Após a Camada 04:** você identifica ferramentas cloud-native e os problemas que cada uma resolve.
 
 Esses marcos são **objetivos de aprendizado**, não certificações de execução ou testes concluídos.
 

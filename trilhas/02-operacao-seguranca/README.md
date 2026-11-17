@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Executar workloads com controles de acesso, limites de consumo, agendamento previsível e disponibilidade.
 
-**9 temas com guias publicados** · **2 labs com manifests** · **exercícios adicionais planejados**
+**14 aulas no catálogo · 9 guias publicados** · **2 labs com manifests** · **exercícios adicionais planejados**
 
 ---
 
@@ -17,31 +17,26 @@
 | **03 · Agendamento e resiliência** | **04 · Tráfego e execução** |
 | 🧩 Investigue Taints, Affinity, PDB e prioridades.<br><br>**[Estudar scheduling →](taints-tolerations-affinity/README.md)** | 🌐 Explore NetworkPolicy, Jobs, CronJobs e padrões de containers.<br><br>**[Estudar NetworkPolicy →](networkpolicy/README.md)** |
 
-## 📚 Catálogo de conceitos
+## 📚 Catálogo de aulas — ordem oficial
 
-### 🔐 Acesso e governança
+A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). Guias e laboratórios são publicados progressivamente, sem remover o material complementar existente.
 
-| Tópico | Para aprender | Prática |
-| --- | --- | --- |
-| **RBAC e ServiceAccount** | [📖 Guia](rbac-serviceaccount/README.md) | [🧪 Lab de menor privilégio](labs/rbac-minimo/README.md) |
-| **ResourceQuota e LimitRange** | [📖 Guia](resourcequota-limitrange/README.md) | [🧪 Lab de quota](labs/quota-namespace/README.md) |
-| **Labels, Selectors e Annotations** | [📖 Guia](labels-selectors-annotations/README.md) | Exemplos e comandos de seleção |
-
-### 🧩 Scheduling e disponibilidade
-
-| Tópico | Para aprender | Prática |
-| --- | --- | --- |
-| **Taints, Tolerations e Node Affinity** | [📖 Guia](taints-tolerations-affinity/README.md) | 🚧 Lab futuro |
-| **PodDisruptionBudget (PDB)** | [📖 Guia](pdb/README.md) | 🚧 Lab futuro |
-| **PriorityClass e Preemption** | [📖 Guia](priorityclass-preemption/README.md) | 🚧 Lab futuro |
-
-### 🌐 Rede e execução
-
-| Tópico | Para aprender | Prática |
-| --- | --- | --- |
-| **NetworkPolicy** | [📖 Guia](networkpolicy/README.md) | ⚠️ Lab exige CNI com enforcement |
-| **Jobs e CronJobs** | [📖 Guia](jobs-cronjobs/README.md) | 🚧 Lab futuro |
-| **Init Containers e Sidecars** | [📖 Guia](init-sidecars/README.md) | 🚧 Lab futuro; [base em Pods](../../2-pod/README.md) |
+| Aula | Conceito | Aula teórica | Material de apoio |
+| --- | --- | --- | --- |
+| 02.01 | **Labels, Selectors e Annotations** | [📖 Estudar](labels-selectors-annotations/README.md) | — |
+| 02.02 | **RBAC e ServiceAccount** | [📖 Estudar](rbac-serviceaccount/README.md) | — · [🧪 Lab](labs/rbac-minimo/README.md) |
+| 02.03 | **SecurityContext e Pod Security Admission** | 🚧 Planejada | — |
+| 02.04 | **ResourceQuota e LimitRange** | [📖 Estudar](resourcequota-limitrange/README.md) | — · [🧪 Lab](labs/quota-namespace/README.md) |
+| 02.05 | **Init Containers e Sidecars** | [📖 Estudar](init-sidecars/README.md) | — |
+| 02.06 | **Jobs e CronJobs** | [📖 Estudar](jobs-cronjobs/README.md) | — |
+| 02.07 | **Taints, Tolerations e Node Affinity** | [📖 Estudar](taints-tolerations-affinity/README.md) | — |
+| 02.08 | **Topology Spread Constraints** | 🚧 Planejada | — |
+| 02.09 | **PriorityClass e Preemption** | [📖 Estudar](priorityclass-preemption/README.md) | — |
+| 02.10 | **QoS Classes e Eviction** | 🚧 Planejada | — |
+| 02.11 | **PodDisruptionBudget (PDB)** | [📖 Estudar](pdb/README.md) | — |
+| 02.12 | **Node Maintenance — Cordon, Drain e Uncordon** | 🚧 Planejada | — |
+| 02.13 | **NetworkPolicy** | [📖 Estudar](networkpolicy/README.md) | — |
+| 02.14 | **Kubernetes Troubleshooting** | 🚧 Planejada | — |
 
 ## 🧪 Labs disponíveis agora
 

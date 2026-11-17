@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Entender os objetos essenciais do Kubernetes, publicar uma aplicação e observar como o cluster mantém o estado desejado.
 
-**13 temas planejados** · **6 guias de entrada disponíveis** · **1 lab integrado com manifests**
+**14 aulas no catálogo** · **6 guias de entrada disponíveis** · **1 lab integrado com manifests**
 
 ---
 
@@ -17,32 +17,26 @@
 | **03 · Controlar e expor** | **04 · Observar e experimentar** |
 | 🔁 Aprenda Deployments, ReplicaSets e Services: como atualizar e acessar aplicações.<br><br>**[Deployments →](deployments/README.md)** | 🧪 Execute o lab integrado e investigue réplicas, Service e eventos.<br><br>**[Primeira aplicação →](labs/primeira-aplicacao/README.md)** |
 
-## 📚 Catálogo de conceitos
+## 📚 Catálogo de aulas — ordem oficial
 
-Os links **Estudar** apresentam o roteiro do conceito; **Anotações e exemplos** dão acesso às explicações, comandos e manifests complementares. Temas sem página própria ficam identificados como planejados, sem sugerir que um lab exista.
+A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). Guias e laboratórios são publicados progressivamente, sem remover o material complementar existente.
 
-### Workloads · como executar aplicações
-
-| Conceito | Guia | Experiência prática |
-| --- | --- | --- |
-| **01. Fundamentos** | [📖 Estudar](fundamentos/README.md) | [Anotações e exemplos](../../1-fundamentos/README.md) |
-| **02. Pods** | [📖 Estudar](pods/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
-| **03. Deployments** | [📖 Estudar](deployments/README.md) | [Anotações e exemplos](../../3-deployment/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| **04. Services** | [📖 Estudar](services/README.md) | [Anotações e exemplos](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| **05. ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações e exemplos](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| **06. Probes** | [📖 Estudar](probes/README.md) | [Anotações e exemplos](../../5-probes/README.md) |
-
-### Configuração, recursos e acesso · aprofundamento
-
-| Conceito | Status do material | Ponto de partida |
-| --- | --- | --- |
-| **07. Volumes** | 🚧 Página de aula pendente | [Armazenamento no resumo](../../resume.md) · [Documentação oficial](https://kubernetes.io/docs/concepts/storage/volumes/) |
-| **08. Namespace** | 🚧 Guia a estruturar | [🧪 Namespace no lab integrado](labs/primeira-aplicacao/README.md) |
-| **09. Ingress** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/concepts/services-networking/ingress/) |
-| **10. ConfigMap** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/concepts/configuration/configmap/) |
-| **11. Secret** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/concepts/configuration/secret/) |
-| **12. HPA** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) |
-| **13. Requests e Limits** | 📖 Exemplos existentes | [Aula de Pods](../../2-pod/README.md) · [Documentação oficial](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) |
+| Aula | Conceito | Aula teórica | Material de apoio |
+| --- | --- | --- | --- |
+| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [Anotações e exemplos](../../1-fundamentos/README.md) |
+| 01.02 | **Namespaces** | 🚧 Planejada | — |
+| 01.03 | **Pods** | [📖 Estudar](pods/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
+| 01.04 | **Requests e Limits** | 🚧 Planejada | [Anotações e exemplos](../../2-pod/README.md) |
+| 01.05 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [Anotações e exemplos](../../5-probes/README.md) |
+| 01.06 | **Deployments** | [📖 Estudar](deployments/README.md) | [Anotações e exemplos](../../3-deployment/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
+| 01.07 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações e exemplos](../../4-replicaSet-daemonSet-statefulSet/README.md) |
+| 01.08 | **Estratégias avançadas de Deployment** | 🚧 Planejada | — |
+| 01.09 | **Services** | [📖 Estudar](services/README.md) | [Anotações e exemplos](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
+| 01.10 | **ConfigMaps** | 🚧 Planejada | — |
+| 01.11 | **Secrets** | 🚧 Planejada | — |
+| 01.12 | **Volumes** | 🚧 Planejada | — |
+| 01.13 | **Ingress** | 🚧 Planejada | — |
+| 01.14 | **Horizontal Pod Autoscaler (HPA)** | 🚧 Planejada | — |
 
 ## 🧪 Laboratório em destaque
 

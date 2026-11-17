@@ -2,7 +2,7 @@
 
 [← Início](../README.md) · [Roadmap](roadmap.md)
 
-A coleção visual terá **44 infográficos**, distribuídos nas quatro camadas da trilha. A criação dos PNGs ocorreu fora do repositório; **este PR não faz upload das imagens**.
+A coleção visual terá **52 infográficos previstos no catálogo**, distribuídos nas quatro camadas da trilha. As imagens geradas fora do repositório ainda precisam ser revisadas e enviadas; **este PR não faz upload dos PNGs**. A referência de temas e sequência está no [catálogo de 52 aulas](catalogo.md).
 
 ## Identidade visual
 
