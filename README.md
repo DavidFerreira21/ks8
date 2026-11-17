@@ -31,7 +31,7 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 | :--- | :--- |
 | 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🧰 **Ferramentas cloud-native**<br>Argo CD, Crossplane, Kyverno, External Secrets, Karpenter, Cilium e Prometheus/Grafana.<br><br>**[Explorar ferramentas →](trilhas/04-platform-engineering/README.md)** |
 
-> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados e outros planejados; nem todos possuem laboratório executável. **46 infográficos PNG já estão no repositório**, integrados às páginas das aulas. Faltam imagens de seis temas, e a revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
+> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados e outros planejados; nem todos possuem laboratório executável. **Os 52 infográficos PNG estão no repositório**, integrados às páginas das aulas. A revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
 
 ## 🚀 Comece em 3 passos
 
