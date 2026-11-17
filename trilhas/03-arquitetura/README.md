@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Investigar como Control Plane, Workers, rede e armazenamento cooperam para transformar objetos declarativos em aplicações executadas.
 
-**14 temas planejados** · **visão arquitetural e referências oficiais** · **labs de observação em planejamento**
+**17 temas no catálogo (2 guias publicados)** · **visão arquitetural e referências oficiais** · **labs de observação em planejamento**
 
 ---
 
@@ -13,42 +13,35 @@
 
 | **CONTROL PLANE** | **WORKER NODES** |
 | :--- | :--- |
-| 🎛️ **Decidem, coordenam e reconciliam.**<br>API Server, etcd, Scheduler e Controller Manager.<br><br>[**Conhecer os componentes oficiais →**](https://kubernetes.io/docs/concepts/overview/components/) | ⚙️ **Executam e conectam os Pods.**<br>kubelet, container runtime e mecanismos de rede.<br><br>[**Explorar a arquitetura de nós →**](https://kubernetes.io/docs/concepts/architecture/nodes/) |
+| 🎛️ **Decidem, coordenam e reconciliam.**<br>API Server, etcd, Scheduler, Controller Manager, CRDs e reconciliação personalizada.<br><br>[**Conhecer os componentes oficiais →**](https://kubernetes.io/docs/concepts/overview/components/) | ⚙️ **Executam e conectam os Pods.**<br>kubelet, container runtime e mecanismos de rede.<br><br>[**Explorar a arquitetura de nós →**](https://kubernetes.io/docs/concepts/architecture/nodes/) |
 | **REDE E DESCOBERTA** | **ARMAZENAMENTO E EXTENSÃO** |
-| 🌐 CNI, Service networking, CoreDNS, Gateway API e opções de dataplane.<br><br>[**Entender a rede →**](https://kubernetes.io/docs/concepts/cluster-administration/networking/) | 💾 CSI, provisionamento de volumes, Kustomize e Helm.<br><br>[**Conceitos de storage →**](https://kubernetes.io/docs/concepts/storage/) |
+| 🌐 CNI, Service networking, CoreDNS, Gateway API e opções de dataplane.<br><br>[**Entender a rede →**](https://kubernetes.io/docs/concepts/cluster-administration/networking/) | 💾 CSI, provisionamento de volumes, extensibilidade da API, Kustomize e Helm.<br><br>[**Conceitos de storage →**](https://kubernetes.io/docs/concepts/storage/) |
 
-## 📚 Catálogo de arquitetura
+## 📚 Catálogo de arquitetura — ordem de estudo
 
-### 🎛️ Control Plane — decisão e reconciliação
+Os números refletem a sequência didática. **Guias próprios** existem, nesta camada, apenas para 03.06 e 03.07; as demais entradas continuam com referências oficiais e aulas detalhadas planejadas.
 
-| Componente | Responsabilidade | Referência |
-| --- | --- | --- |
-| **Arquitetura do cluster** | Fluxo entre Control Plane e Workers | [Visão geral](https://kubernetes.io/docs/concepts/overview/components/) |
-| **kube-apiserver** | Interface da API, autenticação, autorização e admission | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver) |
-| **etcd** | Persistência consistente do estado de configuração do cluster | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#etcd) |
-| **kube-scheduler** | Escolha de nó para Pods ainda não agendados | [Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) |
-| **kube-controller-manager** | Loops de controle e reconciliação | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager) |
-| **cloud-controller-manager** | Integração com recursos de um provedor cloud, quando disponível | [Cloud Controller Manager](https://kubernetes.io/docs/concepts/architecture/cloud-controller/) |
+| Aula | Conceito | O que aprender | Material |
+| --- | --- | --- | --- |
+| 03.01 | Arquitetura do Cluster Kubernetes | Control Plane e Workers | [Referência](https://kubernetes.io/docs/concepts/overview/components/) |
+| 03.02 | kube-apiserver | API, autenticação e autorização | [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver) |
+| 03.03 | etcd | Persistência do estado | [Referência](https://kubernetes.io/docs/concepts/overview/components/#etcd) |
+| 03.04 | Admission Controllers | Validação e mutação de requisições | [Referência](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) |
+| 03.05 | kube-controller-manager | Loops de reconciliação nativos | [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager) |
+| **03.06** | **CRDs e Custom Resources** | **Estender a API Kubernetes** | **[📖 Estudar](crds-custom-resources/README.md)** |
+| **03.07** | **Custom Controllers e Operators** | **Implementar reconciliação própria** | **[📖 Estudar](custom-controllers-operators/README.md)** |
+| 03.08 | kube-scheduler | Agendamento de Pods | [Referência](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) |
+| 03.09 | cloud-controller-manager | Integração com provedores cloud | [Referência](https://kubernetes.io/docs/concepts/architecture/cloud-controller/) |
+| 03.10 | kubelet | Agente em cada nó | [Referência](https://kubernetes.io/docs/concepts/overview/components/#kubelet) |
+| 03.11 | Container Runtime | Execução via CRI | [Referência](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) |
+| 03.12 | CNI e comunicação de rede | Conectividade dos Pods | [Referência](https://kubernetes.io/docs/concepts/cluster-administration/networking/) |
+| 03.13 | kube-proxy e eBPF | Dataplane de Services | [Referência](https://kubernetes.io/docs/reference/networking/virtual-ips/) |
+| 03.14 | CoreDNS e Service Discovery | DNS de serviços e Pods | [Referência](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) |
+| 03.15 | CSI e Storage | Integração de volumes e drivers | [Referência](https://kubernetes.io/docs/concepts/storage/volumes/#csi) |
+| 03.16 | Gateway API | APIs de roteamento de tráfego | [Referência](https://gateway-api.sigs.k8s.io/) |
+| 03.17 | Kustomize e Helm | Customização e empacotamento | [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) · [Helm](https://helm.sh/docs/) |
 
-### ⚙️ Workers — execução de containers
-
-| Componente | Responsabilidade | Referência |
-| --- | --- | --- |
-| **kubelet** | Agente que gerencia Pods atribuídos ao nó | [Componentes](https://kubernetes.io/docs/concepts/overview/components/#kubelet) |
-| **Container Runtime** | Execução de containers via CRI | [Container Runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) |
-
-### 🌐 Rede, storage e configuração
-
-| Componente | Responsabilidade | Referência |
-| --- | --- | --- |
-| **kube-proxy e eBPF** | Implementações possíveis do dataplane para Services; variam por cluster | [Service Virtual IPs](https://kubernetes.io/docs/reference/networking/virtual-ips/) |
-| **CNI e comunicação** | Rede dos Pods e conectividade entre nós | [Networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/) |
-| **CoreDNS e Service Discovery** | Resolução de nomes dentro do cluster | [DNS for Services](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) |
-| **CSI e Storage** | Integração e provisionamento de armazenamento | [CSI](https://kubernetes.io/docs/concepts/storage/volumes/#csi) |
-| **Gateway API** | APIs de roteamento e configuração de tráfego | [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/) |
-| **Kustomize e Helm** | Customização e empacotamento de manifests | [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) · [Helm](https://helm.sh/docs/) |
-
-> **Status:** estes tópicos estão reunidos como roteiro de arquitetura e links oficiais. Ainda não existem páginas individuais ou labs executáveis desta camada no repositório.
+> **Status:** 17 tópicos catalogados; dois guias de introdução publicados. Os labs de observação, CRDs e controllers ainda são roteiros, não exercícios validados.
 
 ## 🔎 Observação guiada — próximos labs
 
@@ -68,6 +61,7 @@ Esses são **roteiros de investigação**, não scripts testados. O cloud-contro
 - [ ] Distinguir estado persistido no etcd e execução dos containers.
 - [ ] Identificar responsabilidades de CNI, CoreDNS, kube-proxy e CSI.
 - [ ] Descrever as diferenças entre arquitetura local e gerenciada em cloud.
+- [ ] Diferenciar CRDs, Custom Resources e controladores que reconciliam o estado.
 
 ## 🔗 Materiais relacionados
 
