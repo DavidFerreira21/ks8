@@ -2,6 +2,15 @@
 
 [← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
 
+> 🔀 **CAMADA 04 · TRILHA KUBERNETES**  
+> Explore reconciliação, extensibilidade, políticas e GitOps.
+
+### Acesso rápido
+
+[**🗺️ Roadmap**](../../docs/roadmap.md) · [**🧪 Laboratórios**](../../docs/labs.md) · [**🎨 Convenção visual**](../../docs/infograficos.md)
+
+---
+
 **Objetivo:** evoluir dos recursos nativos do Kubernetes para extensibilidade, políticas, automação, GitOps e uma abordagem de plataforma como produto.
 
 ## Roteiro de estudo
@@ -39,3 +48,10 @@
 - [OpenTelemetry](https://opentelemetry.io/docs/)
 
 **Voltar ao** [Roadmap](../../docs/roadmap.md).
+
+
+---
+
+### Continue estudando
+
+[← 03 · Arquitetura](../03-arquitetura/README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [⌂ Voltar ao início](../../README.md)
