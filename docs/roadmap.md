@@ -9,6 +9,8 @@
 | **01 · Fundamentos** | **02 · Operação e Segurança** |
 | :--- | :--- |
 | 📦 **13 temas**<br>Crie e exponha aplicações. Aprenda os objetos mais usados.<br><br>[**Entrar na Camada 01 →**](../trilhas/01-fundamentos/README.md) | 🛡️ **9 temas**<br>Controle quem acessa, onde executa e quanto consome.<br><br>[**Entrar na Camada 02 →**](../trilhas/02-operacao-seguranca/README.md) |
+
+
 | **03 · Arquitetura e Infraestrutura** | **04 · Platform Engineering e GitOps** |
 | :--- | :--- |
 | 🧩 **14 temas**<br>Investigue Control Plane, Workers, rede e storage.<br><br>[**Entrar na Camada 03 →**](../trilhas/03-arquitetura/README.md) | 🔀 **8 temas**<br>Trabalhe com reconciliação, extensibilidade e políticas.<br><br>[**Entrar na Camada 04 →**](../trilhas/04-platform-engineering/README.md) |
