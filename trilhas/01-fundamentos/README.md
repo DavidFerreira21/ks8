@@ -1,67 +1,71 @@
-# Camada 01 — Fundamentos e recursos essenciais
+# 📦 Camada 01 · Fundamentos e recursos essenciais
 
-[← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
+[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [🧪 Labs](../../docs/labs.md)
 
-> 📦 **CAMADA 01 · TRILHA KUBERNETES**  
-> Crie, execute e exponha sua primeira aplicação Kubernetes.
+> **Objetivo da camada**  
+> Entender os objetos essenciais do Kubernetes, publicar uma aplicação e observar como o cluster mantém o estado desejado.
 
-### Acesso rápido
-
-[**🧪 Primeiro lab**](labs/primeira-aplicacao/README.md) · [**⚙️ Preparar o Kind**](../../install-kind.md) · [**📚 Aulas originais**](../../resume.md)
+**13 temas planejados** · **6 guias de entrada disponíveis** · **1 lab integrado com manifests**
 
 ---
 
-**Objetivo:** compreender os objetos centrais do Kubernetes, executar uma aplicação, expô-la e inspecionar seu comportamento. A recomendação é fazer os exercícios no cluster Kind local.
+## 🚀 Seu primeiro percurso
 
-## Como estudar
+| **01 · Preparar o ambiente** | **02 · Entender o workload** |
+| :--- | :--- |
+| ⚙️ Instale o Kind, verifique o contexto e conheça os nós do cluster.<br><br>**[Preparar Kind →](../../install-kind.md)** | 📖 Comece pelos fundamentos e pelos Pods. Entenda o que Kubernetes executa e supervisiona.<br><br>**[Fundamentos →](fundamentos/README.md)** · [Pods](pods/README.md) |
+| **03 · Controlar e expor** | **04 · Observar e experimentar** |
+| 🔁 Aprenda Deployments, ReplicaSets e Services: como atualizar e acessar aplicações.<br><br>**[Deployments →](deployments/README.md)** | 🧪 Execute o lab integrado e investigue réplicas, Service e eventos.<br><br>**[Primeira aplicação →](labs/primeira-aplicacao/README.md)** |
 
-Comece pelo [guia de instalação do Kind](../../install-kind.md), depois siga as aulas abaixo. Cada nova página contém o objetivo, o resultado esperado, comandos de inspeção, referência oficial e vínculo com a aula legada.
+## 📚 Catálogo de conceitos
 
-**Lab integrado:** [Primeira aplicação — Pod → Deployment → Service](labs/primeira-aplicacao/README.md). O laboratório tem YAMLs próprios para evitar conflitos com os exemplos originais.
+Os links **Estudar** abrem as páginas novas; **Aula original** mantém acesso aos exemplos já produzidos. Temas sem página própria ficam identificados como planejados, sem sugerir que um lab exista.
 
-## Roteiro de estudo
+### Workloads · como executar aplicações
 
-| Tópico | Nova entrada | Conteúdo prático |
+| Conceito | Guia | Experiência prática |
 | --- | --- | --- |
-| Fundamentos | [Conceitos, cluster e kubectl](fundamentos/README.md) | [Aula legada](../../1-fundamentos/README.md) |
-| Pods | [Pods](pods/README.md) | [Aula legada](../../2-pod/README.md) |
-| Deployments | [Deployments](deployments/README.md) | [Aula legada](../../3-deployment/README.md) |
-| ReplicaSet, DaemonSet e StatefulSet | [Controladores](controladores/README.md) | [Aula legada](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| Probes | [Probes](probes/README.md) | [Aula legada](../../5-probes/README.md) |
-| Volumes | A migrar após localização do conteúdo original | [Conceitos no resumo](../../resume.md) |
-| Services | [Services](services/README.md) | [Aula legada](../../7-services/README.md) |
-| Namespace | A estruturar | [Lab integrado usa namespace](labs/primeira-aplicacao/README.md) |
-| Ingress | A estruturar | Consulte a documentação oficial |
-| ConfigMap | A estruturar | Consulte a documentação oficial |
-| Secret | A estruturar | Consulte a documentação oficial |
-| HPA | A estruturar | Consulte a documentação oficial |
-| Requests e Limits | A estruturar | [Exemplos na aula de Pods](../../2-pod/README.md) |
+| **01. Fundamentos** | [📖 Estudar](fundamentos/README.md) | [Aula original](../../1-fundamentos/README.md) |
+| **02. Pods** | [📖 Estudar](pods/README.md) | [Aula original](../../2-pod/README.md) |
+| **03. Deployments** | [📖 Estudar](deployments/README.md) | [Aula original](../../3-deployment/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
+| **04. Services** | [📖 Estudar](services/README.md) | [Aula original](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
+| **05. ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Aula original](../../4-replicaSet-daemonSet-statefulSet/README.md) |
+| **06. Probes** | [📖 Estudar](probes/README.md) | [Aula original](../../5-probes/README.md) |
 
-> **Status:** as seis páginas de entrada e o lab integrado foram incluídos no PR 2. Os 44 infográficos ainda não foram adicionados ao GitHub. A pasta antiga de Volumes, mencionada no índice histórico, não foi encontrada pelo conector e não foi recriada.
+### Configuração, recursos e acesso · aprofundamento
 
-## Percurso prático sugerido
+| Conceito | Status do material | Ponto de partida |
+| --- | --- | --- |
+| **07. Volumes** | 🚧 Página de aula pendente | [Armazenamento no resumo](../../resume.md) · [Documentação oficial](https://kubernetes.io/docs/concepts/storage/volumes/) |
+| **08. Namespace** | 🚧 Guia a estruturar | [🧪 Namespace no lab integrado](labs/primeira-aplicacao/README.md) |
+| **09. Ingress** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/concepts/services-networking/ingress/) |
+| **10. ConfigMap** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/concepts/configuration/configmap/) |
+| **11. Secret** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/concepts/configuration/secret/) |
+| **12. HPA** | 🚧 Guia a estruturar | [Documentação oficial](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) |
+| **13. Requests e Limits** | 📖 Exemplos existentes | [Aula de Pods](../../2-pod/README.md) · [Documentação oficial](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) |
 
-1. Suba o cluster [Kind](../../install-kind.md) e confira os nós.
-2. [Crie um Pod](labs/primeira-aplicacao/README.md#etapa-1--namespace-e-pod-individual), verifique eventos e identifique em qual nó está.
-3. [Crie um Deployment](labs/primeira-aplicacao/README.md#etapa-2--deployment-e-replicaset) e observe a reconciliação de réplicas.
-4. [Exponha os Pods por Service](labs/primeira-aplicacao/README.md#etapa-3--service-e-descoberta) e teste conectividade.
-5. [Inspecione o rollout](labs/primeira-aplicacao/README.md#etapa-4--rollout-e-rollback).
-6. Retorne às aulas originais de Probes, controladores e armazenamento.
+## 🧪 Laboratório em destaque
 
-## Referências oficiais
+| **Primeira aplicação · Pod → Deployment → Service** | |
+| :--- | :--- |
+| **O que você pratica** | Criar um Pod, gerenciar três réplicas com Deployment, disponibilizar um Service e inspecionar a reconciliação. |
+| **O que observar** | Pods recriados, ReplicaSet, EndpointSlices, rollout e eventos. |
+| **Ambiente** | Kind local, namespace de laboratório isolado. |
+| **Começar** | **[Abrir laboratório →](labs/primeira-aplicacao/README.md)** |
 
-- [Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
-- [Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
-- [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-- [Services](https://kubernetes.io/docs/concepts/services-networking/service/)
-- [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
-- [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+> **Importante:** manifests e roteiro estão disponíveis, mas a execução ponta a ponta no Kind ainda precisa de validação. O material de Volumes citado em índices históricos continua sem um README original localizado; não foi recriado neste ajuste visual.
 
-**Próxima camada:** [Operação, governança e segurança](../02-operacao-seguranca/README.md).
+## 🎯 Checklist de aprendizado
 
+- [ ] Diferenciar Pod, Deployment, ReplicaSet e Service.
+- [ ] Explicar por que um Pod controlado é recriado após exclusão.
+- [ ] Consultar logs, eventos e status de readiness.
+- [ ] Executar o lab integrado e limpar somente os recursos criados.
+
+## 🔗 Continue aprendendo
+
+[Documentação Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/) · [Guia de labs](../../docs/labs.md) · [Resumo histórico](../../resume.md)
 
 ---
 
-### Continue estudando
-
-[⌂ Voltar ao início](../../README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [02 · Operação e Segurança →](../02-operacao-seguranca/README.md)
+[⌂ Início](../../README.md) · [↑ Roadmap](../../docs/roadmap.md) · **[Próxima: 02 · Operação e Segurança →](../02-operacao-seguranca/README.md)**
