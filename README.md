@@ -64,9 +64,9 @@ make lab-down    # Remove apenas os recursos do lab
 
 **Legenda:** 🧪 possui exemplos/arquivos de lab (execução real ainda precisa ser validada) · 📘 conteúdo ou roteiro de estudo · 🚧 planejado.
 
-## 📚 Aulas originais preservadas
+## 📚 Anotações e exemplos práticos
 
-Os exemplos e os manifests anteriores continuam acessíveis. A nova navegação não substitui o conteúdo legado.
+Consulte as explicações, os comandos e os manifests que complementam os guias da trilha. Todo esse material faz parte do mesmo percurso de estudo.
 
 <details>
 <summary><strong>Mostrar o índice das aulas originais</strong></summary>
