@@ -12,7 +12,7 @@ Aprenda os conceitos, execute laboratórios com **Kind**, investigue o comportam
 ![Ambiente](https://img.shields.io/badge/Labs-Kind-8B5CF6?style=flat-square)
 ![Status](https://img.shields.io/badge/Projeto-em%20evolu%C3%A7%C3%A3o-D97706?style=flat-square)
 
-[**Catálogo de 52 aulas**](docs/catalogo.md) · [**Começar a estudar**](docs/roadmap.md) · [**Preparar o Kind**](install-kind.md) · [**Explorar os labs**](docs/labs.md)
+[**Catálogo de 52 aulas e imagens**](docs/catalogo.md) · [**Começar a estudar**](docs/roadmap.md) · [**Preparar o Kind**](install-kind.md) · [**Explorar os labs**](docs/labs.md)
 
 </div>
 
@@ -31,7 +31,7 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 | :--- | :--- |
 | 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🧰 **Ferramentas cloud-native**<br>Argo CD, Crossplane, Kyverno, External Secrets, Karpenter, Cilium e Prometheus/Grafana.<br><br>**[Explorar ferramentas →](trilhas/04-platform-engineering/README.md)** |
 
-> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados e outros planejados; nem todos possuem laboratório executável. Os PNGs ilustrados **ainda serão publicados** no repositório. As páginas mostram o estado real de cada exercício.
+> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados e outros planejados; nem todos possuem laboratório executável. **46 infográficos PNG já estão no repositório**, integrados às páginas das aulas. Faltam imagens de seis temas, e a revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
 
 ## 🚀 Comece em 3 passos
 
