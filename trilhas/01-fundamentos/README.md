@@ -2,6 +2,15 @@
 
 [← Roadmap](../../docs/roadmap.md) · [Início](../../README.md)
 
+> 📦 **CAMADA 01 · TRILHA KUBERNETES**  
+> Crie, execute e exponha sua primeira aplicação Kubernetes.
+
+### Acesso rápido
+
+[**🧪 Primeiro lab**](labs/primeira-aplicacao/README.md) · [**⚙️ Preparar o Kind**](../../install-kind.md) · [**📚 Aulas originais**](../../resume.md)
+
+---
+
 **Objetivo:** compreender os objetos centrais do Kubernetes, executar uma aplicação, expô-la e inspecionar seu comportamento. A recomendação é fazer os exercícios no cluster Kind local.
 
 ## Como estudar
@@ -49,3 +58,10 @@ Comece pelo [guia de instalação do Kind](../../install-kind.md), depois siga a
 - [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
 **Próxima camada:** [Operação, governança e segurança](../02-operacao-seguranca/README.md).
+
+
+---
+
+### Continue estudando
+
+[⌂ Voltar ao início](../../README.md) · [↑ Índice da trilha](../../docs/roadmap.md) · [02 · Operação e Segurança →](../02-operacao-seguranca/README.md)
