@@ -6,7 +6,7 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 
 **52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A experiência prática pode ser um lab executável ou uma observação guiada, conforme o tema.
 
-**Situação:** 📖 aula com material teórico · 🎨 infográfico publicado, teoria em preparação · 🚧 infográfico e aula ainda pendentes. Foram vinculados **46 dos 52 PNGs**; seis imagens não foram localizadas no conjunto enviado. A revisão técnica dos infográficos ainda é recomendada.
+**Situação:** 📖 aula com material teórico · 🎨 infográfico publicado, teoria em preparação. **Os 52 PNGs estão vinculados** às respectivas páginas; a revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
 
 ## 01 · Fundamentos e recursos essenciais
 
@@ -15,19 +15,19 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 | Aula | Tema | Guia |
 | --- | --- | --- |
 | 01.01 | Fundamentos Kubernetes | [📖 Aula + infográfico](../trilhas/01-fundamentos/fundamentos/README.md) |
-| 01.02 | Namespaces | 🚧 Planejado |
+| 01.02 | Namespaces | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/namespaces/README.md) |
 | 01.03 | Pods | [📖 Aula + infográfico](../trilhas/01-fundamentos/pods/README.md) |
 | 01.04 | Requests e Limits | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/requests-limits/README.md) |
 | 01.05 | Probes — Liveness, Readiness e Startup | [📖 Aula + infográfico](../trilhas/01-fundamentos/probes/README.md) |
-| 01.06 | Deployments | [📖 Estudar](../trilhas/01-fundamentos/deployments/README.md) |
+| 01.06 | Deployments | [📖 Aula + infográfico](../trilhas/01-fundamentos/deployments/README.md) |
 | 01.07 | ReplicaSet, DaemonSet e StatefulSet | [📖 Aula + infográfico](../trilhas/01-fundamentos/controladores/README.md) |
 | 01.08 | Estratégias avançadas de Deployment | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/estrategias-deployment/README.md) |
 | 01.09 | Services | [📖 Aula + infográfico](../trilhas/01-fundamentos/services/README.md) |
-| 01.10 | ConfigMaps | 🚧 Planejado |
+| 01.10 | ConfigMaps | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/configmaps/README.md) |
 | 01.11 | Secrets | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/secrets/README.md) |
 | 01.12 | Volumes | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/volumes/README.md) |
 | 01.13 | Ingress | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/ingress/README.md) |
-| 01.14 | Horizontal Pod Autoscaler (HPA) | 🚧 Planejado |
+| 01.14 | Horizontal Pod Autoscaler (HPA) | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/hpa/README.md) |
 
 ## 02 · Operação, segurança e governança
 
@@ -36,7 +36,7 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 | Aula | Tema | Guia |
 | --- | --- | --- |
 | 02.01 | Labels, Selectors e Annotations | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/labels-selectors-annotations/README.md) |
-| 02.02 | RBAC e ServiceAccount | [📖 Estudar](../trilhas/02-operacao-seguranca/rbac-serviceaccount/README.md) |
+| 02.02 | RBAC e ServiceAccount | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/rbac-serviceaccount/README.md) |
 | 02.03 | SecurityContext e Pod Security Admission | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/securitycontext-pod-security/README.md) |
 | 02.04 | ResourceQuota e LimitRange | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/resourcequota-limitrange/README.md) |
 | 02.05 | Init Containers e Sidecars | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/init-sidecars/README.md) |
@@ -47,7 +47,7 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 | 02.10 | QoS Classes e Eviction | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/qos-eviction/README.md) |
 | 02.11 | PodDisruptionBudget (PDB) | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/pdb/README.md) |
 | 02.12 | Node Maintenance | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/node-maintenance/README.md) |
-| 02.13 | NetworkPolicy | [📖 Estudar](../trilhas/02-operacao-seguranca/networkpolicy/README.md) |
+| 02.13 | NetworkPolicy | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/networkpolicy/README.md) |
 | 02.14 | Kubernetes Troubleshooting | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/troubleshooting/README.md) |
 
 ## 03 · Arquitetura e infraestrutura
@@ -90,7 +90,7 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 
 ## Como será cada aula
 
-1. **Infográfico:** visualização sintética do conceito (publicada para 46 temas; seis pendentes).
+1. **Infográfico:** visualização sintética do conceito, publicada nos 52 temas.
 2. **Teoria:** funcionamento, arquitetura, exemplos e referências oficiais.
 3. **Prática:** laboratório ou observação guiada com pré-requisitos e resultado esperado.
 4. **Diagnóstico:** comandos, eventos e falhas a investigar.

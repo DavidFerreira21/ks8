@@ -4,6 +4,13 @@
 
 > **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../3-deployment/README.md).
 
+## 🎨 Infográfico
+
+![01.06 — Deployments](images/deployments.png)
+
+> A imagem ilustra o conceito; consulte a documentação oficial para detalhes técnicos.
+
+
 ## Objetivo
 
 Entender como um Deployment gerencia ReplicaSets, réplicas e atualizações.
@@ -18,7 +25,6 @@ Entender como um Deployment gerencia ReplicaSets, réplicas e atualizações.
 
 Consulte as [anotações e exemplos práticos](../../../3-deployment/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
 
-**Infográfico:** espaço reservado; o PNG será incluído em um PR posterior, após revisão editorial/técnica.
 
 ## Laboratório e observação
 

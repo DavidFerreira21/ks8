@@ -2,6 +2,13 @@
 
 [← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
 
+## 🎨 Infográfico
+
+![02.02 — RBAC e ServiceAccount](images/rbac-serviceaccount.png)
+
+> A imagem ilustra o conceito; consulte a documentação oficial para detalhes técnicos.
+
+
 ## O que você vai aprender
 
 Autenticação identifica o sujeito; autorização RBAC define o que ele pode fazer. ServiceAccount fornece identidade a workloads.
@@ -22,9 +29,6 @@ Crie ServiceAccount, Role e RoleBinding; compare get de Pods permitido com list 
 - Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
 - Regras, condições e pré-requisitos particulares deste mecanismo.
 
-## Infográfico
-
-O infográfico correspondente foi criado na coleção visual, mas **a imagem PNG ainda não foi enviada ao repositório**. Após revisão técnica será incluída no diretório `images/` deste tópico.
 
 ## Referência oficial
 

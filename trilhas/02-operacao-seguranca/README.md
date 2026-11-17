@@ -65,7 +65,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 
 ## 🎨 Coleção visual e fontes
 
-Os infográficos desses nove conceitos **ainda não foram enviados ao GitHub**. Confira a [convenção para integração](../../docs/infograficos.md).
+**Os 14 infográficos da camada estão publicados e vinculados às aulas.** A revisão técnica das imagens e a evolução dos labs continuam em andamento. Consulte a [convenção visual](../../docs/infograficos.md).
 
 [RBAC oficial](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) · [Scheduling](https://kubernetes.io/docs/concepts/scheduling-eviction/) · [NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/) · [ResourceQuota](https://kubernetes.io/docs/concepts/policy/resource-quotas/) · [Pod Disruptions](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
 
