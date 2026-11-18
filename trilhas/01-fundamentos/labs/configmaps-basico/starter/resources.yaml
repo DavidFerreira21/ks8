@@ -1,0 +1,14 @@
+# EXERCICIO 01.07: escreva os recursos exigidos pela aula.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: lab-01-07
+# TODO: crie data com as chaves solicitadas.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumidor
+  namespace: lab-01-07
+# TODO: escreva spec.replicas, selector, template e consumo do ConfigMap.
