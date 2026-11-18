@@ -56,7 +56,7 @@ Não use namespace como única fronteira de isolamento entre ambientes com exig�
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.06:** [abrir exercício guiado](../labs/namespaces-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
+**🧪 Lab 01.06:** [🧪 Lab 01.06](../labs/namespaces-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 ## ✅ Revisão do aprendizado
 
