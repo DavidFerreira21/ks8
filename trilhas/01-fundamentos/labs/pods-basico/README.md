@@ -16,6 +16,7 @@ Pod é a unidade mínima de execução agendada. Hipótese: se eu excluir um Pod
 make doctor
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.02
 cat .labs/01.02/resources.yaml
 ```
 
