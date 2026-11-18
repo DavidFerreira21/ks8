@@ -15,6 +15,7 @@ Um volume efêmero desaparece com o Pod; um PVC pode preservar dados além do ci
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.11
 cat .labs/01.11/claim.yaml
 cat .labs/01.11/pod.yaml
 ```
