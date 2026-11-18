@@ -1,5 +1,7 @@
 # Lab 01.09 — Requests e Limits: recursos e scheduler
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.09` para criar o namespace e copiar um arquivo incompleto para `.labs/01.09/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.09/` e valide com `make lab-test LAB=01.09`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.09` apenas depois de tentar.
+
 [← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -13,7 +15,7 @@ O Scheduler usa requests para decidir elegibilidade de nós, enquanto limits res
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/requests-limits-basico/resources.yaml
+cat .labs/01.09/resources.yaml
 ```
 
 Preveja os objetos criados e seus estados.
@@ -21,7 +23,9 @@ Preveja os objetos criados e seus estados.
 ## Fase 2 — Executar
 
 ```bash
-make lab-up LAB=01.09
+make lab-prepare LAB=01.09
+# Complete o manifesto em .labs/01.09/resources.yaml
+kubectl apply -f .labs/01.09/
 make lab-test LAB=01.09
 make lab-observe LAB=01.09
 ```
