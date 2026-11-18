@@ -1,0 +1,8 @@
+id: "01.03"
+title: "Deployments: replicas e self-healing"
+namespace: lab-01-03
+apply:
+  - resources.yaml
+checks:
+  - type: deployment
+    name: web
