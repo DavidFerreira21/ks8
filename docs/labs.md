@@ -41,7 +41,7 @@ make lab-down LAB=01.05
 | `make lab-test LAB=02.04` | Conferir existência de quota e Pod (rejeição fica para experimento específico) |
 | `make lab-observe LAB=01.05` | Mostra condições, eventos e recursos relacionados |
 | `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod` | Espera e verifica rejeição intencional por quota |
-| `make lab-experiment LAB=01.05 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab 01.12 e observa o rollout |
+| `make lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab 01.12 e observa o rollout |
 | `make lab-down LAB=02.04` | Remover somente os manifests cadastrados; preservar o namespace |
 | `make down` | Excluir o cluster Kind local (ação destrutiva) |
 
