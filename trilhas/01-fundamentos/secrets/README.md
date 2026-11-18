@@ -70,4 +70,4 @@ kubectl describe secret exemplo-sem-credencial
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Requests e Limits →](../requests-limits/README.md)
+[← Aula 01.07 — ConfigMaps](../configmaps/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.08](../labs/secrets-basico/README.md) · [Próxima: Aula 01.09 — Requests e Limits →](../requests-limits/README.md)
