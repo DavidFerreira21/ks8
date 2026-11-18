@@ -55,7 +55,7 @@ Os comandos pressupõem um Deployment existente. O laboratório de blue/green ou
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.12:** [abrir exercício guiado](../labs/estrategias-deployment-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
+**🧪 Lab 01.12:** [🧪 Lab 01.12](../labs/estrategias-deployment-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 ## ✅ Revisão do aprendizado
 
