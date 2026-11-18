@@ -43,7 +43,14 @@ kubectl rollout status deployment/consumidor -n lab-01-07
 kubectl logs deployment/consumidor -n lab-01-07
 ```
 
-Ao fazer restart, a nova variável de ambiente deve ser consumida. Reaplique `resources.yaml` e reinicie o Deployment para restaurar o valor `versao-1`.
+Ao fazer restart, a nova variável de ambiente deve ser consumida. Para restaurar `versao-1` após o patch, use **server-side apply com resolução explícita de conflito**, pois o apply client-side pode manter campos alterados fora do histórico local:
+
+```bash
+kubectl apply --server-side --force-conflicts -f trilhas/01-fundamentos/labs/configmaps-basico/resources.yaml
+kubectl rollout restart deployment/consumidor -n lab-01-07
+kubectl rollout status deployment/consumidor -n lab-01-07
+kubectl logs deployment/consumidor -n lab-01-07
+```
 
 ## Fase 3 — Diagnóstico
 
