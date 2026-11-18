@@ -87,4 +87,4 @@ Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, inv
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: ReplicaSet, DaemonSet e StatefulSet →](../controladores/README.md)
+[← Aula 01.02 — Pods](../pods/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.03](../labs/deployments-basico/README.md) · [Próxima: Aula 01.04 — ReplicaSet, DaemonSet e StatefulSet →](../controladores/README.md)
