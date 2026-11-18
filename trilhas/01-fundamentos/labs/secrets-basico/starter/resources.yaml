@@ -1,0 +1,14 @@
+# EXERCICIO 01.08: escreva o YAML sem consultar a solucao.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: exemplo-ficticio
+  namespace: lab-01-08
+# TODO: adicione type Opaque e stringData com valor ficticio.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumidor
+  namespace: lab-01-08
+# TODO: escreva o spec e configure requests/limits ou a referencia ao Secret.
