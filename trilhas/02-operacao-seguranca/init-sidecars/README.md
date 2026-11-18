@@ -1,45 +1,55 @@
-# Init Containers e Sidecars
+# 02.05 · Init Containers e Sidecars
 
-[← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 02](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Explicar a ordem de inicialização e identificar a diferença entre init containers comuns e sidecars nativos.
 
 ## 🎨 Infográfico
 
 ![02.05 — Init Containers e Sidecars](../init-containers-sidecars/images/init-containers-sidecars.png)
 
-> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+## 📖 Aula teórica
 
+### O problema que este recurso resolve
 
-## O que você vai aprender
+Init containers comuns executam e terminam antes dos containers principais. Um sidecar nativo é definido em `initContainers` com `restartPolicy: Always`: inicia no fluxo de init e permanece ativo enquanto a aplicação opera.
 
-Init containers convencionais concluem tarefas antes da aplicação. Sidecars nativos são definidos como init containers com restartPolicy Always e continuam ativos durante a execução da aplicação.
+### Como funciona no Kubernetes
 
-## Como funciona
+Os init containers comuns precisam concluir com sucesso; falhas são retentadas segundo as políticas aplicáveis. O sidecar nativo permanece em execução e seu status aparece em `initContainerStatuses`. Containers adicionais comuns em `containers` também podem fazer papel auxiliar, mas têm semântica de ciclo de vida diferente.
 
-Init prepara ambiente → aplicação inicia; sidecar auxilia com proxy, logs ou sincronização.
+### Exemplo de inspeção
 
-## Experimento recomendado
+Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
 
-Compare um init container de preparação com um sidecar que permanece em execução e verifique os status de containers.
+```bash
+kubectl config current-context
+kubectl get pod POD -n NAMESPACE -o jsonpath='{.status.initContainerStatuses}'
+kubectl logs POD -n NAMESPACE -c init-prepare
+kubectl describe pod POD -n NAMESPACE
+```
 
-**Status do lab:** roteiro conceitual; manifests e validação prática serão adicionados em uma etapa posterior.
+**O que observar:** Registre a sequência dos init containers e a permanência do sidecar nativo. A aplicação só deve iniciar quando os init containers necessários satisfizerem suas condições.
 
-## O que observar
+### Cuidados e limitações
 
-- Resultado e eventos dos recursos envolvidos.
-- Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
-- Regras, condições e pré-requisitos particulares deste mecanismo.
+Um sidecar nativo não é um Job; processos eternos como init containers comuns impedem o Pod de iniciar. Verifique compatibilidade da versão do Kubernetes.
 
+## 🧪 Aplicação prática
 
+**[🧪 Lab 02.05](../labs/init-sidecars-basico/README.md):** escreva o YAML do exercício, execute no Kind, registre evidências e explique as divergências. O complementar não é pré-requisito.
 
-## Referência oficial
+## ✅ Revisão do aprendizado
 
-- [Documentação Kubernetes — Init Containers e Sidecars](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+- Por que um init container comum que nunca termina impede a aplicação de iniciar?
+- Qual campo identifica um sidecar nativo na definição do Pod?
+- Que status comprova a ordem dos init containers?
 
-**Próxima etapa:** [índice completo da Camada 02](../README.md).
+## 🔗 Referências oficiais
 
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 
 ---
 
-### Navegação
-
-[← Anterior](../priorityclass-preemption/README.md) · [↑ Voltar à camada](../README.md) · Fim da camada ✓
+[↑ Camada 02](../README.md) · [🧪 Lab 02.05](../labs/init-sidecars-basico/README.md) · [← Aula 02.04](../resourcequota-limitrange/README.md) · [Próxima: 02.06 →](../jobs-cronjobs/README.md)
