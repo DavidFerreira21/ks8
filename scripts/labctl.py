@@ -88,9 +88,92 @@ def doctor() -> int:
     return run_command(["docker", "info", "--format", "{{.ServerVersion}}"])
 
 
+
+def checked_cluster() -> None:
+    expected = "kind-" + __import__("os").environ.get("CLUSTER_NAME", "dev")
+    current = subprocess.run(["kubectl", "config", "current-context"], capture_output=True, text=True, check=False)
+    if current.returncode or current.stdout.strip() != expected:
+        raise ValueError(f"Contexto incorreto: {current.stdout.strip()!r}; esperado {expected!r}")
+    clusters = subprocess.run(["kind", "get", "clusters"], capture_output=True, text=True, check=False)
+    if clusters.returncode or expected[5:] not in clusters.stdout.splitlines():
+        raise ValueError(f"Cluster Kind {expected[5:]} não encontrado")
+
+
+def kubectl(*args: str, quiet: bool = False) -> subprocess.CompletedProcess[str]:
+    command = ["kubectl", *args]
+    result = subprocess.run(command, text=True, capture_output=quiet, check=False)
+    if result.returncode != 0 and quiet:
+        print(result.stderr.strip() or "Falha em kubectl", file=sys.stderr)
+    return result
+
+
+def ensure_namespace(namespace: str) -> int:
+    if kubectl("get", "namespace", namespace, quiet=True).returncode == 0:
+        return 0
+    print(f"Criando namespace de estudo: {namespace}")
+    return kubectl("create", "namespace", namespace).returncode
+
+
+def execute_lab(lab: Lab, action: str) -> int:
+    checked_cluster()  # Também para comandos somente de leitura.
+    if action == "lab-status":
+        return kubectl("get", "pods,deployments,services,serviceaccounts,resourcequotas", "-n",
+                       lab.namespace, "--ignore-not-found", "-o", "wide").returncode
+    if action == "lab-up":
+        if ensure_namespace(lab.namespace):
+            return 1
+        for manifest in lab.apply:
+            if kubectl("apply", "-f", str(manifest)).returncode:
+                return 1
+        return 0
+    if action == "lab-down":
+        # Não apague o namespace: ele pode conter recursos de outras pessoas.
+        for manifest in reversed(lab.apply):
+            if manifest.name == "namespace.yaml":
+                continue
+            if kubectl("delete", "-f", str(manifest), "--ignore-not-found").returncode:
+                return 1
+        print(f"Namespace {lab.namespace} preservado. Revise seus recursos antes de removê-lo.")
+        return 0
+    if action == "lab-test":
+        if not lab.checks:
+            print("Lab sem checks: inconclusivo", file=sys.stderr)
+            return 2
+        for check in lab.checks:
+            typ = check["type"]
+            if typ == "deployment":
+                name = check["name"]
+                if kubectl("rollout", "status", f"deployment/{name}", "-n", lab.namespace,
+                           "--timeout=120s").returncode:
+                    return 1
+            elif typ == "service":
+                if kubectl("get", "service", check["name"], "-n", lab.namespace).returncode:
+                    return 1
+            elif typ in ("rbac", "rbac-deny"):
+                account = f"system:serviceaccount:{lab.namespace}:{check['service_account']}"
+                args = ("auth", "can-i", check["verb"], check["resource"], "-n",
+                        lab.namespace, f"--as={account}", "--quiet")
+                result = kubectl(*args)
+                if typ == "rbac" and result.returncode != 0:
+                    return 1
+                if typ == "rbac-deny" and result.returncode != 1:
+                    # Can-i retorna 1 para 'no'; outros erros também exigem diagnóstico.
+                    print("Permissão negativa não confirmada; revise RBAC/impersonation", file=sys.stderr)
+                    return 1
+            elif typ == "quota":
+                if kubectl("get", "resourcequota", check["name"], "-n", lab.namespace).returncode:
+                    return 1
+                if kubectl("get", "pod", check["pod"], "-n", lab.namespace).returncode:
+                    return 1
+        print(f"PASS: checks declarados para {lab.identifier}")
+        return 0
+    raise ValueError(f"Ação não suportada: {action}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Kubernetes Visual Guide — gerenciador de labs")
-    parser.add_argument("action", choices=("labs", "doctor", "validate"))
+    parser.add_argument("action", choices=("labs", "doctor", "validate", "lab-up", "lab-test", "lab-status", "lab-down"))
+    parser.add_argument("--lab", help="ID do lab, por exemplo 01.06")
     args = parser.parse_args()
     if args.action == "doctor":
         return doctor()
@@ -99,6 +182,15 @@ def main() -> int:
     except (ValueError, yaml.YAMLError, OSError) as exc:
         print(f"Erro no catálogo: {exc}", file=sys.stderr)
         return 1
+    if args.action.startswith("lab-"):
+        if not args.lab or args.lab not in labs:
+            print("Informe --lab com um ID válido (consulte make labs)", file=sys.stderr)
+            return 2
+        try:
+            return execute_lab(labs[args.lab], args.action)
+        except (ValueError, OSError) as exc:
+            print(f"Erro: {exc}", file=sys.stderr)
+            return 1
     if args.action == "labs":
         for lab in labs.values():
             print(f"{lab.identifier:6} | {lab.title} | {lab.namespace}")
