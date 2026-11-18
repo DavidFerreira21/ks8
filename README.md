@@ -66,7 +66,7 @@ make lab-prepare LAB=01.01
 make lab-observe LAB=01.01
 make lab-test LAB=01.01
 make lab-down LAB=01.01
-# Após a aula 01.05: make lab-up LAB=01.05
+# `make lab-up` é usado pela CI; o aluno aplica seu próprio YAML
 ```
 
 **Aprendizado ativo:** o aluno escreve YAML em `.labs/<ID>/`, aplica com `kubectl apply` e valida usando `make lab-test`. `make lab-up` permanece somente para testes da CI. 
@@ -90,22 +90,22 @@ A **Camada 01 agora reúne 14 laboratórios (01.01–01.14)**, cada um com contr
 
 **Legenda:** 🧪 possui contrato e manifests (execução depende do ambiente e dos testes do PR) · 📘 conteúdo ou roteiro de estudo · 🚧 planejado.
 
-## 📚 Anotações e exemplos práticos
+## 📚 Materiais complementares
 
-Consulte as explicações, os comandos e os manifests que complementam os guias da trilha. Todo esse material faz parte do mesmo percurso de estudo.
+Os **complementares são opcionais**: fornecem exemplos adicionais, comparação técnica e referência operacional após a aula e o lab. Consulte o [padrão editorial](docs/padrao-editorial.md).
 
 <details>
-<summary><strong>Mostrar anotações e exemplos complementares</strong></summary>
+<summary><strong>Mostrar materiais complementares opcionais</strong></summary>
 
 | Aula | Conteúdo |
 | --- | --- |
-| [Fundamentos](1-fundamentos/README.md) | Conceitos, cluster e primeiros comandos |
-| [Pods](2-pod/README.md) | Criação, inspeção e diagnóstico |
-| [Deployment](3-deployment/README.md) | Estratégias, rollout e rollback |
-| [ReplicaSet, DaemonSet e StatefulSet](4-replicaSet-daemonSet-statefulSet/README.md) | Controladores e manifests |
-| [Probes](5-probes/README.md) | Startup, readiness e liveness |
-| Volumes | Material original ainda não localizado para vinculação |
-| [Services](7-services/README.md) | Tipos de exposição e descoberta |
+| [Fundamentos](1-fundamentos/README.md) | Runtimes, padrões OCI/CRI e alternativas de ambiente |
+| [Pods](2-pod/README.md) | Inspeção, logs e diagnóstico |
+| [Deployment](3-deployment/README.md) | Referência operacional de rollout e rollback |
+| [ReplicaSet, DaemonSet e StatefulSet](4-replicaSet-daemonSet-statefulSet/README.md) | Comparação operacional entre controladores |
+| [Probes](5-probes/README.md) | Ajustes e diagnóstico de probes |
+| [Volumes — aula](trilhas/01-fundamentos/volumes/README.md) | [Lab 01.11](trilhas/01-fundamentos/labs/volumes-basico/README.md); sem complementar específico |
+| [Services](7-services/README.md) | Tipos de Services, DNS e EndpointSlices |
 
 [Resumo de conceitos](resume.md) · [Configuração do Kind](kind-config.yaml)
 
