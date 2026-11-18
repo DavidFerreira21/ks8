@@ -70,4 +70,4 @@ Não use namespace como única fronteira de isolamento entre ambientes com exig�
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: ConfigMaps →](../configmaps/README.md)
+[← Aula 01.05 — Services](../services/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.06](../labs/namespaces-basico/README.md) · [Próxima: Aula 01.07 — ConfigMaps →](../configmaps/README.md)
