@@ -58,7 +58,7 @@ A última linha pressupõe um PVC existente. A escolha entre cache, volume efêm
 
 ## 🧪 Aplicação prática
 
-**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
+**🧪 Lab 01.11:** [abrir exercício guiado](../labs/volumes-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 ## ✅ Revisão do aprendizado
 
