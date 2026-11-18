@@ -1,0 +1,14 @@
+id: "01.04"
+title: "Controladores: ReplicaSet, DaemonSet e StatefulSet"
+namespace: lab-01-04
+apply:
+  - resources.yaml
+checks:
+  - type: resource
+    name: observador
+    kind: daemonset
+  - type: resource
+    name: stateful-demo
+    kind: statefulset
+  - type: service
+    name: stateful-headless
