@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Descrever a unidade de execução Pod, seus containers e estados, e identificar por que um Pod isolado não fornece autorrecuperação declarativa.
 
 ## 🎨 Infográfico
 
@@ -70,9 +70,9 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- O que containers de um mesmo Pod compartilham e quando faz sentido usá-los juntos?
+- Por que excluir um Pod avulso é diferente de excluir um Pod controlado por Deployment?
+- Que sinais diferenciam `Running`, prontidão e um container em `CrashLoopBackOff`?
 
 ## 🔗 Referência oficial
 
