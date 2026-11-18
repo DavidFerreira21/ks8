@@ -55,7 +55,7 @@ Os comandos pressupõem um Deployment existente. O laboratório de blue/green ou
 
 ## 🧪 Aplicação prática
 
-**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
+**🧪 Lab 01.12:** [abrir exercício guiado](../labs/estrategias-deployment-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 ## ✅ Revisão do aprendizado
 
