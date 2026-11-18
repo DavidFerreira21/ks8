@@ -75,4 +75,4 @@ kubectl api-resources
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Pods →](../pods/README.md)
+[↑ Camada 01](../README.md) · [🧪 Lab 01.01](../labs/fundamentos-cluster/README.md) · [Próxima: Aula 01.02 — Pods →](../pods/README.md)
