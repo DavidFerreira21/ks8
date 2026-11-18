@@ -1,0 +1,8 @@
+id: "02.06"
+title: "Jobs e CronJobs"
+namespace: lab-02-06
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks: []

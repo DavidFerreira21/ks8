@@ -1,0 +1,8 @@
+id: "02.03"
+title: "SecurityContext e admissão PSA"
+namespace: lab-02-03
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks: []
