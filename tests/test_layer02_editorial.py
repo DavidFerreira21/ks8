@@ -69,6 +69,7 @@ class Layer02EditorialTests(unittest.TestCase):
                 self.assertEqual(meta["id"], f"02.{n:02d}")
                 self.assertEqual(meta["apply"], ["solution/resources.yaml"])
                 self.assertEqual(meta["starter"], ["starter/resources.yaml"])
+                self.assertTrue(meta.get("checks"), "Lab publicado deve ter checks executáveis")
                 self.assertTrue(meta.get("checks"), f"Lab 02.{n:02d} sem checks executáveis")
                 starter = (folder / meta["starter"][0]).read_text(encoding="utf-8")
                 self.assertIn("TODO", starter)
