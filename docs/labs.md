@@ -16,7 +16,7 @@ Confira as versões e os requisitos do [guia de instalação existente](../insta
 
 ## Comandos padronizados
 
-A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.01` (Fundamentos); o lab integrado de aplicação e Services é `01.05`.
+A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.01` (Fundamentos); o laboratório dedicado a Services é `01.05`.
 
 ```bash
 make doctor
@@ -26,7 +26,7 @@ make lab-up LAB=01.05
 make lab-status LAB=01.05
 make lab-test LAB=01.05
 make lab-observe LAB=01.05
-make lab-experiment LAB=01.05 EXPERIMENT=controlled-rollout
+make lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout
 make lab-down LAB=01.05
 ```
 
@@ -41,19 +41,19 @@ make lab-down LAB=01.05
 | `make lab-test LAB=02.04` | Conferir existência de quota e Pod (rejeição fica para experimento específico) |
 | `make lab-observe LAB=01.05` | Mostra condições, eventos e recursos relacionados |
 | `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod` | Espera e verifica rejeição intencional por quota |
-| `make lab-experiment LAB=01.05 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab e observa a reconciliação |
+| `make lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab 01.12 e observa o rollout |
 | `make lab-down LAB=02.04` | Remover somente os manifests cadastrados; preservar o namespace |
 | `make down` | Excluir o cluster Kind local (ação destrutiva) |
 
 **Segurança:** as operações conferem se o contexto é `kind-<CLUSTER_NAME>` e se o cluster Kind existe. Nenhuma operação do lab deve mirar um contexto diferente do esperado. `lab-down` preserva namespaces por padrão; não pressupõe que estejam vazios.
 
-**Sequência didática:** no lab `01.05` o Pod individual continua sendo criado manualmente conforme o README; o comando automatizado aplica apenas Deployment e Service para não ocultar a primeira etapa.
+**Sequência didática:** no lab `01.05`, um Deployment simples fornece dois backends, mas a prática investiga apenas Services, selectors, EndpointSlices e acesso via DNS/ClusterIP. O experimento de rollout pertence ao lab 01.12.
 
 
 ## Camada 01 — Fundamentos
 
 - [Lab 01.01 — Primeiro contato com a API](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md): explorar o cluster, criar ConfigMap e comparar o estado no arquivo e na API.
-- [Lab 01.05 — Aplicação](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md): Deployment, Service e rollout.
+- [Lab 01.05 — Services](../trilhas/01-fundamentos/labs/services-basico/README.md): ClusterIP, selector, EndpointSlices e DNS.
 
 A criação de namespaces ausentes não imprime mais um erro esperado de `NotFound`; falhas reais na consulta ao API Server continuam visíveis.
 
@@ -65,7 +65,7 @@ A criação de namespaces ausentes não imprime mais um erro esperado de `NotFou
 | 01.02 | Pods | [Pod e diagnóstico](../trilhas/01-fundamentos/labs/pods-basico/README.md) |
 | 01.03 | Deployments | [Réplicas e self-healing](../trilhas/01-fundamentos/labs/deployments-basico/README.md) |
 | 01.04 | Controladores | [DaemonSet e StatefulSet](../trilhas/01-fundamentos/labs/controladores-basico/README.md) |
-| 01.05 | Services | [Aplicação integrada](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) |
+| 01.05 | Services | [Services e descoberta](../trilhas/01-fundamentos/labs/services-basico/README.md) |
 | 01.06 | Namespaces | [Escopo lógico](../trilhas/01-fundamentos/labs/namespaces-basico/README.md) |
 | 01.07 | ConfigMaps | [Configuração e restart](../trilhas/01-fundamentos/labs/configmaps-basico/README.md) |
 | 01.08 | Secrets | [Referência segura](../trilhas/01-fundamentos/labs/secrets-basico/README.md) |
@@ -105,7 +105,7 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - `make down` remove o cluster Kind indicado por `CLUSTER_NAME`. Verifique esse valor antes da execução.
 - `make lab-down` **preserva o namespace** para evitar excluir recursos não relacionados.
 - `make validate` analisa todos os manifests declarados nos contratos e executa checks didáticos, **não substituindo a validação completa do schema Kubernetes**.
-- A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa 14 labs básicos/integrados, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
+- A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa 14 labs básicos, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
 - Os novos labs não foram executados manualmente durante a elaboração deste PR. A CI os valida conforme a cobertura descrita; os labs 01.13 e 01.14 exigem teste funcional em Kind com addons.
 
 
@@ -143,7 +143,7 @@ O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rasc
 
 ## CI: Kind descartável
 
-O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre 14 laboratórios sem addons (01.01–01.12, 02.02 e 02.04), valida os checks, experimenta rollout e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre 14 laboratórios sem addons (01.01–01.12, 02.02 e 02.04), valida os checks, experimenta rollout no lab 01.12 e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
 
 Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
 

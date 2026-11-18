@@ -1,0 +1,10 @@
+id: "01.05"
+title: "Services: descoberta e roteamento para Pods"
+namespace: lab-01-05
+apply:
+  - resources.yaml
+checks:
+  - type: deployment
+    name: web
+  - type: service
+    name: web

@@ -62,7 +62,7 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 ## 🧪 Aplicação prática
 
-**Lab existente:** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
+**🧪 Lab 01.05:** [Services — selectors, EndpointSlices e DNS](../labs/services-basico/README.md). Exercício independente, com Deployment apenas como backend de teste.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../7-services/README.md). Os conteúdos anteriores foram preservados.
 

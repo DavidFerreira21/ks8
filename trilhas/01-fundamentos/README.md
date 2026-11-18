@@ -15,7 +15,7 @@
 | :--- | :--- |
 | ⚙️ Instale o Kind, verifique o contexto e conheça os nós do cluster.<br><br>**[Preparar Kind →](../../install-kind.md)** | 📖 Comece pelos fundamentos e pelos Pods. Entenda o que Kubernetes executa e supervisiona.<br><br>**[Fundamentos →](fundamentos/README.md)** · [Pods](pods/README.md) |
 | **03 · Controlar e expor** | **04 · Observar e experimentar** |
-| 🔁 Aprenda Deployments, ReplicaSets e Services: como atualizar e acessar aplicações.<br><br>**[Deployments →](deployments/README.md)** | 🧪 Execute o lab integrado e investigue réplicas, Service e eventos.<br><br>**[Primeira aplicação →](labs/primeira-aplicacao/README.md)** |
+| 🔁 Aprenda Deployments, ReplicaSets e Services: como atualizar e acessar aplicações.<br><br>**[Deployments →](deployments/README.md)** | 🧪 Execute o lab de Services e investigue selectors, EndpointSlices e acesso HTTP.<br><br>**[Services →](labs/services-basico/README.md)** |
 
 [**Consultar tabela de migração dos IDs antigos →**](../../docs/migracao-ids-fundamentos.md)
 
@@ -29,7 +29,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [🧪 Lab 01.02](labs/pods-basico/README.md) · [Anotações](../../2-pod/README.md) |
 | 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [🧪 Lab 01.03](labs/deployments-basico/README.md) · [Anotações](../../3-deployment/README.md) |
 | 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [🧪 Lab 01.04](labs/controladores-basico/README.md) · [Anotações](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab integrado 01.05](labs/primeira-aplicacao/README.md) · [Anotações](../../7-services/README.md) |
+| 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab 01.05 — Services](labs/services-basico/README.md) · [Anotações](../../7-services/README.md) |
 | 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | [🧪 Lab 01.06](labs/namespaces-basico/README.md) |
 | 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | [🧪 Lab 01.07](labs/configmaps-basico/README.md) |
 | 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | [🧪 Lab 01.08](labs/secrets-basico/README.md) |
@@ -46,12 +46,12 @@ Cada aula da Camada 01 tem agora um lab próprio. Os labs de 01.13 e 01.14 exige
 
 ### Aplicação integrada
 
-| **Lab 01.05 · Pod → Deployment → Service** | |
+| **Lab 01.05 · Services e descoberta** | |
 | :--- | :--- |
-| **O que você pratica** | Criar um Pod, gerenciar três réplicas com Deployment, disponibilizar um Service e inspecionar a reconciliação. |
-| **O que observar** | Pods recriados, ReplicaSet, EndpointSlices, rollout e eventos. |
+| **O que você pratica** | Publicar um Service ClusterIP sobre dois Pods de apoio e testar como o selector controla seus endpoints. |
+| **O que observar** | ClusterIP, selector, EndpointSlices, resolução DNS e conectividade. |
 | **Ambiente** | Kind local, namespace de laboratório isolado. |
-| **Começar** | **[Abrir laboratório →](labs/primeira-aplicacao/README.md)** |
+| **Começar** | **[Abrir laboratório →](labs/services-basico/README.md)** |
 
 > **Importante:** os 14 labs da camada possuem contratos executáveis; valide-os em seu Kind. O conteúdo de Volumes está na aula 01.11; o Lab 01.11 está disponível.
 
@@ -60,7 +60,7 @@ Cada aula da Camada 01 tem agora um lab próprio. Os labs de 01.13 e 01.14 exige
 - [ ] Diferenciar Pod, Deployment, ReplicaSet e Service.
 - [ ] Explicar por que um Pod controlado é recriado após exclusão.
 - [ ] Consultar logs, eventos e status de readiness.
-- [ ] Executar o lab integrado e limpar somente os recursos criados.
+- [ ] Executar o lab de Services e limpar somente os recursos criados.
 
 ## 🔗 Continue aprendendo
 

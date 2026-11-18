@@ -15,7 +15,7 @@ diagnostics() {
     kubectl get pods -A -o wide > "$report_dir/pods.txt" 2>&1 || true
     kubectl get events -A --sort-by=.lastTimestamp > "$report_dir/events.txt" 2>&1 || true
     kubectl describe pods -A > "$report_dir/describe-pods.txt" 2>&1 || true
-    kubectl logs -n k8s-lab deployment/web --all-containers=true > "$report_dir/web-logs.txt" 2>&1 || true
+    kubectl logs -n lab-01-05 deployment/web --all-containers=true > "$report_dir/web-logs.txt" 2>&1 || true
   fi
   for lab in 02.04 02.02 01.12 01.11 01.10 01.09 01.08 01.07 01.06 01.05 01.04 01.03 01.02 01.01; do
     make lab-down LAB="$lab" || true
@@ -36,7 +36,9 @@ for lab in 01.01 01.02 01.03 01.04 01.05 01.06 01.07 01.08 01.09 01.10 01.11 01.
 done
 
 # Testes intencionais de reconciliação e de negação de admissão.
-make lab-experiment LAB=01.05 EXPERIMENT=controlled-rollout
+# Confere que Service possui endpoints prontos, não apenas que existe na API.
+kubectl get endpointslices -n lab-01-05 -l kubernetes.io/service-name=web \
+  -o jsonpath='{.items[0].endpoints[0].conditions.ready}' | grep -qx true
 make lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout
 make lab-experiment LAB=02.04 EXPERIMENT=reject-pod
 
