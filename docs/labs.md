@@ -16,41 +16,28 @@ Confira as versões e os requisitos do [guia de instalação existente](../insta
 
 ## Comandos padronizados
 
-A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.06` (primeira aplicação).
+A partir da raiz do repositório:
 
-```bash
-make doctor
-make up
-make labs
-make lab-up LAB=01.06
-make lab-status LAB=01.06
-make lab-test LAB=01.06
-make lab-down LAB=01.06
-```
-
-| Comando | Finalidade |
+| Comando | Comportamento |
 | --- | --- |
-| `make doctor` | Conferir ferramentas e Docker |
-| `make labs` | Descobrir os labs cadastrados |
-| `make validate` | Verificar contratos e manifests por inspeção |
-| `make lab-up LAB=02.02` | Aplicar o lab RBAC e seus pré-requisitos |
-| `make lab-test LAB=02.02` | Conferir permissões permitidas e negadas |
-| `make lab-up LAB=02.04` | Aplicar quota, LimitRange e Pod de teste |
-| `make lab-test LAB=02.04` | Conferir existência de quota e Pod (rejeição fica para experimento específico) |
-| `make lab-down LAB=02.04` | Remover somente os manifests cadastrados; preservar o namespace |
-| `make down` | Excluir o cluster Kind local (ação destrutiva) |
+| `make help` | Exibe os alvos disponíveis |
+| `make up` | Cria o cluster Kind somente se não existir |
+| `make nodes` | Inspeciona os Nodes do contexto esperado |
+| `make status` | Exibe recursos do namespace de laboratório |
+| `make validate` | Confere YAML e invariantes selecionadas dos exemplos das Camadas 01 e 02 |
+| `make lab-up` | Cria namespace, Deployment e Service do lab integrado |
+| `make lab-test` | Aguarda rollout e inspeciona Service/EndpointSlices |
+| `make lab-down` | Exclui apenas Deployment e Service do lab |
+| `make down` | Exclui o cluster Kind local `dev` (ação destrutiva) |
 
-**Segurança:** as operações conferem se o contexto é `kind-<CLUSTER_NAME>` e se o cluster Kind existe. Nenhuma operação do lab deve mirar um contexto diferente do esperado. `lab-down` preserva namespaces por padrão; não pressupõe que estejam vazios.
-
-**Sequência didática:** no lab `01.06` o Pod individual continua sendo criado manualmente conforme o README; o comando automatizado aplica apenas Deployment e Service para não ocultar a primeira etapa.
-
+`make lab-up` **não** executa a etapa manual de Pod individual do lab integrado, para preservar a sequência didática. Execute essa etapa a partir do [README do laboratório](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md).
 
 ## Camada 02 — Operação e Segurança
 
 - [RBAC e ServiceAccount](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
 - [ResourceQuota e LimitRange](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md): defaults de recursos e rejeição intencional por quota.
 
-Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. A etapa de falha intencional da quota é manual nesta fase e será automatizada em uma etapa seguinte.
+Esses dois laboratórios são **manuais** e têm namespace próprio. Não foram adicionados aos alvos `make lab-*`, que continuam exclusivos do lab da primeira aplicação. O comando `make validate` passa a validar também a estrutura YAML dos novos exemplos.
 
 ## Diagnóstico
 
