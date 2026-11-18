@@ -40,7 +40,17 @@ Use `kubectl get pod auxiliares -n lab-02-05 -o yaml` e inspecione `status.initC
 
 ## Fase 3 — Experimento controlado
 
-Compare os estados de `preparo`, `observador` e `app` com `kubectl describe pod auxiliares -n lab-02-05`. Registre quais containers terminam e quais permanecem ativos. Evite matar os containers manualmente.
+Registre os status inicial e os logs do init comum. **Recrie apenas o Pod didático** para observar novamente o ciclo de vida e compare as condições antes e depois:
+
+```bash
+kubectl get pod auxiliares -n lab-02-05 -o yaml
+kubectl logs auxiliares -n lab-02-05 -c preparo
+kubectl delete pod auxiliares -n lab-02-05
+kubectl apply -f .labs/02.05/resources.yaml
+kubectl get pod auxiliares -n lab-02-05 -w
+```
+
+Interrompa o `-w` com Ctrl+C quando o Pod estiver pronto. Depois inspecione `initContainerStatuses` e `containerStatuses`: o init comum deve terminar de novo, enquanto o sidecar nativo continua ativo. Essa recriação não exige encerrar outros workloads.
 
 ## Resultado esperado e evidências
 
@@ -65,6 +75,7 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.05:** init container comum terminou duas vezes após a recriação, enquanto o sidecar nativo permaneceu ativo após cada inicialização.
 - [ ] Completei o YAML sem copiar a solução e confirmei o contexto esperado.
 - [ ] Observei o comportamento específico descrito em **Resultado esperado**.
 - [ ] Registrei o resultado do experimento, uma hipótese e a explicação técnica.
@@ -75,9 +86,11 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 - Por que um init container comum precisa terminar?
 - Por que um sidecar nativo é definido em `initContainers`?
 
+- Qual status evidencia que o sidecar nativo continua ativo após o init comum concluir?
+
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/) · [Aula 02.05](../../init-sidecars/README.md)
+[Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/) · [Aula 02.05](../../init-sidecars/README.md)
 
 ---
 

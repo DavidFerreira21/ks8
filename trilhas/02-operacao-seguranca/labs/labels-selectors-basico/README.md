@@ -65,6 +65,7 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.01:** label `tier=backend` inicialmente selecionou o Pod; `tier=frontend` o excluiu; a annotation permaneceu independente.
 - [ ] Completei o YAML sem copiar a solução e confirmei o contexto esperado.
 - [ ] Observei o comportamento específico descrito em **Resultado esperado**.
 - [ ] Registrei o resultado do experimento, uma hipótese e a explicação técnica.
@@ -75,9 +76,11 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 - Por que uma annotation não faz parte do selector?
 - O que acontece com a seleção quando a label muda?
 
+- Que outra consulta comprova que annotation não participa de selectors?
+
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) · [Aula 02.01](../../labels-selectors-annotations/README.md)
+[Documentação Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) · [Aula 02.01](../../labels-selectors-annotations/README.md)
 
 ---
 

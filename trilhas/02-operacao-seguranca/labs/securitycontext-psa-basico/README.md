@@ -40,7 +40,24 @@ Inspecione `kubectl get pod seguro -n lab-02-03 -o yaml` e `kubectl describe pod
 
 ## Fase 3 — Experimento controlado
 
-No Kind local, aplique `kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn=restricted --overwrite`. Reaplique seu YAML para observar avisos, se houver. Remova a label após o teste com `kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn-`. **Não use `enforce` sem antes verificar o impacto.**
+O Pod principal atende aos controles de segurança e **não deve ser usado para esperar um aviso**. Use o arquivo didático `experiments/psa-incompativel.yaml` (não é aplicado pelo `lab-prepare`). Os dois testes usam `--dry-run=server`, de modo que o Pod privilegiado **nunca seja criado**.
+
+```bash
+kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn=restricted --overwrite
+kubectl apply --dry-run=server -f trilhas/02-operacao-seguranca/labs/securitycontext-psa-basico/experiments/psa-incompativel.yaml
+kubectl label namespace lab-02-03 pod-security.kubernetes.io/enforce=restricted --overwrite
+kubectl apply --dry-run=server -f trilhas/02-operacao-seguranca/labs/securitycontext-psa-basico/experiments/psa-incompativel.yaml
+```
+
+**Resultado esperado:** a primeira requisição recebe **aviso** e pode ser aceita no dry-run; a segunda deve ser **rejeitada pela admissão**. A rejeição é intencional, não indica falha do exercício. Confirme que `kubectl get pod psa-incompativel -n lab-02-03` não encontra o objeto.
+
+**Reversão obrigatória, inclusive se um comando falhar:**
+
+```bash
+kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn- pod-security.kubernetes.io/enforce-
+```
+
+Não altere outros namespaces. Se a segunda requisição for aceita, investigue o Pod Security Admission do cluster em vez de afirmar bloqueio.
 
 ## Resultado esperado e evidências
 
@@ -65,6 +82,7 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.03:** manifesto incompatível produziu aviso no modo `warn`, rejeição no modo `enforce` e nunca foi criado no cluster.
 - [ ] Completei o YAML sem copiar a solução e confirmei o contexto esperado.
 - [ ] Observei o comportamento específico descrito em **Resultado esperado**.
 - [ ] Registrei o resultado do experimento, uma hipótese e a explicação técnica.
@@ -75,9 +93,11 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 - Por que `runAsNonRoot` não equivale a uma política PSA?
 - Por que avisos no modo `warn` não significam bloqueio?
 
+- Qual evidência distingue rejeição da API de falha de inicialização do container?
+
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://kubernetes.io/docs/concepts/security/pod-security-admission/) · [Aula 02.03](../../securitycontext-pod-security/README.md)
+[Documentação Kubernetes](https://kubernetes.io/docs/concepts/security/pod-security-admission/) · [Aula 02.03](../../securitycontext-pod-security/README.md)
 
 ---
 

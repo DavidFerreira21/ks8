@@ -38,7 +38,25 @@ make lab-observe LAB=02.12
 
 ## Fase 3 — Experimento controlado
 
-**Somente no Kind local**, execute `kubectl cordon dev-worker`; compare `kubectl get nodes` e observe que o Pod existente não é removido. **Obrigatoriamente** execute `kubectl uncordon dev-worker` em seguida, mesmo se a observação falhar. Não execute drain automático, que pode atingir Pods de outros labs.
+**Somente no Kind descartável**, crie um teste de agendamento enquanto o worker está em `cordon`. O Pod inicial deve **permanecer executando**, mas o Pod temporário deve ficar `Pending` até o `uncordon`:
+
+```bash
+kubectl cordon dev-worker
+kubectl apply -f trilhas/02-operacao-seguranca/labs/node-maintenance-basico/experiments/novo-pod.yaml
+kubectl get pods -n lab-02-12 -o wide
+kubectl describe pod novo-bloqueado -n lab-02-12
+kubectl uncordon dev-worker
+kubectl wait --for=condition=Ready pod/novo-bloqueado -n lab-02-12 --timeout=120s
+```
+
+**Reversão obrigatória, mesmo se o `wait` falhar:**
+
+```bash
+kubectl uncordon dev-worker
+kubectl delete -f trilhas/02-operacao-seguranca/labs/node-maintenance-basico/experiments/novo-pod.yaml --ignore-not-found
+```
+
+Registre o evento de scheduling, o estado do nó e do Pod existente. **Não execute drain**, pois afetaria os demais labs.
 
 ## Resultado esperado e evidências
 
@@ -63,6 +81,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.12:** cordon preservou o Pod existente e impediu o agendamento do Pod temporário até o uncordon.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -72,6 +91,8 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 - Qual diferença existe entre cordon e drain?
 - Por que uncordon não move automaticamente Pods?
+
+- Por que `uncordon` não devolve automaticamente os Pods antigos ao nó?
 
 ## Aprofunde seus conhecimentos
 

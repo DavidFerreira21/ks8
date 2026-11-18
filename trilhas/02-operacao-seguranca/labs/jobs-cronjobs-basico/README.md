@@ -65,6 +65,7 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.06:** Job concluiu, CronJob permaneceu agendado e uma execução manual controlada foi criada e removida.
 - [ ] Completei o YAML sem copiar a solução e confirmei o contexto esperado.
 - [ ] Observei o comportamento específico descrito em **Resultado esperado**.
 - [ ] Registrei o resultado do experimento, uma hipótese e a explicação técnica.
@@ -75,9 +76,11 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 - Por que Job terminado não deve ser transformado em Deployment?
 - Qual risco operacional é mitigado por `concurrencyPolicy: Forbid`?
 
+- Por que o Job gerado manualmente não depende da expressão cron?
+
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) · [Aula 02.06](../../jobs-cronjobs/README.md)
+[Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) · [Aula 02.06](../../jobs-cronjobs/README.md)
 
 ---
 

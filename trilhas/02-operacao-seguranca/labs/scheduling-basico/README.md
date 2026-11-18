@@ -81,6 +81,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.07:** um Pod tolerou o taint temporário, outro ficou Pending, e o worker voltou ao estado original.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -90,6 +91,8 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 - Por que toleration não escolheria esse mesmo nó por si só?
 - O que o scheduler faz se `dev-worker` estiver indisponível?
+
+- Por que nodeAffinity e toleration precisam ser avaliadas juntas?
 
 ## Aprofunde seus conhecimentos
 

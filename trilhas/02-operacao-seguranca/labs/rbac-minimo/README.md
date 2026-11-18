@@ -65,6 +65,7 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.02:** ServiceAccount conseguiu listar Pods, mas não Secrets, como demonstrado por dois comandos `kubectl auth can-i`.
 - [ ] Completei o YAML sem copiar a solução e confirmei o contexto esperado.
 - [ ] Observei o comportamento específico descrito em **Resultado esperado**.
 - [ ] Registrei o resultado do experimento, uma hipótese e a explicação técnica.
@@ -75,9 +76,11 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 - Por que uma Role não concede permissão sozinha?
 - Como a identidade e o namespace afetam a resposta de `can-i`?
 
+- Qual resultado obteria ao consultar o mesmo recurso em outro namespace, e por quê?
+
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) · [Aula 02.02](../../rbac-serviceaccount/README.md)
+[Documentação Kubernetes](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) · [Aula 02.02](../../rbac-serviceaccount/README.md)
 
 ---
 

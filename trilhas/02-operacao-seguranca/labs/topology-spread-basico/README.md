@@ -38,7 +38,27 @@ Execute `kubectl rollout status deployment/distribuida -n lab-02-08 --timeout=18
 
 ## Fase 3 — Experimento controlado
 
-Compare quantos Pods existem por worker. Depois reduza a réplicas 1 com `kubectl scale deployment/distribuida -n lab-02-08 --replicas=1` e observe a redistribuição; **restaure `--replicas=2`** antes de validar novamente.
+Primeiro observe a distribuição do Deployment principal com `kubectl get pods -n lab-02-08 -o wide`.
+
+Agora aplique o **cenário independente** de `experiments/spread-impossivel.yaml`. Ele restringe os nós elegíveis a `dev-worker` e `dev-worker2`, exige `minDomains: 3` e `maxSkew: 1` com três réplicas, resultando em uma condição que não pode ser inteiramente satisfeita nos dois workers do Kind.
+
+```bash
+kubectl get nodes -o wide
+kubectl apply -f trilhas/02-operacao-seguranca/labs/topology-spread-basico/experiments/spread-impossivel.yaml
+kubectl get deployment spread-impossivel -n lab-02-08
+kubectl get pods -n lab-02-08 -l app=spread-impossivel -o wide
+kubectl describe pods -n lab-02-08 -l app=spread-impossivel
+```
+
+**Resultado esperado com exatamente dois workers elegíveis e Ready:** duas réplicas agendadas, uma `Pending` por `FailedScheduling` relacionado ao spread. Se a condição não ocorrer, confira os domínios elegíveis, eventos e versões da API; **não conclua que a distribuição foi validada somente pela existência do Deployment**.
+
+**Limpeza obrigatória do experimento** (não coberto por `make lab-down`):
+
+```bash
+kubectl delete -f trilhas/02-operacao-seguranca/labs/topology-spread-basico/experiments/spread-impossivel.yaml --ignore-not-found
+```
+
+O Deployment original `distribuida` permanece com duas réplicas.
 
 ## Resultado esperado e evidências
 
@@ -63,6 +83,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.08:** duas réplicas do experimento distribuíram-se pelos workers, uma permaneceu Pending e o Deployment experimental foi removido.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -72,6 +93,8 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 - Por que a restrição pode deixar um Pod Pending?
 - Qual diferença há entre domínios por hostname e zonas de disponibilidade?
+
+- Como `minDomains` influencia a referência utilizada no cálculo do skew?
 
 ## Aprofunde seus conhecimentos
 

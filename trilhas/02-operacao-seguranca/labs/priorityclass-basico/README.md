@@ -38,7 +38,16 @@ Execute `kubectl get priorityclass lab-02-priority` e `kubectl get pod prioritar
 
 ## Fase 3 — Experimento controlado
 
-Compare `kubectl get priorityclass lab-02-priority -o yaml` com `kubectl describe pod prioritario -n lab-02-09`. **Não gere pressão de CPU e não provoque preempção real**; o objetivo é diferenciar prioridade de preempção.
+Compare a prioridade do Pod principal com a de um Pod temporário sem PriorityClass, sem gerar pressão de recursos:
+
+```bash
+kubectl run sem-classe -n lab-02-09 --image=busybox:1.36 --restart=Never -- sleep 3600
+kubectl get pod prioritario sem-classe -n lab-02-09 -o custom-columns=NAME:.metadata.name,CLASS:.spec.priorityClassName,PRIORIDADE:.spec.priority
+kubectl get priorityclass lab-02-priority -o yaml
+kubectl delete pod sem-classe -n lab-02-09 --ignore-not-found
+```
+
+**Conclusão:** valores diferentes de prioridade são observáveis mesmo sem executar preempção. A ausência de preempção neste ambiente **não valida** a política sob saturação.
 
 ## Resultado esperado e evidências
 
@@ -63,6 +72,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.09:** priorityClassName alterou a prioridade efetiva comparada ao Pod temporário sem classe, sem causar preempção.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -72,6 +82,8 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 - Qual diferença existe entre prioridade de agendamento e preempção?
 - Por que `globalDefault: false` é importante para este lab?
+
+- Por que `preemptionPolicy: Never` não remove a prioridade de fila?
 
 ## Aprofunde seus conhecimentos
 

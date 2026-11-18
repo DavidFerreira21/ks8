@@ -63,6 +63,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.13:** a seleção da NetworkPolicy foi conferida e a ausência de enforcement sem CNI apropriado foi explicitamente registrada.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -72,6 +73,8 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 - Por que a existência de NetworkPolicy não prova bloqueio?
 - Qual diferença entre isolar ingress e egress?
+
+- Qual verificação seria necessária para provar enforcement pelo CNI?
 
 ## Aprofunde seus conhecimentos
 

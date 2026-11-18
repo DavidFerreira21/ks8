@@ -38,7 +38,16 @@ make lab-observe LAB=02.10
 
 ## Fase 3 — Experimento controlado
 
-Compare o campo `status.qosClass` de cada Pod e explique por que ele foi atribuído. Consulte `kubectl describe node dev-worker` para reconhecer indicadores de pressão, **sem gerar OOM/eviction artificial**.
+Além dos três perfis iniciais, crie um quarto Pod temporário com **request e limit iguais apenas para CPU, sem definição de memória**. Antes de aplicar, preveja a QoS; depois compare a classe calculada:
+
+```bash
+kubectl apply -f trilhas/02-operacao-seguranca/labs/qos-eviction-basico/experiments/qos-parcial.yaml
+kubectl get pods -n lab-02-10 -o custom-columns=NAME:.metadata.name,QOS:.status.qosClass
+kubectl get pod qos-parcial -n lab-02-10 -o yaml
+kubectl delete -f trilhas/02-operacao-seguranca/labs/qos-eviction-basico/experiments/qos-parcial.yaml --ignore-not-found
+```
+
+**Resultado:** `qos-parcial` deve ser **Burstable**, porque a categoria Guaranteed exige requests=limits para **CPU e memória**. Não provoque eviction ou OOM no cluster. Confirme via `kubectl describe node dev-worker` que pressão de nó é um fenômeno distinto.
 
 ## Resultado esperado e evidências
 
@@ -63,6 +72,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.10:** as classes QoS foram identificadas e o perfil parcial permaneceu Burstable sem gerar pressão artificial no nó.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -72,6 +82,8 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 - O que diferencia Guaranteed de Burstable?
 - Por que OOMKilled não é sinônimo de Pod Evicted?
+
+- Como você distinguiria `Evicted` de `OOMKilled`?
 
 ## Aprofunde seus conhecimentos
 
