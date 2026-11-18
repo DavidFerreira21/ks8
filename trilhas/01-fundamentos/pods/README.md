@@ -80,4 +80,4 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Deployments →](../deployments/README.md)
+[← Aula 01.01 — Fundamentos Kubernetes](../fundamentos/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.02](../labs/pods-basico/README.md) · [Próxima: Aula 01.03 — Deployments →](../deployments/README.md)
