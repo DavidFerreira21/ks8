@@ -94,6 +94,12 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 - [ ] Mantive `marcador.txt` após excluir e recriar o Pod.
 - [ ] Expliquei a diferença entre apagar Pod, PVC e PV e limpei o lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Se o PVC permanecer em `Pending`, quais evidências em `kubectl describe pvc` e `kubectl get storageclass` ajudam a identificar o problema?
+- Por que excluir somente o Pod preservou `marcador.txt`, enquanto remover o PVC pode ter consequências diferentes conforme a política de reclaim do PV?
+- Registre como evidências o status do claim, o PV associado e o conteúdo de `marcador.txt` antes e depois da recriação.
+
 ## Aprofunde seus conhecimentos
 
 [Volumes](https://kubernetes.io/docs/concepts/storage/volumes/) · [Persistent Volumes e PVCs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) · [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/).
