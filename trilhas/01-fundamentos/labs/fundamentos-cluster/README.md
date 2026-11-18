@@ -34,19 +34,19 @@ kubectl get pods -A
 ## Fase 2 — Conhecer os objetos da API
 
 ```bash
+make lab-prepare LAB=01.01
 kubectl api-resources | head -25
 kubectl explain configmap
 kubectl explain configmap.data
 ```
 
-Leia o arquivo incompleto `.labs/01.01/configmap.yaml` **depois de executar `make lab-prepare LAB=01.01`**. Identifique `apiVersion`, `kind`, `metadata.name`, `metadata.namespace` e `data`.
+Leia o arquivo incompleto `.labs/01.01/configmap.yaml` (gerado pelo comando da fase anterior). Identifique `apiVersion`, `kind`, `metadata.name`, `metadata.namespace` e `data`.
 
 **Conceito:** nem todo recurso tem `spec` e `status`; este ConfigMap contém dados de configuração e não cria um Pod.
 
 ## Fase 3 — Aplicar e testar
 
 ```bash
-make lab-prepare LAB=01.01
 # Complete primeiro o arquivo em .labs/01.01/
 kubectl apply -f .labs/01.01/
 make lab-test LAB=01.01
@@ -103,8 +103,6 @@ make lab-status LAB=01.01
 - [ ] Reapliquei o YAML, confirmei o valor original e removi apenas o ConfigMap.
 
 **Próxima aula:** [Aula 01.02 — Pods](../../pods/README.md). O [🧪 Lab 01.05](../services-basico/README.md) aborda Services e descoberta de backends.
-
-[Referência oficial — Kubernetes Overview](https://kubernetes.io/docs/concepts/overview/) · [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
 
 ## Aprofunde seus conhecimentos
 
