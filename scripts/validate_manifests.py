@@ -13,9 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # path -> (kinds esperados em ordem, namespace dos recursos namespaced)
 FILES = {
     "kind-config.yaml": (["Cluster"], None),
-    "trilhas/01-fundamentos/labs/primeira-aplicacao/pod.yaml": (["Pod"], "k8s-lab"),
-    "trilhas/01-fundamentos/labs/primeira-aplicacao/deployment.yaml": (["Deployment"], "k8s-lab"),
-    "trilhas/01-fundamentos/labs/primeira-aplicacao/service.yaml": (["Service"], "k8s-lab"),
+    "trilhas/01-fundamentos/labs/services-basico/resources.yaml": (["Deployment", "Service"], "lab-01-05"),
     "trilhas/02-operacao-seguranca/labs/rbac-minimo/namespace.yaml": (["Namespace"], None),
     "trilhas/02-operacao-seguranca/labs/rbac-minimo/rbac.yaml": (["ServiceAccount", "Role", "RoleBinding"], "lab-ops-rbac"),
     "trilhas/02-operacao-seguranca/labs/quota-namespace/namespace.yaml": (["Namespace"], None),
@@ -53,12 +51,12 @@ for relative, (expected_kinds, namespace) in FILES.items():
             errors.append(f"{prefix}: namespace esperado {namespace}")
         if kind == "Deployment":
             spec = doc.get("spec") or {}
-            if spec.get("replicas") != 3:
-                errors.append(f"{prefix}: esperado replicas=3")
+            if spec.get("replicas") != 2:
+                errors.append(f"{prefix}: esperado replicas=2")
             if (spec.get("selector") or {}).get("matchLabels") != ((spec.get("template") or {}).get("metadata") or {}).get("labels"):
                 errors.append(f"{prefix}: selector diverge das labels do template")
-        if kind == "Service" and (doc.get("spec") or {}).get("selector") != {"app": "web"}:
-            errors.append(f"{prefix}: esperado selector app=web")
+        if kind == "Service" and (doc.get("spec") or {}).get("selector") != {"app": "services-demo"}:
+            errors.append(f"{prefix}: esperado selector app=services-demo")
         if kind == "Namespace" and metadata.get("name") not in {"lab-ops-rbac", "lab-ops-quota"}:
             errors.append(f"{prefix}: nome de namespace inesperado")
         if kind == "ResourceQuota" and (doc.get("spec") or {}).get("hard", {}).get("pods") != "1":
