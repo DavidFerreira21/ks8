@@ -11,6 +11,12 @@ ConfigMaps desacoplam a configuração da imagem; variáveis de ambiente de Pods
 
 **Ambiente:** Kind `dev` em namespace `lab-01-07`. Execute somente no cluster de estudos.
 
+## Desafio — o que você vai construir
+
+No arquivo de exercício, escreva **dois documentos YAML**: um `ConfigMap` chamado `app-config` com `MENSAGEM: versao-1` e um Deployment `consumidor` que lê essa chave por `envFrom.configMapRef`. O container deve registrar o valor no log e permanecer ativo.
+
+**Antes de aplicar:** use o arquivo incompleto em `.labs/01.07/` como ponto de partida. Confira campos com `kubectl explain`; não abra a solução antes de formular uma tentativa.
+
 ## Fase 1 — Inspecionar
 
 ```bash
@@ -25,7 +31,6 @@ Preveja quais recursos aparecerão.
 ## Fase 2 — Aplicar e testar
 
 ```bash
-make lab-prepare LAB=01.07
 # Complete o manifesto em .labs/01.07/resources.yaml
 kubectl apply -f .labs/01.07/
 make lab-test LAB=01.07
@@ -58,6 +63,14 @@ kubectl rollout status deployment/consumidor -n lab-01-07
 kubectl logs deployment/consumidor -n lab-01-07
 ```
 
+## Resultado esperado e evidências
+
+- No primeiro log do Deployment aparece `MENSAGEM=versao-1`.
+- Alterar o ConfigMap para `versao-2` **não modifica variáveis de ambiente de containers já iniciados**; o log anterior permanece.
+- Após reiniciar o Deployment, os Pods novos recebem `versao-2`. Reaplicar o valor original e reiniciar novamente restaura `versao-1`.
+
+**Se o resultado divergir:** confirme contexto, namespace, eventos e o YAML escrito. Diferencie comportamento intencional do experimento e erro na sua configuração.
+
 ## Fase 3 — Diagnóstico
 
 ```bash
@@ -76,12 +89,18 @@ make lab-status LAB=01.07
 
 Namespace preservado; não use `make down` para limpar um único exercício.
 
-## Conclusão
+## Critérios de conclusão
 
-- [ ] Identifiquei recursos e suas dependências.
-- [ ] Executei a experiência e comparei resultados.
-- [ ] Consultei eventos e conditions quando aplicáveis.
-- [ ] Limpei os recursos criados.
+- [ ] Criei ConfigMap e Deployment com referência válida.
+- [ ] Vi `MENSAGEM=versao-1` nos logs iniciais.
+- [ ] Confirmei a necessidade de reiniciar Pods que consomem ConfigMap como variável de ambiente.
+- [ ] Restaurei o conteúdo do YAML e removi os recursos declarados.
+
+## Aprofunde seus conhecimentos
+
+[ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) · [Configurar Pod com ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) · [Variáveis de ambiente no Pod](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).
+
+Releia a [aula teórica](../../configmaps/README.md) e compare os exemplos com o que você observou no cluster.
 
 ---
 
