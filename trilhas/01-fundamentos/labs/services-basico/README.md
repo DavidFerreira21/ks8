@@ -134,10 +134,6 @@ O namespace é preservado; `lab-down` remove os recursos declarados no contrato.
 - [ ] Conferi Pod labels, selector e EndpointSlices antes e depois do erro.
 - [ ] Testei DNS interno, restaurei o selector e limpei o Pod cliente.
 
-## Referências
-
-[Service](https://kubernetes.io/docs/concepts/services-networking/service/) · [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) · [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
-
 ## Aprofunde seus conhecimentos
 
 [Services](https://kubernetes.io/docs/concepts/services-networking/service/) · [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) · [DNS de Services e Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
