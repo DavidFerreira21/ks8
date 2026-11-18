@@ -98,7 +98,7 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 - Qual evidência mostra que o Secret foi consumido sem expor o valor em logs ou em arquivos versionados?
 - Por que base64 não protege uma credencial contra alguém autorizado a ler o Secret?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre a criação e o consumo do Secret usando somente metadados, status e verificações que não revelem seu valor; explique por que base64 não é criptografia.
 
 ## Aprofunde seus conhecimentos
 
