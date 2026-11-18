@@ -1,0 +1,13 @@
+id: "01.13"
+title: "Ingress: roteamento HTTP com Traefik"
+namespace: lab-01-13
+apply:
+  - resources.yaml
+checks:
+  - type: deployment
+    name: web
+  - type: service
+    name: web
+  - type: resource
+    name: web
+    kind: ingress
