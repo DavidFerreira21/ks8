@@ -16,18 +16,18 @@ Confira as versões e os requisitos do [guia de instalação existente](../insta
 
 ## Comandos padronizados
 
-A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.06` (primeira aplicação); para iniciar pela primeira aula, use `LAB=01.01`.
+A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.01` (Fundamentos); o lab integrado de aplicação e Services é `01.05`.
 
 ```bash
 make doctor
 make up
 make labs
-make lab-up LAB=01.06
-make lab-status LAB=01.06
-make lab-test LAB=01.06
-make lab-observe LAB=01.06
-make lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout
-make lab-down LAB=01.06
+make lab-up LAB=01.05
+make lab-status LAB=01.05
+make lab-test LAB=01.05
+make lab-observe LAB=01.05
+make lab-experiment LAB=01.05 EXPERIMENT=controlled-rollout
+make lab-down LAB=01.05
 ```
 
 | Comando | Finalidade |
@@ -39,21 +39,21 @@ make lab-down LAB=01.06
 | `make lab-test LAB=02.02` | Conferir permissões permitidas e negadas |
 | `make lab-up LAB=02.04` | Aplicar quota, LimitRange e Pod de teste |
 | `make lab-test LAB=02.04` | Conferir existência de quota e Pod (rejeição fica para experimento específico) |
-| `make lab-observe LAB=01.06` | Mostra condições, eventos e recursos relacionados |
+| `make lab-observe LAB=01.05` | Mostra condições, eventos e recursos relacionados |
 | `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod` | Espera e verifica rejeição intencional por quota |
-| `make lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab e observa a reconciliação |
+| `make lab-experiment LAB=01.05 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab e observa a reconciliação |
 | `make lab-down LAB=02.04` | Remover somente os manifests cadastrados; preservar o namespace |
 | `make down` | Excluir o cluster Kind local (ação destrutiva) |
 
 **Segurança:** as operações conferem se o contexto é `kind-<CLUSTER_NAME>` e se o cluster Kind existe. Nenhuma operação do lab deve mirar um contexto diferente do esperado. `lab-down` preserva namespaces por padrão; não pressupõe que estejam vazios.
 
-**Sequência didática:** no lab `01.06` o Pod individual continua sendo criado manualmente conforme o README; o comando automatizado aplica apenas Deployment e Service para não ocultar a primeira etapa.
+**Sequência didática:** no lab `01.05` o Pod individual continua sendo criado manualmente conforme o README; o comando automatizado aplica apenas Deployment e Service para não ocultar a primeira etapa.
 
 
 ## Camada 01 — Fundamentos
 
 - [Lab 01.01 — Primeiro contato com a API](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md): explorar o cluster, criar ConfigMap e comparar o estado no arquivo e na API.
-- [Lab 01.06 — Aplicação](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md): Deployment, Service e rollout.
+- [Lab 01.05 — Aplicação](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md): Deployment, Service e rollout.
 
 A criação de namespaces ausentes não imprime mais um erro esperado de `NotFound`; falhas reais na consulta ao API Server continuam visíveis.
 
@@ -93,7 +93,7 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 ## Criar novos laboratórios sem copiar pastas
 
 ```bash
-make new-lab LAB_ID=01.10 LAB_SLUG=configmaps-basico LAB_TITLE="ConfigMaps: variáveis"
+make new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico LAB_TITLE="ConfigMaps: variáveis"
 ```
 
 Isso gera `trilhas/01-fundamentos/labs/configmaps-basico/` com:
