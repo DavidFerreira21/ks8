@@ -11,6 +11,12 @@ O HPA compara métricas observadas com a meta de utilização e ajusta replicas 
 
 **Ambiente:** Kind `dev`, namespace `lab-01-14`. **Atenção:** este lab exige componentes adicionais no cluster local para a parte funcional; o teste declarativo sozinho não prova tráfego ou escala.
 
+## Desafio — o que você vai construir
+
+Com Metrics Server funcional, o `lab-prepare` cria Deployment e Service `php-apache` como apoio. Você escreve o **HorizontalPodAutoscaler** `php-apache` em `autoscaling/v2`, apontando para esse Deployment, com mínimo **1** e máximo **4** réplicas, meta de utilização média de CPU **50%**.
+
+**Antes de aplicar:** confirme os pré-requisitos, complete o YAML em `.labs/01.14/` e faça uma hipótese sobre o resultado. Recorra a `kubectl explain` ou às referências abaixo; não copie a solução antes de tentar.
+
 ## Fase 1 — Pré-requisitos
 
 Para o HPA de CPU funcionar, o API Server precisa disponibilizar `metrics.k8s.io` via Metrics Server. Confira:
@@ -54,6 +60,14 @@ kubectl delete pod carga-hpa -n lab-01-14 --ignore-not-found
 
 Aguarde as réplicas reduzirem. Um HPA criado sem métricas pode existir no cluster sem conseguir escalar — não confunda existência do recurso com sucesso do experimento.
 
+## Resultado esperado e evidências
+
+- `kubectl get hpa` mostra o recurso e, após coleta de métricas, a utilização de CPU deixa de aparecer como `<unknown>`.
+- Sob carga suficiente, as réplicas podem subir **gradualmente**, até o limite de 4; a decisão depende de métricas, requests CPU, disponibilidade do cluster e janelas do controlador.
+- Após excluir o Pod gerador de carga, as réplicas tendem a cair com atraso devido à estabilização. Um HPA existente **sem métricas funcionais não prova escalabilidade**.
+
+**Se o resultado divergir:** investigue `describe`, eventos e componentes de suporte. Um check que aprova o manifesto não substitui a observação funcional.
+
 ## Fase 3 — Diagnosticar
 
 ```bash
@@ -72,12 +86,18 @@ make lab-status LAB=01.14
 
 O namespace é preservado. Componentes compartilhados instalados nas etapas de pré-requisito **não são removidos** por `lab-down`; revise-os manualmente caso queira desinstalá-los, pois outros labs podem estar utilizando-os.
 
-## Checklist
+## Critérios de conclusão
 
-- [ ] Instalei ou verifiquei a dependência adicional.
-- [ ] Apliquei os recursos e observei o controlador.
-- [ ] Provei o comportamento com tráfego ou carga.
-- [ ] Limpei recursos temporários e diagnostiquei o resultado.
+- [ ] Verifiquei Metrics Server e `kubectl top nodes` antes do teste.
+- [ ] Escrevi o HPA com alvo, mínimo, máximo e CPU 50%.
+- [ ] Gerei carga e observei métricas e réplicas, ou diagnostiquei por que não escalaram.
+- [ ] Removi o Pod gerador de carga e limpei o HPA e o backend de apoio.
+
+## Aprofunde seus conhecimentos
+
+[HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) · [Algoritmo do HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#algorithm-details) · [Metrics Server](https://github.com/kubernetes-sigs/metrics-server).
+
+Volte à [aula teórica](../../hpa/README.md) e relacione os mecanismos com os eventos e estados vistos no Kind.
 
 ---
 
