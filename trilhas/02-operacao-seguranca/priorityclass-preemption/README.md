@@ -1,45 +1,54 @@
-# PriorityClass e Preemption
+# 02.09 · PriorityClass e Preemption
 
-[← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 02](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Distinguir prioridade de agendamento de preempção e interpretar riscos operacionais de classes de alta prioridade.
 
 ## 🎨 Infográfico
 
 ![02.09 — PriorityClass e Preemption](images/priorityclass-preemption.png)
 
-> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+## 📖 Aula teórica
 
+### O problema que este recurso resolve
 
-## O que você vai aprender
+Sob escassez de recursos, o scheduler prioriza Pods mais importantes. `PriorityClass` define um valor inteiro e pode participar da decisão de preemptar Pods de menor prioridade; isso não garante capacidade instantânea.
 
-PriorityClass atribui prioridade de agendamento a Pods. Sob pressão por capacidade, o Scheduler pode preemptar Pods de menor prioridade, conforme política.
+### Como funciona no Kubernetes
 
-## Como funciona
+Um Pod pode referenciar `priorityClassName`. A política `preemptionPolicy: Never` permite prioridade de fila sem preempção iniciada por esse Pod. Preempção tenta abrir espaço respeitando restrições, mas não é garantia de agendamento ou disponibilidade imediata.
 
-priorityClassName referencia classe; priority value afeta ordem e, conforme preemptionPolicy, pode permitir preempção.
+### Exemplo de inspeção
 
-## Experimento recomendado
+Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.
 
-Simule escassez de CPU em laboratório isolado e inspecione Pending e eventos; não force preempção em clusters compartilhados.
+```bash
+kubectl config current-context
+kubectl get priorityclasses
+kubectl get pod POD -n NAMESPACE -o jsonpath='{.spec.priorityClassName}'
+kubectl describe pod POD -n NAMESPACE
+```
 
-**Status do lab:** roteiro conceitual; manifests e validação prática serão adicionados em uma etapa posterior.
+**O que observar:** A prioridade efetiva aparece no Pod. Para observar preempção real é preciso reproduzir escassez de recursos de forma controlada.
 
-## O que observar
+### Cuidados e limitações
 
-- Resultado e eventos dos recursos envolvidos.
-- Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
-- Regras, condições e pré-requisitos particulares deste mecanismo.
+PriorityClass é de escopo de cluster; valores muito altos e defaults impróprios podem prejudicar todo o ambiente. Experimentos de pressão são exclusivos de cluster descartável.
 
+## 🧪 Aplicação prática
 
+**[🧪 Lab 02.09](../labs/priorityclass-basico/README.md):** escreva o YAML do desafio, compare resultados e investigue as condições de execução. O lab não exige leitura complementar.
 
-## Referência oficial
+## ✅ Revisão do aprendizado
 
-- [Documentação Kubernetes — PriorityClass e Preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)
+- Por que alta prioridade não garante agendamento?
+- Qual o efeito de `preemptionPolicy: Never`?
+- Como investigar um Pod de alta prioridade que permanece Pending?
 
-**Próxima etapa:** [índice completo da Camada 02](../README.md).
+## 🔗 Referências oficiais
 
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)
 
 ---
 
-### Navegação
-
-[← Anterior](../pdb/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../init-sidecars/README.md)
+[← Aula 02.08](../topology-spread/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.10 →](../qos-eviction/README.md)
