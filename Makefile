@@ -4,10 +4,10 @@ SHELL := /bin/bash
 CLUSTER_NAME ?= dev
 KIND_CONFIG ?= kind-config.yaml
 KUBE_CONTEXT ?= kind-$(CLUSTER_NAME)
-LAB_DIR := trilhas/01-fundamentos/labs/primeira-aplicacao
+LAB ?= 01.06
 LAB_NAMESPACE := k8s-lab
 
-.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-up lab-test lab-down
+.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-up lab-test lab-status lab-down
 
 help: ## Exibe os alvos disponíveis
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z_-]+:.*## / {printf "  %-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -51,19 +51,17 @@ validate: ## Validação estática dos manifests do lab (sem cluster)
 	@python3 scripts/labctl.py validate
 	@python3 scripts/validate_manifests.py
 
-lab-up: check-context ## Aplica Deployment e Service do laboratório integrado
-	@kubectl create namespace "$(LAB_NAMESPACE)" --dry-run=client -o yaml | kubectl apply -f -
-	@kubectl apply -f "$(LAB_DIR)/deployment.yaml" -f "$(LAB_DIR)/service.yaml"
+lab-up: check-context ## Aplica apenas os manifests declarados para LAB=01.06
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-up --lab "$(LAB)"
 
-lab-test: check-context ## Espera o Deployment ficar pronto e verifica Service
-	@kubectl rollout status deployment/web -n "$(LAB_NAMESPACE)" --timeout=180s
-	@kubectl get deployment web -n "$(LAB_NAMESPACE)"
-	@kubectl get service web -n "$(LAB_NAMESPACE)"
-	@kubectl get endpointslices -n "$(LAB_NAMESPACE)" -l kubernetes.io/service-name=web
+lab-test: check-context ## Valida os checks declarados para LAB=01.06
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-test --lab "$(LAB)"
 
-lab-down: check-context ## Remove somente Deployment e Service criados pelo laboratório
-	@kubectl delete -f "$(LAB_DIR)/service.yaml" -f "$(LAB_DIR)/deployment.yaml" --ignore-not-found
-	@echo "Namespace $(LAB_NAMESPACE) preservado; remova-o manualmente se estiver vazio."
+lab-status: check-context ## Mostra recursos do lab selecionado
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-status --lab "$(LAB)"
+
+lab-down: check-context ## Remove recursos declarados, mas preserva o namespace
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-down --lab "$(LAB)"
 
 # Interface de descoberta: não modifica recursos do cluster.
 doctor: ## Verifica ferramentas e Docker local
