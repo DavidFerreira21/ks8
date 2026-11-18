@@ -58,7 +58,7 @@ class LabPedagogyTests(unittest.TestCase):
         for index, slug in enumerate(LABS, 1):
             identifier = f"01.{index:02d}"
             text = (ROOT / "trilhas/01-fundamentos/labs" / slug / "README.md").read_text(encoding="utf-8")
-            bash = "\n".join(re.findall(r"(?ms)^\\`\\`\\`bash\n(.*?)^\\`\\`\\`$", text))
+            bash = "\n".join(re.findall(r"(?ms)^```bash\n(.*?)^```$", text))
             with self.subTest(identifier=identifier):
                 prepare = f"make lab-prepare LAB={identifier}"
                 self.assertEqual(bash.count(prepare), 1, "Preparar o lab deve acontecer somente uma vez")
