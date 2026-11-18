@@ -94,6 +94,13 @@ Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpa
 - [ ] Expliquei por que readiness inválida bloqueia disponibilidade sem necessariamente reiniciar o container.
 - [ ] Executei rollback, vi o rollout saudável e limpei o lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Qual efeito observado diferencia falha de readiness de falha de liveness?
+- Que configuração evitaria reinícios prematuros em aplicações com startup demorada?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [Probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/) · [Configurar probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) · [Deployments e rollback](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-back-a-deployment).
