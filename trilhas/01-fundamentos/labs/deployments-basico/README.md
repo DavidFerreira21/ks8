@@ -16,6 +16,7 @@ O Deployment controla um ReplicaSet, que mantém a quantidade declarada de Pods.
 make doctor
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.03
 cat .labs/01.03/resources.yaml
 ```
 
