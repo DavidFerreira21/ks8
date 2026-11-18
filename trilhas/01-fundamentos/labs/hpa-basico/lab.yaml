@@ -1,8 +1,12 @@
 id: "01.14"
 title: "HPA: escalabilidade orientada por CPU"
 namespace: lab-01-14
+setup:
+  - setup.yaml
 apply:
-  - resources.yaml
+  - solution/php-apache.yaml
+starter:
+  - starter/php-apache.yaml
 checks:
   - type: deployment
     name: php-apache
