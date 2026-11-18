@@ -2,7 +2,9 @@ id: "01.01"
 title: "Fundamentos: explorar o cluster e o estado declarativo"
 namespace: lab-fundamentos
 apply:
-  - configmap.yaml
+  - solution/configmap.yaml
+starter:
+  - starter/configmap.yaml
 checks:
   - type: configmap
     name: estado-desejado
