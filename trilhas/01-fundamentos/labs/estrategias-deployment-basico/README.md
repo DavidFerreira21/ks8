@@ -103,7 +103,7 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 - Compare `rollout restart` com uma alteração de imagem: ambos modificam o template do Pod, mas o que muda na revisão e na imagem efetiva?
 - Registre as revisões antes da atualização, depois da atualização e após o rollback. Confirme qual imagem ficou em execução.
 
-**Evidências mínimas:** registre o manifesto aplicado, o resultado real do experimento e a interpretação dos eventos/métricas. Se o teste funcional não ocorrer, registre-o como pendente, não como aprovado.
+**Evidências específicas:** registre réplicas prontas, ReplicaSets, histórico de revisões e imagem em execução antes da atualização, após o rollout e depois do rollback.
 
 ## Aprofunde seus conhecimentos
 
