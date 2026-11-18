@@ -152,13 +152,12 @@ def execute_lab(lab: Lab, action: str) -> int:
             elif typ in ("rbac", "rbac-deny"):
                 account = f"system:serviceaccount:{lab.namespace}:{check['service_account']}"
                 args = ("auth", "can-i", check["verb"], check["resource"], "-n",
-                        lab.namespace, f"--as={account}", "--quiet")
-                result = kubectl(*args)
-                if typ == "rbac" and result.returncode != 0:
-                    return 1
-                if typ == "rbac-deny" and result.returncode != 1:
-                    # Can-i retorna 1 para 'no'; outros erros também exigem diagnóstico.
-                    print("Permissão negativa não confirmada; revise RBAC/impersonation", file=sys.stderr)
+                        lab.namespace, f"--as={account}")
+                result = subprocess.run(["kubectl", *args], capture_output=True, text=True, check=False)
+                expected_answer = "yes" if typ == "rbac" else "no"
+                # Um erro de impersonation não equivale a uma negativa RBAC.
+                if result.returncode not in (0, 1) or result.stdout.strip().lower() != expected_answer:
+                    print(f"Falha RBAC ({expected_answer} esperado): {result.stdout} {result.stderr}", file=sys.stderr)
                     return 1
             elif typ == "quota":
                 if kubectl("get", "resourcequota", check["name"], "-n", lab.namespace).returncode:
