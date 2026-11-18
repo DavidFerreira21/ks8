@@ -93,6 +93,12 @@ O namespace é preservado. Componentes compartilhados instalados nas etapas de p
 - [ ] Gerei carga e observei métricas e réplicas, ou diagnostiquei por que não escalaram.
 - [ ] Removi o Pod gerador de carga e limpei o HPA e o backend de apoio.
 
+## Perguntas de diagnóstico e reflexão
+
+- Por que o HPA baseado em utilização de CPU depende de `resources.requests.cpu`, além de métricas disponibilizadas pelo Metrics Server?
+- Como distinguir métrica `<unknown>`, carga insuficiente e falta de capacidade no cluster usando `kubectl describe hpa`, `kubectl top pods` e eventos?
+- Registre utilização de CPU e réplicas desejadas/atuais antes, durante e depois da carga. Se não ocorrer escala, documente o diagnóstico em vez de considerar o teste funcional concluído.
+
 ## Aprofunde seus conhecimentos
 
 [HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) · [Algoritmo do HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#algorithm-details) · [Metrics Server](https://github.com/kubernetes-sigs/metrics-server).

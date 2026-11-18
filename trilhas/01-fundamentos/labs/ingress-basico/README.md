@@ -97,6 +97,12 @@ O namespace é preservado. Componentes compartilhados instalados nas etapas de p
 - [ ] Testei HTTP com e sem o Host e expliquei o resultado.
 - [ ] Distingui o recurso Ingress do controller e limpei apenas o exercício.
 
+## Perguntas de diagnóstico e reflexão
+
+- Por que um Ingress válido na API pode não encaminhar tráfego quando o controller ou os endpoints estão indisponíveis?
+- Qual é o papel específico de Service, EndpointSlice, IngressClass e Ingress Controller neste caminho HTTP?
+- Anexe como evidência os status HTTP obtidos com e sem `Host: aula.local` e os endpoints associados ao Service.
+
 ## Aprofunde seus conhecimentos
 
 [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) · [Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) · [Ingress Classes](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class).

@@ -97,6 +97,12 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 - [ ] Executei uma atualização, acompanhei a disponibilidade e fiz rollback.
 - [ ] Conferi a versão final e removi os recursos do lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Com três réplicas, `maxSurge: 1` e `maxUnavailable: 0`, quantos Pods podem existir durante um RollingUpdate saudável, e qual é a disponibilidade mínima desejada?
+- Compare `rollout restart` com uma alteração de imagem: ambos modificam o template do Pod, mas o que muda na revisão e na imagem efetiva?
+- Registre as revisões antes da atualização, depois da atualização e após o rollback. Confirme qual imagem ficou em execução.
+
 ## Aprofunde seus conhecimentos
 
 [Estratégia de Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) · [Atualizar Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) · [Reverter Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-back-a-deployment).
