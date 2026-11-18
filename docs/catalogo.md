@@ -4,7 +4,7 @@
 
 Este é o **catálogo curricular**, não uma indicação de que todos os conteúdos, imagens e laboratórios já foram publicados.
 
-**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A experiência prática pode ser um lab executável ou uma observação guiada, conforme o tema.
+**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A experiência prática pode ser um lab executável ou uma observação guiada, conforme o tema. As Camadas 01 e 02 agora possuem 14 roteiros de lab cada; a homologação funcional depende de cobertura e execução específica na CI.
 
 **Situação:** 📖 aula com material teórico · 🎨 infográfico publicado, teoria em preparação. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 52 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
 
@@ -37,18 +37,18 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 | --- | --- | --- |
 | 02.01 | Labels, Selectors e Annotations | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/labels-selectors-annotations/README.md) |
 | 02.02 | RBAC e ServiceAccount | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/rbac-serviceaccount/README.md) |
-| 02.03 | SecurityContext e Pod Security Admission | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/securitycontext-pod-security/README.md) |
+| 02.03 | SecurityContext e Pod Security Admission | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/securitycontext-pod-security/README.md) |
 | 02.04 | ResourceQuota e LimitRange | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/resourcequota-limitrange/README.md) |
 | 02.05 | Init Containers e Sidecars | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/init-sidecars/README.md) |
 | 02.06 | Jobs e CronJobs | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/jobs-cronjobs/README.md) |
 | 02.07 | Taints, Tolerations e Node Affinity | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/taints-tolerations-affinity/README.md) |
-| 02.08 | Topology Spread Constraints | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/topology-spread/README.md) |
+| 02.08 | Topology Spread Constraints | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/topology-spread/README.md) |
 | 02.09 | PriorityClass e Preemption | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/priorityclass-preemption/README.md) |
-| 02.10 | QoS Classes e Eviction | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/qos-eviction/README.md) |
+| 02.10 | QoS Classes e Eviction | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/qos-eviction/README.md) |
 | 02.11 | PodDisruptionBudget (PDB) | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/pdb/README.md) |
-| 02.12 | Node Maintenance | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/node-maintenance/README.md) |
+| 02.12 | Node Maintenance | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/node-maintenance/README.md) |
 | 02.13 | NetworkPolicy | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/networkpolicy/README.md) |
-| 02.14 | Kubernetes Troubleshooting | [🎨 Infográfico · teoria em preparação](../trilhas/02-operacao-seguranca/troubleshooting/README.md) |
+| 02.14 | Kubernetes Troubleshooting | [📖 Aula + infográfico](../trilhas/02-operacao-seguranca/troubleshooting/README.md) |
 
 ## 03 · Arquitetura e infraestrutura
 
