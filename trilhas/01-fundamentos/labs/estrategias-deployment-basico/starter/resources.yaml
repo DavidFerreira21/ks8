@@ -1,0 +1,7 @@
+# EXERCICIO 01.12: complete o Deployment.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: lab-01-12
+# TODO: configure replicas, selector, template, maxSurge e maxUnavailable.
