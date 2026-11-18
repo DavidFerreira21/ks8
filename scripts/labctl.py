@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TRILHAS = ROOT / "trilhas"
 ID_PATTERN = re.compile(r"^\d{2}\.\d{2}$")
 SAFE_NAME = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
-SUPPORTED_CHECKS = {"deployment", "service", "rbac", "rbac-deny", "quota", "configmap"}
+SUPPORTED_CHECKS = {"deployment", "service", "rbac", "rbac-deny", "quota", "configmap", "resource", "pod-ready", "pvc-bound"}
 SUPPORTED_EXPERIMENTS = {"expect-rejected-manifest", "rollout-restart"}
 
 
@@ -78,6 +78,14 @@ def load_labs() -> dict[str, Lab]:
                     raise ValueError(f"{metadata}: nome de Deployment inválido")
                 if not any(x.get("type") == "deployment" and x.get("name") == name for x in checks):
                     raise ValueError(f"{metadata}: rollout deve referenciar Deployment declarado nos checks")
+        for check in checks:
+            if check["type"] in {"resource", "pod-ready", "pvc-bound"}:
+                if not isinstance(check.get("name"), str) or not SAFE_NAME.fullmatch(check["name"]):
+                    raise ValueError(f"{metadata}: nome de check inválido")
+                if check["type"] == "resource":
+                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange"}
+                    if check.get("kind") not in allowed:
+                        raise ValueError(f"{metadata}: kind de check não permitido")
         labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments))
     return labs
 
@@ -134,7 +142,7 @@ def ensure_namespace(namespace: str) -> int:
 def observe_lab(lab: Lab) -> int:
     print(f"\n=== {lab.identifier}: {lab.title} ===")
     print(f"Namespace: {lab.namespace}")
-    kubectl("get", "pods,deployments,replicasets,services,serviceaccounts,resourcequotas", "-n",
+    kubectl("get", "pods,deployments,replicasets,daemonsets,statefulsets,services,ingresses,hpa,pvc,configmaps,secrets,serviceaccounts,resourcequotas", "-n",
             lab.namespace, "--ignore-not-found", "-o", "wide")
     print("\n=== Eventos ===")
     kubectl("get", "events", "-n", lab.namespace, "--sort-by=.lastTimestamp")
@@ -191,7 +199,7 @@ def execute_lab(lab: Lab, action: str) -> int:
     if action == "lab-observe":
         return observe_lab(lab)
     if action == "lab-status":
-        return kubectl("get", "pods,deployments,services,serviceaccounts,resourcequotas", "-n",
+        return kubectl("get", "pods,deployments,daemonsets,statefulsets,services,ingresses,hpa,pvc,configmaps,serviceaccounts,resourcequotas", "-n",
                        lab.namespace, "--ignore-not-found", "-o", "wide").returncode
     if action == "lab-up":
         if ensure_namespace(lab.namespace):
@@ -232,6 +240,17 @@ def execute_lab(lab: Lab, action: str) -> int:
                 # Um erro de impersonation não equivale a uma negativa RBAC.
                 if result.returncode not in (0, 1) or result.stdout.strip().lower() != expected_answer:
                     print(f"Falha RBAC ({expected_answer} esperado): {result.stdout} {result.stderr}", file=sys.stderr)
+                    return 1
+            elif typ == "resource":
+                if kubectl("get", check["kind"], check["name"], "-n", lab.namespace).returncode:
+                    return 1
+            elif typ == "pod-ready":
+                if kubectl("wait", "--for=condition=Ready", f"pod/{check['name']}", "-n",
+                           lab.namespace, "--timeout=120s").returncode:
+                    return 1
+            elif typ == "pvc-bound":
+                if kubectl("wait", "--for=jsonpath={.status.phase}=Bound",
+                           f"pvc/{check['name']}", "-n", lab.namespace, "--timeout=120s").returncode:
                     return 1
             elif typ == "configmap":
                 if kubectl("get", "configmap", check["name"], "-n", lab.namespace).returncode:

@@ -54,6 +54,7 @@ down: ## Remove somente o cluster Kind identificado por CLUSTER_NAME
 validate: ## Validação estática dos manifests do lab (sem cluster)
 	@python3 scripts/labctl.py validate
 	@python3 scripts/validate_manifests.py
+	@python3 scripts/validate_lab_resources.py
 
 lab-up: check-context ## Aplica manifests declarados para LAB (padrão 01.01)
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-up --lab "$(LAB)"

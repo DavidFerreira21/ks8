@@ -1,0 +1,10 @@
+id: "01.07"
+title: "ConfigMaps: configuracao da aplicacao"
+namespace: lab-01-07
+apply:
+  - resources.yaml
+checks:
+  - type: configmap
+    name: app-config
+  - type: deployment
+    name: consumidor

@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Entender os objetos essenciais do Kubernetes, publicar uma aplicação e observar como o cluster mantém o estado desejado.
 
-**14 aulas com teoria e infográfico publicados** · **2 labs com manifests**
+**14 aulas com teoria e infográfico publicados** · **14 labs com manifests**
 
 ---
 
@@ -26,23 +26,23 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | Aula | Conceito | Aula teórica | Material de apoio |
 | --- | --- | --- | --- |
 | 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) · [Anotações](../../1-fundamentos/README.md) |
-| 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [Anotações](../../2-pod/README.md) |
-| 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [Anotações](../../3-deployment/README.md) |
-| 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações](../../4-replicaSet-daemonSet-statefulSet/README.md) |
+| 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [🧪 Lab 01.02](labs/pods-basico/README.md) · [Anotações](../../2-pod/README.md) |
+| 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [🧪 Lab 01.03](labs/deployments-basico/README.md) · [Anotações](../../3-deployment/README.md) |
+| 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [🧪 Lab 01.04](labs/controladores-basico/README.md) · [Anotações](../../4-replicaSet-daemonSet-statefulSet/README.md) |
 | 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab integrado 01.05](labs/primeira-aplicacao/README.md) · [Anotações](../../7-services/README.md) |
-| 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | — |
-| 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | — |
-| 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | — |
-| 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [Anotações](../../2-pod/README.md) |
-| 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [Anotações](../../5-probes/README.md) |
-| 01.11 | **Volumes** | [📖 Estudar](volumes/README.md) | — |
-| 01.12 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | — |
-| 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | — |
-| 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | — |
+| 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | [🧪 Lab 01.06](labs/namespaces-basico/README.md) |
+| 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | [🧪 Lab 01.07](labs/configmaps-basico/README.md) |
+| 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | [🧪 Lab 01.08](labs/secrets-basico/README.md) |
+| 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [🧪 Lab 01.09](labs/requests-limits-basico/README.md) · [Anotações](../../2-pod/README.md) |
+| 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [🧪 Lab 01.10](labs/probes-basico/README.md) · [Anotações](../../5-probes/README.md) |
+| 01.11 | **Volumes** | [📖 Estudar](volumes/README.md) | [🧪 Lab 01.11](labs/volumes-basico/README.md) |
+| 01.12 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | [🧪 Lab 01.12](labs/estrategias-deployment-basico/README.md) |
+| 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | [🧪 Lab 01.13](labs/ingress-basico/README.md) |
+| 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | [🧪 Lab 01.14](labs/hpa-basico/README.md) |
 
 ## 🧪 Laboratórios
 
-Comece pelo [**Lab 01.01 — Explorar o cluster e a API**](labs/fundamentos-cluster/README.md), que ensina a observar o Control Plane e os Workers e a aplicar um objeto declarativo.
+Cada aula da Camada 01 tem agora um lab próprio. Os labs de 01.13 e 01.14 exigem addons e validação funcional adicionais. Comece pelo [**Lab 01.01 — Explorar o cluster e a API**](labs/fundamentos-cluster/README.md), que ensina a observar o Control Plane e os Workers e a aplicar um objeto declarativo.
 
 ### Aplicação integrada
 
@@ -53,7 +53,7 @@ Comece pelo [**Lab 01.01 — Explorar o cluster e a API**](labs/fundamentos-clus
 | **Ambiente** | Kind local, namespace de laboratório isolado. |
 | **Começar** | **[Abrir laboratório →](labs/primeira-aplicacao/README.md)** |
 
-> **Importante:** os labs 01.01 e 01.05 possuem contratos executáveis; valide-os em seu Kind. O conteúdo de Volumes está na aula 01.11; ainda não existe lab específico para ele.
+> **Importante:** os 14 labs da camada possuem contratos executáveis; valide-os em seu Kind. O conteúdo de Volumes está na aula 01.11; o Lab 01.11 está disponível.
 
 ## 🎯 Checklist de aprendizado
 

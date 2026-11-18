@@ -57,6 +57,25 @@ make lab-down LAB=01.05
 
 A criação de namespaces ausentes não imprime mais um erro esperado de `NotFound`; falhas reais na consulta ao API Server continuam visíveis.
 
+**Pré-requisitos adicionais:** o Lab 01.13 requer um Ingress Controller (Traefik) e Helm; o 01.14 requer Metrics Server funcional. O `make lab-test` desses labs verifica seus objetos, mas **não** substitui o experimento de tráfego ou escalabilidade descrito no README.
+
+| ID | Aula | Laboratório |
+| --- | --- | --- |
+| 01.01 | Fundamentos | [Explorar o cluster](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) |
+| 01.02 | Pods | [Pod e diagnóstico](../trilhas/01-fundamentos/labs/pods-basico/README.md) |
+| 01.03 | Deployments | [Réplicas e self-healing](../trilhas/01-fundamentos/labs/deployments-basico/README.md) |
+| 01.04 | Controladores | [DaemonSet e StatefulSet](../trilhas/01-fundamentos/labs/controladores-basico/README.md) |
+| 01.05 | Services | [Aplicação integrada](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) |
+| 01.06 | Namespaces | [Escopo lógico](../trilhas/01-fundamentos/labs/namespaces-basico/README.md) |
+| 01.07 | ConfigMaps | [Configuração e restart](../trilhas/01-fundamentos/labs/configmaps-basico/README.md) |
+| 01.08 | Secrets | [Referência segura](../trilhas/01-fundamentos/labs/secrets-basico/README.md) |
+| 01.09 | Requests/Limits | [Agendamento e recursos](../trilhas/01-fundamentos/labs/requests-limits-basico/README.md) |
+| 01.10 | Probes | [Readiness e rollback](../trilhas/01-fundamentos/labs/probes-basico/README.md) |
+| 01.11 | Volumes | [Pod e PVC](../trilhas/01-fundamentos/labs/volumes-basico/README.md) |
+| 01.12 | Estratégias | [RollingUpdate e rollback](../trilhas/01-fundamentos/labs/estrategias-deployment-basico/README.md) |
+| 01.13 | Ingress | [Traefik e tráfego HTTP](../trilhas/01-fundamentos/labs/ingress-basico/README.md) |
+| 01.14 | HPA | [Metrics Server e carga CPU](../trilhas/01-fundamentos/labs/hpa-basico/README.md) |
+
 ## Camada 02 — Operação e Segurança
 
 - [RBAC e ServiceAccount](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
@@ -85,10 +104,12 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - Os alvos `lab-up`, `lab-test` e `lab-down` falham se o contexto não for o Kind esperado.
 - `make down` remove o cluster Kind indicado por `CLUSTER_NAME`. Verifique esse valor antes da execução.
 - `make lab-down` **preserva o namespace** para evitar excluir recursos não relacionados.
-- `make validate` realiza parse YAML e alguns checks didáticos, **não é um validador completo do schema Kubernetes**.
-- A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa três labs, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
-- Os labs não foram executados manualmente durante a elaboração deste PR; a primeira validação real acontecerá quando o workflow de integração rodar.
+- `make validate` analisa todos os manifests declarados nos contratos e executa checks didáticos, **não substituindo a validação completa do schema Kubernetes**.
+- A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa 14 labs básicos/integrados, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
+- Os novos labs não foram executados manualmente durante a elaboração deste PR. A CI os valida conforme a cobertura descrita; os labs 01.13 e 01.14 exigem teste funcional em Kind com addons.
 
+
+**Modelo didático da camada:** inspecionar → aplicar → observar → experimentar → diagnosticar → limpar. As fases constam no README; o motor atual executa o `apply` declarado no contrato, e não interpreta `PHASE=`. Alterações experimentais manuais precisam ser conferidas antes da limpeza.
 
 ## Criar novos laboratórios sem copiar pastas
 
@@ -108,7 +129,7 @@ configmaps-basico/
     └── README.md
 ```
 
-O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rascunho. Reescreva o README com objetivo, pré-requisitos, etapas, observação, diagnóstico, experimentos, limpeza e critérios de sucesso. Revise os manifests e os checks (`deployment`, `service`, `configmap`, `rbac`, `rbac-deny`, `quota`). Somente quando o exercício estiver pronto, renomeie para `lab.yaml`, execute `make validate` e `make labs`.
+O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rascunho. Reescreva o README com objetivo, pré-requisitos, etapas, observação, diagnóstico, experimentos, limpeza e critérios de sucesso. Revise os manifests e os checks (`deployment`, `service`, `configmap`, `rbac`, `rbac-deny`, `quota`, `resource`, `pod-ready`, `pvc-bound`). Somente quando o exercício estiver pronto, renomeie para `lab.yaml`, execute `make validate` e `make labs`.
 
 **Regras de organização:** mantenha infográfico e teoria no diretório do conceito; coloque os labs em `trilhas/<camada>/labs/<slug>`; deixe `scripts/labctl.py` como motor compartilhado; não introduza comandos shell arbitrários no contrato. IDs seguem o catálogo oficial, e cada lab publicado deve usar um ID único.
 
@@ -122,7 +143,7 @@ O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rasc
 
 ## CI: Kind descartável
 
-O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre os quatro laboratórios cadastrados, valida os checks, experimenta rollout e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre 14 laboratórios sem addons (01.01–01.12, 02.02 e 02.04), valida os checks, experimenta rollout e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
 
 Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
 

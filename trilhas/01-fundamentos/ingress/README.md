@@ -70,7 +70,7 @@ Se o endereço externo não foi atribuído, verifique controller, classe, Servic
 
 ## 🧪 Aplicação prática
 
-**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
+**🧪 Lab 01.13:** [abrir exercício guiado](../labs/ingress-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 ## ✅ Revisão do aprendizado
 

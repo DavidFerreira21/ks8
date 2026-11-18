@@ -56,7 +56,7 @@ kubectl describe secret exemplo-sem-credencial
 
 ## 🧪 Aplicação prática
 
-**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
+**🧪 Lab 01.08:** [abrir exercício guiado](../labs/secrets-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 ## ✅ Revisão do aprendizado
 

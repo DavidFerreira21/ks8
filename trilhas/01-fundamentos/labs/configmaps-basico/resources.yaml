@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: lab-01-07
+data:
+  MENSAGEM: "versao-1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumidor
+  namespace: lab-01-07
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: consumidor}
+  template:
+    metadata:
+      labels: {app: consumidor}
+    spec:
+      containers:
+        - name: leitor
+          image: busybox:1.36
+          command: ["sh", "-c", "echo MENSAGEM=$MENSAGEM; sleep 3600"]
+          envFrom:
+            - configMapRef:
+                name: app-config
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {cpu: 50m, memory: 32Mi}

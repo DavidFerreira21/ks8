@@ -1,0 +1,8 @@
+id: "01.06"
+title: "Namespaces: isolamento logico"
+namespace: lab-01-06
+apply:
+  - resources.yaml
+checks:
+  - type: configmap
+    name: identidade
