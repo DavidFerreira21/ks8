@@ -17,6 +17,7 @@ Entender por que um **Service** fornece um endereço estável para Pods efêmero
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.05
 cat .labs/01.05/service.yaml
 ```
 
