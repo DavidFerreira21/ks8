@@ -11,6 +11,12 @@ O Deployment controla um ReplicaSet, que mantém a quantidade declarada de Pods.
 
 **Ambiente:** cluster Kind `dev`, namespace isolado `lab-01-03`. Leia primeiro a aula teórica correspondente. Os experimentos são locais e manuais para você observar cada transição.
 
+## Desafio — o que você vai construir
+
+Escreva um `Deployment` chamado `web`, com **3 réplicas**, container `nginx:1.27`, porta 80 e labels/selector compatíveis (`app: web-0103`). Defina recursos mínimos de CPU/memória. O cluster deve criar os Pods via ReplicaSet, não manualmente.
+
+**Antes de aplicar:** tente explicar o comportamento esperado sem consultar `solution/`. Se precisar, use `kubectl explain` ou a documentação abaixo. A solução de referência só deve ser consultada depois da tentativa.
+
 ## Fase 1 — Preparar e inspecionar
 
 ```bash
@@ -26,8 +32,7 @@ Antes de aplicar, preveja quais objetos serão criados e quais controladores par
 ## Fase 2 — Aplicar e observar
 
 ```bash
-make lab-prepare LAB=01.03
-# Complete primeiro o arquivo em .labs/01.03/
+# Você já preparou o ambiente na Fase 1; complete agora o YAML local.
 kubectl apply -f .labs/01.03/
 make lab-test LAB=01.03
 make lab-observe LAB=01.03
@@ -49,7 +54,15 @@ kubectl rollout status deployment/web -n lab-01-03
 kubectl get pods,replicasets -n lab-01-03
 ```
 
-Compare com o Pod isolado do lab 01.02. Para observar escalabilidade, execute `kubectl scale deployment/web -n lab-01-03 --replicas=2`; depois reaplique `resources.yaml` e confirme o estado desejado.
+Compare com o Pod isolado do lab 01.02. Para observar escalabilidade, execute `kubectl scale deployment/web -n lab-01-03 --replicas=2`; depois restaure com `kubectl scale deployment/web -n lab-01-03 --replicas=3` e confirme o estado desejado.
+
+## Resultado esperado e evidências
+
+- `kubectl get deployment,replicaset,pods` mostra **1 Deployment, 1 ReplicaSet e 3 Pods disponíveis** após o rollout.
+- Ao excluir um dos Pods, outro é criado com **nome/UID diferente**, mantendo a contagem desejada em 3.
+- Se fizer o experimento de `kubectl scale ... --replicas=2`, verá 2 Pods; reconfigure de volta para 3 e aguarde `kubectl rollout status` antes de validar.
+
+**Se o resultado divergir:** consulte `kubectl describe`, `kubectl get events` e os logs quando existirem Pods. Diferencie erro de YAML, problema no cluster e comportamento intencional do experimento.
 
 ## Fase 3 — Diagnosticar
 
@@ -71,10 +84,16 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 
 ## Critérios de conclusão
 
-- [ ] Expliquei a função dos objetos do manifesto.
-- [ ] Executei a observação antes e depois do experimento.
-- [ ] Comparei hipótese e resultado e identifiquei evidências.
-- [ ] Removi os recursos do lab sem apagar o cluster.
+- [ ] Expliquei a relação Deployment → ReplicaSet → Pods.
+- [ ] Vi três réplicas disponíveis no estado inicial.
+- [ ] Excluí um Pod e identifiquei o Pod substituto.
+- [ ] Restaurei as três réplicas e limpei os recursos do lab.
+
+## Aprofunde seus conhecimentos
+
+[Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) · [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) · [Operações de atualização](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).
+
+Use essas referências para entender **por que** o Kubernetes se comportou assim; depois compare com a [aula teórica](../../deployments/README.md).
 
 ---
 
