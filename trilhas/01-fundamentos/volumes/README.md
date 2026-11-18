@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Distinguir armazenamento efêmero e persistente e explicar a relação entre Pod, PVC, PV e StorageClass.
 
 ## 🎨 Infográfico
 
@@ -62,9 +62,9 @@ A última linha pressupõe um PVC existente. A escolha entre cache, volume efêm
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Por que um `emptyDir` não resolve persistência após a remoção do Pod?
+- Que relação existe entre PVC, PV e StorageClass no provisionamento dinâmico?
+- O que pode acontecer com os dados ao excluir um PVC e como a política de reclaim interfere?
 
 ## 🔗 Referência oficial
 
