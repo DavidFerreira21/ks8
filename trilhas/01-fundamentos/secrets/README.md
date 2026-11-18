@@ -56,7 +56,7 @@ kubectl describe secret exemplo-sem-credencial
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.08:** [abrir exercício guiado](../labs/secrets-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
+**🧪 Lab 01.08:** [🧪 Lab 01.08](../labs/secrets-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 ## ✅ Revisão do aprendizado
 
