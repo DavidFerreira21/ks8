@@ -41,6 +41,8 @@ O aluno deve conseguir concluir a prática estudando a aula e usando documentaç
 9. **Critérios e limpeza:** checklist, `make lab-down` no contexto seguro e limites explícitos da limpeza.
 10. **Fontes e navegação:** docs oficiais, aula, lab anterior e próximo.
 
+**Cada lab deve detalhar suas evidências específicas** (por exemplo, HTTP para Ingress, métricas e réplicas para HPA, arquivo persistente para Volumes). O texto genérico de evidências permanece neste contrato, sem ser repetido literalmente em todos os laboratórios.
+
 **Evidências mínimas de conclusão:** (a) manifesto/recurso criado pelo aluno; (b) comportamento real observado; (c) explicação do motivo e, se falhou, diagnóstico. O laboratório pode ter mais de quatro fases quando o experimento justificar (Services, por exemplo). Não renumerar fases sem necessidade.
 
 **Dependências especiais da Camada 01:** PVC requer StorageClass/provisionador funcional (01.11); Ingress exige controller e teste de tráfego (01.13); HPA exige Metrics Server, CPU requests e teste de carga (01.14). Sem esses componentes, marque a validação funcional como **pendente**.
