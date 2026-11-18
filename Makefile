@@ -5,9 +5,10 @@ CLUSTER_NAME ?= dev
 KIND_CONFIG ?= kind-config.yaml
 KUBE_CONTEXT ?= kind-$(CLUSTER_NAME)
 LAB ?= 01.06
+EXPERIMENT ?= controlled-rollout
 LAB_NAMESPACE := k8s-lab
 
-.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-up lab-test lab-status lab-down
+.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-up lab-test lab-status lab-observe lab-experiment lab-down
 
 help: ## Exibe os alvos disponíveis
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z_-]+:.*## / {printf "  %-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -59,6 +60,12 @@ lab-test: check-context ## Valida os checks declarados para LAB=01.06
 
 lab-status: check-context ## Mostra recursos do lab selecionado
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-status --lab "$(LAB)"
+
+lab-observe: check-context ## Mostra eventos, recursos, estados e perguntas de observação
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-observe --lab "$(LAB)"
+
+lab-experiment: check-context ## Executa experimento controlado após confirmação explícita
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-experiment --lab "$(LAB)" --experiment "$(EXPERIMENT)" --confirm
 
 lab-down: check-context ## Remove recursos declarados, mas preserva o namespace
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-down --lab "$(LAB)"
