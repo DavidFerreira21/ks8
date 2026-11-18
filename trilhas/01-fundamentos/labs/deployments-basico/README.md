@@ -1,8 +1,8 @@
-# Lab 01.03 — Deployments: replicas e self-healing
+# Lab 01.03 — Deployments
 
+[← Aula 01.03](../../deployments/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 > **MODO DESAFIO — o aluno constrói:** `make lab-prepare LAB=01.03` cria apenas o namespace e copia um YAML incompleto para `.labs/01.03/`. **Complete o arquivo usando o objetivo abaixo**, aplique você mesmo com `kubectl apply -f .labs/01.03/` e só então execute `make lab-test LAB=01.03`. O comando `make lab-up` é reservado à CI. `make lab-solution LAB=01.03` mostra o caminho da referência quando você quiser conferir.
 
-[← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
 
@@ -74,3 +74,7 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 - [ ] Executei a observação antes e depois do experimento.
 - [ ] Comparei hipótese e resultado e identifiquei evidências.
 - [ ] Removi os recursos do lab sem apagar o cluster.
+
+---
+
+[← Lab 01.02](../pods-basico/README.md) · [↑ Aula 01.03](../../deployments/README.md) · [Próximo: Lab 01.04 →](../controladores-basico/README.md)
