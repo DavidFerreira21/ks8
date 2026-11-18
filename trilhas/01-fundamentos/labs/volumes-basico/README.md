@@ -11,6 +11,12 @@ Um volume efêmero desaparece com o Pod; um PVC pode preservar dados além do ci
 
 **Escopo:** cluster Kind `dev` e namespace `lab-01-11`.
 
+## Desafio — o que você vai construir
+
+Escreva **dois arquivos**: `claim.yaml` com PVC `dados-pvc`, acesso `ReadWriteOnce` e solicitação de `100Mi`; e `pod.yaml` com Pod `escritor`, container BusyBox e montagem do PVC em `/dados`. O container escreve um arquivo e permanece ativo. Confira antes se existe StorageClass com provisionamento funcional no Kind.
+
+**Antes de aplicar:** confirme os pré-requisitos, complete o YAML em `.labs/01.11/` e faça uma hipótese sobre o resultado. Recorra a `kubectl explain` ou às referências abaixo; não copie a solução antes de tentar.
+
 ## Fase 1 — Preparar e prever
 
 ```bash
@@ -26,9 +32,9 @@ Preveja o comportamento dos controladores e componentes envolvidos.
 ## Fase 2 — Aplicar e testar
 
 ```bash
-make lab-prepare LAB=01.11
 # Preencha os arquivos de trabalho
-kubectl apply -f .labs/01.11/
+kubectl apply -f .labs/01.11/claim.yaml
+kubectl apply -f .labs/01.11/pod.yaml
 make lab-test LAB=01.11
 make lab-observe LAB=01.11
 ```
@@ -53,7 +59,15 @@ kubectl wait --for=condition=Ready pod/escritor -n lab-01-11 --timeout=120s
 kubectl exec -n lab-01-11 pod/escritor -- cat /dados/marcador.txt
 ```
 
-O arquivo inicial pode ser sobrescrito pelo script de inicialização. Para comprovar persistência, **antes de excluir o Pod**, execute `kubectl exec -n lab-01-11 pod/escritor -- sh -c 'echo marcador > /dados/marcador.txt'`. Após recriar o Pod, execute `kubectl exec -n lab-01-11 pod/escritor -- cat /dados/marcador.txt` e confirme que o marcador permaneceu. O Kind requer um StorageClass funcional, normalmente `standard`.
+O arquivo inicial pode ser sobrescrito pelo script de inicialização. Para comprovar persistência, antes de excluir o Pod, grave um marcador em `/dados/` como no bloco acima. Depois de recriá-lo com o mesmo PVC, leia o marcador para conferir a persistência. O Kind requer um StorageClass funcional, normalmente `standard`.
+
+## Resultado esperado e evidências
+
+- O PVC chega ao estado **Bound** e o Pod ao estado **Ready**. Com provisionamento dinâmico, um PV é associado ao PVC.
+- Antes de excluir o Pod, grave `/dados/marcador.txt` com um texto próprio. Ao recriar **somente o Pod** usando o mesmo PVC, o arquivo precisa continuar legível.
+- Se o PVC permanecer `Pending`, investigue o `StorageClass`/provisionador e os eventos. `make lab-down` remove também o PVC; **não considere este exercício backup ou persistência permanente**.
+
+**Se o resultado divergir:** investigue `describe`, eventos e componentes de suporte. Um check que aprova o manifesto não substitui a observação funcional.
 
 ## Fase 3 — Diagnosticar
 
@@ -73,12 +87,18 @@ make lab-status LAB=01.11
 
 O namespace é preservado; não utilize `make down` para limpar um único exercício.
 
-## Checklist
+## Critérios de conclusão
 
-- [ ] Expliquei os objetos do manifesto.
-- [ ] Comparei hipótese com observação real.
-- [ ] Investiguei eventos e condições relevantes.
-- [ ] Limpei os recursos do exercício.
+- [ ] Criei o PVC e o Pod com referência ao mesmo claim.
+- [ ] Confirmei `Bound` no PVC e a montagem em `/dados`.
+- [ ] Mantive `marcador.txt` após excluir e recriar o Pod.
+- [ ] Expliquei a diferença entre apagar Pod, PVC e PV e limpei o lab.
+
+## Aprofunde seus conhecimentos
+
+[Volumes](https://kubernetes.io/docs/concepts/storage/volumes/) · [Persistent Volumes e PVCs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) · [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/).
+
+Volte à [aula teórica](../../volumes/README.md) e relacione os mecanismos com os eventos e estados vistos no Kind.
 
 ---
 
