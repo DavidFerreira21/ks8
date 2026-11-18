@@ -1,0 +1,7 @@
+# EXERCICIO 01.10: complete o Deployment.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: lab-01-10
+# TODO: crie readinessProbe, livenessProbe e container nginx.
