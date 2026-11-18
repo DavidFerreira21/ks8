@@ -58,7 +58,7 @@ kubectl top pods -A
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.09:** [abrir exercício guiado](../labs/requests-limits-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
+**🧪 Lab 01.09:** [🧪 Lab 01.09](../labs/requests-limits-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../2-pod/README.md). Os conteúdos anteriores foram preservados.
 
