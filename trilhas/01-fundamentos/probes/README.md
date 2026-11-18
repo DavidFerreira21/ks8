@@ -56,7 +56,7 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.10:** [abrir exercício guiado](../labs/probes-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
+**🧪 Lab 01.10:** [🧪 Lab 01.10](../labs/probes-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../5-probes/README.md). Os conteúdos anteriores foram preservados.
 
