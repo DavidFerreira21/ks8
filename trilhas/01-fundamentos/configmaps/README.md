@@ -77,4 +77,4 @@ O objeto `app-config` precisa existir. Se a variável não aparece no Pod, confi
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Secrets →](../secrets/README.md)
+[← Aula 01.06 — Namespaces](../namespaces/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.07](../labs/configmaps-basico/README.md) · [Próxima: Aula 01.08 — Secrets →](../secrets/README.md)
