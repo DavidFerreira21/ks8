@@ -89,6 +89,13 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 - [ ] Excluí um Pod e identifiquei o Pod substituto.
 - [ ] Restaurei as três réplicas e limpei os recursos do lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Que recurso recriou o Pod após a exclusão, e como você comprovou isso?
+- Como `readyReplicas` se relaciona ao número de réplicas desejadas do Deployment?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) · [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) · [Operações de atualização](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).
