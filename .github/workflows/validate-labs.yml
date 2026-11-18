@@ -40,8 +40,7 @@ jobs:
         run: |
           while IFS= read -r -d '' script; do
             echo "Checking ${script}"
-            if LC_ALL=C grep -q 
-\\r' "$script"; then
+            if LC_ALL=C grep -q "$(printf '\\015')" "$script"; then
               echo "::error file=${script}::Shell script uses CRLF; convert to LF" >&2
               exit 1
             fi
