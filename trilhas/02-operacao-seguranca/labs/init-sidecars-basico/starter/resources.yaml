@@ -1,0 +1,10 @@
+# EXERCÍCIO 02.05: complete initContainers e containers
+apiVersion: v1
+kind: Pod
+metadata:
+  name: auxiliares
+  namespace: lab-02-05
+spec:
+  # TODO: init container de preparo que termina
+  # TODO: sidecar nativo restartPolicy: Always
+  # TODO: container app

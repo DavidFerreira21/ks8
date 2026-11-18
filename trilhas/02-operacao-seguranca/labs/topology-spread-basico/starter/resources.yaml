@@ -1,0 +1,18 @@
+# EXERCÍCIO 02.08: defina Deployment e distribuição por hostname
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: distribuida
+  namespace: lab-02-08
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: distribuida
+  template:
+    metadata:
+      labels:
+        app: distribuida
+    spec:
+      # TODO: topologySpreadConstraints com maxSkew=1 por hostname
+      # TODO: container nginx

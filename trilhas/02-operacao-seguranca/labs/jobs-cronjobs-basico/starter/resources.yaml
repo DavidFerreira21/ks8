@@ -1,0 +1,14 @@
+# EXERCÍCIO 02.06: crie Job e CronJob
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: tarefa
+  namespace: lab-02-06
+# TODO: spec com template, restartPolicy e comando finito
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: agenda
+  namespace: lab-02-06
+# TODO: schedule, concurrencyPolicy e jobTemplate

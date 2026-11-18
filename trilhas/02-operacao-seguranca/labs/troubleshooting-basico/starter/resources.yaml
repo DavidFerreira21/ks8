@@ -1,0 +1,11 @@
+# EXERCÍCIO 02.14: Pod com falha intencional de imagem
+apiVersion: v1
+kind: Pod
+metadata:
+  name: diagnostico
+  namespace: lab-02-14
+spec:
+  containers:
+    - name: app
+      # TODO: imagem busybox:versao-inexistente-para-lab
+      command: ["sh", "-c", "sleep 3600"]

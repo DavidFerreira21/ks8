@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: replicas
+  namespace: lab-02-11
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: replicas
+  template:
+    metadata:
+      labels:
+        app: replicas
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: disponibilidade
+  namespace: lab-02-11
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: replicas

@@ -1,0 +1,14 @@
+# EXERCÍCIO 02.11: Deployment com três réplicas e PDB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: replicas
+  namespace: lab-02-11
+# TODO: replicas=3, selector/template nginx
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: disponibilidade
+  namespace: lab-02-11
+# TODO: minAvailable=2 e selector app=replicas

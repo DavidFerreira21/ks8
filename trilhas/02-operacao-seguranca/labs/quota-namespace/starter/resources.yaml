@@ -1,0 +1,21 @@
+# EXERCÍCIO 02.04: escreva ResourceQuota + LimitRange + Pod
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: pod-count
+  namespace: lab-02-04
+# TODO: spec.hard.pods=1
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: container-defaults
+  namespace: lab-02-04
+# TODO: defaults CPU/memória
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-1
+  namespace: lab-02-04
+# TODO: Pod nginx sem resources no manifesto

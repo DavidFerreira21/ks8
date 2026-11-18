@@ -95,7 +95,7 @@ def load_labs() -> dict[str, Lab]:
                 if not isinstance(check.get("name"), str) or not SAFE_NAME.fullmatch(check["name"]):
                     raise ValueError(f"{metadata}: nome de check inválido")
                 if check["type"] == "resource":
-                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange"}
+                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy"}
                     if check.get("kind") not in allowed:
                         raise ValueError(f"{metadata}: kind de check não permitido")
         labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments), setup, starter)
@@ -278,6 +278,23 @@ def check_student_manifest(lab: Lab) -> int:
             for field in ("spec", "data", "type"):
                 if field in expected:
                     fields[field] = expected[field]
+            # Labels e annotations fazem parte do contrato quando declaradas
+            # na solucao, mas metadados gerados pelo API Server sao ignorados.
+            expected_metadata = {
+                key: metadata[key]
+                for key in ("labels", "annotations")
+                if key in metadata
+            }
+            if expected_metadata:
+                fields["metadata"] = expected_metadata
+            if kind in {"Role", "ClusterRole", "RoleBinding", "ClusterRoleBinding"}:
+                for key in ("rules", "subjects", "roleRef"):
+                    if key in expected:
+                        fields[key] = expected[key]
+            if kind == "PriorityClass":
+                for key in ("value", "globalDefault", "preemptionPolicy"):
+                    if key in expected:
+                        fields[key] = expected[key]
             if kind == "Secret" and "stringData" in expected:
                 fields["data"] = {
                     k: base64.b64encode(str(v).encode("utf-8")).decode("ascii")

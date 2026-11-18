@@ -1,60 +1,84 @@
-# Lab — ResourceQuota e LimitRange
+# Lab 02.04 — ResourceQuota e LimitRange
 
-[← Camada 02](../../README.md) · [Conceito](../../resourcequota-limitrange/README.md)
+[← Aula 02.04](../../resourcequota-limitrange/README.md) · [↑ Camada 02](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-## Objetivo
+> **MODO DESAFIO:** `make lab-prepare LAB=02.04` cria o namespace e copia um **starter incompleto** para `.labs/02.04/resources.yaml`. Você completa o YAML e executa `kubectl apply -f .labs/02.04/`. Só então use `make lab-test LAB=02.04` e `make lab-observe LAB=02.04`. **`make lab-up` aplica a solução e é reservado à CI.**
 
-Observar a aplicação de defaults por container e o bloqueio de novos Pods quando o namespace atinge a quota agregada.
+## Objetivo e hipótese
 
-**Requisitos:** cluster Kind `dev` e contexto `kind-dev`. Este laboratório utiliza namespace exclusivo `lab-ops-quota`.
+Observar defaults de admissão e a rejeição deliberada do segundo Pod ao atingir a quota do namespace.
 
-## Etapa 1 — Preparação
+**Pré-requisitos:** Kind `dev`, contexto `kind-dev`, `kubectl`, `make`; namespace isolado `lab-02-04`. 
 
-A partir da pasta deste lab:
+## Desafio — o que você vai construir
+
+Escreva ResourceQuota `pod-count` com `pods: '1'`, LimitRange `container-defaults` com defaults CPU/memória e Pod `demo-1` que não declare requests/limits no template.
+
+Antes de olhar `solution/`, formule uma hipótese sobre o comportamento e consulte `kubectl explain` quando necessário.
+
+## Fase 1 — Preparar e prever
 
 ```bash
 kubectl config current-context
-# esperado: kind-dev
-kubectl apply -f namespace.yaml
-kubectl apply -f policy.yaml
-kubectl get resourcequota,limitrange -n lab-ops-quota
+make lab-prepare LAB=02.04
+cat .labs/02.04/resources.yaml
 ```
 
-## Etapa 2 — Pod aceito
+Descreva quais objetos devem aparecer e qual observação confirmará sua hipótese.
+
+## Fase 2 — Aplicar e observar
+
+Complete os campos TODO no starter e execute:
 
 ```bash
-kubectl apply -f pod-ok.yaml
-kubectl get pod demo-1 -n lab-ops-quota -o yaml
-kubectl describe resourcequota pod-count -n lab-ops-quota
+kubectl apply -f .labs/02.04/
+make lab-test LAB=02.04
+make lab-observe LAB=02.04
 ```
 
-**Observe:** `LimitRange` preenche requests/limits ausentes do manifesto na admissão, enquanto `ResourceQuota` controla o total de Pods não terminados no namespace.
+Use `kubectl describe resourcequota pod-count -n lab-02-04` e `kubectl get pod demo-1 -n lab-02-04 -o yaml` para comparar defaults com seu YAML.
 
-## Etapa 3 — Pod rejeitado
+## Fase 3 — Experimento controlado
+
+Tente criar um segundo Pod com `kubectl run demo-2 -n lab-02-04 --image=nginx:1.27 --restart=Never`. A criação deve ser rejeitada por quota. Caso seja admitido, remova-o e investigue o estado de `used` e `hard`. Para validar a rejeição de forma reproduzível, também execute `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod`; o contrato usa o mesmo namespace e só considera sucesso quando o erro confirma quota excedida.
+
+## Resultado esperado e evidências
+
+`used: pods: 1` e falha de admissão com motivo de quota. Os defaults definidos pelo LimitRange aparecem no Pod admitido.
+
+**Evidências específicas:** registre os valores `hard`/`used`, requests/limits admitidos e o erro específico de quota na tentativa de criar `demo-2`.
+
+## Fase 4 — Diagnosticar
+
+`kubectl describe quota pod-count -n lab-02-04`; se a criação inesperada tiver sucesso, `kubectl delete pod demo-2 -n lab-02-04`.
+
+Se a observação divergir, identifique primeiro **contexto → namespace → objeto → eventos → hipótese**, sem aplicar soluções aleatórias.
+
+## Fase 5 — Limpar com segurança
 
 ```bash
-kubectl apply -f pod-rejected.yaml
+make lab-down LAB=02.04
+make lab-status LAB=02.04
 ```
 
-**Resultado esperado:** erro de admissão informando que a quota de Pods foi excedida (`pods=1`). Essa falha é intencional. Se o primeiro Pod não existir ou não ocupar quota, o segundo pode ser aceito: confira o estado antes da tentativa.
+A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfaça explicitamente alterações manuais do experimento. **Não execute `make down`**, que remove o cluster Kind.
 
-```bash
-kubectl describe resourcequota pod-count -n lab-ops-quota
-kubectl get pods -n lab-ops-quota
-```
+## Critérios de conclusão
 
-## Diagnóstico e limpeza
+- [ ] Completei o YAML sem copiar a solução e confirmei o contexto esperado.
+- [ ] Observei o comportamento específico descrito em **Resultado esperado**.
+- [ ] Registrei o resultado do experimento, uma hipótese e a explicação técnica.
+- [ ] Removi os recursos do lab e revi qualquer alteração manual.
 
-```bash
-kubectl describe limitrange container-defaults -n lab-ops-quota
-kubectl get events -n lab-ops-quota --sort-by=.lastTimestamp
-kubectl delete -f pod-ok.yaml -f pod-rejected.yaml --ignore-not-found
-kubectl delete -f policy.yaml --ignore-not-found
-```
+## Perguntas de diagnóstico e reflexão
 
-Preserve o namespace. Apague-o somente após confirmar que pertence exclusivamente a este lab: `kubectl delete -f namespace.yaml`.
+- O que o LimitRange injeta em um Pod sem requests definidos?
+- Por que a rejeição ocorre na admissão e não no scheduler?
 
-## Referências oficiais
+## Aprofunde seus conhecimentos
 
-- [Resource Quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
-- [Limit Ranges](https://kubernetes.io/docs/concepts/policy/limit-range/)
+[Documentação oficial](https://kubernetes.io/docs/concepts/policy/resource-quotas/) · [Aula 02.04](../../resourcequota-limitrange/README.md)
+
+---
+
+[← Lab 02.03](../securitycontext-psa-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.05 →](../init-sidecars-basico/README.md)

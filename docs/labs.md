@@ -111,11 +111,30 @@ A criação de namespaces ausentes não imprime mais um erro esperado de `NotFou
 
 ## Camada 02 — Operação e Segurança
 
-- [🧪 Lab 02.02](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
-- [🧪 Lab 02.04](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md): defaults de recursos e rejeição intencional por quota.
+Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incompleto e solução de referência separada. Os complementares só existem onde agregam aprofundamento. Os testes da CI atual não equivalem à homologação funcional dos 14 labs: o smoke Kind cobre **10 labs** (02.01–02.08, 02.10 e 02.11), enquanto 02.09, 02.12, 02.13 e 02.14 exigem validação específica e evidências próprias.
 
-Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. O experimento `reject-pod` faz uma tentativa controlada de admissão e **só considera sucesso se identificar rejeição por quota**, nunca qualquer erro genérico.
+| ID | Prática | Lab |
+| --- | --- | --- |
+| 02.01 | Labels e seleção | [🧪 Lab 02.01](../trilhas/02-operacao-seguranca/labs/labels-selectors-basico/README.md) |
+| 02.02 | RBAC e ServiceAccount | [🧪 Lab 02.02](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md) |
+| 02.03 | SecurityContext/PSA | [🧪 Lab 02.03](../trilhas/02-operacao-seguranca/labs/securitycontext-psa-basico/README.md) |
+| 02.04 | ResourceQuota/LimitRange | [🧪 Lab 02.04](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md) |
+| 02.05 | Init e sidecar | [🧪 Lab 02.05](../trilhas/02-operacao-seguranca/labs/init-sidecars-basico/README.md) |
+| 02.06 | Jobs/CronJobs | [🧪 Lab 02.06](../trilhas/02-operacao-seguranca/labs/jobs-cronjobs-basico/README.md) |
+| 02.07 | Affinity e scheduling | [🧪 Lab 02.07](../trilhas/02-operacao-seguranca/labs/scheduling-basico/README.md) |
+| 02.08 | Topology spread | [🧪 Lab 02.08](../trilhas/02-operacao-seguranca/labs/topology-spread-basico/README.md) |
+| 02.09 | PriorityClass | [🧪 Lab 02.09](../trilhas/02-operacao-seguranca/labs/priorityclass-basico/README.md) |
+| 02.10 | QoS e eviction | [🧪 Lab 02.10](../trilhas/02-operacao-seguranca/labs/qos-eviction-basico/README.md) |
+| 02.11 | PDB | [🧪 Lab 02.11](../trilhas/02-operacao-seguranca/labs/pdb-basico/README.md) |
+| 02.12 | Cordon/uncordon | [🧪 Lab 02.12](../trilhas/02-operacao-seguranca/labs/node-maintenance-basico/README.md) |
+| 02.13 | NetworkPolicy | [🧪 Lab 02.13](../trilhas/02-operacao-seguranca/labs/networkpolicy-basico/README.md) |
+| 02.14 | Troubleshooting | [🧪 Lab 02.14](../trilhas/02-operacao-seguranca/labs/troubleshooting-basico/README.md) |
 
+**Fluxo do aluno:** `make lab-prepare LAB=02.XX` → completar `.labs/02.XX/resources.yaml` → `kubectl apply -f .labs/02.XX/` → `make lab-test LAB=02.XX` → observar, experimentar, diagnosticar → `make lab-down LAB=02.XX`.
+
+**Dependências:** os labs 02.07 e 02.12 pressupõem Kind com worker `dev-worker`. O 02.09 usa PriorityClass de escopo do cluster; limpe-a ao concluir. O 02.13 requer CNI compatível para comprovar isolamento; sem ele, somente a validação declarativa fica disponível. O 02.14 usa uma imagem inválida intencionalmente. Em qualquer lab, não confunda `make lab-test` com prova do experimento completo.
+
+**CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. Os demais labs permanecem fora do smoke Kind por exigirem validação especial de PriorityClass, manutenção de nó, enforcement de NetworkPolicy ou diagnóstico de imagem inválida.
 ## Aprendizado orientado por observação
 
 O fluxo recomendado é **escrever YAML → aplicar com kubectl → observar → experimentar → testar → limpar**. `make lab-prepare` cria apenas o namespace, os recursos de apoio explicitamente declarados e uma cópia local do starter em `.labs/<ID>/`, preservando suas alterações existentes. A solução não é aplicada neste comando. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.
@@ -176,7 +195,7 @@ O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rasc
 
 ## CI: Kind descartável
 
-O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre 14 laboratórios sem addons (01.01–01.12, 02.02 e 02.04), valida os checks, experimenta rollout no lab 01.12 e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre 22 laboratórios sem addons (01.01–01.12 e 10 da Camada 02), valida os checks, experimenta rollout no lab 01.12 e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
 
 Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
 

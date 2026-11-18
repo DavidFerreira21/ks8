@@ -1,0 +1,9 @@
+# EXERCÍCIO 02.01: complete labels, annotations e spec
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rotulado
+  namespace: lab-02-01
+  # TODO: labels app=demo, tier=backend
+  # TODO: annotation estudo=labels
+# TODO: container BusyBox que permanece ativo

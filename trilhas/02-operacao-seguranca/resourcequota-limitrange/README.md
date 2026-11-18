@@ -1,45 +1,71 @@
-# ResourceQuota e LimitRange
+# 02.04 · ResourceQuota e LimitRange
 
-[← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 02](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Interpretar defaults por container e comprovar que uma ResourceQuota restringe o consumo agregado do namespace.
 
 ## 🎨 Infográfico
 
 ![02.04 — ResourceQuota e LimitRange](images/resourcequota-limitrange.png)
 
-> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+## 📖 Aula teórica
 
+### O problema que este recurso resolve
 
-## O que você vai aprender
+LimitRange define restrições e valores padrão para requests e limits de containers ou Pods. ResourceQuota limita agregados do namespace, como Pods, requests CPU/memória ou objetos. São políticas diferentes, aplicadas na admissão.
 
-ResourceQuota limita consumo agregado por namespace. LimitRange define mínimos, máximos e defaults por container/Pod, quando configurados.
+### Como funciona no Kubernetes
 
-## Como funciona
+O admission controller pode completar requests/limits ausentes a partir do LimitRange. O ResourceQuota compara a demanda resultante com o limite do namespace. Uma falha por quota é rejeição na API, não um Pod `Pending`.
 
-Admissão avalia limites individuais e quotas agregadas ao criar recursos.
+### Exemplo interpretado (trecho)
 
-## Experimento recomendado
+Uma quota de contagem de Pods e defaults de CPU são políticas distintas; os valores reais só são observáveis após admissão.
 
-Aplique quota e defaults em namespace isolado; crie um Pod aceito e tente exceder a quota.
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: pods-limitados
+spec:
+  hard:
+    pods: "2"
+```
 
-**Laboratório com manifests:** [Abrir lab](../labs/quota-namespace/README.md).
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
 
-## O que observar
+### Exemplo de inspeção
 
-- Resultado e eventos dos recursos envolvidos.
-- Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
-- Regras, condições e pré-requisitos particulares deste mecanismo.
+Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
 
+```bash
+kubectl config current-context
+kubectl get limitrange,resourcequota -n lab-ops-quota
+kubectl describe resourcequota pod-count -n lab-ops-quota
+kubectl get pod demo-1 -n lab-ops-quota -o yaml
+```
 
+**O que observar:** Compare `spec.containers[].resources` admitidos com o manifesto enviado. Quando a quota de Pods é atingida, o próximo manifesto deve falhar com mensagem de quota excedida.
 
-## Referência oficial
+### Cuidados e limitações
 
-- [Documentação Kubernetes — ResourceQuota e LimitRange](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+Quota de requests pode causar rejeição mesmo quando há CPU livre nos nós. Não confunda quotas com limits por container.
 
-**Próxima etapa:** [índice completo da Camada 02](../README.md).
+## 🧪 Aplicação prática
 
+**[🧪 Lab 02.04](../labs/quota-namespace/README.md):** escreva o YAML do exercício, execute no Kind, registre evidências e explique as divergências. O complementar não é pré-requisito.
+
+## ✅ Revisão do aprendizado
+
+- Qual recurso fornece defaults para containers que não especificam requests?
+- Por que uma criação rejeitada por quota não aparece como Pod Pending?
+- Como distinguir `hard` e `used` ao interpretar uma ResourceQuota?
+
+## 🔗 Referências oficiais
+
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/policy/limit-range/)
 
 ---
 
-### Navegação
-
-[← Anterior](../taints-tolerations-affinity/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../pdb/README.md)
+[↑ Camada 02](../README.md) · [🧪 Lab 02.04](../labs/quota-namespace/README.md) · [← Aula 02.03](../securitycontext-pod-security/README.md) · [Próxima: 02.05 →](../init-sidecars/README.md)
