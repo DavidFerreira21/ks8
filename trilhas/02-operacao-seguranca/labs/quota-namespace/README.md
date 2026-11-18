@@ -40,7 +40,7 @@ Use `kubectl describe resourcequota pod-count -n lab-02-04` e `kubectl get pod d
 
 ## Fase 3 — Experimento controlado
 
-Tente criar um segundo Pod com `kubectl run demo-2 -n lab-02-04 --image=nginx:1.27 --restart=Never`. A criação deve ser rejeitada por quota. Caso seja admitido, remova-o e investigue o estado de `used` e `hard`. Não é necessário usar a automação legada do experimento, que pertence a outro namespace.
+Tente criar um segundo Pod com `kubectl run demo-2 -n lab-02-04 --image=nginx:1.27 --restart=Never`. A criação deve ser rejeitada por quota. Caso seja admitido, remova-o e investigue o estado de `used` e `hard`. Para validar a rejeição de forma reproduzível, também execute `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod`; o contrato usa o mesmo namespace e só considera sucesso quando o erro confirma quota excedida.
 
 ## Resultado esperado e evidências
 
