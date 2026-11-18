@@ -1,4 +1,4 @@
-# 01.02 · Namespaces
+# 01.06 · Namespaces
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.02 — Namespaces](images/namespaces.png)
+![01.06 — Namespaces](images/namespaces.png)
 
 ## 📖 Aula teórica
 
@@ -70,4 +70,4 @@ Não use namespace como única fronteira de isolamento entre ambientes com exig�
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Pods →](../pods/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: ConfigMaps →](../configmaps/README.md)
