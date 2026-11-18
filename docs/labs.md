@@ -79,11 +79,24 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - `make down` remove o cluster Kind indicado por `CLUSTER_NAME`. Verifique esse valor antes da execução.
 - `make lab-down` **preserva o namespace** para evitar excluir recursos não relacionados.
 - `make validate` realiza parse YAML e alguns checks didáticos, **não é um validador completo do schema Kubernetes**.
-- A pipeline do GitHub executa verificações estáticas, mas **não cria um cluster Kind**.
-- Nenhum lab foi executado em um cluster durante a elaboração deste PR.
+- A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa três labs, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
+- Os labs não foram executados manualmente durante a elaboração deste PR; a primeira validação real acontecerá quando o workflow de integração rodar.
 
 ## Referências oficiais
 
 - [Kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start/)
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/)
 - [Debug Applications](https://kubernetes.io/docs/tasks/debug/debug-application/)
+
+## CI: Kind descartável
+
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre os três laboratórios cadastrados, valida os checks, experimenta rollout e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+
+Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
+
+Testes unitários do motor:
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+A CI de Kind não substitui validação de labs de CNI, ingress controller, cloud providers ou storage que precisem de plugins e infraestrutura adicionais.
