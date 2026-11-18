@@ -1,8 +1,8 @@
-# Lab 01.11 — Volumes: persistencia via PVC
+# Lab 01.11 — Volumes
 
+[← Aula 01.11](../../volumes/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.11`, complete `.labs/01.11/claim.yaml` e `.labs/01.11/pod.yaml` e execute **`kubectl apply -f .labs/01.11/`**. Só depois valide com `make lab-test LAB=01.11`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.11` revela seus arquivos para estudo posterior.
 
-[← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
 
@@ -78,3 +78,7 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 - [ ] Comparei hipótese com observação real.
 - [ ] Investiguei eventos e condições relevantes.
 - [ ] Limpei os recursos do exercício.
+
+---
+
+[← Lab 01.10](../probes-basico/README.md) · [↑ Aula 01.11](../../volumes/README.md) · [Próximo: Lab 01.12 →](../estrategias-deployment-basico/README.md)
