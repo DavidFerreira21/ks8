@@ -15,6 +15,7 @@ O Scheduler usa requests para decidir elegibilidade de nós, enquanto limits res
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.09
 cat .labs/01.09/resources.yaml
 ```
 
