@@ -2,8 +2,11 @@ id: "01.11"
 title: "Volumes: persistencia via PVC"
 namespace: lab-01-11
 apply:
-  - claim.yaml
-  - pod.yaml
+  - solution/claim.yaml
+  - solution/pod.yaml
+starter:
+  - starter/claim.yaml
+  - starter/pod.yaml
 checks:
   - type: pvc-bound
     name: dados-pvc
