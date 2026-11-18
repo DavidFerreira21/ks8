@@ -31,11 +31,14 @@ def scaffold(root: Path, identifier: str, slug: str, title: str) -> Path:
     # Falha de validação deve ocorrer antes de criar qualquer diretório.
     (lab_dir / "manifests").mkdir(parents=True)
     (lab_dir / "tests").mkdir()
+    (lab_dir / "starter").mkdir()
+    (lab_dir / "solution").mkdir()
     contract = (
         f"id: {json.dumps(identifier)}\n"
         f"title: {json.dumps(title, ensure_ascii=False)}\n"
         f"namespace: {ns}\n"
-        "apply:\n  - manifests/configmap.yaml\n"
+        "apply:\n  - solution/configmap.yaml\n"
+        "starter:\n  - starter/configmap.yaml\n"
         "checks:\n  - type: configmap\n    name: exemplo\n"
     )
     (lab_dir / "lab.yaml.example").write_text(contract, encoding="utf-8")
@@ -45,6 +48,13 @@ def scaffold(root: Path, identifier: str, slug: str, title: str) -> Path:
         "data:\n  objetivo: \"entender o ciclo do lab\"\n"
     )
     (lab_dir / "manifests" / "configmap.yaml").write_text(manifest, encoding="utf-8")
+    (lab_dir / "solution" / "configmap.yaml").write_text(manifest, encoding="utf-8")
+    starter = (
+        "apiVersion: v1\nkind: ConfigMap\nmetadata:\n"
+        f"  name: exemplo\n  namespace: {ns}\n"
+        "# TODO: escreva o campo data\n"
+    )
+    (lab_dir / "starter" / "configmap.yaml").write_text(starter, encoding="utf-8")
     readme = f"""# {identifier} · {title}
 
 [↑ Índice dos laboratórios](../../../../docs/labs.md)
@@ -58,8 +68,8 @@ Descreva a hipótese e o comportamento de Kubernetes que o aluno observará.
 
 ## Etapas
 1. **Preparar:** confirme contexto e namespace.
-2. **Executar:** aplique o manifesto do lab.
-3. **Observar:** verifique objeto, status e eventos.
+2. **Construir:** prepare o lab com `make lab-prepare LAB={identifier}`, escreva YAML em `.labs/{identifier}/` e execute `kubectl apply -f .labs/{identifier}/`.
+3. **Observar e validar:** use `make lab-observe LAB={identifier}` e `make lab-test LAB={identifier}`.
 4. **Experimentar:** proponha uma mudança ou falha controlada.
 5. **Diagnosticar:** explique o resultado encontrado.
 6. **Limpar:** exclua somente os recursos criados.
