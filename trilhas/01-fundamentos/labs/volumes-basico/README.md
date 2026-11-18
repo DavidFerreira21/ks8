@@ -13,7 +13,8 @@ Um volume efêmero desaparece com o Pod; um PVC pode preservar dados além do ci
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/volumes-basico/resources.yaml
+cat trilhas/01-fundamentos/labs/volumes-basico/claim.yaml
+cat trilhas/01-fundamentos/labs/volumes-basico/pod.yaml
 ```
 
 Preveja o comportamento dos controladores e componentes envolvidos.
@@ -39,12 +40,13 @@ kubectl exec -n lab-01-11 pod/escritor -- cat /dados/mensagem.txt
 ```bash
 kubectl delete pod escritor -n lab-01-11
 kubectl get pvc dados-pvc -n lab-01-11
-kubectl apply -f trilhas/01-fundamentos/labs/volumes-basico/resources.yaml
+kubectl apply -f trilhas/01-fundamentos/labs/volumes-basico/claim.yaml
+kubectl apply -f trilhas/01-fundamentos/labs/volumes-basico/pod.yaml
 kubectl wait --for=condition=Ready pod/escritor -n lab-01-11 --timeout=120s
 kubectl exec -n lab-01-11 pod/escritor -- cat /dados/mensagem.txt
 ```
 
-O arquivo pode ser sobrescrito pelo script de inicialização: para provar persistência, antes de excluir o Pod escreva `kubectl exec ... -- sh -c 'echo marcador > /dados/marcador.txt'` e depois leia `marcador.txt` no novo Pod. O Kind requer um StorageClass funcional, normalmente `standard`.
+O arquivo inicial pode ser sobrescrito pelo script de inicialização. Para comprovar persistência, **antes de excluir o Pod**, execute `kubectl exec -n lab-01-11 pod/escritor -- sh -c 'echo marcador > /dados/marcador.txt'`. Após recriar o Pod, execute `kubectl exec -n lab-01-11 pod/escritor -- cat /dados/marcador.txt` e confirme que o marcador permaneceu. O Kind requer um StorageClass funcional, normalmente `standard`.
 
 ## Fase 3 — Diagnosticar
 
