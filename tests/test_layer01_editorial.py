@@ -59,7 +59,7 @@ class Layer01EditorialTests(unittest.TestCase):
                 ):
                     self.assertIn(required, body)
                 self.assertNotIn("**Evidências mínimas:**", body)
-                section = body.split("**Evidências específicas:**", 1)[1].split("\\n", 1)[0]
+                section = body.split("**Evidências específicas:**", 1)[1].splitlines()[0]
                 self.assertGreaterEqual(len(section.strip()), 75)
 
     def test_relative_links_in_layer_content(self):
