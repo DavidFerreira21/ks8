@@ -1,4 +1,4 @@
-# 01.07 · ReplicaSet, DaemonSet e StatefulSet
+# 01.04 · ReplicaSet, DaemonSet e StatefulSet
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.07 — ReplicaSet, DaemonSet e StatefulSet](../replicaset-daemonset-statefulset/images/replicaset-daemonset-statefulset.png)
+![01.04 — ReplicaSet, DaemonSet e StatefulSet](../replicaset-daemonset-statefulset/images/replicaset-daemonset-statefulset.png)
 
 ## 📖 Aula teórica
 
@@ -62,4 +62,4 @@ Verifique quantos Pods cada controlador deseja, onde executam e quais são suas 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Estratégias avançadas de Deployment →](../estrategias-deployment/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Services →](../services/README.md)
