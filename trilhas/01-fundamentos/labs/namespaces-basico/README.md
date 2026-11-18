@@ -15,6 +15,7 @@ Namespaces isolam nomes de objetos e definem escopo de políticas, mas não são
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.06
 cat .labs/01.06/resources.yaml
 ```
 
