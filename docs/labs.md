@@ -16,7 +16,7 @@ Confira as versões e os requisitos do [guia de instalação existente](../insta
 
 ## Comandos padronizados
 
-A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.06` (primeira aplicação).
+A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.06` (primeira aplicação); para iniciar pela primeira aula, use `LAB=01.01`.
 
 ```bash
 make doctor
@@ -49,6 +49,13 @@ make lab-down LAB=01.06
 
 **Sequência didática:** no lab `01.06` o Pod individual continua sendo criado manualmente conforme o README; o comando automatizado aplica apenas Deployment e Service para não ocultar a primeira etapa.
 
+
+## Camada 01 — Fundamentos
+
+- [Lab 01.01 — Primeiro contato com a API](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md): explorar o cluster, criar ConfigMap e comparar o estado no arquivo e na API.
+- [Lab 01.06 — Aplicação](../trilhas/01-fundamentos/labs/primeira-aplicacao/README.md): Deployment, Service e rollout.
+
+A criação de namespaces ausentes não imprime mais um erro esperado de `NotFound`; falhas reais na consulta ao API Server continuam visíveis.
 
 ## Camada 02 — Operação e Segurança
 
@@ -115,7 +122,7 @@ O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rasc
 
 ## CI: Kind descartável
 
-O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre os três laboratórios cadastrados, valida os checks, experimenta rollout e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre os quatro laboratórios cadastrados, valida os checks, experimenta rollout e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
 
 Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
 
