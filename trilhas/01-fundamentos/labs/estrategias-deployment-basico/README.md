@@ -11,6 +11,12 @@ RollingUpdate cria nova revisão de Pod template; rollback recupera uma revisão
 
 **Escopo:** cluster Kind `dev` e namespace `lab-01-12`.
 
+## Desafio — o que você vai construir
+
+Crie o Deployment `web` com **3 réplicas** de nginx, `RollingUpdate`, `maxSurge: 1` e `maxUnavailable: 0`; configure selector/labels, recursos e readiness HTTP. Depois execute um rollout de nova revisão e retorne à versão anterior.
+
+**Antes de aplicar:** confirme os pré-requisitos, complete o YAML em `.labs/01.12/` e faça uma hipótese sobre o resultado. Recorra a `kubectl explain` ou às referências abaixo; não copie a solução antes de tentar.
+
 ## Fase 1 — Preparar e prever
 
 ```bash
@@ -25,7 +31,6 @@ Preveja o comportamento dos controladores e componentes envolvidos.
 ## Fase 2 — Aplicar e testar
 
 ```bash
-make lab-prepare LAB=01.12
 # Preencha os arquivos de trabalho
 kubectl apply -f .labs/01.12/
 make lab-test LAB=01.12
@@ -59,6 +64,14 @@ kubectl rollout status deployment/web -n lab-01-12 --timeout=120s
 
 Se a imagem não estiver acessível, diagnostique ImagePullBackOff e reverta com `rollout undo`. Compare `maxSurge` e `maxUnavailable` com as transições observadas.
 
+## Resultado esperado e evidências
+
+- O Deployment inicial fica disponível com 3 Pods; `kubectl rollout history` lista a revisão inicial.
+- Ao reiniciar ou mudar a imagem, aparece novo ReplicaSet/revisão; durante um RollingUpdate saudável, os limites de `maxSurge`/`maxUnavailable` controlam a transição.
+- `kubectl rollout undo` restaura a revisão anterior. Se a imagem não puder ser baixada, o status mostra falha de pull e o rollback é o caminho de recuperação.
+
+**Se o resultado divergir:** investigue `describe`, eventos e componentes de suporte. Um check que aprova o manifesto não substitui a observação funcional.
+
 ## Fase 3 — Diagnosticar
 
 ```bash
@@ -77,12 +90,18 @@ make lab-status LAB=01.12
 
 O namespace é preservado; não utilize `make down` para limpar um único exercício.
 
-## Checklist
+## Critérios de conclusão
 
-- [ ] Expliquei os objetos do manifesto.
-- [ ] Comparei hipótese com observação real.
-- [ ] Investiguei eventos e condições relevantes.
-- [ ] Limpei os recursos do exercício.
+- [ ] Configurei a estratégia RollingUpdate e seus limites.
+- [ ] Observei ao menos duas revisões do Deployment no histórico.
+- [ ] Executei uma atualização, acompanhei a disponibilidade e fiz rollback.
+- [ ] Conferi a versão final e removi os recursos do lab.
+
+## Aprofunde seus conhecimentos
+
+[Estratégia de Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) · [Atualizar Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) · [Reverter Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-back-a-deployment).
+
+Volte à [aula teórica](../../estrategias-deployment/README.md) e relacione os mecanismos com os eventos e estados vistos no Kind.
 
 ---
 
