@@ -1,0 +1,8 @@
+# EXERCICIO 01.13: crie o Ingress; backend de apoio ja sera preparado.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web
+  namespace: lab-01-13
+spec:
+  # TODO: ingressClassName traefik, host aula.local, path / e service web:80
