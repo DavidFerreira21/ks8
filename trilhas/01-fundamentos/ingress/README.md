@@ -84,4 +84,4 @@ Se o endereço externo não foi atribuído, verifique controller, classe, Servic
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Horizontal Pod Autoscaler (HPA) →](../hpa/README.md)
+[← Aula 01.12 — Estratégias avançadas de Deployment](../estrategias-deployment/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.13](../labs/ingress-basico/README.md) · [Próxima: Aula 01.14 — Horizontal Pod Autoscaler (HPA) →](../hpa/README.md)
