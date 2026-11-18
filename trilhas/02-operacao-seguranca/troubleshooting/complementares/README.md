@@ -8,6 +8,8 @@
 
 Para diagnosticar sem começar com reinícios, exclusões ou correções especulativas.
 
+## Referência de diagnóstico
+
 | Sintoma | Evidência primária |
 | --- | --- |
 | `Pending` | Eventos do scheduler, PVC e quotas |

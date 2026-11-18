@@ -8,6 +8,8 @@
 
 Para diferenciar pressão de nó, OOM de container e falhas de agendamento.
 
+## Diagnóstico por sintoma
+
 | Sinal | Interpretação | Evidência |
 | --- | --- | --- |
 | `OOMKilled` | Processo encerrado por memória | `lastState.terminated.reason` |

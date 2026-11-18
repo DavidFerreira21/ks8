@@ -10,7 +10,7 @@ Ao planejar default-deny e investigar por que a comunicação entre Pods parou a
 
 As políticas de **egress da origem** e **ingress do destino** são avaliadas separadamente quando os Pods estão isolados nessas direções. Regras permissivas são aditivas; não existe regra explícita de deny com precedência sobre allow.
 
-### Exemplo alternativo: default-deny egress
+## Exemplo adicional: default-deny egress
 
 ```yaml
 apiVersion: networking.k8s.io/v1

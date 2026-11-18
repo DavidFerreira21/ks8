@@ -8,6 +8,8 @@
 
 Para diagnosticar `FailedScheduling` e selecionar estratégia de alocação.
 
+## Comparação de estratégias
+
 | Configuração | Resultado |
 | --- | --- |
 | `nodeSelector` | Requer label do nó |
