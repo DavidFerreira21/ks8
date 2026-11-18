@@ -25,8 +25,8 @@ class FundamentalsCurriculumTests(unittest.TestCase):
     def test_catalog_and_layer_have_same_sequence(self):
         catalog = (ROOT / "docs/catalogo.md").read_text(encoding="utf-8")
         layer = (ROOT / "trilhas/01-fundamentos/README.md").read_text(encoding="utf-8")
-        catalog_ids = re.findall(r"^\\| (01\\.\\d{2}) \\|", catalog, flags=re.M)
-        layer_ids = re.findall(r"^\\| (01\\.\\d{2}) \\|", layer, flags=re.M)
+        catalog_ids = re.findall(r"^\| (01\.\d{2}) \|", catalog, flags=re.M)
+        layer_ids = re.findall(r"^\| (01\.\d{2}) \|", layer, flags=re.M)
         expected = [item[0] for item in LESSONS]
         self.assertEqual(catalog_ids, expected)
         self.assertEqual(layer_ids, expected)
