@@ -17,6 +17,9 @@ diagnostics() {
     kubectl describe pods -A > "$report_dir/describe-pods.txt" 2>&1 || true
     kubectl logs -n lab-01-05 deployment/web --all-containers=true > "$report_dir/web-logs.txt" 2>&1 || true
   fi
+  # Reversão dos experimentos fora do contrato, também em falhas da CI.
+  kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn- pod-security.kubernetes.io/enforce- >/dev/null 2>&1 || true
+  kubectl delete -f trilhas/02-operacao-seguranca/labs/topology-spread-basico/experiments/spread-impossivel.yaml --ignore-not-found >/dev/null 2>&1 || true
   for lab in 02.11 02.10 02.08 02.07 02.06 02.05 02.04 02.03 02.02 02.01 01.12 01.11 01.10 01.09 01.08 01.07 01.06 01.05 01.04 01.03 01.02 01.01; do
     make lab-down LAB="$lab" || true
   done
@@ -59,6 +62,42 @@ done
 kubectl rollout status deployment/replicas -n lab-02-11 --timeout=180s
 kubectl get pdb disponibilidade -n lab-02-11 -o yaml > "$report_dir/pdb-02.11.yaml"
 
+# PSA: contraste real entre warn e enforce sem criar Pod privilegiado.
+psa_manifest="trilhas/02-operacao-seguranca/labs/securitycontext-psa-basico/experiments/psa-incompativel.yaml"
+kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn=restricted --overwrite
+kubectl apply --dry-run=server -f "$psa_manifest" > "$report_dir/psa-warn.txt" 2>&1
+grep -Eiq 'warning|would violate podsecurity' "$report_dir/psa-warn.txt"
+kubectl label namespace lab-02-03 pod-security.kubernetes.io/enforce=restricted --overwrite
+if kubectl apply --dry-run=server -f "$psa_manifest" > "$report_dir/psa-enforce.txt" 2>&1; then
+  echo "FAIL: PSA enforce aceitou manifesto privilegiado" >&2
+  exit 1
+fi
+grep -Eiq 'violates podsecurity|forbidden' "$report_dir/psa-enforce.txt"
+test -z "$(kubectl get pod psa-incompativel -n lab-02-03 --ignore-not-found -o name)"
+kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn- pod-security.kubernetes.io/enforce-
+
+# Topology Spread: 3 réplicas, minDomains 3 e apenas 2 workers elegíveis.
+spread_manifest="trilhas/02-operacao-seguranca/labs/topology-spread-basico/experiments/spread-impossivel.yaml"
+kubectl apply -f "$spread_manifest"
+spread_ok=false
+for attempt in $(seq 1 40); do
+  ready="$(kubectl get deployment spread-impossivel -n lab-02-08 -o jsonpath='{.status.readyReplicas}')"
+  pending="$(kubectl get pods -n lab-02-08 -l app=spread-impossivel --field-selector=status.phase=Pending -o name)"
+  if [[ "$ready" == "2" && -n "$pending" ]]; then
+    spread_ok=true
+    break
+  fi
+  sleep 3
+done
+kubectl get pods -n lab-02-08 -l app=spread-impossivel -o wide > "$report_dir/spread-pods.txt"
+kubectl describe pods -n lab-02-08 -l app=spread-impossivel > "$report_dir/spread-describe.txt"
+if [[ "$spread_ok" != true ]]; then
+  echo "FAIL: topology spread não demonstrou duas réplicas prontas e uma Pending" >&2
+  exit 1
+fi
+grep -q 'FailedScheduling' "$report_dir/spread-describe.txt"
+kubectl delete -f "$spread_manifest"
+
 # Testes intencionais de reconciliação e de negação de admissão.
 # Confere que Service possui endpoints prontos, não apenas que existe na API.
 kubectl get endpointslices -n lab-01-05 -l kubernetes.io/service-name=web \
@@ -66,4 +105,4 @@ kubectl get endpointslices -n lab-01-05 -l kubernetes.io/service-name=web \
 make lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout
 make lab-experiment LAB=02.04 EXPERIMENT=reject-pod
 
-echo "Smoke test de 22 laboratórios concluído (14 originais + 8 novos da Camada 02)."
+echo "Smoke test de 22 laboratórios e experimentos de PSA/Topology Spread concluído."
