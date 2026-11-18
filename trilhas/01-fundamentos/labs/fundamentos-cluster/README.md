@@ -104,6 +104,13 @@ make lab-status LAB=01.01
 
 **Próxima aula:** [Aula 01.02 — Pods](../../pods/README.md). O [🧪 Lab 01.05](../services-basico/README.md) aborda Services e descoberta de backends.
 
+## Perguntas de diagnóstico e reflexão
+
+- Qual evidência mostra que um objeto foi aceito pelo API Server, mas o estado esperado ainda não foi observado?
+- Como a leitura de `spec` e `status` mudou sua hipótese sobre reconciliação?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [Conceitos básicos e arquitetura](https://kubernetes.io/docs/concepts/overview/) · [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) · [Gerenciamento declarativo de objetos](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/declarative-config/).
