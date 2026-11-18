@@ -59,7 +59,7 @@ kubectl wait --for=condition=Ready pod/escritor -n lab-01-11 --timeout=120s
 kubectl exec -n lab-01-11 pod/escritor -- cat /dados/marcador.txt
 ```
 
-O arquivo inicial pode ser sobrescrito pelo script de inicialização. Para comprovar persistência, antes de excluir o Pod, grave um marcador em `/dados/` como no bloco acima. Depois de recriá-lo com o mesmo PVC, leia o marcador para conferir a persistência. O Kind requer um StorageClass funcional, normalmente `standard`.
+O arquivo inicial pode ser sobrescrito pelo script de inicialização. Para comprovar persistência, antes de excluir o Pod, grave um marcador em `/dados/` como no bloco acima. Depois de recriá-lo com o mesmo PVC, leia o marcador para conferir a persistência. O Kind requer um StorageClass funcional, normalmente `standard`. Confira com `kubectl get storageclass` antes do exercício.
 
 ## Resultado esperado e evidências
 
