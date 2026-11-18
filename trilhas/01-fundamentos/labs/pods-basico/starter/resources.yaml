@@ -1,0 +1,7 @@
+# EXERCICIO 01.02: complete os campos TODO. Nao copie a solucao antes de tentar.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-demo
+  namespace: lab-01-02
+# TODO: configure spec.containers (nome, imagem, comando e recursos).

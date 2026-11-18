@@ -1,5 +1,7 @@
 # Lab 01.07 — ConfigMaps: configuracao da aplicacao
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.07` para criar o namespace e copiar um arquivo incompleto para `.labs/01.07/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.07/` e valide com `make lab-test LAB=01.07`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.07` apenas depois de tentar.
+
 [← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Hipótese e objetivo
@@ -13,7 +15,8 @@ ConfigMaps desacoplam a configuração da imagem; variáveis de ambiente de Pods
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/configmaps-basico/resources.yaml
+make lab-prepare LAB=01.07
+cat .labs/01.07/resources.yaml
 ```
 
 Preveja quais recursos aparecerão.
@@ -21,7 +24,9 @@ Preveja quais recursos aparecerão.
 ## Fase 2 — Aplicar e testar
 
 ```bash
-make lab-up LAB=01.07
+make lab-prepare LAB=01.07
+# Complete o manifesto em .labs/01.07/resources.yaml
+kubectl apply -f .labs/01.07/
 make lab-test LAB=01.07
 make lab-observe LAB=01.07
 ```
@@ -46,7 +51,7 @@ kubectl logs deployment/consumidor -n lab-01-07
 Ao fazer restart, a nova variável de ambiente deve ser consumida. Para restaurar `versao-1` após o patch, use **server-side apply com resolução explícita de conflito**, pois o apply client-side pode manter campos alterados fora do histórico local:
 
 ```bash
-kubectl apply --server-side --force-conflicts -f trilhas/01-fundamentos/labs/configmaps-basico/resources.yaml
+kubectl apply --server-side --force-conflicts -f .labs/01.07/resources.yaml
 kubectl rollout restart deployment/consumidor -n lab-01-07
 kubectl rollout status deployment/consumidor -n lab-01-07
 kubectl logs deployment/consumidor -n lab-01-07

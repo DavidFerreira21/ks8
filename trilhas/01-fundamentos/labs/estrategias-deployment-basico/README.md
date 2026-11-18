@@ -1,5 +1,7 @@
 # Lab 01.12 — Deployment: rollout e rollback
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.12`, complete `.labs/01.12/resources.yaml` e execute **`kubectl apply -f .labs/01.12/`**. Só depois valide com `make lab-test LAB=01.12`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.12` revela seus arquivos para estudo posterior.
+
 [← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -13,7 +15,8 @@ RollingUpdate cria nova revisão de Pod template; rollback recupera uma revisão
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/estrategias-deployment-basico/resources.yaml
+make lab-prepare LAB=01.12
+cat .labs/01.12/resources.yaml
 ```
 
 Preveja o comportamento dos controladores e componentes envolvidos.
@@ -21,7 +24,9 @@ Preveja o comportamento dos controladores e componentes envolvidos.
 ## Fase 2 — Aplicar e testar
 
 ```bash
-make lab-up LAB=01.12
+make lab-prepare LAB=01.12
+# Preencha os arquivos de trabalho
+kubectl apply -f .labs/01.12/
 make lab-test LAB=01.12
 make lab-observe LAB=01.12
 ```

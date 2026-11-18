@@ -1,5 +1,7 @@
 # Lab 01.03 — Deployments: replicas e self-healing
 
+> **MODO DESAFIO — o aluno constrói:** `make lab-prepare LAB=01.03` cria apenas o namespace e copia um YAML incompleto para `.labs/01.03/`. **Complete o arquivo usando o objetivo abaixo**, aplique você mesmo com `kubectl apply -f .labs/01.03/` e só então execute `make lab-test LAB=01.03`. O comando `make lab-up` é reservado à CI. `make lab-solution LAB=01.03` mostra o caminho da referência quando você quiser conferir.
+
 [← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -14,7 +16,8 @@ O Deployment controla um ReplicaSet, que mantém a quantidade declarada de Pods.
 make doctor
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/deployments-basico/resources.yaml
+make lab-prepare LAB=01.03
+cat .labs/01.03/resources.yaml
 ```
 
 Antes de aplicar, preveja quais objetos serão criados e quais controladores participarão.
@@ -22,7 +25,9 @@ Antes de aplicar, preveja quais objetos serão criados e quais controladores par
 ## Fase 2 — Aplicar e observar
 
 ```bash
-make lab-up LAB=01.03
+make lab-prepare LAB=01.03
+# Complete primeiro o arquivo em .labs/01.03/
+kubectl apply -f .labs/01.03/
 make lab-test LAB=01.03
 make lab-observe LAB=01.03
 ```

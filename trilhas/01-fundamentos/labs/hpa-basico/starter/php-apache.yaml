@@ -1,0 +1,8 @@
+# EXERCICIO 01.14: defina HPA; backend de apoio sera preparado.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: php-apache
+  namespace: lab-01-14
+spec:
+  # TODO: scaleTargetRef, minReplicas 1, maxReplicas 4, metrica cpu 50%

@@ -1,5 +1,7 @@
 # Lab 01.11 — Volumes: persistencia via PVC
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.11`, complete `.labs/01.11/claim.yaml` e `.labs/01.11/pod.yaml` e execute **`kubectl apply -f .labs/01.11/`**. Só depois valide com `make lab-test LAB=01.11`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.11` revela seus arquivos para estudo posterior.
+
 [← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -13,8 +15,9 @@ Um volume efêmero desaparece com o Pod; um PVC pode preservar dados além do ci
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/volumes-basico/claim.yaml
-cat trilhas/01-fundamentos/labs/volumes-basico/pod.yaml
+make lab-prepare LAB=01.11
+cat .labs/01.11/claim.yaml
+cat .labs/01.11/pod.yaml
 ```
 
 Preveja o comportamento dos controladores e componentes envolvidos.
@@ -22,7 +25,9 @@ Preveja o comportamento dos controladores e componentes envolvidos.
 ## Fase 2 — Aplicar e testar
 
 ```bash
-make lab-up LAB=01.11
+make lab-prepare LAB=01.11
+# Preencha os arquivos de trabalho
+kubectl apply -f .labs/01.11/
 make lab-test LAB=01.11
 make lab-observe LAB=01.11
 ```
@@ -41,8 +46,8 @@ kubectl exec -n lab-01-11 pod/escritor -- cat /dados/mensagem.txt
 kubectl exec -n lab-01-11 pod/escritor -- sh -c 'echo marcador > /dados/marcador.txt'
 kubectl delete pod escritor -n lab-01-11
 kubectl get pvc dados-pvc -n lab-01-11
-kubectl apply -f trilhas/01-fundamentos/labs/volumes-basico/claim.yaml
-kubectl apply -f trilhas/01-fundamentos/labs/volumes-basico/pod.yaml
+kubectl apply -f .labs/01.11/claim.yaml
+kubectl apply -f .labs/01.11/pod.yaml
 kubectl wait --for=condition=Ready pod/escritor -n lab-01-11 --timeout=120s
 kubectl exec -n lab-01-11 pod/escritor -- cat /dados/marcador.txt
 ```

@@ -1,5 +1,7 @@
 # Lab 01.05 — Services: descoberta e acesso
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.05` para preparar o namespace e os Pods de apoio e criar o arquivo `.labs/01.05/service.yaml`. Complete o YAML com base no objetivo desta aula. Execute `kubectl apply -f .labs/01.05/` e depois `make lab-test LAB=01.05`. **`make lab-up` é exclusivo da CI** e aplica a solução, portanto não é o fluxo do aluno. `make lab-solution LAB=01.05` mostra onde consultar a referência.
+
 [← Aula 01.05 — Services](../../services/README.md) · [↑ Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -15,7 +17,8 @@ Entender por que um **Service** fornece um endereço estável para Pods efêmero
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/services-basico/resources.yaml
+make lab-prepare LAB=01.05
+cat .labs/01.05/service.yaml
 ```
 
 Identifique `metadata.name`, `spec.type: ClusterIP`, `spec.selector`, `port` e `targetPort`. Compare o selector do Service com a label dos Pods do Deployment de apoio.
@@ -23,7 +26,9 @@ Identifique `metadata.name`, `spec.type: ClusterIP`, `spec.selector`, `port` e `
 ## Fase 2 — Criar e observar
 
 ```bash
-make lab-up LAB=01.05
+make lab-prepare LAB=01.05
+# Complete os campos TODO do arquivo local
+kubectl apply -f .labs/01.05/
 make lab-test LAB=01.05
 make lab-observe LAB=01.05
 kubectl get service web -n lab-01-05 -o wide

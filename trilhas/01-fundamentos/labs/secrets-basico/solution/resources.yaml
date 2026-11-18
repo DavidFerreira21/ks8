@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: exemplo-ficticio
+  namespace: lab-01-08
+type: Opaque
+stringData:
+  TOKEN_DEMO: "valor-ficticio-para-estudo"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumidor
+  namespace: lab-01-08
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: consumidor}
+  template:
+    metadata:
+      labels: {app: consumidor}
+    spec:
+      containers:
+        - name: leitor
+          image: busybox:1.36
+          command: ["sh", "-c", "echo Secret referenciado; sleep 3600"]
+          env:
+            - name: TOKEN_DEMO
+              valueFrom:
+                secretKeyRef:
+                  name: exemplo-ficticio
+                  key: TOKEN_DEMO
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {cpu: 50m, memory: 32Mi}

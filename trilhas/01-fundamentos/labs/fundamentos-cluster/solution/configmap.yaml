@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: estado-desejado
+  namespace: lab-fundamentos
+  labels:
+    app.kubernetes.io/part-of: kubernetes-visual-guide
+data:
+  mensagem: "Declarar, observar, reconciliar"
+  etapa: "primeira-versao"

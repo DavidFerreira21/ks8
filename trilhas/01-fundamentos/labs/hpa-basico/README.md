@@ -1,5 +1,7 @@
 # Lab 01.14 — HPA: escalabilidade orientada por CPU
 
+> **MODO DESAFIO:** primeiro configure os addons do roteiro. Depois, `make lab-prepare LAB=01.14` prepara somente o Deployment e Service de apoio e cria `.labs/01.14/php-apache.yaml`. **Escreva o HPA**, execute `kubectl apply -f .labs/01.14/` e valide com `make lab-test LAB=01.14`. `make lab-up` é reservado à CI, não ao aluno.
+
 [← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -23,7 +25,9 @@ Se não existir Metrics Server, instale-o conforme [instruções oficiais](https
 
 ```bash
 kubectl config current-context
-make lab-up LAB=01.14
+make lab-prepare LAB=01.14
+# Complete o arquivo local com a especificacao
+kubectl apply -f .labs/01.14/
 make lab-test LAB=01.14
 make lab-observe LAB=01.14
 ```

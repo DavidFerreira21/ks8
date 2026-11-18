@@ -25,7 +25,9 @@ class FundamentalLabsTests(unittest.TestCase):
                 self.assertTrue((lab.directory / "README.md").is_file())
                 self.assertTrue(lab.apply)
                 self.assertTrue(lab.checks)
-                for item in lab.apply:
+                self.assertTrue(lab.starter)
+                self.assertEqual(len(lab.starter), len(lab.apply))
+                for item in (*lab.starter, *lab.setup, *lab.apply):
                     self.assertTrue(item.is_file())
 
     def test_all_manifests_parse_and_match_namespaces(self):
@@ -36,8 +38,11 @@ class FundamentalLabsTests(unittest.TestCase):
         self.assertEqual(lab.namespace, "lab-01-05")
         self.assertEqual(lab.directory.name, "services-basico")
         self.assertEqual(lab.experiments, ())
+        self.assertEqual(len(lab.setup), 1)
+        self.assertEqual(len(lab.starter), 1)
+        self.assertEqual({obj["kind"] for path in lab.apply for obj in yaml.safe_load_all(path.read_text(encoding="utf-8"))}, {"Service"})
         manifests = []
-        for path in lab.apply:
+        for path in (*lab.setup, *lab.apply):
             manifests.extend(yaml.safe_load_all(path.read_text(encoding="utf-8")))
         self.assertEqual({obj["kind"] for obj in manifests}, {"Deployment", "Service"})
         deployment = next(obj for obj in manifests if obj["kind"] == "Deployment")

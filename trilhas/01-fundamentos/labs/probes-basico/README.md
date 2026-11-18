@@ -1,5 +1,7 @@
 # Lab 01.10 — Probes: readiness e liveness
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.10`, complete `.labs/01.10/resources.yaml` e execute **`kubectl apply -f .labs/01.10/`**. Só depois valide com `make lab-test LAB=01.10`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.10` revela seus arquivos para estudo posterior.
+
 [← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -13,7 +15,8 @@ Uma aplicação Running pode estar NotReady. O experimento cria uma falha de rea
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/probes-basico/resources.yaml
+make lab-prepare LAB=01.10
+cat .labs/01.10/resources.yaml
 ```
 
 Preveja os objetos criados e seus estados.
@@ -21,7 +24,9 @@ Preveja os objetos criados e seus estados.
 ## Fase 2 — Executar
 
 ```bash
-make lab-up LAB=01.10
+make lab-prepare LAB=01.10
+# Preencha os arquivos de trabalho
+kubectl apply -f .labs/01.10/
 make lab-test LAB=01.10
 make lab-observe LAB=01.10
 ```

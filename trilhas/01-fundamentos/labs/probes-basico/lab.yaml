@@ -2,7 +2,9 @@ id: "01.10"
 title: "Probes: readiness e liveness"
 namespace: lab-01-10
 apply:
-  - resources.yaml
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
 checks:
   - type: deployment
     name: web

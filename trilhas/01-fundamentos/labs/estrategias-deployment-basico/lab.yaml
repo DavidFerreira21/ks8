@@ -2,7 +2,9 @@ id: "01.12"
 title: "Deployment: rollout e rollback"
 namespace: lab-01-12
 apply:
-  - resources.yaml
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
 checks:
   - type: deployment
     name: web

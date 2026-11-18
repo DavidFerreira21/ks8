@@ -28,8 +28,11 @@ jobs:
           test -f Makefile
           test ! -f makefile
           make -n labs > /dev/null
+          make -n lab-prepare LAB=01.02 > /dev/null
+          make -n lab-reset LAB=01.02 > /dev/null
+          make -n lab-solution LAB=01.02 > /dev/null
           make -n lab-observe LAB=01.05 > /dev/null
-          make -n lab-experiment LAB=01.05 EXPERIMENT=controlled-rollout > /dev/null
+          make -n lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout > /dev/null
           make -n new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico > /dev/null
 
       - name: Validate example manifests
@@ -42,8 +45,7 @@ jobs:
         run: |
           while IFS= read -r -d '' script; do
             echo "Checking ${script}"
-            if LC_ALL=C grep -q 
-\\r' "$script"; then
+            if LC_ALL=C grep -q "$(printf '\015')" "$script"; then
               echo "::error file=${script}::Shell script uses CRLF; convert to LF" >&2
               exit 1
             fi

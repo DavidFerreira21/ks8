@@ -1,5 +1,7 @@
 # Lab 01.08 — Secrets: referencia e consumo seguro
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.08` para criar o namespace e copiar um arquivo incompleto para `.labs/01.08/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.08/` e valide com `make lab-test LAB=01.08`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.08` apenas depois de tentar.
+
 [← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Hipótese e objetivo
@@ -13,7 +15,8 @@ Um Secret permite referenciar informações sensíveis sem embuti-las no Pod spe
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/secrets-basico/resources.yaml
+make lab-prepare LAB=01.08
+cat .labs/01.08/resources.yaml
 ```
 
 Preveja quais recursos aparecerão.
@@ -21,7 +24,9 @@ Preveja quais recursos aparecerão.
 ## Fase 2 — Aplicar e testar
 
 ```bash
-make lab-up LAB=01.08
+make lab-prepare LAB=01.08
+# Complete o manifesto em .labs/01.08/resources.yaml
+kubectl apply -f .labs/01.08/
 make lab-test LAB=01.08
 make lab-observe LAB=01.08
 ```
@@ -42,7 +47,7 @@ kubectl delete secret exemplo-ficticio -n lab-01-08
 kubectl rollout restart deployment/consumidor -n lab-01-08
 kubectl get pods -n lab-01-08
 kubectl get events -n lab-01-08 --sort-by=.lastTimestamp
-kubectl apply -f trilhas/01-fundamentos/labs/secrets-basico/resources.yaml
+kubectl apply -f .labs/01.08/resources.yaml
 kubectl rollout restart deployment/consumidor -n lab-01-08
 make lab-test LAB=01.08
 ```

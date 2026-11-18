@@ -1,5 +1,7 @@
 # Lab 01.06 — Namespaces: isolamento logico
 
+> **MODO DESAFIO:** execute `make lab-prepare LAB=01.06` para preparar o namespace e criar o arquivo `.labs/01.06/resources.yaml`. Complete o YAML com base no objetivo desta aula. Execute `kubectl apply -f .labs/01.06/` e depois `make lab-test LAB=01.06`. **`make lab-up` é exclusivo da CI** e aplica a solução, portanto não é o fluxo do aluno. `make lab-solution LAB=01.06` mostra onde consultar a referência.
+
 [← Camada 01](../../README.md) · [Guia dos labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -13,7 +15,8 @@ Namespaces isolam nomes de objetos e definem escopo de políticas, mas não são
 ```bash
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/namespaces-basico/resources.yaml
+make lab-prepare LAB=01.06
+cat .labs/01.06/resources.yaml
 ```
 
 Antes de executar, anote quais objetos e controladores devem aparecer.
@@ -21,7 +24,9 @@ Antes de executar, anote quais objetos e controladores devem aparecer.
 ## Fase 2 — Aplicar e validar
 
 ```bash
-make lab-up LAB=01.06
+make lab-prepare LAB=01.06
+# Complete os campos TODO do arquivo local
+kubectl apply -f .labs/01.06/
 make lab-test LAB=01.06
 make lab-observe LAB=01.06
 ```

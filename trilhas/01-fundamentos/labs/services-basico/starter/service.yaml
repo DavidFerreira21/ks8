@@ -1,0 +1,9 @@
+# EXERCICIO 01.05: configure um Service que selecione os Pods do backend.
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: lab-01-05
+spec:
+  type: ClusterIP
+  # TODO: selector app correto, ports.port e ports.targetPort.

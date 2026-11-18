@@ -1,0 +1,7 @@
+# EXERCICIO 01.11: configure accessModes e resources.requests.storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dados-pvc
+  namespace: lab-01-11
+# TODO: escrever a especificacao do recurso

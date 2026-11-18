@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: observador
+  namespace: lab-01-04
+spec:
+  selector:
+    matchLabels: {app: observador}
+  template:
+    metadata:
+      labels: {app: observador}
+    spec:
+      containers:
+        - name: watcher
+          image: busybox:1.36
+          command: ["sh", "-c", "sleep 3600"]
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+            limits: {cpu: 50m, memory: 32Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stateful-headless
+  namespace: lab-01-04
+spec:
+  clusterIP: None
+  selector: {app: stateful-demo}
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: stateful-demo
+  namespace: lab-01-04
+spec:
+  serviceName: stateful-headless
+  replicas: 2
+  selector:
+    matchLabels: {app: stateful-demo}
+  template:
+    metadata:
+      labels: {app: stateful-demo}
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+          resources:
+            requests: {cpu: 20m, memory: 32Mi}
+            limits: {cpu: 200m, memory: 128Mi}

@@ -1,8 +1,12 @@
 id: "01.13"
 title: "Ingress: roteamento HTTP com Traefik"
 namespace: lab-01-13
+setup:
+  - setup.yaml
 apply:
-  - resources.yaml
+  - solution/web.yaml
+starter:
+  - starter/web.yaml
 checks:
   - type: deployment
     name: web
