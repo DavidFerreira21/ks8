@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Entender os objetos essenciais do Kubernetes, publicar uma aplicação e observar como o cluster mantém o estado desejado.
 
-**14 aulas com teoria e infográfico publicados** · **14 labs com manifests**
+**14 aulas com teoria e infográfico publicados** · **14 labs de prática ativa (YAML escrito pelo aluno)**
 
 ---
 
@@ -42,7 +42,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 
 ## 🧪 Laboratórios
 
-Cada aula da Camada 01 tem agora um lab próprio. Os labs de 01.13 e 01.14 exigem addons e validação funcional adicionais. Comece pelo [**Lab 01.01 — Explorar o cluster e a API**](labs/fundamentos-cluster/README.md), que ensina a observar o Control Plane e os Workers e a aplicar um objeto declarativo.
+Cada aula da Camada 01 tem um lab próprio. **O aluno escreve os manifests**, aplica com `kubectl apply` e valida com `make lab-test`; `make lab-prepare` cria somente o necessário para começar. Os labs de 01.13 e 01.14 exigem addons e validação funcional adicionais. Comece pelo [**Lab 01.01 — Explorar o cluster e a API**](labs/fundamentos-cluster/README.md), que ensina a observar o Control Plane e os Workers e a aplicar um objeto declarativo.
 
 ### Aplicação integrada
 
