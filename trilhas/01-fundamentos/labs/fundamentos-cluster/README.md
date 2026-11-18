@@ -1,5 +1,7 @@
 # Lab 01.01 — Fundamentos: primeiro contato com a API Kubernetes
 
+> **MODO DESAFIO — o aluno constrói:** `make lab-prepare LAB=01.01` cria apenas o namespace e copia um YAML incompleto para `.labs/01.01/`. **Complete o arquivo usando o objetivo abaixo**, aplique você mesmo com `kubectl apply -f .labs/01.01/` e só então execute `make lab-test LAB=01.01`. O comando `make lab-up` é reservado à CI. `make lab-solution LAB=01.01` mostra o caminho da referência quando você quiser conferir.
+
 [← Aula 01.01](../../fundamentos/README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo
@@ -37,7 +39,9 @@ Leia [configmap.yaml](configmap.yaml). Identifique `apiVersion`, `kind`, `metada
 ## Fase 3 — Aplicar e testar
 
 ```bash
-make lab-up LAB=01.01
+make lab-prepare LAB=01.01
+# Complete primeiro o arquivo em .labs/01.01/
+kubectl apply -f .labs/01.01/
 make lab-test LAB=01.01
 kubectl get configmap estado-desejado -n lab-fundamentos -o yaml
 ```
@@ -58,7 +62,7 @@ Espere alguns segundos e consulte o valor novamente. **Ele não será revertido 
 Agora reaplique a intenção local:
 
 ```bash
-kubectl apply --server-side --force-conflicts -f trilhas/01-fundamentos/labs/fundamentos-cluster/configmap.yaml
+kubectl apply --server-side --force-conflicts -f .labs/01.01/configmap.yaml
 kubectl get configmap estado-desejado -n lab-fundamentos -o jsonpath='{.data.etapa}{"\n"}'
 ```
 
