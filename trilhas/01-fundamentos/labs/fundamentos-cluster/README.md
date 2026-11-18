@@ -1,8 +1,8 @@
-# Lab 01.01 — Fundamentos: primeiro contato com a API Kubernetes
+# Lab 01.01 — Fundamentos Kubernetes
 
+[← Aula 01.01](../../fundamentos/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 > **MODO DESAFIO — o aluno constrói:** `make lab-prepare LAB=01.01` cria apenas o namespace e copia um YAML incompleto para `.labs/01.01/`. **Complete o arquivo usando o objetivo abaixo**, aplique você mesmo com `kubectl apply -f .labs/01.01/` e só então execute `make lab-test LAB=01.01`. O comando `make lab-up` é reservado à CI. `make lab-solution LAB=01.01` mostra o caminho da referência quando você quiser conferir.
 
-[← Aula 01.01](../../fundamentos/README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo
 
@@ -88,6 +88,10 @@ make lab-status LAB=01.01
 - [ ] Observei a alteração manual e sua reversão após reaplicar o manifesto.
 - [ ] Limpei apenas o recurso criado neste laboratório.
 
-**Próxima aula:** [01.02 — Pods](../../pods/README.md). Mais adiante, o [Lab 01.05](../primeira-aplicacao/README.md) demonstra controllers e réplicas.
+**Próxima aula:** [Aula 01.02 — Pods](../../pods/README.md). O [Lab 01.05](../services-basico/README.md) aborda Services e descoberta de backends.
 
 [Referência oficial — Kubernetes Overview](https://kubernetes.io/docs/concepts/overview/) · [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
+
+---
+
+[↑ Aula 01.01](../../fundamentos/README.md) · [Próximo: Lab 01.02 →](../pods-basico/README.md)
