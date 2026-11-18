@@ -45,8 +45,9 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 make up          # Cria o cluster Kind local
 make nodes       # Confere os nós
 make validate    # Executa validação estática dos exemplos
-make lab-up      # Aplica ConfigMap do primeiro lab (01.01)
-make lab-test    # Confere o recurso registrado no lab
+make lab-prepare LAB=01.01  # Cria namespace e starter, sem solução
+kubectl apply -f .labs/01.01/  # Após escrever o YAML
+make lab-test LAB=01.01         # Confere o recurso criado pelo aluno
 make lab-down    # Remove apenas recursos do lab
 ```
 
@@ -60,12 +61,15 @@ O projeto agora oferece uma interface única para descobrir, executar e diagnost
 make doctor
 make up
 make labs
-make lab-up LAB=01.01
+make lab-prepare LAB=01.01
+# Escreva o YAML em .labs/01.01/ e execute kubectl apply -f .labs/01.01/
 make lab-observe LAB=01.01
 make lab-test LAB=01.01
 make lab-down LAB=01.01
 # Após a aula 01.05: make lab-up LAB=01.05
 ```
+
+**Aprendizado ativo:** o aluno escreve YAML em `.labs/<ID>/`, aplica com `kubectl apply` e valida usando `make lab-test`. `make lab-up` permanece somente para testes da CI. 
 
 Os exercícios são executados em um **Kind local** com verificação de contexto e limpeza restrita aos manifests registrados; namespaces são preservados. Para criar um novo exercício, use `make new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico` e revise o contrato antes de publicá-lo. Veja o [guia dos laboratórios](docs/labs.md).
 
