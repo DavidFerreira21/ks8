@@ -15,6 +15,7 @@ Um Secret permite referenciar informações sensíveis sem embuti-las no Pod spe
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.08
 cat .labs/01.08/resources.yaml
 ```
 
