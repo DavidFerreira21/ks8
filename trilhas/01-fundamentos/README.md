@@ -17,6 +17,8 @@
 | **03 · Controlar e expor** | **04 · Observar e experimentar** |
 | 🔁 Aprenda Deployments, ReplicaSets e Services: como atualizar e acessar aplicações.<br><br>**[Deployments →](deployments/README.md)** | 🧪 Execute o lab integrado e investigue réplicas, Service e eventos.<br><br>**[Primeira aplicação →](labs/primeira-aplicacao/README.md)** |
 
+[**Consultar tabela de migração dos IDs antigos →**](../../docs/migracao-ids-fundamentos.md)
+
 ## 📚 Catálogo de aulas — ordem oficial
 
 A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). As **14 aulas já possuem explicação teórica e infográfico**. Laboratórios executáveis continuam em evolução, sem remover o material complementar existente.
