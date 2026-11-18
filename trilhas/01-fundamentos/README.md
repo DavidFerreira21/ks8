@@ -33,12 +33,16 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | [🧪 Lab 01.06](labs/namespaces-basico/README.md) | — |
 | 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | [🧪 Lab 01.07](labs/configmaps-basico/README.md) | — |
 | 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | [🧪 Lab 01.08](labs/secrets-basico/README.md) | — |
-| 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [🧪 Lab 01.09](labs/requests-limits-basico/README.md) | [Consultar](../../2-pod/README.md) |
+| 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [🧪 Lab 01.09](labs/requests-limits-basico/README.md) | — |
 | 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [🧪 Lab 01.10](labs/probes-basico/README.md) | [Consultar](../../5-probes/README.md) |
 | 01.11 | **Volumes** | [📖 Estudar](volumes/README.md) | [🧪 Lab 01.11](labs/volumes-basico/README.md) | — |
 | 01.12 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | [🧪 Lab 01.12](labs/estrategias-deployment-basico/README.md) | — |
 | 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | [🧪 Lab 01.13](labs/ingress-basico/README.md) | — |
 | 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | [🧪 Lab 01.14](labs/hpa-basico/README.md) | — |
+
+## 📚 Como usar os complementares
+
+Os **complementares são opcionais**: a aula ensina o conceito e o lab valida a prática. Eles servem como referência para decisões, comandos adicionais, troubleshooting, limitações e fontes oficiais. Não precisam existir para todas as aulas. A mesma página não deve ser usada como complementar de um assunto diferente apenas porque menciona esse tema.
 
 ## 🧪 Laboratórios
 
