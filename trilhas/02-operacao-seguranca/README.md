@@ -6,7 +6,7 @@
 
 **14 aulas com teoria e infográfico** · **14 labs com desafios YAML e soluções separadas** · **6 complementares opcionais**
 
-O [padrão editorial](../../docs/padrao-editorial.md) é o mesmo da Camada 01. Os labs possuem contratos e validação estática; **não confunda publicação com homologação funcional integral**. A CI Kind atual só executa os labs 02.02 e 02.04; os demais aguardam execução específica e evidências.
+O [padrão editorial](../../docs/padrao-editorial.md) é o mesmo da Camada 01. Os labs possuem contratos e validação estática; **não confunda publicação com homologação funcional integral**. A CI Kind executa 10 labs da Camada 02 (02.01–02.08, 02.10 e 02.11), conforme os checks de cada caso. Os labs 02.09, 02.12, 02.13 e 02.14 exigem validação específica; smoke test não substitui experimentos manuais.
 
 ## 🚀 Percurso recomendado
 

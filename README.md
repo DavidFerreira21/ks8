@@ -77,7 +77,7 @@ Os exercícios são executados em um **Kind local** com verificação de context
 
 ## 🧪 Laboratórios disponíveis
 
-As **Camadas 01 e 02 reúnem 14 laboratórios cada (28 no total)**, com contratos, starters e desafios de escrita de YAML. A execução funcional completa depende de validação por tema. Os exercícios 01.13 (Ingress) e 01.14 (HPA) requerem addons para testes funcionais. [**Abrir Camada 01**](trilhas/01-fundamentos/README.md) · [**Abrir Camada 02**](trilhas/02-operacao-seguranca/README.md).
+As **Camadas 01 e 02 reúnem 14 laboratórios cada (28 no total)**, com contratos, starters e desafios de escrita de YAML. A CI executa automaticamente 12 da Camada 01 e 10 da Camada 02; os casos restantes dependem de validação específica. A execução funcional completa depende de validação por tema. Os exercícios 01.13 (Ingress) e 01.14 (HPA) requerem addons para testes funcionais. [**Abrir Camada 01**](trilhas/01-fundamentos/README.md) · [**Abrir Camada 02**](trilhas/02-operacao-seguranca/README.md).
 
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |
