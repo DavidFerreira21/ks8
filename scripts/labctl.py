@@ -278,6 +278,23 @@ def check_student_manifest(lab: Lab) -> int:
             for field in ("spec", "data", "type"):
                 if field in expected:
                     fields[field] = expected[field]
+            # Labels e annotations fazem parte do contrato quando declaradas
+            # na solucao, mas metadados gerados pelo API Server sao ignorados.
+            expected_metadata = {
+                key: metadata[key]
+                for key in ("labels", "annotations")
+                if key in metadata
+            }
+            if expected_metadata:
+                fields["metadata"] = expected_metadata
+            if kind in {"Role", "ClusterRole", "RoleBinding", "ClusterRoleBinding"}:
+                for key in ("rules", "subjects", "roleRef"):
+                    if key in expected:
+                        fields[key] = expected[key]
+            if kind == "PriorityClass":
+                for key in ("value", "globalDefault", "preemptionPolicy"):
+                    if key in expected:
+                        fields[key] = expected[key]
             if kind == "Secret" and "stringData" in expected:
                 fields["data"] = {
                     k: base64.b64encode(str(v).encode("utf-8")).decode("ascii")
