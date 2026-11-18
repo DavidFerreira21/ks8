@@ -65,8 +65,8 @@ Não force OOM em cluster compartilhado. OOMKilled de um container e eviction de
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/)
 
 ---
 
-[← Aula 02.09](../priorityclass-preemption/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.11 →](../pdb/README.md)
+[← Aula 02.09 — PriorityClass e Preemption](../priorityclass-preemption/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.10](../labs/qos-eviction-basico/README.md) · [Próxima: Aula 02.11 — PodDisruptionBudget (PDB) →](../pdb/README.md)

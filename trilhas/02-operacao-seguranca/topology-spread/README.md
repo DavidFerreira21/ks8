@@ -63,8 +63,8 @@ kubectl describe pod POD -n NAMESPACE
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
 
 ---
 
-[← Aula 02.07](../taints-tolerations-affinity/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.09 →](../priorityclass-preemption/README.md)
+[← Aula 02.07 — Taints, Tolerations e Node Affinity](../taints-tolerations-affinity/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.08](../labs/topology-spread-basico/README.md) · [Próxima: Aula 02.09 — PriorityClass e Preemption →](../priorityclass-preemption/README.md)

@@ -59,8 +59,8 @@ Não execute drain/cordon no Control Plane ou em clusters compartilhados sem aut
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
 
 ---
 
-[← Aula 02.11](../pdb/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.13 →](../networkpolicy/README.md)
+[← Aula 02.11 — PodDisruptionBudget (PDB)](../pdb/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.12](../labs/node-maintenance-basico/README.md) · [Próxima: Aula 02.13 — NetworkPolicy →](../networkpolicy/README.md)

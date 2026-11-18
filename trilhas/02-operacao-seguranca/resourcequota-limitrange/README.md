@@ -63,9 +63,9 @@ Quota de requests pode causar rejeição mesmo quando há CPU livre nos nós. N�
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/policy/limit-range/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/policy/limit-range/)
 
 ---
 
-[↑ Camada 02](../README.md) · [🧪 Lab 02.04](../labs/quota-namespace/README.md) · [← Aula 02.03](../securitycontext-pod-security/README.md) · [Próxima: 02.05 →](../init-sidecars/README.md)
+[← Aula 02.03 — SecurityContext e Pod Security Admission](../securitycontext-pod-security/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.04](../labs/quota-namespace/README.md) · [Próxima: Aula 02.05 — Init Containers e Sidecars →](../init-sidecars/README.md)
