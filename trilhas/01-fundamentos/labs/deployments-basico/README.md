@@ -1,6 +1,7 @@
 # Lab 01.03 — Deployments
 
 [← Aula 01.03](../../deployments/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+
 > **MODO DESAFIO — o aluno constrói:** `make lab-prepare LAB=01.03` cria apenas o namespace e copia um YAML incompleto para `.labs/01.03/`. **Complete o arquivo usando o objetivo abaixo**, aplique você mesmo com `kubectl apply -f .labs/01.03/` e só então execute `make lab-test LAB=01.03`. O comando `make lab-up` é reservado à CI. `make lab-solution LAB=01.03` mostra o caminho da referência quando você quiser conferir.
 
 
