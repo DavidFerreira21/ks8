@@ -1,0 +1,8 @@
+id: "02.09"
+title: "PriorityClass sem preempção"
+namespace: lab-02-09
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks: []

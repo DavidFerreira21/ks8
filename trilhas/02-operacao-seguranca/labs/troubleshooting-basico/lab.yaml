@@ -1,0 +1,8 @@
+id: "02.14"
+title: "Diagnóstico orientado a evidências"
+namespace: lab-02-14
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks: []

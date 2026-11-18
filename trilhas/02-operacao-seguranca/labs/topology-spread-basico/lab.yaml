@@ -1,0 +1,10 @@
+id: "02.08"
+title: "Topology Spread Constraints"
+namespace: lab-02-08
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: deployment
+    name: distribuida

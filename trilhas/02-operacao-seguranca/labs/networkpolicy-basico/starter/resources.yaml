@@ -1,0 +1,14 @@
+# EXERCÍCIO 02.13: Pod e NetworkPolicy default-deny ingress
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alvo
+  namespace: lab-02-13
+# TODO: label app=alvo e container BusyBox
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: isolar-ingress
+  namespace: lab-02-13
+# TODO: podSelector, policyTypes Ingress e ingress []

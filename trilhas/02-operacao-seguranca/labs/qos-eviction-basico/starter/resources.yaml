@@ -1,0 +1,21 @@
+# EXERCÍCIO 02.10: crie três Pods com perfis diferentes
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sem-recursos
+  namespace: lab-02-10
+# TODO: container sem resources
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: variavel
+  namespace: lab-02-10
+# TODO: requests menores que limits
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: garantido
+  namespace: lab-02-10
+# TODO: requests e limits iguais para CPU e memória

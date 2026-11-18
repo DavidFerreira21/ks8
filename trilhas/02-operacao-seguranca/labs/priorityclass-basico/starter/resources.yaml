@@ -1,0 +1,13 @@
+# EXERCÍCIO 02.09: PriorityClass de escopo do cluster e Pod
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: lab-02-priority
+# TODO: value 1000, globalDefault false, preemptionPolicy Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: prioritario
+  namespace: lab-02-09
+# TODO: priorityClassName e container BusyBox

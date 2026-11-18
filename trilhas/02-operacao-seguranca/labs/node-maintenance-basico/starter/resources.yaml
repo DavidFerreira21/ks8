@@ -1,0 +1,9 @@
+# EXERCÍCIO 02.12: Pod para observar um worker durante manutenção
+apiVersion: v1
+kind: Pod
+metadata:
+  name: manutencao
+  namespace: lab-02-12
+spec:
+  # TODO: nodeSelector para dev-worker
+  # TODO: container BusyBox com sleep
