@@ -11,6 +11,12 @@ Namespaces isolam nomes de objetos e definem escopo de políticas, mas não são
 
 **Pré-requisitos:** Kind `dev` ativo, `kubectl`, `make`; namespace exclusivo `lab-01-06`.
 
+## Desafio — o que você vai construir
+
+Crie um `ConfigMap` chamado `identidade` em `lab-01-06`, com `data.ambiente: aula-0106`. Depois compare o objeto com outro `ConfigMap` chamado `identidade` em um **segundo namespace criado somente para o experimento**. Entenda que namespace organiza nomes, não isola rede automaticamente.
+
+**Antes de aplicar:** use o arquivo incompleto em `.labs/01.06/` como ponto de partida. Confira campos com `kubectl explain`; não abra a solução antes de formular uma tentativa.
+
 ## Fase 1 — Inspecionar o que será aplicado
 
 ```bash
@@ -25,7 +31,6 @@ Antes de executar, anote quais objetos e controladores devem aparecer.
 ## Fase 2 — Aplicar e validar
 
 ```bash
-make lab-prepare LAB=01.06
 # Complete os campos TODO do arquivo local
 kubectl apply -f .labs/01.06/
 make lab-test LAB=01.06
@@ -54,6 +59,14 @@ kubectl delete namespace lab-01-06-extra
 
 **Atenção:** a exclusão do namespace secundário só é segura se você o criou exclusivamente para este experimento e ele não contém recursos de terceiros. O namespace principal do lab permanece após `lab-down`.
 
+## Resultado esperado e evidências
+
+- O ConfigMap `identidade` existe em `lab-01-06` e não aparece no namespace `default` a menos que alguém o tenha criado lá.
+- Dois ConfigMaps com o **mesmo nome** podem coexistir em namespaces diferentes, com `data.ambiente` distinto.
+- `kubectl api-resources --namespaced=false` mostra tipos de recurso cujo escopo é o cluster, não um namespace.
+
+**Se o resultado divergir:** confirme contexto, namespace, eventos e o YAML escrito. Diferencie comportamento intencional do experimento e erro na sua configuração.
+
 ## Fase 3 — Diagnóstico
 
 ```bash
@@ -72,12 +85,18 @@ make lab-status LAB=01.06
 
 O namespace é preservado. Não use `make down` para excluir um único lab.
 
-## Checklist
+## Critérios de conclusão
 
-- [ ] Previ os recursos criados e conferi o resultado.
-- [ ] Executei e expliquei o experimento.
-- [ ] Investiguei eventos e condições.
-- [ ] Limpei os recursos sem afetar outros labs.
+- [ ] Criei e inspecionei `identidade` no namespace correto.
+- [ ] Criei o mesmo nome em outro namespace e comparei os valores.
+- [ ] Expliquei por que namespaces não equivalem a clusters ou isolamento de rede.
+- [ ] Apaguei somente o namespace extra que eu mesmo criei e limpei o lab.
+
+## Aprofunde seus conhecimentos
+
+[Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) · [Organização de objetos](https://kubernetes.io/docs/concepts/overview/working-with-objects/) · [DNS e Namespaces](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+
+Releia a [aula teórica](../../namespaces/README.md) e compare os exemplos com o que você observou no cluster.
 
 ---
 

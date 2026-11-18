@@ -4,7 +4,20 @@
 
 ## Modelo de laboratório
 
-Cada lab deve documentar: objetivo, pré-requisitos, manifests, sequência de comandos, resultado esperado, investigação de falhas, limpeza e referências oficiais. As atividades novas devem demonstrar o comportamento de um recurso, não somente sua criação.
+Todos os labs da **Camada 01** seguem um percurso completo e repetível, adequado para quem está começando:
+
+1. **Objetivo e conceito:** entender qual comportamento Kubernetes será estudado.
+2. **Pré-requisitos:** confirmar o Kind local e addons necessários, quando houver.
+3. **Desafio YAML:** receber requisitos claros e preencher os arquivos em `.labs/<ID>/` sem copiar a solução.
+4. **Aplicação:** executar `kubectl apply` manualmente e observar os recursos criados.
+5. **Experimento:** alterar, excluir ou provocar uma falha controlada.
+6. **Resultado esperado:** comparar eventos, status, logs e hipóteses com as evidências previstas.
+7. **Diagnóstico:** investigar divergências com `kubectl describe` e eventos.
+8. **Critérios de conclusão:** responder às perguntas específicas do conceito.
+9. **Limpeza:** remover somente os recursos do lab, preservando o cluster.
+10. **Aprofundamento:** acessar a aula teórica e as páginas relevantes da documentação oficial.
+
+As atividades precisam **mostrar o comportamento** do recurso, não apenas sua criação. O resultado esperado descreve o que o aluno deve procurar depois de tentar o desafio; a solução de referência continua separada em `solution/`.
 
 ## Pré-requisitos locais
 
@@ -41,8 +54,8 @@ kubectl apply -f .labs/01.05/
 make lab-status LAB=01.05
 make lab-test LAB=01.05
 make lab-observe LAB=01.05
-make lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout
 make lab-down LAB=01.05
+# Para estudar RollingUpdate, avance ao Lab 01.12.
 ```
 
 | Comando | Finalidade |
@@ -75,7 +88,7 @@ make lab-down LAB=01.05
 
 A criação de namespaces ausentes não imprime mais um erro esperado de `NotFound`; falhas reais na consulta ao API Server continuam visíveis.
 
-**Pré-requisitos adicionais:** o Lab 01.13 requer um Ingress Controller (Traefik) e Helm; o 01.14 requer Metrics Server funcional. O `make lab-test` desses labs verifica seus objetos, mas **não** substitui o experimento de tráfego ou escalabilidade descrito no README.
+**Pré-requisitos adicionais:** o Lab 01.11 requer StorageClass funcional; o 01.13 requer um Ingress Controller (Traefik) e Helm; o 01.14 requer Metrics Server funcional. O `make lab-test` desses labs verifica seus objetos, mas **não** substitui o experimento de tráfego ou escalabilidade descrito no README.
 
 | ID | Aula | Laboratório |
 | --- | --- | --- |

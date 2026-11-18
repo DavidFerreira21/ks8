@@ -11,6 +11,12 @@ O Scheduler usa requests para decidir elegibilidade de nós, enquanto limits res
 
 **Escopo:** cluster Kind `dev`, namespace exclusivo `lab-01-09`.
 
+## Desafio — o que você vai construir
+
+Crie o Deployment `recursos` com nginx e defina `resources.requests` para CPU/memória e `resources.limits` para ambos. Em seguida, compare os recursos configurados com a capacidade dos nós e provoque um Pod temporário **Pending** por request exagerado.
+
+**Antes de aplicar:** use o arquivo incompleto em `.labs/01.09/` como ponto de partida. Confira campos com `kubectl explain`; não abra a solução antes de formular uma tentativa.
+
 ## Fase 1 — Preparar
 
 ```bash
@@ -25,7 +31,6 @@ Preveja os objetos criados e seus estados.
 ## Fase 2 — Executar
 
 ```bash
-make lab-prepare LAB=01.09
 # Complete o manifesto em .labs/01.09/resources.yaml
 kubectl apply -f .labs/01.09/
 make lab-test LAB=01.09
@@ -51,6 +56,14 @@ kubectl delete pod pedido-exagerado -n lab-01-09 --ignore-not-found
 
 O evento `FailedScheduling` deverá indicar recursos insuficientes; observe que um request não garante consumo real, e limites CPU e memória têm efeitos diferentes.
 
+## Resultado esperado e evidências
+
+- O Deployment simples deve ficar `Available`, com CPU/memória em `kubectl describe pod`.
+- O Pod `pedido-exagerado` permanece `Pending`; em eventos, normalmente aparecerá `FailedScheduling`/`Insufficient cpu` porque `1000` CPUs excedem a capacidade do nó.
+- A ausência de `kubectl top` não impede o lab básico: métricas de consumo requerem Metrics Server, opcional aqui. Diferencie `requests` (scheduling) e `limits` (execução).
+
+**Se o resultado divergir:** confirme contexto, namespace, eventos e o YAML escrito. Diferencie comportamento intencional do experimento e erro na sua configuração.
+
 ## Fase 3 — Diagnosticar
 
 ```bash
@@ -69,12 +82,18 @@ make lab-status LAB=01.09
 
 Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpar só um lab.
 
-## Checklist
+## Critérios de conclusão
 
-- [ ] Fiz uma hipótese antes de aplicar.
-- [ ] Identifiquei o comportamento do recurso.
-- [ ] Executei o experimento e interpretei eventos.
-- [ ] Removi os recursos do exercício.
+- [ ] Defini requests e limits para CPU e memória.
+- [ ] Identifiquei os recursos do container em `kubectl describe`.
+- [ ] Expliquei o `Pending` e o evento `FailedScheduling` do Pod exagerado.
+- [ ] Removi o Pod temporário e os objetos do lab.
+
+## Aprofunde seus conhecimentos
+
+[Gerenciamento de recursos](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) · [Scheduler e recursos](https://kubernetes.io/docs/concepts/scheduling-eviction/resource-bin-packing/) · [Diagnóstico de Pods Pending](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/).
+
+Releia a [aula teórica](../../requests-limits/README.md) e compare os exemplos com o que você observou no cluster.
 
 ---
 

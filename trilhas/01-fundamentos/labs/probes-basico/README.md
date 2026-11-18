@@ -11,6 +11,12 @@ Uma aplicação Running pode estar NotReady. O experimento cria uma falha de rea
 
 **Escopo:** cluster Kind `dev`, namespace exclusivo `lab-01-10`.
 
+## Desafio — o que você vai construir
+
+Escreva o Deployment `web` com nginx e configure **readinessProbe** e **livenessProbe** HTTP na porta 80. Inicialmente ambas devem verificar `/`. Depois aplique a alteração controlada da readiness para um caminho inválido e observe a nova revisão.
+
+**Antes de aplicar:** use o arquivo incompleto em `.labs/01.10/` como ponto de partida. Confira campos com `kubectl explain`; não abra a solução antes de formular uma tentativa.
+
 ## Fase 1 — Preparar
 
 ```bash
@@ -25,7 +31,6 @@ Preveja os objetos criados e seus estados.
 ## Fase 2 — Executar
 
 ```bash
-make lab-prepare LAB=01.10
 # Preencha os arquivos de trabalho
 kubectl apply -f .labs/01.10/
 make lab-test LAB=01.10
@@ -56,6 +61,14 @@ make lab-test LAB=01.10
 
 Repare que readiness controla elegibilidade ao tráfego e progressão do rollout; liveness decide quando reiniciar o container.
 
+## Resultado esperado e evidências
+
+- Inicialmente o Pod do Deployment fica `Ready` com sucesso nas verificações HTTP.
+- Uma revisão com readiness em `/nao-existe` tem novo Pod `Running`, mas **NotReady**; o rollout pode ficar travado porque o Pod não é elegível para tráfego.
+- `kubectl rollout undo` recupera a revisão saudável. Falhar readiness não equivale a reinício por liveness; compare `READY` e `RESTARTS`.
+
+**Se o resultado divergir:** confirme contexto, namespace, eventos e o YAML escrito. Diferencie comportamento intencional do experimento e erro na sua configuração.
+
 ## Fase 3 — Diagnosticar
 
 ```bash
@@ -74,12 +87,18 @@ make lab-status LAB=01.10
 
 Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpar só um lab.
 
-## Checklist
+## Critérios de conclusão
 
-- [ ] Fiz uma hipótese antes de aplicar.
-- [ ] Identifiquei o comportamento do recurso.
-- [ ] Executei o experimento e interpretei eventos.
-- [ ] Removi os recursos do exercício.
+- [ ] Configurei readiness e liveness com funções diferentes.
+- [ ] Observei o novo Pod Running/NotReady no experimento.
+- [ ] Expliquei por que readiness inválida bloqueia disponibilidade sem necessariamente reiniciar o container.
+- [ ] Executei rollback, vi o rollout saudável e limpei o lab.
+
+## Aprofunde seus conhecimentos
+
+[Probes](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/) · [Configurar probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) · [Deployments e rollback](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-back-a-deployment).
+
+Releia a [aula teórica](../../probes/README.md) e compare os exemplos com o que você observou no cluster.
 
 ---
 

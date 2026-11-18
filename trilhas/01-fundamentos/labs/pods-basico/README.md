@@ -11,6 +11,12 @@ Pod é a unidade mínima de execução agendada. Hipótese: se eu excluir um Pod
 
 **Ambiente:** cluster Kind `dev`, namespace isolado `lab-01-02`. Leia primeiro a aula teórica correspondente. Os experimentos são locais e manuais para você observar cada transição.
 
+## Desafio — o que você vai construir
+
+Escreva um `Pod` chamado `pod-demo`, no namespace `lab-01-02`, com um container `principal` usando `busybox:1.36`, comando que registre `pod-iniciado` e permaneça ativo, e `requests/limits` de CPU e memória. O Pod deve ser criado **sem Deployment ou ReplicaSet**.
+
+**Antes de aplicar:** tente explicar o comportamento esperado sem consultar `solution/`. Se precisar, use `kubectl explain` ou a documentação abaixo. A solução de referência só deve ser consultada depois da tentativa.
+
 ## Fase 1 — Preparar e inspecionar
 
 ```bash
@@ -26,8 +32,7 @@ Antes de aplicar, preveja quais objetos serão criados e quais controladores par
 ## Fase 2 — Aplicar e observar
 
 ```bash
-make lab-prepare LAB=01.02
-# Complete primeiro o arquivo em .labs/01.02/
+# Você já preparou o ambiente na Fase 1; complete agora o YAML local.
 kubectl apply -f .labs/01.02/
 make lab-test LAB=01.02
 make lab-observe LAB=01.02
@@ -46,11 +51,19 @@ kubectl logs pod-demo -n lab-01-02
 ```bash
 kubectl delete pod pod-demo -n lab-01-02
 kubectl get pods -n lab-01-02
-make lab-prepare LAB=01.02
+kubectl apply -f .labs/01.02/
 make lab-test LAB=01.02
 ```
 
 Por que o Deployment da aula seguinte responde de forma diferente?
+
+## Resultado esperado e evidências
+
+- Antes da exclusão, `pod-demo` fica `Running` e `Ready` (após o agendamento); os logs contêm `pod-iniciado`.
+- Depois de `kubectl delete pod`, o recurso desaparece e **nenhum controlador recria outro**; `make lab-test` falharia nesse momento.
+- Reaplicar seu próprio YAML recria o Pod e permite passar no teste. Compare o comportamento com o Lab 01.03.
+
+**Se o resultado divergir:** consulte `kubectl describe`, `kubectl get events` e os logs quando existirem Pods. Diferencie erro de YAML, problema no cluster e comportamento intencional do experimento.
 
 ## Fase 3 — Diagnosticar
 
@@ -59,7 +72,7 @@ kubectl get events -n lab-01-02 --sort-by=.lastTimestamp
 kubectl get all -n lab-01-02
 ```
 
-Investigue com `kubectl describe` e, quando houver Pod, `kubectl logs`. Compare estado desejado, readiness e eventos. `make lab-test` valida checks básicos, não substitui sua investigação.
+Investigue com `kubectl describe` e, quando houver Pod, `kubectl logs`. Compare estado desejado, readiness e eventos. `make lab-test` confere os checks e os campos declarados na solução de referência, mas não substitui sua investigação.
 
 ## Fase 4 — Limpar com segurança
 
@@ -72,10 +85,16 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 
 ## Critérios de conclusão
 
-- [ ] Expliquei a função dos objetos do manifesto.
-- [ ] Executei a observação antes e depois do experimento.
-- [ ] Comparei hipótese e resultado e identifiquei evidências.
-- [ ] Removi os recursos do lab sem apagar o cluster.
+- [ ] Escrevi o manifesto `Pod` sem copiar a solução.
+- [ ] Identifiquei nó, status e mensagem de log do `pod-demo`.
+- [ ] Confirmei que um Pod isolado não é recriado após a exclusão.
+- [ ] Reapliquei meu YAML e fiz a limpeza do lab.
+
+## Aprofunde seus conhecimentos
+
+[Pods](https://kubernetes.io/docs/concepts/workloads/pods/) · [Ciclo de vida do Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/) · [Depuração de Pods](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/).
+
+Use essas referências para entender **por que** o Kubernetes se comportou assim; depois compare com a [aula teórica](../../pods/README.md).
 
 ---
 

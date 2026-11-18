@@ -55,30 +55,52 @@ def scaffold(root: Path, identifier: str, slug: str, title: str) -> Path:
         "# TODO: escreva o campo data\n"
     )
     (lab_dir / "starter" / "configmap.yaml").write_text(starter, encoding="utf-8")
-    readme = f"""# {identifier} · {title}
+    readme = f"""# Lab {identifier} — {title}
 
 [↑ Índice dos laboratórios](../../../../docs/labs.md)
 
-## Objetivo
-Descreva a hipótese e o comportamento de Kubernetes que o aluno observará.
+## Objetivo e hipótese
+Explique a finalidade do recurso e formule uma hipótese verificável.
 
-## Pré-requisitos
-- Kind `dev`, contexto `kind-dev`.
-- Não use clusters compartilhados.
+## Desafio — o que você vai construir
+Descreva nome, kind, namespace, campos essenciais, dependencies e comportamento desejado. Não entregue o YAML completo ao aluno.
 
-## Etapas
-1. **Preparar:** confirme contexto e namespace.
-2. **Construir:** prepare o lab com `make lab-prepare LAB={identifier}`, escreva YAML em `.labs/{identifier}/` e execute `kubectl apply -f .labs/{identifier}/`.
-3. **Observar e validar:** use `make lab-observe LAB={identifier}` e `make lab-test LAB={identifier}`.
-4. **Experimentar:** proponha uma mudança ou falha controlada.
-5. **Diagnosticar:** explique o resultado encontrado.
-6. **Limpar:** exclua somente os recursos criados.
+## Fase 1 — Preparar e inspecionar
+```bash
+make lab-prepare LAB={identifier}
+cat .labs/{identifier}/configmap.yaml
+```
 
-## Critérios de sucesso
-- [ ] Descrever o comportamento esperado.
-- [ ] Comparar estado desejado com estado observado.
-- [ ] Identificar comandos de diagnóstico.
-- [ ] Limpar os recursos do experimento.
+## Fase 2 — Escrever, aplicar e observar
+Complete o starter, depois:
+```bash
+kubectl apply -f .labs/{identifier}/
+make lab-observe LAB={identifier}
+make lab-test LAB={identifier}
+```
+
+## Fase 3 — Experimentar
+Proponha uma alteração ou falha controlada e diga o que medir antes e depois.
+
+## Resultado esperado e evidências
+Descreva estados, eventos e logs observáveis. Diferencie condição normal, erro e caso de recuperação.
+
+## Fase 4 — Diagnosticar
+Registre comandos de `kubectl describe`, logs e eventos para o recurso.
+
+## Fase 5 — Limpar
+```bash
+make lab-down LAB={identifier}
+```
+
+## Critérios de conclusão
+- [ ] Expliquei o conceito com evidências reais.
+- [ ] Construí e apliquei meu próprio manifesto.
+- [ ] Comparei hipótese com o resultado do experimento.
+- [ ] Fiz a limpeza sem apagar o cluster.
+
+## Aprofunde seus conhecimentos
+[Documentação Kubernetes](https://kubernetes.io/docs/home/) — substitua por 2–3 páginas oficiais específicas do tema.
 
 ## Publicação do lab
 Revise o YAML, manifeste checks reais, valide os exercícios e **renomeie
