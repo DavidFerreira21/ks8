@@ -1,0 +1,7 @@
+# EXERCICIO 01.03: escreva as definicoes e remova os TODO.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: lab-01-03
+# TODO: complete spec.replicas, selector e spec.template.
