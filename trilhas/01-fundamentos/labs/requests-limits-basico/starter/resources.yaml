@@ -1,0 +1,7 @@
+# EXERCICIO 01.09: escreva o YAML sem consultar a solucao.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recursos
+  namespace: lab-01-09
+# TODO: escreva o spec e configure requests/limits ou a referencia ao Secret.
