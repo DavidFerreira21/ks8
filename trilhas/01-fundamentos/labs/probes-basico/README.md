@@ -15,6 +15,7 @@ Uma aplicação Running pode estar NotReady. O experimento cria uma falha de rea
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.10
 cat .labs/01.10/resources.yaml
 ```
 
