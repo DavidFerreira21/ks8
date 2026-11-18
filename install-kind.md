@@ -75,15 +75,15 @@ bash scripts/lab-diagnostics.sh
 make lab-down
 ```
 
-> `make lab-up` aplica **Deployment e Service**, não o Pod individual. Para seguir a sequência didática completa, veja o [lab Pod → Deployment → Service](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md).
+> Neste curso, **o aluno escreve o manifesto e executa `kubectl apply`**. `make lab-prepare` cria o namespace e o arquivo inicial, sem aplicar a solução. Comece pelo [🧪 Lab 01.01](trilhas/01-fundamentos/labs/fundamentos-cluster/README.md); o exercício de Services é o [🧪 Lab 01.05](trilhas/01-fundamentos/labs/services-basico/README.md).
 
 ## 6. Limpeza
 
-- `make lab-down` remove somente Deployment e Service do exemplo e preserva `k8s-lab`.
+- `make lab-down LAB=01.01` remove os recursos declarados do primeiro exercício e preserva o namespace `lab-fundamentos`.
 - `make down` **apaga o cluster Kind `dev` inteiro**, incluindo seus recursos e dados. Execute apenas se não precisar mais dele.
 
 ## 7. Ingress
 
-O cluster tem portas 80/443 mapeadas, mas **não instala automaticamente um Ingress Controller**. O exercício de Ingress será padronizado em um laboratório separado; não dependa de um antigo alvo `make install-nginx`, pois ele não foi implementado nesta etapa.
+O cluster tem portas 80/443 mapeadas, mas **não instala automaticamente um Ingress Controller**. O [🧪 Lab 01.13](trilhas/01-fundamentos/labs/ingress-basico/README.md) usa Traefik como Ingress Controller opcional, instalado conforme o roteiro. Não dependa de um antigo alvo `make install-nginx`, pois ele não faz parte do projeto.
 
 Referências: [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) e [Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/).
