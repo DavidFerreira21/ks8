@@ -80,4 +80,4 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 
 ---
 
-[← Lab 01.05](../services-basico/README.md) · [↑ Aula 01.06](../../namespaces/README.md)
+[← Lab 01.05](../services-basico/README.md) · [↑ Aula 01.06](../../namespaces/README.md) · [Próximo: Lab 01.07 →](../configmaps-basico/README.md)
