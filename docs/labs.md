@@ -25,6 +25,8 @@ make labs
 make lab-up LAB=01.06
 make lab-status LAB=01.06
 make lab-test LAB=01.06
+make lab-observe LAB=01.06
+make lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout
 make lab-down LAB=01.06
 ```
 
@@ -37,6 +39,9 @@ make lab-down LAB=01.06
 | `make lab-test LAB=02.02` | Conferir permissões permitidas e negadas |
 | `make lab-up LAB=02.04` | Aplicar quota, LimitRange e Pod de teste |
 | `make lab-test LAB=02.04` | Conferir existência de quota e Pod (rejeição fica para experimento específico) |
+| `make lab-observe LAB=01.06` | Mostra condições, eventos e recursos relacionados |
+| `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod` | Espera e verifica rejeição intencional por quota |
+| `make lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab e observa a reconciliação |
 | `make lab-down LAB=02.04` | Remover somente os manifests cadastrados; preservar o namespace |
 | `make down` | Excluir o cluster Kind local (ação destrutiva) |
 
@@ -50,7 +55,15 @@ make lab-down LAB=01.06
 - [RBAC e ServiceAccount](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
 - [ResourceQuota e LimitRange](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md): defaults de recursos e rejeição intencional por quota.
 
-Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. A etapa de falha intencional da quota é manual nesta fase e será automatizada em uma etapa seguinte.
+Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. O experimento `reject-pod` faz uma tentativa controlada de admissão e **só considera sucesso se identificar rejeição por quota**, nunca qualquer erro genérico.
+
+## Aprendizado orientado por observação
+
+O fluxo recomendado é **aplicar → observar → experimentar → testar → limpar**. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.
+
+Os experimentos têm **IDs pré-definidos** em `lab.yaml`, não aceitam comandos arbitrários e exigem confirmação explícita via `--confirm` no CLI (o alvo `make lab-experiment` confirma a ação por ser um comando dedicado). O rollout controlado exige que o Deployment já exista; o teste de quota depende do Pod inicial estar presente.
+
+**Importante:** não execute os experimentos em clusters compartilhados. No experimento de quota, se a segunda criação for admitida inesperadamente, o comando falha e o Pod inesperado precisa ser removido após inspeção; o sistema não tenta apagar recursos às cegas.
 
 ## Diagnóstico
 
