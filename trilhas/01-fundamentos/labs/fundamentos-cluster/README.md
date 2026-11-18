@@ -84,6 +84,6 @@ make lab-status LAB=01.01
 - [ ] Observei a alteração manual e sua reversão após reaplicar o manifesto.
 - [ ] Limpei apenas o recurso criado neste laboratório.
 
-**Próxima aula:** [01.02 — Namespaces](../../namespaces/README.md). Mais adiante, o [Lab 01.06](../primeira-aplicacao/README.md) demonstra controllers e réplicas.
+**Próxima aula:** [01.02 — Pods](../../pods/README.md). Mais adiante, o [Lab 01.05](../primeira-aplicacao/README.md) demonstra controllers e réplicas.
 
 [Referência oficial — Kubernetes Overview](https://kubernetes.io/docs/concepts/overview/) · [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
