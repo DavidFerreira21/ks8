@@ -71,7 +71,7 @@ kubectl get events -n lab-01-03 --sort-by=.lastTimestamp
 kubectl get all -n lab-01-03
 ```
 
-Investigue com `kubectl describe` e, quando houver Pod, `kubectl logs`. Compare estado desejado, readiness e eventos. `make lab-test` valida checks básicos, não substitui sua investigação.
+Investigue com `kubectl describe` e, quando houver Pod, `kubectl logs`. Compare estado desejado, readiness e eventos. `make lab-test` confere os checks e os campos declarados na solução de referência, mas não substitui sua investigação.
 
 ## Fase 4 — Limpar com segurança
 
