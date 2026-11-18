@@ -1,8 +1,9 @@
-# Lab 01.09 — Requests e Limits: recursos e scheduler
+# Lab 01.09 — Requests e Limits
+
+[← Aula 01.09](../../requests-limits/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.09` para criar o namespace e copiar um arquivo incompleto para `.labs/01.09/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.09/` e valide com `make lab-test LAB=01.09`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.09` apenas depois de tentar.
 
-[← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
 
@@ -74,3 +75,7 @@ Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpa
 - [ ] Identifiquei o comportamento do recurso.
 - [ ] Executei o experimento e interpretei eventos.
 - [ ] Removi os recursos do exercício.
+
+---
+
+[← Lab 01.08](../secrets-basico/README.md) · [↑ Aula 01.09](../../requests-limits/README.md) · [Próximo: Lab 01.10 →](../probes-basico/README.md)

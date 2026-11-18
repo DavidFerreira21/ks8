@@ -24,9 +24,9 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | Aula | Conceito | Aula teórica | Material de apoio |
 | --- | --- | --- | --- |
 | 02.01 | **Labels, Selectors e Annotations** | [📖 Estudar](labels-selectors-annotations/README.md) | — |
-| 02.02 | **RBAC e ServiceAccount** | [📖 Estudar](rbac-serviceaccount/README.md) | — · [🧪 Lab](labs/rbac-minimo/README.md) |
+| 02.02 | **RBAC e ServiceAccount** | [📖 Estudar](rbac-serviceaccount/README.md) | [🧪 Lab 02.02](labs/rbac-minimo/README.md) |
 | 02.03 | **SecurityContext e Pod Security Admission** | [🎨 Infográfico · teoria em preparação](securitycontext-pod-security/README.md) | — |
-| 02.04 | **ResourceQuota e LimitRange** | [📖 Estudar](resourcequota-limitrange/README.md) | — · [🧪 Lab](labs/quota-namespace/README.md) |
+| 02.04 | **ResourceQuota e LimitRange** | [📖 Estudar](resourcequota-limitrange/README.md) | [🧪 Lab 02.04](labs/quota-namespace/README.md) |
 | 02.05 | **Init Containers e Sidecars** | [📖 Estudar](init-sidecars/README.md) | — |
 | 02.06 | **Jobs e CronJobs** | [📖 Estudar](jobs-cronjobs/README.md) | — |
 | 02.07 | **Taints, Tolerations e Node Affinity** | [📖 Estudar](taints-tolerations-affinity/README.md) | — |
@@ -42,7 +42,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 
 | **🔐 RBAC · Menor privilégio** | **📏 ResourceQuota · Controle por namespace** |
 | :--- | :--- |
-| Crie ServiceAccount, Role e RoleBinding. Compare permissões concedidas e negadas com `kubectl auth can-i`.<br><br>**[Executar lab RBAC →](labs/rbac-minimo/README.md)** | Configure LimitRange e ResourceQuota, admita um Pod e observe a rejeição intencional de um segundo.<br><br>**[Executar lab de Quotas →](labs/quota-namespace/README.md)** |
+| Crie ServiceAccount, Role e RoleBinding. Compare permissões concedidas e negadas com `kubectl auth can-i`.<br><br>**[Lab 02.02 →](labs/rbac-minimo/README.md)** | Configure LimitRange e ResourceQuota, admita um Pod e observe a rejeição intencional de um segundo.<br><br>**[Lab 02.04 →](labs/quota-namespace/README.md)** |
 
 > **Ambiente de teste:** Kind local. Os manifests foram adicionados à trilha, mas **os exercícios ainda precisam de validação real no cluster**. O CI faz verificações estáticas; não executa esses labs.
 

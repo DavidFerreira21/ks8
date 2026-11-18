@@ -46,7 +46,7 @@ Verifique quantos Pods cada controlador deseja, onde executam e quais são suas 
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.04:** [abrir exercício guiado](../labs/controladores-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
+**🧪 Lab 01.04:** [🧪 Lab 01.04](../labs/controladores-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../4-replicaSet-daemonSet-statefulSet/README.md). Os conteúdos anteriores foram preservados.
 
@@ -62,4 +62,4 @@ Verifique quantos Pods cada controlador deseja, onde executam e quais são suas 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Services →](../services/README.md)
+[← Aula 01.03 — Deployments](../deployments/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.04](../labs/controladores-basico/README.md) · [Próxima: Aula 01.05 — Services →](../services/README.md)

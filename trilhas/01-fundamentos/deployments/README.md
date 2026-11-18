@@ -71,7 +71,7 @@ Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, inv
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.03:** [abrir exercício guiado](../labs/deployments-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
+**🧪 Lab 01.03:** [🧪 Lab 01.03](../labs/deployments-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../3-deployment/README.md). Os conteúdos anteriores foram preservados.
 
@@ -87,4 +87,4 @@ Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, inv
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: ReplicaSet, DaemonSet e StatefulSet →](../controladores/README.md)
+[← Aula 01.02 — Pods](../pods/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.03](../labs/deployments-basico/README.md) · [Próxima: Aula 01.04 — ReplicaSet, DaemonSet e StatefulSet →](../controladores/README.md)

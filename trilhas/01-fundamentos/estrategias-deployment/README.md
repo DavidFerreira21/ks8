@@ -55,7 +55,7 @@ Os comandos pressupõem um Deployment existente. O laboratório de blue/green ou
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.12:** [abrir exercício guiado](../labs/estrategias-deployment-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
+**🧪 Lab 01.12:** [🧪 Lab 01.12](../labs/estrategias-deployment-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 ## ✅ Revisão do aprendizado
 
@@ -69,4 +69,4 @@ Os comandos pressupõem um Deployment existente. O laboratório de blue/green ou
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Ingress →](../ingress/README.md)
+[← Aula 01.11 — Volumes](../volumes/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.12](../labs/estrategias-deployment-basico/README.md) · [Próxima: Aula 01.13 — Ingress →](../ingress/README.md)

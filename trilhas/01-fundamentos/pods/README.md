@@ -64,7 +64,7 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.02:** [abrir exercício guiado](../labs/pods-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
+**🧪 Lab 01.02:** [🧪 Lab 01.02](../labs/pods-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../2-pod/README.md). Os conteúdos anteriores foram preservados.
 
@@ -80,4 +80,4 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Deployments →](../deployments/README.md)
+[← Aula 01.01 — Fundamentos Kubernetes](../fundamentos/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.02](../labs/pods-basico/README.md) · [Próxima: Aula 01.03 — Deployments →](../deployments/README.md)

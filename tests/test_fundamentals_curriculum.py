@@ -38,7 +38,7 @@ class FundamentalsCurriculumTests(unittest.TestCase):
                 self.assertTrue(content.startswith(f"# {identifier} · {title}"), slug)
                 if i < len(LESSONS) - 1:
                     following = LESSONS[i + 1]
-                    self.assertIn(f"[Próxima: {following[1]} →](../{following[2]}/README.md)", content)
+                    self.assertIn(f"[Próxima: Aula {following[0]} — {following[1]} →](../{following[2]}/README.md)", content)
 
     def test_lab_ids_are_aligned(self):
         fundamental = (ROOT / "trilhas/01-fundamentos/labs/fundamentos-cluster/lab.yaml").read_text(encoding="utf-8")

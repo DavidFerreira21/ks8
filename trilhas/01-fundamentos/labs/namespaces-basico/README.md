@@ -1,8 +1,9 @@
-# Lab 01.06 — Namespaces: isolamento logico
+# Lab 01.06 — Namespaces
+
+[← Aula 01.06](../../namespaces/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.06` para preparar o namespace e criar o arquivo `.labs/01.06/resources.yaml`. Complete o YAML com base no objetivo desta aula. Execute `kubectl apply -f .labs/01.06/` e depois `make lab-test LAB=01.06`. **`make lab-up` é exclusivo da CI** e aplica a solução, portanto não é o fluxo do aluno. `make lab-solution LAB=01.06` mostra onde consultar a referência.
 
-[← Camada 01](../../README.md) · [Guia dos labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
 
@@ -77,3 +78,7 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 - [ ] Executei e expliquei o experimento.
 - [ ] Investiguei eventos e condições.
 - [ ] Limpei os recursos sem afetar outros labs.
+
+---
+
+[← Lab 01.05](../services-basico/README.md) · [↑ Aula 01.06](../../namespaces/README.md) · [Próximo: Lab 01.07 →](../configmaps-basico/README.md)

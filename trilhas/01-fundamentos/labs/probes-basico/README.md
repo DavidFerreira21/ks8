@@ -1,8 +1,9 @@
-# Lab 01.10 — Probes: readiness e liveness
+# Lab 01.10 — Probes
+
+[← Aula 01.10](../../probes/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.10`, complete `.labs/01.10/resources.yaml` e execute **`kubectl apply -f .labs/01.10/`**. Só depois valide com `make lab-test LAB=01.10`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.10` revela seus arquivos para estudo posterior.
 
-[← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
 
@@ -79,3 +80,7 @@ Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpa
 - [ ] Identifiquei o comportamento do recurso.
 - [ ] Executei o experimento e interpretei eventos.
 - [ ] Removi os recursos do exercício.
+
+---
+
+[← Lab 01.09](../requests-limits-basico/README.md) · [↑ Aula 01.10](../../probes/README.md) · [Próximo: Lab 01.11 →](../volumes-basico/README.md)

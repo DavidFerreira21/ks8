@@ -70,8 +70,8 @@ make lab-down LAB=01.05
 
 ## Camada 01 — Fundamentos
 
-- [Lab 01.01 — Primeiro contato com a API](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md): explorar o cluster, criar ConfigMap e comparar o estado no arquivo e na API.
-- [Lab 01.05 — Services](../trilhas/01-fundamentos/labs/services-basico/README.md): ClusterIP, selector, EndpointSlices e DNS.
+- [🧪 Lab 01.01](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md): explorar o cluster, criar ConfigMap e comparar o estado no arquivo e na API.
+- [🧪 Lab 01.05](../trilhas/01-fundamentos/labs/services-basico/README.md): ClusterIP, selector, EndpointSlices e DNS.
 
 A criação de namespaces ausentes não imprime mais um erro esperado de `NotFound`; falhas reais na consulta ao API Server continuam visíveis.
 
@@ -79,25 +79,25 @@ A criação de namespaces ausentes não imprime mais um erro esperado de `NotFou
 
 | ID | Aula | Laboratório |
 | --- | --- | --- |
-| 01.01 | Fundamentos | [Explorar o cluster](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) |
-| 01.02 | Pods | [Pod e diagnóstico](../trilhas/01-fundamentos/labs/pods-basico/README.md) |
-| 01.03 | Deployments | [Réplicas e self-healing](../trilhas/01-fundamentos/labs/deployments-basico/README.md) |
-| 01.04 | Controladores | [DaemonSet e StatefulSet](../trilhas/01-fundamentos/labs/controladores-basico/README.md) |
-| 01.05 | Services | [Services e descoberta](../trilhas/01-fundamentos/labs/services-basico/README.md) |
-| 01.06 | Namespaces | [Escopo lógico](../trilhas/01-fundamentos/labs/namespaces-basico/README.md) |
-| 01.07 | ConfigMaps | [Configuração e restart](../trilhas/01-fundamentos/labs/configmaps-basico/README.md) |
-| 01.08 | Secrets | [Referência segura](../trilhas/01-fundamentos/labs/secrets-basico/README.md) |
-| 01.09 | Requests/Limits | [Agendamento e recursos](../trilhas/01-fundamentos/labs/requests-limits-basico/README.md) |
-| 01.10 | Probes | [Readiness e rollback](../trilhas/01-fundamentos/labs/probes-basico/README.md) |
-| 01.11 | Volumes | [Pod e PVC](../trilhas/01-fundamentos/labs/volumes-basico/README.md) |
-| 01.12 | Estratégias | [RollingUpdate e rollback](../trilhas/01-fundamentos/labs/estrategias-deployment-basico/README.md) |
-| 01.13 | Ingress | [Traefik e tráfego HTTP](../trilhas/01-fundamentos/labs/ingress-basico/README.md) |
-| 01.14 | HPA | [Metrics Server e carga CPU](../trilhas/01-fundamentos/labs/hpa-basico/README.md) |
+| 01.01 | Fundamentos | [🧪 Lab 01.01](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) |
+| 01.02 | Pods | [🧪 Lab 01.02](../trilhas/01-fundamentos/labs/pods-basico/README.md) |
+| 01.03 | Deployments | [🧪 Lab 01.03](../trilhas/01-fundamentos/labs/deployments-basico/README.md) |
+| 01.04 | Controladores | [🧪 Lab 01.04](../trilhas/01-fundamentos/labs/controladores-basico/README.md) |
+| 01.05 | Services | [🧪 Lab 01.05](../trilhas/01-fundamentos/labs/services-basico/README.md) |
+| 01.06 | Namespaces | [🧪 Lab 01.06](../trilhas/01-fundamentos/labs/namespaces-basico/README.md) |
+| 01.07 | ConfigMaps | [🧪 Lab 01.07](../trilhas/01-fundamentos/labs/configmaps-basico/README.md) |
+| 01.08 | Secrets | [🧪 Lab 01.08](../trilhas/01-fundamentos/labs/secrets-basico/README.md) |
+| 01.09 | Requests/Limits | [🧪 Lab 01.09](../trilhas/01-fundamentos/labs/requests-limits-basico/README.md) |
+| 01.10 | Probes | [🧪 Lab 01.10](../trilhas/01-fundamentos/labs/probes-basico/README.md) |
+| 01.11 | Volumes | [🧪 Lab 01.11](../trilhas/01-fundamentos/labs/volumes-basico/README.md) |
+| 01.12 | Estratégias | [🧪 Lab 01.12](../trilhas/01-fundamentos/labs/estrategias-deployment-basico/README.md) |
+| 01.13 | Ingress | [🧪 Lab 01.13](../trilhas/01-fundamentos/labs/ingress-basico/README.md) |
+| 01.14 | HPA | [🧪 Lab 01.14](../trilhas/01-fundamentos/labs/hpa-basico/README.md) |
 
 ## Camada 02 — Operação e Segurança
 
-- [RBAC e ServiceAccount](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
-- [ResourceQuota e LimitRange](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md): defaults de recursos e rejeição intencional por quota.
+- [🧪 Lab 02.02](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
+- [🧪 Lab 02.04](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md): defaults de recursos e rejeição intencional por quota.
 
 Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. O experimento `reject-pod` faz uma tentativa controlada de admissão e **só considera sucesso se identificar rejeição por quota**, nunca qualquer erro genérico.
 

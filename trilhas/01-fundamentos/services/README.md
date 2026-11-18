@@ -62,7 +62,7 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.05:** [Services — selectors, EndpointSlices e DNS](../labs/services-basico/README.md). Exercício independente, com Deployment apenas como backend de teste.
+**🧪 Lab 01.05:** [🧪 Lab 01.05](../labs/services-basico/README.md). Exercício independente, com Deployment apenas como backend de teste.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../7-services/README.md). Os conteúdos anteriores foram preservados.
 
@@ -78,4 +78,4 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Namespaces →](../namespaces/README.md)
+[← Aula 01.04 — ReplicaSet, DaemonSet e StatefulSet](../controladores/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.05](../labs/services-basico/README.md) · [Próxima: Aula 01.06 — Namespaces →](../namespaces/README.md)

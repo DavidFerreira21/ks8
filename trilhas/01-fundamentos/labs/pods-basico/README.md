@@ -1,8 +1,9 @@
-# Lab 01.02 — Pods: ciclo de vida e diagnostico
+# Lab 01.02 — Pods
+
+[← Aula 01.02](../../pods/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
 > **MODO DESAFIO — o aluno constrói:** `make lab-prepare LAB=01.02` cria apenas o namespace e copia um YAML incompleto para `.labs/01.02/`. **Complete o arquivo usando o objetivo abaixo**, aplique você mesmo com `kubectl apply -f .labs/01.02/` e só então execute `make lab-test LAB=01.02`. O comando `make lab-up` é reservado à CI. `make lab-solution LAB=01.02` mostra o caminho da referência quando você quiser conferir.
 
-[← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
 
@@ -75,3 +76,7 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 - [ ] Executei a observação antes e depois do experimento.
 - [ ] Comparei hipótese e resultado e identifiquei evidências.
 - [ ] Removi os recursos do lab sem apagar o cluster.
+
+---
+
+[← Lab 01.01](../fundamentos-cluster/README.md) · [↑ Aula 01.02](../../pods/README.md) · [Próximo: Lab 01.03 →](../deployments-basico/README.md)

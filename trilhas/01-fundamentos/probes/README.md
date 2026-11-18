@@ -56,7 +56,7 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.10:** [abrir exercício guiado](../labs/probes-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
+**🧪 Lab 01.10:** [🧪 Lab 01.10](../labs/probes-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../5-probes/README.md). Os conteúdos anteriores foram preservados.
 
@@ -72,4 +72,4 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Volumes →](../volumes/README.md)
+[← Aula 01.09 — Requests e Limits](../requests-limits/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.10](../labs/probes-basico/README.md) · [Próxima: Aula 01.11 — Volumes →](../volumes/README.md)

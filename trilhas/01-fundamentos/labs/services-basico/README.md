@@ -1,8 +1,9 @@
-# Lab 01.05 — Services: descoberta e acesso
+# Lab 01.05 — Services
+
+[← Aula 01.05](../../services/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.05` para preparar o namespace e os Pods de apoio e criar o arquivo `.labs/01.05/service.yaml`. Complete o YAML com base no objetivo desta aula. Execute `kubectl apply -f .labs/01.05/` e depois `make lab-test LAB=01.05`. **`make lab-up` é exclusivo da CI** e aplica a solução, portanto não é o fluxo do aluno. `make lab-solution LAB=01.05` mostra onde consultar a referência.
 
-[← Aula 01.05 — Services](../../services/README.md) · [↑ Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
 
@@ -124,3 +125,7 @@ O namespace é preservado; `lab-down` remove os recursos declarados no contrato.
 ## Referências
 
 [Service](https://kubernetes.io/docs/concepts/services-networking/service/) · [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) · [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+
+---
+
+[← Lab 01.04](../controladores-basico/README.md) · [↑ Aula 01.05](../../services/README.md) · [Próximo: Lab 01.06 →](../namespaces-basico/README.md)

@@ -63,7 +63,7 @@ O objeto `app-config` precisa existir. Se a variável não aparece no Pod, confi
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.07:** [abrir exercício guiado](../labs/configmaps-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
+**🧪 Lab 01.07:** [🧪 Lab 01.07](../labs/configmaps-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 ## ✅ Revisão do aprendizado
 
@@ -77,4 +77,4 @@ O objeto `app-config` precisa existir. Se a variável não aparece no Pod, confi
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Secrets →](../secrets/README.md)
+[← Aula 01.06 — Namespaces](../namespaces/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.07](../labs/configmaps-basico/README.md) · [Próxima: Aula 01.08 — Secrets →](../secrets/README.md)

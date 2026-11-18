@@ -70,7 +70,7 @@ Compare métricas observadas, valores-alvo, `desiredReplicas`, `currentReplicas`
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.14:** [abrir exercício guiado](../labs/hpa-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
+**🧪 Lab 01.14:** [🧪 Lab 01.14](../labs/hpa-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
 ## ✅ Revisão do aprendizado
 
@@ -84,4 +84,4 @@ Compare métricas observadas, valores-alvo, `desiredReplicas`, `currentReplicas`
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima camada: Operação e Segurança →](../../02-operacao-seguranca/README.md)
+[← Aula 01.13 — Ingress](../ingress/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.14](../labs/hpa-basico/README.md) · [Próxima camada: Operação e Segurança →](../../02-operacao-seguranca/README.md)

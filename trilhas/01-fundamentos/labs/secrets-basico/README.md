@@ -1,8 +1,9 @@
-# Lab 01.08 — Secrets: referencia e consumo seguro
+# Lab 01.08 — Secrets
+
+[← Aula 01.08](../../secrets/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.08` para criar o namespace e copiar um arquivo incompleto para `.labs/01.08/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.08/` e valide com `make lab-test LAB=01.08`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.08` apenas depois de tentar.
 
-[← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Hipótese e objetivo
 
@@ -78,3 +79,7 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 - [ ] Executei a experiência e comparei resultados.
 - [ ] Consultei eventos e conditions quando aplicáveis.
 - [ ] Limpei os recursos criados.
+
+---
+
+[← Lab 01.07](../configmaps-basico/README.md) · [↑ Aula 01.08](../../secrets/README.md) · [Próximo: Lab 01.09 →](../requests-limits-basico/README.md)
