@@ -72,4 +72,4 @@ A última linha pressupõe um PVC existente. A escolha entre cache, volume efêm
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Estratégias avançadas de Deployment →](../estrategias-deployment/README.md)
+[← Aula 01.10 — Probes — Liveness, Readiness e Startup](../probes/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.11](../labs/volumes-basico/README.md) · [Próxima: Aula 01.12 — Estratégias avançadas de Deployment →](../estrategias-deployment/README.md)
