@@ -45,6 +45,8 @@ O aluno deve conseguir concluir a prática estudando a aula e usando documentaç
 
 **Evidências mínimas de conclusão:** (a) manifesto/recurso criado pelo aluno; (b) comportamento real observado; (c) explicação do motivo e, se falhou, diagnóstico. O laboratório pode ter mais de quatro fases quando o experimento justificar (Services, por exemplo). Não renumerar fases sem necessidade.
 
+**Evidência pedagógica:** além dos critérios genéricos, todo lab deve possuir ao menos um critério de aprovação exclusivo, verificável por observação. Para testes que alteram políticas, nós ou recursos temporários, inclua reversão explícita mesmo em caso de falha. Separe validação declarativa, comportamento real e diagnóstico.
+
 **Dependências especiais da Camada 01:** PVC requer StorageClass/provisionador funcional (01.11); Ingress exige controller e teste de tráfego (01.13); HPA exige Metrics Server, CPU requests e teste de carga (01.14). Sem esses componentes, marque a validação funcional como **pendente**.
 
 ## Contrato do complementar

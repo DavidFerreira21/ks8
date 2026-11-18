@@ -6,7 +6,7 @@
 
 Siga o [padrão editorial](padrao-editorial.md): objetivo e hipótese específicos; pré-requisitos e desafio YAML; preparação; aplicação pelo aluno; observação e experimento; resultado esperado; diagnóstico e reflexão; critérios de conclusão; limpeza segura e referências. O número de fases pode variar conforme o conceito, sem perder as evidências mínimas (objeto, comportamento, explicação).
 
-Todos os labs da **Camada 01** seguem um percurso completo e repetível, adequado para quem está começando:
+Os labs das **Camadas 01 e 02** seguem um percurso completo e repetível, adequado para quem está começando:
 
 1. **Objetivo e conceito:** entender qual comportamento Kubernetes será estudado.
 2. **Pré-requisitos:** confirmar o Kind local e addons necessários, quando houver.
@@ -68,9 +68,9 @@ make lab-down LAB=01.05
 | `make lab-solution LAB=01.02` | Mostrar caminhos da solução sem aplicá-la |
 | `make lab-reset LAB=01.02` | Limpar recursos declarados e refazer setup sem apagar arquivos locais |
 | `make validate` | Verificar contratos e manifests por inspeção |
-| `make lab-up LAB=02.02` | Aplicar o lab RBAC e seus pré-requisitos |
+| `make lab-up LAB=02.02` | **Somente CI:** aplicar a solução RBAC no Kind descartável |
 | `make lab-test LAB=02.02` | Conferir permissões permitidas e negadas |
-| `make lab-up LAB=02.04` | Aplicar quota, LimitRange e Pod de teste |
+| `make lab-up LAB=02.04` | **Somente CI:** aplicar a solução de quota no Kind descartável |
 | `make lab-test LAB=02.04` | Conferir existência de quota e Pod (rejeição fica para experimento específico) |
 | `make lab-observe LAB=01.05` | Mostra condições, eventos e recursos relacionados |
 | `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod` | Espera e verifica rejeição intencional por quota |
@@ -134,7 +134,9 @@ Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incomple
 
 **Dependências:** os labs 02.07 e 02.12 pressupõem Kind com worker `dev-worker`. O 02.09 usa PriorityClass de escopo do cluster; limpe-a ao concluir. O 02.13 requer CNI compatível para comprovar isolamento; sem ele, somente a validação declarativa fica disponível. O 02.14 usa uma imagem inválida intencionalmente. Em qualquer lab, não confunda `make lab-test` com prova do experimento completo.
 
-**CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. Os demais labs permanecem fora do smoke Kind por exigirem validação especial de PriorityClass, manutenção de nó, enforcement de NetworkPolicy ou diagnóstico de imagem inválida.
+**CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. Os labs 02.09, 02.12, 02.13 e 02.14 permanecem fora do smoke Kind geral por exigirem validação específica de PriorityClass, manutenção de nó, enforcement de NetworkPolicy ou diagnóstico de imagem inválida.
+**Experimentos adicionais:** 02.03 compara `warn` com `enforce` por dry-run de servidor, sem criar Pod privilegiado; 02.08 demonstra agendamento impossível com `minDomains: 3` e dois workers elegíveis; 02.10 compara QoS de um quarto Pod; 02.12 demonstra que cordon impede novos agendamentos. Os arquivos ficam em `experiments/` e exigem limpeza própria.
+
 ## Aprendizado orientado por observação
 
 O fluxo recomendado é **escrever YAML → aplicar com kubectl → observar → experimentar → testar → limpar**. `make lab-prepare` cria apenas o namespace, os recursos de apoio explicitamente declarados e uma cópia local do starter em `.labs/<ID>/`, preservando suas alterações existentes. A solução não é aplicada neste comando. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.
@@ -142,6 +144,10 @@ O fluxo recomendado é **escrever YAML → aplicar com kubectl → observar → 
 Os experimentos têm **IDs pré-definidos** em `lab.yaml`, não aceitam comandos arbitrários e exigem confirmação explícita via `--confirm` no CLI (o alvo `make lab-experiment` confirma a ação por ser um comando dedicado). O rollout controlado exige que o Deployment já exista; o teste de quota depende do Pod inicial estar presente.
 
 **Importante:** não execute os experimentos em clusters compartilhados. No experimento de quota, se a segunda criação for admitida inesperadamente, o comando falha e o Pod inesperado precisa ser removido após inspeção; o sistema não tenta apagar recursos às cegas.
+
+## Evidências de homologação
+
+Classifique cada resultado como **declarativo** (objeto e campos aceitos), **funcional** (comportamento realmente observado no Kind) ou **diagnóstico** (falha reproduzida, causa identificada e reversão). `make lab-test` confirma os checks declarados, não a execução manual de todo o roteiro. Não declare aprovado um job de Kind apenas porque existe ou está em andamento.
 
 ## Diagnóstico
 
@@ -157,7 +163,7 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - `make down` remove o cluster Kind indicado por `CLUSTER_NAME`. Verifique esse valor antes da execução.
 - `make lab-down` **preserva o namespace** para evitar excluir recursos não relacionados.
 - `make validate` analisa todos os manifests declarados nos contratos e executa checks didáticos, **não substituindo a validação completa do schema Kubernetes**.
-- A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa 14 labs básicos, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
+- A pipeline do GitHub possui **job de integração com Kind descartável**, com cobertura declarada de 22 labs (12 da Camada 01 e 10 da Camada 02). A cobertura só pode ser considerada validada quando a execução correspondente terminar em `success`. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
 - Os novos labs não foram executados manualmente durante a elaboração deste PR. A CI os valida conforme a cobertura descrita; os labs 01.13 e 01.14 exigem teste funcional em Kind com addons.
 
 
@@ -195,7 +201,7 @@ O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rasc
 
 ## CI: Kind descartável
 
-O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre 22 laboratórios sem addons (01.01–01.12 e 10 da Camada 02), valida os checks, experimenta rollout no lab 01.12 e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O smoke abrange 22 laboratórios sem addons (01.01–01.12 e 10 da Camada 02), valida os checks e exercita rollout, quota, PSA e agendamento por Topology Spread, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
 
 Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
 
