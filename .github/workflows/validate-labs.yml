@@ -35,6 +35,15 @@ jobs:
       - name: Validate example manifests
         run: python scripts/validate_manifests.py
 
-      - name: Verify shell syntax
+      - name: Verify shell scripts use LF and pass Bash syntax
+        shell: bash
         run: |
-          if [ -f scripts/lab-diagnostics.sh ]; then bash -n scripts/lab-diagnostics.sh; fi
+          while IFS= read -r -d '' script; do
+            echo "Checking ${script}"
+            if LC_ALL=C grep -q 
+\\r' "$script"; then
+              echo "::error file=${script}::Shell script uses CRLF; convert to LF" >&2
+              exit 1
+            fi
+            bash -n "$script"
+          done < <(find scripts -type f -name '*.sh' -print0)
