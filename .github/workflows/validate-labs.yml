@@ -35,6 +35,11 @@ jobs:
           make -n lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout > /dev/null
           make -n new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico > /dev/null
 
+      - name: Validate Markdown links and course navigation
+        run: |
+          python scripts/check_navigation.py
+          python -m unittest discover -s tests -p 'test_navigation.py' -v
+
       - name: Validate example manifests
         run: |
           python scripts/validate_manifests.py
