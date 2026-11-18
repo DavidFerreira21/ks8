@@ -23,6 +23,15 @@ jobs:
       - name: Install YAML parser
         run: python -m pip install 'PyYAML>=6,<7'
 
+      - name: Check canonical Makefile and lab commands
+        run: |
+          test -f Makefile
+          test ! -f makefile
+          make -n labs > /dev/null
+          make -n lab-observe LAB=01.06 > /dev/null
+          make -n lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout > /dev/null
+          make -n new-lab LAB_ID=01.10 LAB_SLUG=configmaps-basico > /dev/null
+
       - name: Validate example manifests
         run: python scripts/validate_manifests.py
 
