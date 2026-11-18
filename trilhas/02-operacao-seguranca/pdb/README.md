@@ -1,45 +1,54 @@
-# PodDisruptionBudget (PDB)
+# 02.11 · PodDisruptionBudget (PDB)
 
-[← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 02](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Interpretar orçamento de interrupções voluntárias e demonstrar o efeito de `minAvailable` e `disruptionsAllowed`.
 
 ## 🎨 Infográfico
 
 ![02.11 — PodDisruptionBudget (PDB)](images/pdb.png)
 
-> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+## 📖 Aula teórica
 
+### O problema que este recurso resolve
 
-## O que você vai aprender
+A manutenção de nós pode interromper várias réplicas ao mesmo tempo. Um PodDisruptionBudget fornece limites para evictions voluntárias realizadas via Eviction API, preservando um nível definido de disponibilidade.
 
-PDB limita quantos Pods podem ficar indisponíveis por interrupções voluntárias que usam a Eviction API, como um drain.
+### Como funciona no Kubernetes
 
-## Como funciona
+A política seleciona Pods e define `minAvailable` ou `maxUnavailable`. O controller calcula `currentHealthy`, `desiredHealthy` e `disruptionsAllowed`. Exclusão direta de Pods, indisponibilidade involuntária e falhas de nó não são impedidas por PDB.
 
-selector identifica os Pods protegidos; minAvailable ou maxUnavailable determina a margem para eviction.
+### Exemplo de inspeção
 
-## Experimento recomendado
+Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.
 
-Use um Deployment com três réplicas e minAvailable: 2; consulte disruptionsAllowed antes de experimentar drenagem em ambiente descartável.
+```bash
+kubectl config current-context
+kubectl get pdb -n NAMESPACE
+kubectl describe pdb disponibilidade -n NAMESPACE
+kubectl get pods -n NAMESPACE -o wide
+```
 
-**Status do lab:** roteiro conceitual; manifests e validação prática serão adicionados em uma etapa posterior.
+**O que observar:** Um PDB sobre três réplicas com `minAvailable: 2` normalmente permite uma eviction quando três estão saudáveis. A condição real depende de readiness e estado do controlador.
 
-## O que observar
+### Cuidados e limitações
 
-- Resultado e eventos dos recursos envolvidos.
-- Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
-- Regras, condições e pré-requisitos particulares deste mecanismo.
+Nunca presuma que PDB protege contra qualquer interrupção. Ao testar drains, identifique pods do sistema e reversão do nó.
 
+## 🧪 Aplicação prática
 
+**[🧪 Lab 02.11](../labs/pdb-basico/README.md):** escreva o YAML do desafio, compare resultados e investigue as condições de execução. O lab não exige leitura complementar.
 
-## Referência oficial
+## ✅ Revisão do aprendizado
 
-- [Documentação Kubernetes — PodDisruptionBudget (PDB)](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
+- Por que `kubectl delete pod` não respeita o orçamento como Eviction API?
+- Como muda `disruptionsAllowed` quando um Pod deixa de estar pronto?
+- Por que um PDB mal dimensionado pode bloquear um drain?
 
-**Próxima etapa:** [índice completo da Camada 02](../README.md).
+## 🔗 Referências oficiais
 
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
 
 ---
 
-### Navegação
-
-[← Anterior](../resourcequota-limitrange/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../priorityclass-preemption/README.md)
+[← Aula 02.10](../qos-eviction/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.12 →](../node-maintenance/README.md)
