@@ -15,6 +15,7 @@ ConfigMaps desacoplam a configuração da imagem; variáveis de ambiente de Pods
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.07
 cat .labs/01.07/resources.yaml
 ```
 
