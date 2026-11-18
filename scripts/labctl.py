@@ -19,8 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TRILHAS = ROOT / "trilhas"
 ID_PATTERN = re.compile(r"^\d{2}\.\d{2}$")
 SAFE_NAME = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
-SUPPORTED_CHECKS = {"deployment", "service", "rbac", "rbac-deny", "quota"}
-SUPPORTED_EXPERIMENTS = {"expect-rejected-manifest"}
+SUPPORTED_CHECKS = {"deployment", "service", "rbac", "rbac-deny", "quota", "configmap"}
+SUPPORTED_EXPERIMENTS = {"expect-rejected-manifest", "rollout-restart"}
 
 
 @dataclass(frozen=True)
@@ -68,7 +68,16 @@ def load_labs() -> dict[str, Lab]:
         if not isinstance(experiments, list) or any(not isinstance(x, dict) or x.get("type") not in SUPPORTED_EXPERIMENTS for x in experiments):
             raise ValueError(f"{metadata}: experiments não suportados")
         for experiment in experiments:
-            manifest(experiment.get("manifest"))
+            if not isinstance(experiment.get("id"), str) or not SAFE_NAME.fullmatch(experiment["id"]):
+                raise ValueError(f"{metadata}: id de experimento inválido")
+            if experiment["type"] == "expect-rejected-manifest":
+                manifest(experiment.get("manifest"))
+            elif experiment["type"] == "rollout-restart":
+                name = experiment.get("deployment")
+                if not isinstance(name, str) or not SAFE_NAME.fullmatch(name):
+                    raise ValueError(f"{metadata}: nome de Deployment inválido")
+                if not any(x.get("type") == "deployment" and x.get("name") == name for x in checks):
+                    raise ValueError(f"{metadata}: rollout deve referenciar Deployment declarado nos checks")
         labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments))
     return labs
 
@@ -114,8 +123,65 @@ def ensure_namespace(namespace: str) -> int:
     return kubectl("create", "namespace", namespace).returncode
 
 
+def observe_lab(lab: Lab) -> int:
+    print(f"\n=== {lab.identifier}: {lab.title} ===")
+    print(f"Namespace: {lab.namespace}")
+    kubectl("get", "pods,deployments,replicasets,services,serviceaccounts,resourcequotas", "-n",
+            lab.namespace, "--ignore-not-found", "-o", "wide")
+    print("\n=== Eventos ===")
+    kubectl("get", "events", "-n", lab.namespace, "--sort-by=.lastTimestamp")
+    for check in lab.checks:
+        if check["type"] in ("deployment", "quota"):
+            kind = "deployment" if check["type"] == "deployment" else "resourcequota"
+            kubectl("describe", kind, check["name"], "-n", lab.namespace)
+        if check["type"] == "service":
+            kubectl("get", "endpointslices", "-n", lab.namespace,
+                    "-l", f"kubernetes.io/service-name={check['name']}")
+    print("\nPerguntas: o estado observado atende à intenção? Que eventos explicam divergências?")
+    print("Para acompanhar a reconciliação ao vivo, abra outro terminal e execute kubectl get pods -w -n", lab.namespace)
+    return 0
+
+
+def perform_experiment(lab: Lab, experiment_id: str | None, confirm: bool) -> int:
+    experiment = next((x for x in lab.experiments if x["id"] == experiment_id), None)
+    if experiment is None:
+        available = ", ".join(x["id"] for x in lab.experiments) or "(nenhum)"
+        print(f"Experimento inválido. Disponíveis: {available}", file=sys.stderr)
+        return 2
+    if not confirm:
+        print("Experimento modifica recursos. Repita com --confirm depois de revisar o lab.yaml.", file=sys.stderr)
+        return 2
+    if experiment["type"] == "rollout-restart":
+        deployment = experiment["deployment"]
+        print(f"Experimento: reiniciar o Deployment {deployment} em {lab.namespace}")
+        if kubectl("get", "deployment", deployment, "-n", lab.namespace).returncode:
+            return 1
+        if kubectl("rollout", "restart", f"deployment/{deployment}", "-n", lab.namespace).returncode:
+            return 1
+        return kubectl("rollout", "status", f"deployment/{deployment}", "-n",
+                       lab.namespace, "--timeout=120s").returncode
+    if experiment["type"] == "expect-rejected-manifest":
+        name = experiment["manifest"]
+        manifest = (lab.directory / name).resolve()
+        print(f"Experimento: esperar rejeição de admissão para {name}")
+        proc = subprocess.run(["kubectl", "apply", "-f", str(manifest)],
+                              capture_output=True, text=True, check=False)
+        output = (proc.stdout + proc.stderr).lower()
+        if proc.returncode != 0 and ("exceeded quota" in output or "excedeu" in output):
+            print("PASS: falha de admissão por quota observada\n" + proc.stderr.strip())
+            return 0
+        if proc.returncode == 0:
+            print("FAIL: manifesto foi admitido; revise quota e Pods existentes", file=sys.stderr)
+        else:
+            print("FAIL: erro diferente de quota; confira os detalhes:\n" + proc.stderr, file=sys.stderr)
+        return 1
+    return 2
+
+
 def execute_lab(lab: Lab, action: str) -> int:
     checked_cluster()  # Também para comandos somente de leitura.
+    if action == "lab-observe":
+        return observe_lab(lab)
     if action == "lab-status":
         return kubectl("get", "pods,deployments,services,serviceaccounts,resourcequotas", "-n",
                        lab.namespace, "--ignore-not-found", "-o", "wide").returncode
@@ -159,6 +225,9 @@ def execute_lab(lab: Lab, action: str) -> int:
                 if result.returncode not in (0, 1) or result.stdout.strip().lower() != expected_answer:
                     print(f"Falha RBAC ({expected_answer} esperado): {result.stdout} {result.stderr}", file=sys.stderr)
                     return 1
+            elif typ == "configmap":
+                if kubectl("get", "configmap", check["name"], "-n", lab.namespace).returncode:
+                    return 1
             elif typ == "quota":
                 if kubectl("get", "resourcequota", check["name"], "-n", lab.namespace).returncode:
                     return 1
@@ -171,8 +240,10 @@ def execute_lab(lab: Lab, action: str) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Kubernetes Visual Guide — gerenciador de labs")
-    parser.add_argument("action", choices=("labs", "doctor", "validate", "lab-up", "lab-test", "lab-status", "lab-down"))
+    parser.add_argument("action", choices=("labs", "doctor", "validate", "lab-up", "lab-test", "lab-status", "lab-down", "lab-observe", "lab-experiment"))
     parser.add_argument("--lab", help="ID do lab, por exemplo 01.06")
+    parser.add_argument("--experiment", help="ID do experimento definido no lab.yaml")
+    parser.add_argument("--confirm", action="store_true", help="Confirma a mutação do experimento")
     args = parser.parse_args()
     if args.action == "doctor":
         return doctor()
@@ -186,6 +257,9 @@ def main() -> int:
             print("Informe --lab com um ID válido (consulte make labs)", file=sys.stderr)
             return 2
         try:
+            if args.action == "lab-experiment":
+                checked_cluster()
+                return perform_experiment(labs[args.lab], args.experiment, args.confirm)
             return execute_lab(labs[args.lab], args.action)
         except (ValueError, OSError) as exc:
             print(f"Erro: {exc}", file=sys.stderr)

@@ -25,6 +25,8 @@ make labs
 make lab-up LAB=01.06
 make lab-status LAB=01.06
 make lab-test LAB=01.06
+make lab-observe LAB=01.06
+make lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout
 make lab-down LAB=01.06
 ```
 
@@ -37,6 +39,9 @@ make lab-down LAB=01.06
 | `make lab-test LAB=02.02` | Conferir permissões permitidas e negadas |
 | `make lab-up LAB=02.04` | Aplicar quota, LimitRange e Pod de teste |
 | `make lab-test LAB=02.04` | Conferir existência de quota e Pod (rejeição fica para experimento específico) |
+| `make lab-observe LAB=01.06` | Mostra condições, eventos e recursos relacionados |
+| `make lab-experiment LAB=02.04 EXPERIMENT=reject-pod` | Espera e verifica rejeição intencional por quota |
+| `make lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout` | Reinicia o Deployment do lab e observa a reconciliação |
 | `make lab-down LAB=02.04` | Remover somente os manifests cadastrados; preservar o namespace |
 | `make down` | Excluir o cluster Kind local (ação destrutiva) |
 
@@ -50,7 +55,15 @@ make lab-down LAB=01.06
 - [RBAC e ServiceAccount](../trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md): exercício de menor privilégio com autorização permitida/negada.
 - [ResourceQuota e LimitRange](../trilhas/02-operacao-seguranca/labs/quota-namespace/README.md): defaults de recursos e rejeição intencional por quota.
 
-Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. A etapa de falha intencional da quota é manual nesta fase e será automatizada em uma etapa seguinte.
+Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. O experimento `reject-pod` faz uma tentativa controlada de admissão e **só considera sucesso se identificar rejeição por quota**, nunca qualquer erro genérico.
+
+## Aprendizado orientado por observação
+
+O fluxo recomendado é **aplicar → observar → experimentar → testar → limpar**. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.
+
+Os experimentos têm **IDs pré-definidos** em `lab.yaml`, não aceitam comandos arbitrários e exigem confirmação explícita via `--confirm` no CLI (o alvo `make lab-experiment` confirma a ação por ser um comando dedicado). O rollout controlado exige que o Deployment já exista; o teste de quota depende do Pod inicial estar presente.
+
+**Importante:** não execute os experimentos em clusters compartilhados. No experimento de quota, se a segunda criação for admitida inesperadamente, o comando falha e o Pod inesperado precisa ser removido após inspeção; o sistema não tenta apagar recursos às cegas.
 
 ## Diagnóstico
 
@@ -66,11 +79,49 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - `make down` remove o cluster Kind indicado por `CLUSTER_NAME`. Verifique esse valor antes da execução.
 - `make lab-down` **preserva o namespace** para evitar excluir recursos não relacionados.
 - `make validate` realiza parse YAML e alguns checks didáticos, **não é um validador completo do schema Kubernetes**.
-- A pipeline do GitHub executa verificações estáticas, mas **não cria um cluster Kind**.
-- Nenhum lab foi executado em um cluster durante a elaboração deste PR.
+- A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa três labs, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
+- Os labs não foram executados manualmente durante a elaboração deste PR; a primeira validação real acontecerá quando o workflow de integração rodar.
+
+
+## Criar novos laboratórios sem copiar pastas
+
+```bash
+make new-lab LAB_ID=01.10 LAB_SLUG=configmaps-basico LAB_TITLE="ConfigMaps: variáveis"
+```
+
+Isso gera `trilhas/01-fundamentos/labs/configmaps-basico/` com:
+
+```text
+configmaps-basico/
+├── README.md
+├── lab.yaml.example
+├── manifests/
+│   └── configmap.yaml
+└── tests/
+    └── README.md
+```
+
+O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rascunho. Reescreva o README com objetivo, pré-requisitos, etapas, observação, diagnóstico, experimentos, limpeza e critérios de sucesso. Revise os manifests e os checks (`deployment`, `service`, `configmap`, `rbac`, `rbac-deny`, `quota`). Somente quando o exercício estiver pronto, renomeie para `lab.yaml`, execute `make validate` e `make labs`.
+
+**Regras de organização:** mantenha infográfico e teoria no diretório do conceito; coloque os labs em `trilhas/<camada>/labs/<slug>`; deixe `scripts/labctl.py` como motor compartilhado; não introduza comandos shell arbitrários no contrato. IDs seguem o catálogo oficial, e cada lab publicado deve usar um ID único.
+
+**Limitação atual:** o identificador de lab é único. Caso uma aula precise de múltiplos labs independentes, será necessário ampliar o contrato para IDs com sufixo, em uma evolução posterior.
 
 ## Referências oficiais
 
 - [Kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start/)
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/)
 - [Debug Applications](https://kubernetes.io/docs/tasks/debug/debug-application/)
+
+## CI: Kind descartável
+
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O teste percorre os três laboratórios cadastrados, valida os checks, experimenta rollout e rejeição por quota, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+
+Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
+
+Testes unitários do motor:
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+A CI de Kind não substitui validação de labs de CNI, ingress controller, cloud providers ou storage que precisem de plugins e infraestrutura adicionais.
