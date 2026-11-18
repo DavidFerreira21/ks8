@@ -94,7 +94,7 @@ Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpa
 - Como os valores de `requests` e `limits` afetam agendamento e consumo?
 - Que evidência separa limitação de CPU de encerramento por falta de memória?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre requests/limits declarados, estado e eventos do Pod durante o experimento; diferencie agendamento, limitação de CPU e eventual OOM.
 
 ## Aprofunde seus conhecimentos
 
