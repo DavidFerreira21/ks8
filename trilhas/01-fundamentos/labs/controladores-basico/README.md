@@ -11,6 +11,12 @@ Compare três padrões de gerenciamento de Pods: réplicas intercambiáveis, um 
 
 **Pré-requisitos:** Kind `dev` ativo, `kubectl`, `make`; namespace exclusivo `lab-01-04`.
 
+## Desafio — o que você vai construir
+
+No mesmo arquivo, crie um `DaemonSet` chamado `observador` (container BusyBox), um Service **headless** chamado `stateful-headless` (`clusterIP: None`) e um `StatefulSet` chamado `stateful-demo` com 2 réplicas, usando esse Service. As labels e selectors precisam corresponder.
+
+**Antes de aplicar:** tente explicar o comportamento esperado sem consultar `solution/`. Se precisar, use `kubectl explain` ou a documentação abaixo. A solução de referência só deve ser consultada depois da tentativa.
+
 ## Fase 1 — Inspecionar o que será aplicado
 
 ```bash
@@ -25,8 +31,7 @@ Antes de executar, anote quais objetos e controladores devem aparecer.
 ## Fase 2 — Aplicar e validar
 
 ```bash
-make lab-prepare LAB=01.04
-# Complete os campos TODO do arquivo local
+# Você já preparou o ambiente na Fase 1; complete agora o YAML local.
 kubectl apply -f .labs/01.04/
 make lab-test LAB=01.04
 make lab-observe LAB=01.04
@@ -51,6 +56,14 @@ kubectl get pod stateful-demo-0 -n lab-01-04 -o jsonpath='{.metadata.uid}{"\n"}'
 
 O DaemonSet pode executar em apenas parte dos nós se houver taints e restrições. O ReplicaSet é visto no laboratório 01.03, sob controle de um Deployment.
 
+## Resultado esperado e evidências
+
+- O DaemonSet cria **um Pod por nó elegível**; taints do Control Plane podem reduzir a quantidade esperada (não presuma sempre 3).
+- O StatefulSet cria Pods com nomes previsíveis `stateful-demo-0` e `stateful-demo-1`, normalmente de forma ordenada.
+- Ao excluir `stateful-demo-0`, seu nome retorna **com outro UID**. Compare isso com os nomes intercambiáveis gerados por ReplicaSets.
+
+**Se o resultado divergir:** consulte `kubectl describe`, `kubectl get events` e os logs quando existirem Pods. Diferencie erro de YAML, problema no cluster e comportamento intencional do experimento.
+
 ## Fase 3 — Diagnóstico
 
 ```bash
@@ -69,12 +82,18 @@ make lab-status LAB=01.04
 
 O namespace é preservado. Não use `make down` para excluir um único lab.
 
-## Checklist
+## Critérios de conclusão
 
-- [ ] Previ os recursos criados e conferi o resultado.
-- [ ] Executei e expliquei o experimento.
-- [ ] Investiguei eventos e condições.
-- [ ] Limpei os recursos sem afetar outros labs.
+- [ ] Distingui o papel de ReplicaSet, DaemonSet e StatefulSet.
+- [ ] Expliquei por que o DaemonSet não precisa executar em todos os nós.
+- [ ] Observei os nomes estáveis e a troca do UID do StatefulSet.
+- [ ] Confirmei a função do Service headless e removi o lab.
+
+## Aprofunde seus conhecimentos
+
+[DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) · [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) · [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/).
+
+Use essas referências para entender **por que** o Kubernetes se comportou assim; depois compare com a [aula teórica](../../controladores/README.md).
 
 ---
 
