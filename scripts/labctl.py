@@ -32,6 +32,8 @@ class Lab:
     apply: tuple[Path, ...]
     checks: tuple[dict, ...]
     experiments: tuple[dict, ...]
+    setup: tuple[Path, ...] = ()
+    starter: tuple[Path, ...] = ()
 
 
 def load_labs() -> dict[str, Lab]:
@@ -61,6 +63,14 @@ def load_labs() -> dict[str, Lab]:
                 raise ValueError(f"{metadata}: arquivo fora do lab ou inexistente: {filename}")
             return candidate
         apply = tuple(manifest(name) for name in filenames)
+        setup_names = data.get("setup", [])
+        starter_names = data.get("starter", [])
+        if not isinstance(setup_names, list) or not isinstance(starter_names, list):
+            raise ValueError(f"{metadata}: setup/starter devem ser listas")
+        setup = tuple(manifest(name) for name in setup_names)
+        starter = tuple(manifest(name) for name in starter_names)
+        if starter and len(starter) != len(apply):
+            raise ValueError(f"{metadata}: starter e apply devem ter mesmo numero de arquivos")
         checks = data.get("checks", [])
         if not isinstance(checks, list) or any(not isinstance(x, dict) or x.get("type") not in SUPPORTED_CHECKS for x in checks):
             raise ValueError(f"{metadata}: checks não suportados")
@@ -86,7 +96,7 @@ def load_labs() -> dict[str, Lab]:
                     allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange"}
                     if check.get("kind") not in allowed:
                         raise ValueError(f"{metadata}: kind de check não permitido")
-        labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments))
+        labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments), setup, starter)
     return labs
 
 
@@ -194,6 +204,37 @@ def perform_experiment(lab: Lab, experiment_id: str | None, confirm: bool) -> in
     return 2
 
 
+def prepare_lab(lab: Lab) -> int:
+    """Prepara namespace, backends de apoio e arquivos locais sem aplicar a solucao."""
+    if ensure_namespace(lab.namespace):
+        return 1
+    for manifest in lab.setup:
+        if kubectl("apply", "-f", str(manifest)).returncode:
+            return 1
+    if lab.starter:
+        workspace = ROOT / ".labs" / lab.identifier
+        workspace.mkdir(parents=True, exist_ok=True)
+        for template in lab.starter:
+            target = workspace / template.name
+            if not target.exists():
+                shutil.copyfile(template, target)
+                print(f"Arquivo de exercicio criado: {target.relative_to(ROOT)}")
+            else:
+                print(f"Arquivo existente preservado: {target.relative_to(ROOT)}")
+        print(f"Edite .labs/{lab.identifier}/ e execute kubectl apply -f .labs/{lab.identifier}/")
+        print(f"Depois valide: make lab-test LAB={lab.identifier}")
+    return 0
+
+
+def remove_lab_objects(lab: Lab) -> int:
+    for manifest in reversed((*lab.setup, *lab.apply)):
+        if manifest.name == "namespace.yaml":
+            continue
+        if kubectl("delete", "-f", str(manifest), "--ignore-not-found").returncode:
+            return 1
+    return 0
+
+
 def execute_lab(lab: Lab, action: str) -> int:
     checked_cluster()  # Também para comandos somente de leitura.
     if action == "lab-observe":
@@ -201,20 +242,29 @@ def execute_lab(lab: Lab, action: str) -> int:
     if action == "lab-status":
         return kubectl("get", "pods,deployments,daemonsets,statefulsets,services,ingresses,hpa,pvc,configmaps,serviceaccounts,resourcequotas", "-n",
                        lab.namespace, "--ignore-not-found", "-o", "wide").returncode
+    if action == "lab-prepare":
+        return prepare_lab(lab)
+    if action == "lab-solution":
+        for path in lab.apply:
+            print(path.relative_to(ROOT))
+        print("Solucao de referencia: nao aplicada.")
+        return 0
+    if action == "lab-reset":
+        if remove_lab_objects(lab):
+            return 1
+        print("Recursos removidos; seus arquivos em .labs/ foram preservados.")
+        return prepare_lab(lab)
     if action == "lab-up":
         if ensure_namespace(lab.namespace):
             return 1
-        for manifest in lab.apply:
+        for manifest in (*lab.setup, *lab.apply):
             if kubectl("apply", "-f", str(manifest)).returncode:
                 return 1
         return 0
     if action == "lab-down":
         # Não apague o namespace: ele pode conter recursos de outras pessoas.
-        for manifest in reversed(lab.apply):
-            if manifest.name == "namespace.yaml":
-                continue
-            if kubectl("delete", "-f", str(manifest), "--ignore-not-found").returncode:
-                return 1
+        if remove_lab_objects(lab):
+            return 1
         print(f"Namespace {lab.namespace} preservado. Revise seus recursos antes de removê-lo.")
         return 0
     if action == "lab-test":
@@ -267,7 +317,7 @@ def execute_lab(lab: Lab, action: str) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Kubernetes Visual Guide — gerenciador de labs")
-    parser.add_argument("action", choices=("labs", "doctor", "validate", "lab-up", "lab-test", "lab-status", "lab-down", "lab-observe", "lab-experiment"))
+    parser.add_argument("action", choices=("labs", "doctor", "validate", "lab-prepare", "lab-solution", "lab-reset", "lab-up", "lab-test", "lab-status", "lab-down", "lab-observe", "lab-experiment"))
     parser.add_argument("--lab", help="ID do lab, por exemplo 01.06")
     parser.add_argument("--experiment", help="ID do experimento definido no lab.yaml")
     parser.add_argument("--confirm", action="store_true", help="Confirma a mutação do experimento")
