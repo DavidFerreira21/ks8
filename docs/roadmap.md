@@ -55,9 +55,11 @@ Esses marcos são **objetivos de aprendizado**, não certificações de execuç�
 | 📚 Consultar conceitos históricos | [Resumo do projeto](../resume.md) |
 | 🎨 Preparar infográficos | [Convenção visual](infograficos.md) |
 
-> **Estado do projeto:** as anotações e os exemplos práticos continuam disponíveis nas suas páginas atuais, integrados à trilha de estudo, e **não há comprovação de execução dos labs em cluster real** apenas pela presença dos arquivos.
+> **Estado do projeto:** os materiais complementares opcionais estão vinculados às aulas correspondentes, integrados à trilha de estudo, e **não há comprovação de execução dos labs em cluster real** apenas pela presença dos arquivos.
 
 ## Padrão de uma aula completa
+
+O [contrato editorial das aulas, labs e complementares](padrao-editorial.md) define critérios observáveis, perguntas específicas por conceito e documentação de evidências.
 
 - [ ] Objetivo e pré-requisitos claros
 - [ ] Explicação objetiva e arquitetura/fluxo

@@ -5,7 +5,7 @@
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.08` para criar o namespace e copiar um arquivo incompleto para `.labs/01.08/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.08/` e valide com `make lab-test LAB=01.08`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.08` apenas depois de tentar.
 
 
-## Hipótese e objetivo
+## Objetivo e hipótese
 
 Um Secret permite referenciar informações sensíveis sem embuti-las no Pod spec, mas sua existência não implica armazenamento criptografado por padrão.
 
@@ -92,6 +92,13 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 - [ ] Configurei `secretKeyRef` para a chave `TOKEN_DEMO` sem registrar o valor.
 - [ ] Observei a falha da dependência ausente e a recuperação.
 - [ ] Identifiquei controles adicionais necessários para Secrets em produção.
+
+## Perguntas de diagnóstico e reflexão
+
+- Qual evidência mostra que o Secret foi consumido sem expor o valor em logs ou em arquivos versionados?
+- Por que base64 não protege uma credencial contra alguém autorizado a ler o Secret?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
 
 ## Aprofunde seus conhecimentos
 

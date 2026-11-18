@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Explicar como configuração não sensível é separada da imagem e por que atualizações não afetam automaticamente variáveis de ambiente existentes.
 
 ## 🎨 Infográfico
 
@@ -67,9 +67,9 @@ O objeto `app-config` precisa existir. Se a variável não aparece no Pod, confi
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- O que muda quando um ConfigMap consumido via `envFrom` é atualizado?
+- Por que reiniciar os Pods pode ser necessário para consumir um novo valor de variável de ambiente?
+- Quando usar ConfigMap em vez de Secret?
 
 ## 🔗 Referência oficial
 

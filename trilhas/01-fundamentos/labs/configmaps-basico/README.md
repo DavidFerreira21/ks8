@@ -5,7 +5,7 @@
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.07` para criar o namespace e copiar um arquivo incompleto para `.labs/01.07/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.07/` e valide com `make lab-test LAB=01.07`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.07` apenas depois de tentar.
 
 
-## Hipótese e objetivo
+## Objetivo e hipótese
 
 ConfigMaps desacoplam a configuração da imagem; variáveis de ambiente de Pods existentes não se atualizam automaticamente.
 
@@ -95,6 +95,13 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 - [ ] Vi `MENSAGEM=versao-1` nos logs iniciais.
 - [ ] Confirmei a necessidade de reiniciar Pods que consomem ConfigMap como variável de ambiente.
 - [ ] Restaurei o conteúdo do YAML e removi os recursos declarados.
+
+## Perguntas de diagnóstico e reflexão
+
+- Por que um Pod já existente não recebeu automaticamente a nova variável de ambiente?
+- O que mudou nos logs após reiniciar o Deployment e como você registrou a diferença?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
 
 ## Aprofunde seus conhecimentos
 

@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Diferenciar liveness, readiness e startup e interpretar seus efeitos sobre reinícios e tráfego.
 
 ## 🎨 Infográfico
 
@@ -62,9 +62,9 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- O que acontece quando readiness falha e liveness continua passando?
+- Por que uma liveness dependente de serviço externo pode provocar reinícios desnecessários?
+- Como startupProbe protege aplicações com inicialização lenta?
 
 ## 🔗 Referência oficial
 

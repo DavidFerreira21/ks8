@@ -99,6 +99,8 @@ O namespace é preservado. Componentes compartilhados instalados nas etapas de p
 - Como distinguir métrica `<unknown>`, carga insuficiente e falta de capacidade no cluster usando `kubectl describe hpa`, `kubectl top pods` e eventos?
 - Registre utilização de CPU e réplicas desejadas/atuais antes, durante e depois da carga. Se não ocorrer escala, documente o diagnóstico em vez de considerar o teste funcional concluído.
 
+**Evidências mínimas:** registre o manifesto aplicado, o resultado real do experimento e a interpretação dos eventos/métricas. Se o teste funcional não ocorrer, registre-o como pendente, não como aprovado.
+
 ## Aprofunde seus conhecimentos
 
 [HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) · [Algoritmo do HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#algorithm-details) · [Metrics Server](https://github.com/kubernetes-sigs/metrics-server).

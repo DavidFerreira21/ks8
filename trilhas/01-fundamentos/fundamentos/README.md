@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Explicar a diferença entre estado desejado e observado e identificar o papel de API Server, etcd, scheduler, controllers e kubelet.
 
 ## 🎨 Infográfico
 
@@ -65,9 +65,9 @@ kubectl api-resources
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- O que acontece entre um `kubectl apply` aceito e um Pod efetivamente pronto?
+- Qual componente escolhe o nó de execução de um Pod e qual mantém os containers em funcionamento?
+- Como distinguir `spec` e `status` ao investigar uma divergência no cluster?
 
 ## 🔗 Referência oficial
 

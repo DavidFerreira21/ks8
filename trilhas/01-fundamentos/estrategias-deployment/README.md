@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Explicar RollingUpdate, seus limites de disponibilidade e o mecanismo de revisão e rollback.
 
 ## 🎨 Infográfico
 
@@ -59,9 +59,9 @@ Os comandos pressupõem um Deployment existente. O laboratório de blue/green ou
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Com `maxSurge: 1` e `maxUnavailable: 0`, que transição é permitida durante a atualização?
+- Qual diferença existe entre um `rollout restart` e alterar a imagem do Deployment?
+- Que sinais mostram um rollout travado e quando um rollback ajuda?
 
 ## 🔗 Referência oficial
 

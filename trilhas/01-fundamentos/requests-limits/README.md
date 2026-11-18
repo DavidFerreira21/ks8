@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Distinguir requests e limits de CPU e memória e interpretar decisões de agendamento e falhas de recursos.
 
 ## 🎨 Infográfico
 
@@ -60,13 +60,12 @@ kubectl top pods -A
 
 **🧪 Lab 01.09:** [🧪 Lab 01.09](../labs/requests-limits-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
-**Anotações e exemplos complementares:** [consultar material já existente](../../../2-pod/README.md). Os conteúdos anteriores foram preservados.
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Como o scheduler utiliza `requests` para decidir se um Pod cabe em um nó?
+- Por que exceder o limite de memória costuma ter consequência diferente de exceder o limite de CPU?
+- Por que o HPA de utilização de CPU depende de `requests.cpu`?
 
 ## 🔗 Referência oficial
 

@@ -92,6 +92,13 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 - [ ] Expliquei por que namespaces não equivalem a clusters ou isolamento de rede.
 - [ ] Apaguei somente o namespace extra que eu mesmo criei e limpei o lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Que consulta demonstra que um recurso com namespace não aparece automaticamente em outro?
+- Por que namespaces sozinhos não são uma política de isolamento de rede?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) · [Organização de objetos](https://kubernetes.io/docs/concepts/overview/working-with-objects/) · [DNS e Namespaces](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).

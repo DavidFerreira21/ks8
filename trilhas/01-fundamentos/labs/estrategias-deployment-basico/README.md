@@ -103,6 +103,8 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 - Compare `rollout restart` com uma alteração de imagem: ambos modificam o template do Pod, mas o que muda na revisão e na imagem efetiva?
 - Registre as revisões antes da atualização, depois da atualização e após o rollback. Confirme qual imagem ficou em execução.
 
+**Evidências mínimas:** registre o manifesto aplicado, o resultado real do experimento e a interpretação dos eventos/métricas. Se o teste funcional não ocorrer, registre-o como pendente, não como aprovado.
+
 ## Aprofunde seus conhecimentos
 
 [Estratégia de Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) · [Atualizar Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment) · [Reverter Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-back-a-deployment).

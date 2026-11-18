@@ -4,6 +4,8 @@
 
 ## Modelo de laboratório
 
+Siga o [padrão editorial](padrao-editorial.md): objetivo e hipótese específicos; pré-requisitos e desafio YAML; preparação; aplicação pelo aluno; observação e experimento; resultado esperado; diagnóstico e reflexão; critérios de conclusão; limpeza segura e referências. O número de fases pode variar conforme o conceito, sem perder as evidências mínimas (objeto, comportamento, explicação).
+
 Todos os labs da **Camada 01** seguem um percurso completo e repetível, adequado para quem está começando:
 
 1. **Objetivo e conceito:** entender qual comportamento Kubernetes será estudado.

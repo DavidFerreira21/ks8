@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Explicar como Deployments gerenciam ReplicaSets e réplicas de Pods e como observar a disponibilidade declarada.
 
 ## 🎨 Infográfico
 
@@ -77,9 +77,9 @@ Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, inv
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Qual a relação entre Deployment, ReplicaSet e Pods gerenciados?
+- O que acontece com o número de réplicas quando um Pod do Deployment é excluído?
+- Que diferença existe entre `replicas`, `readyReplicas` e `updatedReplicas`?
 
 ## 🔗 Referência oficial
 

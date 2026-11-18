@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Explicar como um Service encontra backends por labels e oferece descoberta e conectividade estáveis.
 
 ## 🎨 Infográfico
 
@@ -68,9 +68,9 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- O que acontece com os EndpointSlices quando o selector do Service deixa de corresponder às labels dos Pods?
+- Qual a diferença entre `port`, `targetPort` e a porta realmente escutada pelo processo?
+- Por que um Service pode existir e ter DNS válido mesmo sem backends prontos?
 
 ## 🔗 Referência oficial
 
