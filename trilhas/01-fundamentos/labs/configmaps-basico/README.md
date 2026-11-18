@@ -1,6 +1,7 @@
 # Lab 01.07 — ConfigMaps
 
 [← Aula 01.07](../../configmaps/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.07` para criar o namespace e copiar um arquivo incompleto para `.labs/01.07/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.07/` e valide com `make lab-test LAB=01.07`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.07` apenas depois de tentar.
 
 
