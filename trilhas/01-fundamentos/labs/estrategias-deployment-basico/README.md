@@ -15,6 +15,7 @@ RollingUpdate cria nova revisão de Pod template; rollback recupera uma revisão
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.12
 cat .labs/01.12/resources.yaml
 ```
 
