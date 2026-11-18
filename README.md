@@ -73,6 +73,8 @@ Os exercícios são executados em um **Kind local** com verificação de context
 
 ## 🧪 Laboratórios disponíveis
 
+A **Camada 01 agora reúne 14 laboratórios (01.01–01.14)**, cada um com contrato, manifests e roteiro de observação por etapas. Os exercícios 01.13 (Ingress) e 01.14 (HPA) requerem addons para testes funcionais. [**Abrir índice completo da Camada 01**](trilhas/01-fundamentos/README.md).
+
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |
 | [Fundamentos — primeiro contato com a API](trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) | Control Plane, Workers, ConfigMap e estado declarativo | 🧪 Manifestos disponíveis |
@@ -82,7 +84,7 @@ Os exercícios são executados em um **Kind local** com verificação de context
 | [Arquitetura](trilhas/03-arquitetura/README.md) | Observação dos componentes internos | 📘 Roteiro conceitual |
 | [Ferramentas do ecossistema](trilhas/04-platform-engineering/README.md) | GitOps, governança, networking e observabilidade | 📘 Roteiro conceitual |
 
-**Legenda:** 🧪 possui exemplos/arquivos de lab (execução real ainda precisa ser validada) · 📘 conteúdo ou roteiro de estudo · 🚧 planejado.
+**Legenda:** 🧪 possui contrato e manifests (execução depende do ambiente e dos testes do PR) · 📘 conteúdo ou roteiro de estudo · 🚧 planejado.
 
 ## 📚 Anotações e exemplos práticos
 
