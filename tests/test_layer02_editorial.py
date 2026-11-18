@@ -24,7 +24,7 @@ LABS = [
     "networkpolicy-basico", "troubleshooting-basico",
 ]
 COMPLEMENTS = (1, 2, 6, 9, 12, 13)  # índices zero-based
-LINK_RE = re.compile(r"!?\\[[^\\]]+\\]\\(([^)]+)\\)")
+LINK_RE = re.compile(r"!?\[[^\]]+\]\(([^)]+)\)")
 
 
 class Layer02EditorialTests(unittest.TestCase):
@@ -45,7 +45,7 @@ class Layer02EditorialTests(unittest.TestCase):
                 review = data.split("## ✅ Revisão do aprendizado", 1)[1].split(
                     "## 🔗 Referências oficiais", 1
                 )[0]
-                self.assertGreaterEqual(len(re.findall(r"^- .+\\?", review, re.M)), 3)
+                self.assertGreaterEqual(len(re.findall(r"^- .+\?", review, re.M)), 3)
                 self.assertNotIn("Em preparação.", data)
                 self.assertNotIn("Qual problema este conceito resolve?", review)
                 self.assertEqual("complementares/README.md" in data, n - 1 in COMPLEMENTS)
@@ -80,7 +80,7 @@ class Layer02EditorialTests(unittest.TestCase):
     def test_links_and_catalog(self):
         index = (LAYER / "README.md").read_text(encoding="utf-8")
         self.assertIn("| Aula | Conceito | Aula | Lab | Complementares |", index)
-        self.assertEqual(len(re.findall(r"^\\| 02\\.\\d{2} \\|", index, re.M)), 14)
+        self.assertEqual(len(re.findall(r"^\| 02\.\d{2} \|", index, re.M)), 14)
         pages = [LAYER / "README.md"]
         pages += [LAYER / s / "README.md" for s in LESSONS]
         pages += [LAYER / s / "complementares" / "README.md" for i, s in enumerate(LESSONS) if i in COMPLEMENTS]
