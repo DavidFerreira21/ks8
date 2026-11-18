@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Distinguir as garantias de ReplicaSet, DaemonSet e StatefulSet e selecionar cada um conforme identidade e distribuição dos Pods.
 
 ## 🎨 Infográfico
 
@@ -52,9 +52,9 @@ Verifique quantos Pods cada controlador deseja, onde executam e quais são suas 
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Por que um DaemonSet pode não executar em todos os nós do cluster?
+- O que torna a identidade de um Pod de StatefulSet diferente da identidade de um Pod de Deployment?
+- Por que StatefulSet não equivale automaticamente a banco de dados replicado ou backup?
 
 ## 🔗 Referência oficial
 
