@@ -6,13 +6,13 @@
 
 ## Objetivo e hipótese
 
-Aplicar node affinity em um Pod e verificar o agendamento sobre um worker específico do Kind.
+Demonstrar node affinity, o efeito de um taint NoSchedule e o papel de uma toleration para admitir o Pod no worker escolhido.
 
 **Pré-requisitos:** Kind `dev`, contexto `kind-dev`, `kubectl` e `make`; namespace exclusivo `lab-02-07`. O laboratório depende de um Kind denominado `dev` com worker `dev-worker`, como no `kind-config.yaml` do projeto.
 
 ## Desafio — o que você vai construir
 
-Escreva um Pod `afinidade` com BusyBox e `nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution`, exigindo `kubernetes.io/hostname In [dev-worker]`. O Pod deve permanecer ativo.
+Escreva um Pod `afinidade` com BusyBox e `nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution`, exigindo `kubernetes.io/hostname In [dev-worker]`. Acrescente uma toleration para `estudo=true:NoSchedule`; o Pod deve permanecer ativo.
 
 Preveja o que deve acontecer antes de abrir `solution/`. Use `kubectl explain` e a aula para esclarecer a API.
 
@@ -38,13 +38,31 @@ Confira `kubectl get nodes -L kubernetes.io/hostname` e `kubectl get pods -n lab
 
 ## Fase 3 — Experimento controlado
 
-**Sem modificar os nós**, consulte com `kubectl describe pod afinidade -n lab-02-07` as restrições efetivas. Discuta: se o worker não existir, o Pod permanece Pending. Para observar taints existentes, use `kubectl describe node dev-worker` e identifique `Taints`.
+**Somente no Kind descartável:** marque temporariamente `dev-worker` com um taint e recrie o Pod tolerante. Depois crie outro Pod sem toleration, exigindo o mesmo worker, para observar `FailedScheduling`.
+
+```bash
+kubectl taint node dev-worker estudo=true:NoSchedule
+kubectl delete pod afinidade -n lab-02-07
+kubectl apply -f .labs/02.07/resources.yaml
+kubectl get pod afinidade -n lab-02-07 -o wide
+kubectl run sem-toleration -n lab-02-07 --image=busybox:1.36 --restart=Never --overrides='{"spec":{"nodeSelector":{"kubernetes.io/hostname":"dev-worker"}}}' -- sleep 3600
+kubectl describe pod sem-toleration -n lab-02-07
+```
+
+O Pod com toleration pode executar em `dev-worker`; o Pod sem toleration deve ficar Pending por taint não tolerado. **Reverta obrigatoriamente** — inclusive após uma falha:
+
+```bash
+kubectl delete pod sem-toleration -n lab-02-07 --ignore-not-found
+kubectl taint node dev-worker estudo=true:NoSchedule-
+```
+
+Não avance para outro lab enquanto o taint de teste permanecer no nó.
 
 ## Resultado esperado e evidências
 
-O Pod é agendado em `dev-worker` se ele estiver Ready e tiver capacidade. Affinity exigida não é substituída por tolerations.
+Com worker Ready e capacidade suficiente, o Pod tolerante agenda em `dev-worker` mesmo sob taint; o Pod sem toleration recebe `FailedScheduling`. Affinity seleciona o nó, toleration remove uma restrição, mas não define destino.
 
-**Evidências específicas:** registre labels dos nós, nodeAffinity do Pod, valor de `spec.nodeName` e eventuais `FailedScheduling` se a restrição não for atendida.
+**Evidências específicas:** registre affinity e toleration no YAML, taint temporário, `spec.nodeName` do Pod tolerante, evento `FailedScheduling` do Pod sem toleration e a reversão do taint.
 
 ## Fase 4 — Diagnosticar
 
