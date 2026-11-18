@@ -74,4 +74,4 @@ kubectl top pods -A
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Probes — Liveness, Readiness e Startup →](../probes/README.md)
+[← Aula 01.08 — Secrets](../secrets/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.09](../labs/requests-limits-basico/README.md) · [Próxima: Aula 01.10 — Probes — Liveness, Readiness e Startup →](../probes/README.md)
