@@ -1,44 +1,54 @@
-# NetworkPolicy
+# 02.13 · NetworkPolicy
 
-[← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 02](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Explicar isolamento de tráfego com NetworkPolicy e comprovar a dependência de um CNI que implemente enforcement.
 
 ## 🎨 Infográfico
 
 ![02.13 — NetworkPolicy](images/networkpolicy.png)
 
-> A imagem ilustra o conceito; consulte a documentação oficial para detalhes técnicos.
+## 📖 Aula teórica
 
+### O problema que este recurso resolve
 
-## O que você vai aprender
+Namespaces e Services não isolam conexões por padrão. NetworkPolicy seleciona Pods e declara quais origens/destinos e portas são permitidos por direção. Sem plugin que implemente NetworkPolicy, aceitar o YAML não significa bloquear tráfego.
 
-Define quais conexões de entrada e saída são permitidas para Pods selecionados. É aplicada pelo plugin de rede, não apenas pela existência do YAML.
+### Como funciona no Kubernetes
 
-## Como funciona
+O efeito é aditivo: várias policies selecionando o mesmo Pod somam o tráfego permitido. A seleção por `podSelector` é por namespace; `namespaceSelector` permite cruzar namespaces. Políticas de ingress/egress são independentes conforme `policyTypes`.
 
-podSelector seleciona Pods; ingress/egress e policyTypes descrevem tráfego permitido; deny-by-default requer políticas de isolamento.
+### Exemplo de inspeção
 
-## Experimento recomendado
+Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.
 
-Compare conectividade antes/depois de política em cluster com CNI que implemente NetworkPolicy. O Kind padrão não garante enforcement.
+```bash
+kubectl config current-context
+kubectl get networkpolicy -n NAMESPACE
+kubectl describe networkpolicy isolada -n NAMESPACE
+kubectl get pods -n NAMESPACE --show-labels
+```
 
-**Status do lab:** roteiro conceitual; manifests e validação prática serão adicionados em uma etapa posterior.
+**O que observar:** Confira o objeto na API e os selectors. O teste funcional exige CNI compatível, como Cilium ou Calico configurado corretamente; não presuma isolamento no Kind padrão.
 
-## O que observar
+### Cuidados e limitações
 
-- Resultado e eventos dos recursos envolvidos.
-- Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
-- Regras, condições e pré-requisitos particulares deste mecanismo.
+Um default-deny de egress pode bloquear DNS. Mudanças de rede podem interromper workloads; teste apenas em namespace isolado.
 
+## 🧪 Aplicação prática
 
-## Referência oficial
+**[🧪 Lab 02.13](../labs/networkpolicy-basico/README.md):** escreva o YAML do desafio, compare resultados e investigue as condições de execução. O lab não exige leitura complementar.
 
-- [Documentação Kubernetes — NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+## ✅ Revisão do aprendizado
 
-**Próxima etapa:** [índice completo da Camada 02](../README.md).
+- Por que NetworkPolicy criada não prova enforcement?
+- Como políticas múltiplas combinam permissões?
+- Por que uma regra de egress precisa considerar DNS?
 
+## 🔗 Referências oficiais
+
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
 ---
 
-### Navegação
-
-[← Anterior](../jobs-cronjobs/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../labels-selectors-annotations/README.md)
+[← Aula 02.12](../node-maintenance/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.14 →](../troubleshooting/README.md)
