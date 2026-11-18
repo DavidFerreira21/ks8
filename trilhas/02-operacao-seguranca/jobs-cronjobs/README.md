@@ -1,45 +1,55 @@
-# Jobs e CronJobs
+# 02.06 · Jobs e CronJobs
 
-[← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 02](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Distinguir workloads finitos dos agendados e analisar sucesso, falhas e concorrência de Jobs.
 
 ## 🎨 Infográfico
 
 ![02.06 — Jobs e CronJobs](images/jobs-cronjobs.png)
 
-> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+## 📖 Aula teórica
 
+### O problema que este recurso resolve
 
-## O que você vai aprender
+Deployment mantém serviços em execução; Job busca conclusão finita. CronJob cria Jobs a partir de um calendário e pode controlar concorrência e histórico. Um Job completo não precisa de Pods rodando continuamente.
 
-Job executa Pods até atingir a conclusão desejada; CronJob cria Jobs seguindo uma expressão cron.
+### Como funciona no Kubernetes
 
-## Como funciona
+`completions` e `parallelism` controlam tarefas de Job, `backoffLimit` limita tentativas; CronJob usa `schedule`, `concurrencyPolicy` e `startingDeadlineSeconds`. CronJob não é garantia de execução exatamente uma vez: os Jobs devem tolerar repetição.
 
-CronJob → Job → Pod(s); configure concurrencyPolicy, backoffLimit e histórico conforme a necessidade.
+### Exemplo de inspeção
 
-## Experimento recomendado
+Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
 
-Crie Job simples, observe completions e logs; depois agende CronJob e inspecione os Jobs.
+```bash
+kubectl config current-context
+kubectl get jobs,cronjobs -n NAMESPACE
+kubectl describe job tarefa -n NAMESPACE
+kubectl logs job/tarefa -n NAMESPACE
+```
 
-**Status do lab:** roteiro conceitual; manifests e validação prática serão adicionados em uma etapa posterior.
+**O que observar:** Observe `Complete` no Job e a relação ownerReferences de Job criado pelo CronJob. A criação depende da janela da expressão cron.
 
-## O que observar
+### Cuidados e limitações
 
-- Resultado e eventos dos recursos envolvidos.
-- Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
-- Regras, condições e pré-requisitos particulares deste mecanismo.
+Para teste determinístico, execute primeiro um Job sem esperar pela agenda do CronJob. Não use jobs não idempotentes sem controles.
 
+## 🧪 Aplicação prática
 
+**[🧪 Lab 02.06](../labs/jobs-cronjobs-basico/README.md):** escreva o YAML do exercício, execute no Kind, registre evidências e explique as divergências. O complementar não é pré-requisito.
 
-## Referência oficial
+## ✅ Revisão do aprendizado
 
-- [Documentação Kubernetes — Jobs e CronJobs](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+- Quando usar Job em vez de Deployment?
+- Por que um CronJob deve executar tarefas idempotentes?
+- Qual diferença entre `parallelism`, `completions` e `concurrencyPolicy`?
 
-**Próxima etapa:** [índice completo da Camada 02](../README.md).
+## 🔗 Referências oficiais
 
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
 
 ---
 
-### Navegação
-
-[← Anterior](../rbac-serviceaccount/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../networkpolicy/README.md)
+[↑ Camada 02](../README.md) · [🧪 Lab 02.06](../labs/jobs-cronjobs-basico/README.md) · [← Aula 02.05](../init-sidecars/README.md) · [Próxima: 02.07 →](../taints-tolerations-affinity/README.md)
