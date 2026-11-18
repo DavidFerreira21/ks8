@@ -85,7 +85,7 @@ aparecer em `make labs`.
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Gerador de esqueleto de laboratório")
-    parser.add_argument("--id", required=True, help="Ex.: 01.10")
+    parser.add_argument("--id", required=True, help="Ex.: 01.07")
     parser.add_argument("--slug", required=True, help="Ex.: configmaps-variaveis")
     parser.add_argument("--title", required=True)
     args = parser.parse_args()
