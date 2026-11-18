@@ -11,7 +11,7 @@ LAB_SLUG ?= configmaps-basico
 LAB_TITLE ?= Estudando ConfigMaps
 LAB_NAMESPACE := k8s-lab
 
-.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-up lab-test lab-status lab-observe lab-experiment lab-down new-lab
+.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-prepare lab-reset lab-solution lab-up lab-test lab-status lab-observe lab-experiment lab-down new-lab
 
 help: ## Exibe os alvos disponíveis
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z_-]+:.*## / {printf "  %-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -56,7 +56,16 @@ validate: ## Validação estática dos manifests do lab (sem cluster)
 	@python3 scripts/validate_manifests.py
 	@python3 scripts/validate_lab_resources.py
 
-lab-up: check-context ## Aplica manifests declarados para LAB (padrão 01.01)
+lab-prepare: check-context ## Prepara namespace, apoio e arquivos para o aluno (sem aplicar a solução)
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-prepare --lab "$(LAB)"
+
+lab-reset: check-context ## Reinicia recursos declarados, preservando seus arquivos de estudo
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-reset --lab "$(LAB)"
+
+lab-solution: check-context ## Mostra caminhos das soluções sem aplicar nada
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-solution --lab "$(LAB)"
+
+lab-up: check-context ## Apenas CI: aplica a solução de referência para LAB
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-up --lab "$(LAB)"
 
 lab-test: check-context ## Valida checks do LAB selecionado
