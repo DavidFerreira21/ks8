@@ -19,7 +19,7 @@ FILES = {
     "trilhas/02-operacao-seguranca/labs/quota-namespace/namespace.yaml": (["Namespace"], None),
     "trilhas/02-operacao-seguranca/labs/quota-namespace/policy.yaml": (["ResourceQuota", "LimitRange"], "lab-ops-quota"),
     "trilhas/02-operacao-seguranca/labs/quota-namespace/pod-ok.yaml": (["Pod"], "lab-ops-quota"),
-    "trilhas/02-operacao-seguranca/labs/quota-namespace/pod-rejected.yaml": (["Pod"], "lab-ops-quota"),
+    "trilhas/02-operacao-seguranca/labs/quota-namespace/pod-rejected.yaml": (["Pod"], "lab-02-04"),
 }
 
 errors = []
