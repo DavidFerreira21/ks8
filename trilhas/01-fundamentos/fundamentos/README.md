@@ -1,57 +1,78 @@
-# Fundamentos
+# 01.01 · Fundamentos Kubernetes
 
-[← Camada 01](../README.md) · [Roadmap](../../../docs/roadmap.md) · [Início](../../../README.md)
+[⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Material de apoio:** este guia organiza o estudo do conceito. Veja também as anotações, os comandos e os exercícios em [material complementar](../../../1-fundamentos/README.md).
+> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
 
 ## 🎨 Infográfico
 
 ![01.01 — Fundamentos Kubernetes](../fundamentos-kubernetes/images/fundamentos-kubernetes.png)
 
-> **Revisão editorial:** o infográfico está disponível no repositório; confirme os detalhes técnicos com a documentação da aula.
+## 📖 Aula teórica
 
+## Por que Kubernetes existe?
 
-## Objetivo
+Um container empacota a aplicação e suas dependências, mas, sozinho, não resolve descoberta de serviços, distribuição de carga, recuperação de falhas ou atualizações de múltiplas réplicas. O **Kubernetes** é um orquestrador: você declara o estado desejado de uma aplicação e seus controladores trabalham continuamente para aproximar a execução desse estado.
 
-Conhecer containers, kubectl, o cluster Kubernetes e os primeiros objetos.
+**Container image** é o artefato imutável de distribuição; **container runtime** executa os containers no nó; **Pod** é a unidade de execução gerenciada pelo Kubernetes. O Kubernetes utiliza runtimes compatíveis com a **Container Runtime Interface (CRI)**, como containerd e CRI-O. Docker pode ser usado para construir imagens e para executar os nós do Kind, mas não precisa atuar como runtime CRI do cluster.
 
-## Ao concluir, você deverá conseguir
+## Componentes e responsabilidades
 
-- Identificar Control Plane e Worker Nodes
-- Criar e inspecionar recursos com kubectl
-- Preparar o Kind para os próximos exercícios
+| Componente | Responsabilidade |
+| --- | --- |
+| **API Server** | Recebe e valida requisições; é a interface central do cluster |
+| **etcd** | Persiste os dados de configuração e estado do cluster |
+| **Scheduler** | Escolhe o nó para um Pod ainda sem agendamento |
+| **Controllers** | Comparam estado desejado e observado e reconciliam divergências |
+| **kubelet** | Garante que os containers dos Pods atribuídos ao nó sejam executados |
+| **Rede e DNS** | Permitem conectividade e descoberta entre workloads |
 
-## Estude o conceito
+O **Control Plane** coordena a plataforma; os **Worker Nodes** executam os workloads. Em serviços gerenciados como EKS, parte da operação do Control Plane é responsabilidade do provedor, mas os conceitos permanecem.
 
-Consulte as [anotações e exemplos práticos](../../../1-fundamentos/README.md), com explicações, exemplos e comandos para aprofundar o conceito.
+## O que acontece quando você aplica um YAML?
 
+1. O cliente `kubectl` envia uma requisição à API.
+2. A API autentica, autoriza e valida o objeto antes de persistir o estado desejado.
+3. Controladores observam a mudança e criam ou ajustam recursos dependentes.
+4. O scheduler decide onde executar Pods pendentes.
+5. O kubelet instrui o runtime e reporta o estado observado.
 
-## Laboratório e observação
+Esse ciclo não é uma pipeline única; é um conjunto de **loops de reconciliação assíncronos**. Por isso, `kubectl apply` aceitar o objeto não significa que a aplicação já esteja saudável.
 
-**Pré-requisito:** [Kind configurado](../../../install-kind.md) e contexto correto selecionado. Confira `kubectl config current-context` antes de executar comandos que alterem o cluster.
+## Objetos, spec e status
 
-Utilize os manifests e exemplos das [anotações e exemplos práticos](../../../1-fundamentos/README.md). Para observar o cluster:
+Em recursos declarativos, `metadata` identifica o objeto, `spec` descreve a intenção e `status`, quando presente, expressa observações do controlador. Nem todos os objetos têm os mesmos campos.
 
 ```bash
 kubectl config current-context
+kubectl cluster-info
 kubectl get nodes -o wide
-kubectl get namespaces
 kubectl get pods -A
+kubectl api-resources
 ```
 
-> Substitua os valores entre `<...>` pelos recursos realmente criados. Os comandos acima são referências para estudo; a execução não foi testada neste PR.
+**Leitura esperada:** identifique quantos nós existem, qual é o contexto selecionado e quais recursos o API Server conhece. Os comandos acima são de inspeção.
 
-Os exercícios com falhas intencionais e critérios de aceitação serão padronizados nas próximas etapas.
+## Modelo mental
 
-## Documentação oficial
+**Você declara; o Kubernetes reconcilia; você observa.** Quando houver diferença entre `spec` e `status`, investigue eventos, condições, controladores e dependências.
 
-- [Kubernetes — Fundamentos](https://kubernetes.io/docs/tutorials/kubernetes-basics/)
+## 🧪 Aplicação prática
 
-**Próximo tópico:** [Pods](../pods/README.md).
+**Atividade de observação:** utilize os comandos e exemplos acima em um cluster de estudos. Não há lab independente validado para este tópico.
 
+**Anotações e exemplos complementares:** [consultar material já existente](../../../1-fundamentos/README.md). Os conteúdos anteriores foram preservados.
+
+## ✅ Revisão do aprendizado
+
+- Qual problema este conceito resolve?
+- Que campos ou estados da API permitem verificar o comportamento real?
+- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+
+## 🔗 Referência oficial
+
+[Documentação Kubernetes — Fundamentos Kubernetes](https://kubernetes.io/docs/concepts/overview/)
 
 ---
 
-### Navegação
-
-← Primeiro tópico · [↑ Voltar à camada](../README.md) · [Próximo →](../pods/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Namespaces →](../namespaces/README.md)

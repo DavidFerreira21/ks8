@@ -6,7 +6,7 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 
 **52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A experiência prática pode ser um lab executável ou uma observação guiada, conforme o tema.
 
-**Situação:** 📖 aula com material teórico · 🎨 infográfico publicado, teoria em preparação. **Os 52 PNGs estão vinculados** às respectivas páginas; a revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
+**Situação:** 📖 aula com material teórico · 🎨 infográfico publicado, teoria em preparação. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 52 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
 
 ## 01 · Fundamentos e recursos essenciais
 
@@ -15,19 +15,19 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 | Aula | Tema | Guia |
 | --- | --- | --- |
 | 01.01 | Fundamentos Kubernetes | [📖 Aula + infográfico](../trilhas/01-fundamentos/fundamentos/README.md) |
-| 01.02 | Namespaces | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/namespaces/README.md) |
+| 01.02 | Namespaces | [📖 Aula + infográfico](../trilhas/01-fundamentos/namespaces/README.md) |
 | 01.03 | Pods | [📖 Aula + infográfico](../trilhas/01-fundamentos/pods/README.md) |
-| 01.04 | Requests e Limits | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/requests-limits/README.md) |
+| 01.04 | Requests e Limits | [📖 Aula + infográfico](../trilhas/01-fundamentos/requests-limits/README.md) |
 | 01.05 | Probes — Liveness, Readiness e Startup | [📖 Aula + infográfico](../trilhas/01-fundamentos/probes/README.md) |
 | 01.06 | Deployments | [📖 Aula + infográfico](../trilhas/01-fundamentos/deployments/README.md) |
 | 01.07 | ReplicaSet, DaemonSet e StatefulSet | [📖 Aula + infográfico](../trilhas/01-fundamentos/controladores/README.md) |
-| 01.08 | Estratégias avançadas de Deployment | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/estrategias-deployment/README.md) |
+| 01.08 | Estratégias avançadas de Deployment | [📖 Aula + infográfico](../trilhas/01-fundamentos/estrategias-deployment/README.md) |
 | 01.09 | Services | [📖 Aula + infográfico](../trilhas/01-fundamentos/services/README.md) |
-| 01.10 | ConfigMaps | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/configmaps/README.md) |
-| 01.11 | Secrets | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/secrets/README.md) |
-| 01.12 | Volumes | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/volumes/README.md) |
-| 01.13 | Ingress | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/ingress/README.md) |
-| 01.14 | Horizontal Pod Autoscaler (HPA) | [🎨 Infográfico · teoria em preparação](../trilhas/01-fundamentos/hpa/README.md) |
+| 01.10 | ConfigMaps | [📖 Aula + infográfico](../trilhas/01-fundamentos/configmaps/README.md) |
+| 01.11 | Secrets | [📖 Aula + infográfico](../trilhas/01-fundamentos/secrets/README.md) |
+| 01.12 | Volumes | [📖 Aula + infográfico](../trilhas/01-fundamentos/volumes/README.md) |
+| 01.13 | Ingress | [📖 Aula + infográfico](../trilhas/01-fundamentos/ingress/README.md) |
+| 01.14 | Horizontal Pod Autoscaler (HPA) | [📖 Aula + infográfico](../trilhas/01-fundamentos/hpa/README.md) |
 
 ## 02 · Operação, segurança e governança
 

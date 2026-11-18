@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Entender os objetos essenciais do Kubernetes, publicar uma aplicação e observar como o cluster mantém o estado desejado.
 
-**14 aulas no catálogo · infográficos publicados progressivamente** · **6 guias de entrada disponíveis** · **1 lab integrado com manifests**
+**14 aulas com teoria e infográfico publicados** · **1 lab integrado com manifests**
 
 ---
 
@@ -19,24 +19,24 @@
 
 ## 📚 Catálogo de aulas — ordem oficial
 
-A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). Guias e laboratórios são publicados progressivamente, sem remover o material complementar existente.
+A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). As **14 aulas já possuem explicação teórica e infográfico**. Laboratórios executáveis continuam em evolução, sem remover o material complementar existente.
 
 | Aula | Conceito | Aula teórica | Material de apoio |
 | --- | --- | --- | --- |
 | 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [Anotações e exemplos](../../1-fundamentos/README.md) |
-| 01.02 | **Namespaces** | [🎨 Infográfico · teoria em preparação](namespaces/README.md) | — |
+| 01.02 | **Namespaces** | [📖 Estudar](namespaces/README.md) | — |
 | 01.03 | **Pods** | [📖 Estudar](pods/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
-| 01.04 | **Requests e Limits** | [🎨 Infográfico · teoria em preparação](requests-limits/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
+| 01.04 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
 | 01.05 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [Anotações e exemplos](../../5-probes/README.md) |
 | 01.06 | **Deployments** | [📖 Estudar](deployments/README.md) | [Anotações e exemplos](../../3-deployment/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
 | 01.07 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações e exemplos](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| 01.08 | **Estratégias avançadas de Deployment** | [🎨 Infográfico · teoria em preparação](estrategias-deployment/README.md) | — |
+| 01.08 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | — |
 | 01.09 | **Services** | [📖 Estudar](services/README.md) | [Anotações e exemplos](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| 01.10 | **ConfigMaps** | [🎨 Infográfico · teoria em preparação](configmaps/README.md) | — |
-| 01.11 | **Secrets** | [🎨 Infográfico · teoria em preparação](secrets/README.md) | — |
-| 01.12 | **Volumes** | [🎨 Infográfico · teoria em preparação](volumes/README.md) | — |
-| 01.13 | **Ingress** | [🎨 Infográfico · teoria em preparação](ingress/README.md) | — |
-| 01.14 | **Horizontal Pod Autoscaler (HPA)** | [🎨 Infográfico · teoria em preparação](hpa/README.md) | — |
+| 01.10 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | — |
+| 01.11 | **Secrets** | [📖 Estudar](secrets/README.md) | — |
+| 01.12 | **Volumes** | [📖 Estudar](volumes/README.md) | — |
+| 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | — |
+| 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | — |
 
 ## 🧪 Laboratório em destaque
 
@@ -47,7 +47,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | **Ambiente** | Kind local, namespace de laboratório isolado. |
 | **Começar** | **[Abrir laboratório →](labs/primeira-aplicacao/README.md)** |
 
-> **Importante:** manifests e roteiro estão disponíveis, mas a execução ponta a ponta no Kind ainda precisa de validação. O conteúdo de Volumes ainda não tem uma página completa identificada no repositório; os conceitos disponíveis continuam acessíveis pelo resumo.
+> **Importante:** os manifests do lab integrado estão disponíveis, mas a execução ponta a ponta no Kind ainda precisa de validação. A teoria de Volumes está na aula 01.12; não existe um laboratório específico validado para o tema.
 
 ## 🎯 Checklist de aprendizado
 
