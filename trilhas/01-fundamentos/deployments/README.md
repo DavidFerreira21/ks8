@@ -71,7 +71,7 @@ Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, inv
 
 ## 🧪 Aplicação prática
 
-**🧪 Lab 01.03:** [abrir exercício guiado](../labs/deployments-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
+**🧪 Lab 01.03:** [🧪 Lab 01.03](../labs/deployments-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../3-deployment/README.md). Os conteúdos anteriores foram preservados.
 
