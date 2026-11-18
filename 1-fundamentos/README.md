@@ -1,229 +1,69 @@
-# Kubernetes - Aula 01
+# Complementar 01.01 — Ecossistema e ambiente Kubernetes
 
-## Aula 01 - Fundamentos 
+[← Aula 01.01](../trilhas/01-fundamentos/fundamentos/README.md) · [🧪 Lab 01.01](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) · [↑ Camada 01](../trilhas/01-fundamentos/README.md)
 
+> **Leitura opcional:** referência para entender tecnologias ao redor do Kubernetes e escolher ferramentas locais. A [aula](../trilhas/01-fundamentos/fundamentos/README.md) explica o funcionamento do cluster; o [lab](../trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) conduz a prática com Kind. Não é necessário estudar este texto para concluir o lab.
 
-### Indice
+## Quando consultar
 
-- [O quê preciso saber antes de começar?](#o-quê-preciso-saber-antes-de-começar?)
-- [Início da Aula 01](#inicio-da-aula-01)
-    - [Qual a distro GNU/Linux que devo usar?](#qual-a-distro-gnu/linux-que-devo-usar?)
-    - [Alguns sites que devemos visitar](#alguns-sites-que-devemos-visitar)
-    - [O Container Engine](#o-container-engine)
-    - [OCI - Open Container Initiative](#oci---open-container-initiative)
-    - [O Container Runtime](#o-container-runtime)
-    - [O que é o Kubernetes?](#o-que-é-o-kubernetes?)
-        - [Arquitetura do k8s](#arquitetura-do-k8s)
-    - [Kubectl: instalacao e customizacao](#kubectl-instalacao-e-customizacao)
-    - [Criando um cluster Kubernetes](#criando-um-cluster-kubernetes)
-        - [Criando o cluster em sua máquina local](#criando-o-cluster-em-sua-máquina-local)
-            - [Minikube](#minikube)
-            - [Kind](#kind)
-    - [Primeiros passos no k8s](#primeiros-passos-no-k8s)
-        - [Verificando os namespaces e pods](#verificando-os-namespaces-e-pods)
-        - [Executando nosso primeiro pod no k8s](#executando-nosso-primeiro-pod-no-k8s)
-        - [Expondo o pod e criando um Service](#expondo-o-pod-e-criando-um-service)
-    - [Limpando tudo e indo para casa](#limpando-tudo-e-indo-para-casa)
+- Ao diferenciar Docker/Podman, imagens OCI e container runtimes usados pelo Kubernetes.
+- Ao comparar opções de cluster local para estudo e CI.
+- Ao investigar conexões e portas entre os componentes do cluster.
 
+## Engine, runtime, CRI e OCI: não são a mesma coisa
 
+| Elemento | Papel | Exemplos |
+| --- | --- | --- |
+| Ferramenta/engine de containers | Constrói imagens, gerencia containers locais e outras funcionalidades | Docker, Podman |
+| Runtime compatível com CRI | Interface de execução de containers consumida pelo kubelet | containerd, CRI-O |
+| Runtime de baixo nível | Cria e executa processos de containers sob o sistema operacional | runc, crun |
+| Padrões OCI | Definem formatos e interfaces portáveis para imagens e execução | OCI Image Specification, OCI Runtime Specification |
 
+A **OCI** padroniza formatos e especificações; a **CRI** é a interface entre o kubelet e o runtime no nó. Docker pode ser usado no host do Kind para hospedar os nós, enquanto o Kubernetes dentro desses nós usa seu próprio runtime. Nem toda ferramenta listada na tabela implementa a mesma interface.
 
-### O que iremos ver hoje?
+**Limitação importante:** um container estar saudável no Docker do computador não garante que o Pod esteja pronto no Kubernetes. São ambientes, mecanismos de rede e políticas de controle diferentes.
 
-Durante a Aula 01 nós vamos entender o que é um container, vamos falar sobre a importância do container runtime e do container engine. Durante a Aula 01 vamos entender o que é o Kubernetes e sua arquitetura, vamos falar sobre o control plane, workers, apiserver, scheduler, controller e muito mais!
-Será aqui que iremos criar o nosso primeiro cluster Kubernetes e realizar o deploy de um pod do Nginx. 
-A Aula 01 é para que eu possa me sentir mais confortável com o Kubernetes e seus conceitos iniciais.
- 
-### Inicio da Aula 01
- 
-### Qual distro GNU/Linux devo usar?
+## Quando usar cada ambiente local?
 
-Devido ao fato de algumas ferramentas importantes, como o ``systemd`` e ``journald``, terem se tornado padrão na maioria das principais distribuições disponíveis hoje, você não deve encontrar problemas para seguir o treinamento, caso você opte por uma delas, como Ubuntu, Debian, CentOS e afins.
- 
-### Alguns sites que devemos visitar
+| Ferramenta | Valor para estudo | Atenção |
+| --- | --- | --- |
+| [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/) | Clusters descartáveis em containers; adequado a labs e CI | Nós são containers, não equivalem a VMs/hosts de produção |
+| [Minikube](https://minikube.sigs.k8s.io/docs/start/) | Desenvolvimento local e experimentos com addons | Drivers e recursos disponíveis variam por host |
+| [k3s](https://docs.k3s.io/) | Distribuição leve para laboratório e casos de edge | Difere da instalação upstream em componentes e defaults |
+| [MicroK8s](https://microk8s.io/docs) | Ambiente local/edge com gerenciamento de addons | Requisitos e comportamento dependem do sistema |
+| [k0s](https://docs.k0sproject.io/) | Distribuição compacta para diferentes topologias | Exige planejamento de operação conforme o cenário |
 
-Abaixo temos os sites oficiais do projeto do Kubernetes:
+**Neste Learning Path, use Kind.** Os demais são alternativas de aprofundamento, não pré-requisitos.
 
-- [https://kubernetes.io](https://kubernetes.io)
+## Portas e conectividade: consulta rápida
 
-- [https://github.com/kubernetes/kubernetes/](https://github.com/kubernetes/kubernetes/)
+| Porta | Uso típico | Observação |
+| --- | --- | --- |
+| TCP 6443 | Kubernetes API Server | Pode ser alterada conforme a configuração |
+| TCP 2379–2380 | etcd | Relevante para topologias com etcd |
+| TCP 10250 | kubelet API | Deve ter acesso cuidadosamente controlado |
+| TCP 10257 | kube-controller-manager seguro | Depende da topologia |
+| TCP 10259 | kube-scheduler seguro | Depende da topologia |
+| TCP 30000–32767 | Faixa padrão de NodePort | Configurável no API Server |
 
-- [https://github.com/kubernetes/kubernetes/issues](https://github.com/kubernetes/kubernetes/issues)
+As portas não são uma receita de regras abertas no firewall. Verifique [portas e protocolos oficiais](https://kubernetes.io/docs/reference/networking/ports-and-protocols/) e a topologia específica; não utilize como referência portas legadas inseguras 10251/10252.
 
- 
-Abaixo temos as páginas oficiais das certificações do Kubernetes (CKA, CKAD e CKS):
+## Referência de inspeção (somente leitura)
 
-- [https://www.cncf.io/certification/cka/](https://www.cncf.io/certification/cka/)
+```bash
+kubectl config current-context
+kubectl cluster-info
+kubectl get nodes -o wide
+kubectl get --raw /readyz
+kubectl api-resources
+```
 
-- [https://www.cncf.io/certification/ckad/](https://www.cncf.io/certification/ckad/)
+Se uma consulta falhar, diferencie contexto errado, API inacessível e falta de permissão. Um `kubectl apply` bem-sucedido não atesta sozinho a saúde do workload.
 
-- [https://www.cncf.io/certification/cks/](https://www.cncf.io/certification/cks/)
+## Referências oficiais
 
- 
-### O Container Engine
-
-Antes de começar a falar um pouco mais sobre o Kubernetes, nós primeiro precisamos entender alguns componentes que são importantes no ecossistema do Kubernetes, um desses componentes é o Container Engine. 
-
-O *Container Engine* é o responsável por gerenciar as imagens e volumes, é ele o responsável por garantir que os os recursos que os containers estão utilizando está devidamente isolados, a vida do container, storage, rede, etc.
-
-Hoje temos diversas opções para se utilizar como *Container Engine*, que até pouco tempo atrás tinhamos somente o Docker para esse papel.
-
-Opções como o Docker, o CRI-O e o Podman são bem conhecidas e preparadas para o ambiente produtivo. O Docker, como todos sabem, é o Container Engine mais popular e ele utiliza como Container Runtime o containerd.
-
-Container Runtime? O que é isso?
-
-Calma que vou te explicar já já, mas antes temos que falar sobre a OCI. :)
-
- 
-#### OCI - Open Container Initiative
-
-A OCI é uma organização sem fins lucrativos que tem como objetivo padronizar a criação de containers, para que possam ser executados em qualquer ambiente. A OCI foi fundada em 2015 pela Docker, CoreOS, Google, IBM, Microsoft, Red Hat e VMware e hoje faz parte da Linux Foundation.
-
-O principal projeto criado pela OCI é o *runc*, que é o principal container runtime de baixo nível, e utilizado por diferentes *Container Engines, como o Docker. 
-O *runc* é um projeto open source, escrito em Go e seu código está disponível no GitHub.
-
-Agora sim já podemos falar sobre o que é o Container Runtime.
-
- 
-#### O Container Runtime
-
-Para que seja possível executar os containers nos nós é necessário ter um *Container Runtime* instalado em cada um dos nós.
-
-O *Container Runtime* é o responsável por executar os containers nos nós. Quando você está utilizando Docker ou Podman para executar containers em sua máquina, por exemplo, você está fazendo uso de algum *Container Runtime*, ou melhor, o seu Container Engine está fazendo uso de algum *Container Runtime*.
-
-Temos três tipos de *Container Runtime*:
-
-- Low-level: são os *Container Runtime* que são executados diretamente pelo Kernel, como o runc, o crun e o runsc.
-
-- High-level: são os *Container Runtime* que são executados por um *Container Engine*, como o containerd, o CRI-O e o Podman.
-
-- Sandbox: são os *Container Runtime* que são executados por um *Container Engine* e que são responsáveis por executar containers de forma segura em unikernels ou utilizando algum proxy para fazer a comunicação com o Kernel. O gVisor é um exemplo de *Container Runtime* do tipo Sandbox.
-
-- Virtualized: são os *Container Runtime* que são executados por um *Container Engine* e que são responsáveis por executar containers de forma segura em máquinas virtuais. A performance aqui é um pouco menor do que quando temos um sendo executado nativamente.
-O Kata Containers é um exemplo de *Container Runtime* do tipo Virtualized.
-
-### O que é o Kubernetes?
-
-**Versão resumida:**
-
-O projeto Kubernetes foi desenvolvido pela Google, em meados de 2014, para atuar como um orquestrador de contêineres para a empresa. O Kubernetes (k8s), cujo termo em Grego significa "timoneiro", é um projeto *open source* que conta com *design* e desenvolvimento baseados no projeto Borg, que também é da Google [1](https://kubernetes.io/blog/2015/04/borg-predecessor-to-kubernetes/). Alguns outros produtos disponíveis no mercado, tais como o Apache Mesos e o Cloud Foundry, também surgiram a partir do projeto Borg.
-
-Como Kubernetes é uma palavra difícil de se pronunciar - e de se escrever - a comunidade simplesmente o apelidou de **k8s**, seguindo o padrão [i18n](http://www.i18nguy.com/origini18n.html) (a letra "k" seguida por oito letras e o "s" no final), pronunciando-se simplesmente "kates".
-
-
-### Arquitetura do k8s
-
-Assim como os demais orquestradores disponíveis, o k8s também segue um modelo *control plane/workers*, constituindo assim um *cluster*, onde para seu funcionamento é recomendado no mínimo três nós: o nó *control-plane*, responsável (por padrão) pelo gerenciamento do *cluster*, e os demais como *workers*, executores das aplicações que queremos executar sobre esse *cluster*.
-
-É possível criar um cluster Kubernetes rodando em apenas um nó, porém é recomendado somente para fins de estudos e nunca executado em ambiente produtivo.
-
-Caso você queira utilizar o Kubernetes em sua máquina local, em seu desktop, existem diversas soluções que irão criar um cluster Kubernetes, utilizando máquinas virtuais ou o Docker, por exemplo.
-
-Com isso você poderá ter um cluster Kubernetes com diversos nós, porém todos eles rodando em sua máquina local, em seu desktop.
-
-Alguns exemplos são:
-
-* [Kind](https://kind.sigs.k8s.io/docs/user/quick-start): Uma ferramenta para execução de contêineres Docker que simulam o funcionamento de um cluster Kubernetes. É utilizado para fins didáticos, de desenvolvimento e testes. O **Kind não deve ser utilizado para produção**;
-
-* [Minikube](https://github.com/kubernetes/minikube): ferramenta para implementar um *cluster* Kubernetes localmente com apenas um nó. Muito utilizado para fins didáticos, de desenvolvimento e testes. O **Minikube não deve ser utilizado para produção**;
-
-* [MicroK8S](https://microk8s.io): Desenvolvido pela [Canonical](https://canonical.com), mesma empresa que desenvolve o [Ubuntu](https://ubuntu.com). Pode ser utilizado em diversas distribuições e **pode ser utilizado em ambientes de produção**, em especial para *Edge Computing* e IoT (*Internet of things*);
-
-* [k3s](https://k3s.io): Desenvolvido pela [Rancher Labs](https://rancher.com), é um concorrente direto do MicroK8s, podendo ser executado inclusive em Raspberry Pi;
-
-* [k0s](https://k0sproject.io): Desenvolvido pela [Mirantis](https://www.mirantis.com), mesma empresa que adquiriu a parte enterprise do [Docker](https://www.docker.com). É uma distribuição do Kubernetes com todos os recursos necessários para funcionar em um único binário, que proporciona uma simplicidade na instalação e manutenção do cluster. A pronúncia é correta é kay-zero-ess e tem por objetivo reduzir o esforço técnico e desgaste na instalação de um cluster Kubernetes, por isso o seu nome faz alusão a *Zero Friction*. **O k0s pode ser utilizado em ambientes de produção**;
-
-* **API Server**: É um dos principais componentes do k8s. Este componente fornece uma API que utiliza JSON sobre HTTP para comunicação, onde para isto é utilizado principalmente o utilitário ``kubectl``, por parte dos administradores, para a comunicação com os demais nós, como mostrado no gráfico. Estas comunicações entre componentes são estabelecidas através de requisições [REST](https://restfulapi.net);
-
-* **etcd**: O etcd é um *datastore* chave-valor distribuído que o k8s utiliza para armazenar as especificações, status e configurações do *cluster*. Todos os dados armazenados dentro do etcd são manipulados apenas através da API. Por questões de segurança, o etcd é por padrão executado apenas em nós classificados como *control plane* no *cluster* k8s, mas também podem ser executados em *clusters* externos, específicos para o etcd, por exemplo;
-
-* **Scheduler**: O *scheduler* é responsável por selecionar o nó que irá hospedar um determinado *pod* (a menor unidade de um *cluster* k8s - não se preocupe sobre isso por enquanto, nós falaremos mais sobre isso mais tarde) para ser executado. Esta seleção é feita baseando-se na quantidade de recursos disponíveis em cada nó, como também no estado de cada um dos nós do *cluster*, garantindo assim que os recursos sejam bem distribuídos. Além disso, a seleção dos nós, na qual um ou mais pods serão executados, também pode levar em consideração políticas definidas pelo usuário, tais como afinidade, localização dos dados a serem lidos pelas aplicações, etc;
-
-* **Controller Manager**: É o *controller manager* quem garante que o *cluster* esteja no último estado definido no etcd. Por exemplo: se no etcd um *deploy* está configurado para possuir dez réplicas de um *pod*, é o *controller manager* quem irá verificar se o estado atual do *cluster* corresponde a este estado e, em caso negativo, procurará conciliar ambos;
-
-* **Kubelet**: O *kubelet* pode ser visto como o alente do k8s que é executado nos nós workers. Em cada nó worker deverá existir um agente Kubelet em execução. O Kubelet é responsável por de fato gerenciar os *pods* que foram direcionados pelo *controller* do *cluster*, dentro dos nós, de forma que para isto o Kubelet pode iniciar, parar e manter os contêineres e os pods em funcionamento de acordo com o instruído pelo controlador do cluster;
-
-* **Kube-proxy**: Age como um *proxy* e um *load balancer*. Este componente é responsável por efetuar roteamento de requisições para os *pods* corretos, como também por cuidar da parte de rede do nó;
-
- 
-### Portas que devemos nos preocupar
-
-**CONTROL PLANE**
-
-Protocol|Direction|Port Range|Purpose|Used By
---------|---------|----------|-------|-------
-TCP|Inbound|6443*|Kubernetes API server|All
-TCP|Inbound|2379-2380|etcd server client API|kube-apiserver, etcd
-TCP|Inbound|10250|Kubelet API|Self, Control plane
-TCP|Inbound|10251|kube-scheduler|Self
-TCP|Inbound|10252|kube-controller-manager|Self
-
-* Toda porta marcada por * é customizável, você precisa se certificar que a porta alterada também esteja aberta.
-
-
- 
-**WORKERS**
-
-Protocol|Direction|Port Range|Purpose|Used By
---------|---------|----------|-------|-------
-TCP|Inbound|10250|Kubelet API|Self, Control plane
-TCP|Inbound|30000-32767|NodePort|Services All
-
- 
-### Conceitos-chave do k8s
-
-É importante saber que a forma como o k8s gerencia os contêineres é ligeiramente diferente de outros orquestradores, como o Docker Swarm, sobretudo devido ao fato de que ele não trata os contêineres diretamente, mas sim através de *pods*. Vamos conhecer alguns dos principais conceitos que envolvem o k8s a seguir:
-
-- **Pod**: É o menor objeto do k8s. Como dito anteriormente, o k8s não trabalha com os contêineres diretamente, mas organiza-os dentro de *pods*, que são abstrações que dividem os mesmos recursos, como endereços, volumes, ciclos de CPU e memória. Um pod pode possuir vários contêineres;
-
-- **Deployment**: É um dos principais *controllers* utilizados. O *Deployment*, em conjunto com o *ReplicaSet*, garante que determinado número de réplicas de um pod esteja em execução nos nós workers do cluster. Além disso, o Deployment também é responsável por gerenciar o ciclo de vida das aplicações, onde características associadas a aplicação, tais como imagem, porta, volumes e variáveis de ambiente, podem ser especificados em arquivos do tipo *yaml* ou *json* para posteriormente serem passados como parâmetro para o ``kubectl`` executar o deployment. Esta ação pode ser executada tanto para criação quanto para atualização e remoção do deployment;
-
-- **ReplicaSets**: É um objeto responsável por garantir a quantidade de pods em execução no nó;
-
-- **Services**: É uma forma de você expor a comunicação através de um *ClusterIP*, *NodePort* ou *LoadBalancer* para distribuir as requisições entre os diversos Pods daquele Deployment. Funciona como um balanceador de carga.
-
-- **Volumes**: Mecanismos de armazenamento que permitem compartilhar dados entre containers no mesmo Pod e manter dados persistentes além do ciclo de vida do Pod. Podem ser efêmeros (ex: *emptyDir*) ou persistentes via PV/PVC e StorageClass.
-
-- **Probes**: Checagens de saúde configuradas nos containers para o Kubernetes saber quando reiniciar (*liveness*), quando enviar tráfego (*readiness*) e quando dar tempo extra para inicialização (*startup*). Ajudam a manter disponibilidade e estabilidade.
-
-- **Ingress**: Camada HTTP/HTTPS que define regras de roteamento para expor serviços externamente com hostnames, paths, TLS e outros recursos. Depende de um Ingress Controller para funcionar.
-
-- **Secrets**: Armazenam dados sensíveis como senhas, tokens e chaves em base64. Podem ser montados como volume ou injetados via variáveis de ambiente, evitando hardcode nos manifests.
-
-- **Configmap**: Armazena configurações não sensíveis em pares chave/valor. Pode ser usado para injetar arquivos ou variáveis de ambiente nos Pods, separando configuração da imagem da aplicação.
-
-
-
-### Kubectl: instalacao e customizacao
-
-Para garantir que o `kubectl` esteja sempre atualizado e configurado corretamente, utilize exclusivamente a documentação oficial:
-
-- Guia geral de instalação (Linux, macOS e Windows): [https://kubernetes.io/docs/tasks/tools/](https://kubernetes.io/docs/tasks/tools/)
-- Passo a passo das personalizações (autocompletion, alias `k`, variáveis de ambiente e outras dicas): [https://kubernetes.io/docs/reference/kubectl/cheatsheet/](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
-
-Essas referências são mantidas pelo próprio projeto Kubernetes e acompanham sempre a versão mais recente da ferramenta.
-
-### Criando um cluster Kubernetes
-
-### Criando o cluster em sua máquina local
-
-Vamos mostrar algumas opções, caso você queira começar a brincar com o Kubernetes utilizando somente a sua máquina local, o seu desktop.
-
-Lembre-se, você não é obrigado a testar/utilizar todas as opções abaixo, mas seria muito bom caso você testasse. :D
-
-#### Minikube
-
-O Minikube continua sendo uma excelente opção para simular um cluster Kubernetes localmente com suporte a múltiplos drivers (Docker, VirtualBox, Hyper-V, etc.). Em vez de manter scripts aqui, siga as instruções oficiais, que cobrem requisitos, instalação e comandos de operação:
-
-- Documentação oficial: [https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io/docs/start/)
-- Referência dos comandos (`start`, `addons`, `status`, `delete` e outros): [https://minikube.sigs.k8s.io/docs/commands/](https://minikube.sigs.k8s.io/docs/commands/)
-
-#### Kind
-
-Para cenários que utilizam Docker Desktop/WSL ou pipelines de CI, o Kind (Kubernetes in Docker) é o caminho mais enxuto. Todo o processo de instalação, criação de clusters multi-node e configurações adicionais está detalhado no quick start oficial:
-
-- Documentação oficial: [https://kind.sigs.k8s.io/docs/user/quick-start/](https://kind.sigs.k8s.io/docs/user/quick-start/)
-- Exemplos de configurações extras (múltiplos nós, portas expostas, ingress): [https://kind.sigs.k8s.io/docs/user/configuration/](https://kind.sigs.k8s.io/docs/user/configuration/)
-
-
-
+- [OCI — especificações](https://opencontainers.org/)
+- [Container Runtime Interface](https://kubernetes.io/docs/concepts/architecture/cri/)
+- [Kind — configuração](https://kind.sigs.k8s.io/docs/user/configuration/)
+- [Ferramentas kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Cheat sheet kubectl](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)

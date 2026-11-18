@@ -1,112 +1,71 @@
-# Probes
+# Complementar 01.10 — Ajuste e diagnóstico de Probes
 
-## Indice
+[← Aula 01.10](../trilhas/01-fundamentos/probes/README.md) · [🧪 Lab 01.10](../trilhas/01-fundamentos/labs/probes-basico/README.md) · [↑ Camada 01](../trilhas/01-fundamentos/README.md)
 
-- [O que sao Probes](#o-que-sao-probes)
-- [Tipos de probes e quando usar](#tipos-de-probes-e-quando-usar)
-- [Liveness Probe](#liveness-probe)
-- [Readiness Probe](#readiness-probe)
-- [Startup Probe](#startup-probe)
-- [Comandos rapidos](#comandos-rapidos)
+> **Leitura opcional:** padrões de configuração, sinais de falha e decisões operacionais sobre probes. A aula explica liveness, readiness e startup; o lab permite observar os efeitos. Aqui o foco é escolher parâmetros e diagnosticar divergências.
 
-## O que sao Probes
+## Quando ajustar
 
-Probes sao verificacoes de saude que o Kubernetes executa dentro do container para
-decidir se ele deve reiniciar o Pod, remover do Service ou aguardar a inicializacao.
-Elas sao definidas no nivel do container e podem usar tres mecanismos:
+- Aplicações com tempo de inicialização elevado ou variável.
+- Containers que reiniciam quando uma dependência externa está indisponível.
+- Workloads marcados como `Running`, mas ainda não prontos para tráfego.
 
-- `httpGet`: testa um endpoint HTTP.
-- `tcpSocket`: testa abertura de porta TCP.
-- `exec`: executa um comando dentro do container.
+## Escolha da verificação
 
-## Tipos de probes e quando usar
+| Probe | Pergunta respondida | Consequência após falhas |
+| --- | --- | --- |
+| `livenessProbe` | O processo ainda consegue funcionar? | Container reiniciado pelo kubelet |
+| `readinessProbe` | A aplicação pode receber tráfego agora? | Pod deixa de ser considerado pronto; endpoints refletem o estado |
+| `startupProbe` | A inicialização terminou? | Enquanto não tiver sucesso, liveness/readiness não são executadas; falhas excessivas podem reiniciar o container |
 
-- `livenessProbe`: detecta se o container travou ou ficou inconsistente. Falha gera restart.
-- `readinessProbe`: indica se o container esta pronto para receber trafego.
-- `startupProbe`: garante que o container finalize o bootstrap antes de ativar a liveness/readiness.
+Uma dependência externa temporariamente indisponível costuma ser sinal inadequado para liveness: reiniciar containers em massa pode piorar o incidente.
 
-## Liveness Probe
+## Exemplo complementar: app com inicialização demorada
 
-Verifica se o processo esta saudavel. Se falhar repetidamente, o Pod e reiniciado.
-
-Exemplo (arquivo `nginx-liveness.yaml`):
+O trecho abaixo pertence ao item de um container dentro de `spec.containers`; **não é um manifesto completo**.
 
 ```yaml
-        livenessProbe:
-          tcpSocket:
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
+startupProbe:
+  httpGet:
+    path: /startup
+    port: 8080
+  periodSeconds: 5
+  failureThreshold: 24
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  periodSeconds: 5
+  failureThreshold: 2
+livenessProbe:
+  httpGet:
+    path: /live
+    port: 8080
+  periodSeconds: 10
+  failureThreshold: 3
 ```
 
-## Readiness Probe
+A combinação `periodSeconds: 5` e `failureThreshold: 24` permite aproximadamente 120 segundos para a startup probe obter sucesso, desconsiderando particularidades de agendamento e execução. As rotas HTTP precisam existir de fato na aplicação; não copie esses caminhos automaticamente para nginx.
 
-Controla quando o Pod entra no balanceamento de carga do Service. Se falhar, o Pod
-fica indisponivel para trafego, mas nao reinicia.
-
-Exemplo (arquivo `nginx-readiness.yaml`):
-
-```yaml
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 2
-          failureThreshold: 3
-```
-
-## Startup Probe
-
-Usada para containers que demoram a subir. Enquanto ela nao passar, liveness/readiness
-ficam desativadas.
-
-Exemplo (arquivo `nginx-startup.yaml`):
-
-```yaml
-        startupProbe:
-          httpGet:
-            path: /
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 2
-          failureThreshold: 3
-```
-
-## Comandos rapidos
-
-- Aplicar o manifesto da liveness probe
+## Como investigar falhas
 
 ```bash
-kubectl apply -f nginx-liveness.yaml
+kubectl get pods -n NAMESPACE
+kubectl describe pod POD -n NAMESPACE
+kubectl logs POD -n NAMESPACE -c CONTAINER --previous
+kubectl get events -n NAMESPACE --sort-by=.lastTimestamp
 ```
 
-- Aplicar o manifesto da readiness probe
+| Sintoma | Hipótese de diagnóstico |
+| --- | --- |
+| Restarts frequentes | Liveness/startup agressiva, falha de processo ou OOM |
+| Pod `Running` e `0/1 Ready` | Readiness falhando, container ainda iniciando |
+| HTTP 404 em probe | Caminho incorreto ou handler não implementado |
+| Timeout | Aplicação lenta, porta incorreta, saturação ou problemas de conectividade |
 
-```bash
-kubectl apply -f nginx-readiness.yaml
-```
+**Cuidados:** `initialDelaySeconds`, `periodSeconds`, `timeoutSeconds`, `failureThreshold` e `successThreshold` devem refletir o comportamento real. A startup probe não elimina a necessidade de readiness. Probes não substituem monitoramento e SLOs.
 
-- Aplicar o manifesto da startup probe
+## Referências oficiais
 
-```bash
-kubectl apply -f nginx-startup.yaml
-```
-
-- Verificar pods e status das probes
-
-```bash
-kubectl get pods
-```
-
-- Ver detalhes e eventos do pod
-
-```bash
-kubectl describe pod <nome-do-pod>
-```
+- [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
+- [Pod Lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)

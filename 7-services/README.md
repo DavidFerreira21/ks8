@@ -1,58 +1,24 @@
-# Services
+# Complementar 01.05 — Tipos de Service e descoberta de backends
 
-Services são recursos do Kubernetes que expõem um conjunto de Pods de forma estável. Eles resolvem dois problemas comuns:
-- IPs de Pod são efêmeros e mudam quando o Pod é recriado.
-- É necessário ter um ponto de acesso único e balanceado para vários Pods.
+[← Aula 01.05](../trilhas/01-fundamentos/services/README.md) · [🧪 Lab 01.05](../trilhas/01-fundamentos/labs/services-basico/README.md) · [↑ Camada 01](../trilhas/01-fundamentos/README.md)
 
-Em resumo, um Service cria um IP virtual (ClusterIP) e um DNS para acessar os Pods que combinam com um seletor de labels.
+> **Leitura opcional:** catálogo de tipos de Service e ferramentas de diagnóstico. A aula e o lab usam ClusterIP, selectors e descoberta; aqui comparamos alternativas que não precisam ser implantadas no exercício.
 
-## Conceitos básicos
+## Escolhendo o tipo de Service
 
-- Seletor: define quais Pods fazem parte do Service (match por labels).
-- Port / TargetPort: porta exposta pelo Service e a porta no container.
-- DNS interno: `meu-service.meu-namespace.svc.cluster.local`.
-- Balanceamento: o kube-proxy distribui as conexões entre os Pods saudáveis.
+| Tipo | O que oferece | Uso comum | Limite |
+| --- | --- | --- | --- |
+| `ClusterIP` | IP virtual e DNS para acesso dentro do cluster | Comunicação entre aplicações | Não expõe automaticamente acesso externo |
+| `NodePort` | Porta nos nós, normalmente no intervalo configurado | Testes e integração de rede | Exposição depende da rede do host/nó |
+| `LoadBalancer` | Integração com balanceador externo quando suportado | Exposição por cloud/LB controller | Kind puro não cria um LB externo automaticamente |
+| `ExternalName` | Alias DNS do Service para nome DNS externo | Referenciar destino externo | Não cria proxy, ClusterIP nem EndpointSlices de backends |
+| Headless (`clusterIP: None`) | DNS apontando para endpoints em vez de ClusterIP | Descoberta direta, StatefulSets | Comportamento depende dos endpoints e do cliente |
 
-## Tipos de Service
+`Headless` é uma característica da configuração de Service, não um quinto valor de `spec.type`.
 
-### ClusterIP (padrão)
+## Exemplos adicionais de configuração
 
-Exposição interna ao cluster. Ideal para comunicação entre serviços dentro do Kubernetes.
-
-Expor com:
-
-```bash
-kubectl expose deploy minha-app --name=app-clusterip --port=80 --target-port=8080 --type=ClusterIP
-```
-
-ou
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: app-clusterip
-spec:
-  type: ClusterIP
-  selector:
-    app: minha-app
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-```
-
-### NodePort
-
-Expõe o Service em uma porta fixa em todos os nós. Útil para testes ou acesso externo simples.
-
-Expor com:
-
-```bash
-kubectl expose deploy minha-app --name=app-nodeport --port=80 --target-port=8080 --type=NodePort
-```
-
-ou
+**NodePort** — exemplo para entender o campo, não obrigatório no lab:
 
 ```yaml
 apiVersion: v1
@@ -64,78 +30,24 @@ spec:
   selector:
     app: minha-app
   ports:
-    - name: http
-      port: 80
+    - port: 80
       targetPort: 8080
       nodePort: 30080
 ```
 
-### LoadBalancer
-
-Cria um balanceador de carga externo via provedor cloud (ou via MetalLB em clusters locais).
-
-Expor com:
-
-```bash
-kubectl expose deploy minha-app --name=app-loadbalancer --port=80 --target-port=8080 --type=LoadBalancer
-```
-
-ou
+**ExternalName** — não encaminha pacotes nem seleciona Pods:
 
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-loadbalancer
-spec:
-  type: LoadBalancer
-  selector:
-    app: minha-app
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-```
-
-### ExternalName
-
-Cria um alias DNS para um serviço externo. Não cria endpoints.
-
-Criar com:
-
-```bash
-kubectl create service externalname db-externa --external-name=db.exemplo.com
-```
-
-ou
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: db-externa
+  name: db-externo
 spec:
   type: ExternalName
   externalName: db.exemplo.com
 ```
 
-## Endpoints
-
-Endpoints são os IPs e portas dos Pods que o Service está apontando. Eles são gerados automaticamente com base no selector (exceto no ExternalName).
-
-```bash
-kubectl get endpoints app-clusterip
-```
-
-Para inspecionar os endpoints detalhados:
-
-```bash
-kubectl describe endpoints app-clusterip
-```
-
-## Headless Service (ClusterIP: None)
-
-Quando você define `clusterIP: None`, o Service não cria IP virtual e expõe diretamente os IPs dos Pods via DNS. Isso é útil em StatefulSets.
+**Headless** — permite descoberta direta de endpoints:
 
 ```yaml
 apiVersion: v1
@@ -147,20 +59,30 @@ spec:
   selector:
     app: minha-app
   ports:
-    - name: http
-      port: 80
+    - port: 80
       targetPort: 8080
 ```
 
-## Comandos úteis
+Os exemplos usam nomes ilustrativos. Não há Deployment ou Pods implícitos; sem backends compatíveis, o Service não terá endpoints prontos.
+
+## Diagnóstico por camadas
 
 ```bash
-# listar services
-kubectl get svc
-
-# ver detalhes
-kubectl describe svc app-clusterip
-
-# testar DNS do service dentro do cluster (exemplo com pod temporário)
-kubectl run -it --rm dns-test --image=busybox --restart=Never -- nslookup app-clusterip
+kubectl get svc -n NAMESPACE
+kubectl describe svc NOME -n NAMESPACE
+kubectl get endpointslices -n NAMESPACE -l kubernetes.io/service-name=NOME
+kubectl get pods -n NAMESPACE --show-labels
 ```
+
+- **Service sem endpoints:** compare `spec.selector`, labels dos Pods e readiness.
+- **DNS não resolve:** confirme namespace, nome e DNS do cluster.
+- **DNS resolve, mas conexão falha:** confira `targetPort`, aplicação, políticas de rede e endpoints disponíveis.
+- **LoadBalancer sem endereço externo:** confira suporte do provedor/controlador; não assuma provisionamento automático no Kind.
+
+O recurso legado `Endpoints` pode ser consultado em clusters antigos, mas prefira `EndpointSlice` para investigação atual.
+
+## Referências oficiais
+
+- [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+- [Service types](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
+- [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)

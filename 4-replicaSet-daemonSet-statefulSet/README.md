@@ -1,153 +1,49 @@
-# ReplicaSet, DaemonSet e StatefulSet
+# Complementar 01.04 — Comparação operacional dos controladores
 
-## Indice
+[← Aula 01.04](../trilhas/01-fundamentos/controladores/README.md) · [🧪 Lab 01.04](../trilhas/01-fundamentos/labs/controladores-basico/README.md) · [↑ Camada 01](../trilhas/01-fundamentos/README.md)
 
-- [O que e um ReplicaSet](#o-que-e-um-replicaset)
-- [Comandos (ReplicaSet)](#comandos-replicaset)
-- [O que e um DaemonSet](#o-que-e-um-daemonset)
-- [Casos de uso comuns](#casos-de-uso-comuns)
-- [Comandos (DaemonSet)](#comandos-daemonset)
-- [O que e um StatefulSet](#o-que-e-um-statefulset)
-- [Comandos (StatefulSet)](#comandos-statefulset)
+> **Leitura opcional:** comparação de casos de uso e procedimentos de inspeção para ReplicaSet, DaemonSet e StatefulSet. Não substitui a explicação da aula nem o desafio YAML do lab.
 
-## O que e um ReplicaSet:
+## Quando usar cada controlador?
 
-O ReplicaSet garante que uma quantidade desejada de replicas de um Pod esteja sempre em execucao. Em geral ele e criado e gerenciado por um Deployment.
+| Recurso | Finalidade operacional | Exemplos de uso | Cuidado |
+| --- | --- | --- | --- |
+| ReplicaSet | Manter um número desejado de Pods equivalentes | Normalmente gerenciado por Deployment | Evite gerenciá-lo manualmente quando um Deployment resolve |
+| DaemonSet | Executar Pods em nós elegíveis | Agentes de observabilidade, rede e segurança | Taints, selectors e tolerations afetam a distribuição |
+| StatefulSet | Manter identidade estável e ordem de Pods | Sistemas que precisam de nomes previsíveis ou armazenamento por réplica | Não fornece por si só replicação de dados nem backup |
 
-## Comandos (ReplicaSet)
+Um DaemonSet **não garante um Pod em todo nó indiscriminadamente**: seleção de nós, taints, tolerations e condições de agendamento precisam ser consideradas. Um StatefulSet pode usar `volumeClaimTemplates`, mas a persistência depende da infraestrutura de storage.
 
-- Aplicar o Deployment (gera o ReplicaSet definido no manifesto)
+## Comandos para identificar controladores e seus Pods
 
 ```bash
-kubectl apply -f deployment.yaml
+kubectl get deployments,replicasets,daemonsets,statefulsets -n NAMESPACE
+kubectl get pods -n NAMESPACE -o wide
+kubectl describe replicaset NOME -n NAMESPACE
+kubectl describe daemonset NOME -n NAMESPACE
+kubectl describe statefulset NOME -n NAMESPACE
+kubectl get pvc -n NAMESPACE
 ```
 
-- Listar ReplicaSets
+Substitua `NAMESPACE` e `NOME`. Para entender quem controla um Pod, inspecione `metadata.ownerReferences` com `kubectl get pod POD -n NAMESPACE -o yaml`. Um ReplicaSet controlado por Deployment possui, por sua vez, seu próprio `ownerReferences`.
 
-```bash
-kubectl get rs
-```
+## Cenários complementares de diagnóstico
 
-- Detalhar um ReplicaSet (status, eventos e pods associados)
+| Observação | Investigue |
+| --- | --- |
+| DaemonSet com Pods desejados diferentes do número de nós | Node selectors, taints, tolerations e nós elegíveis |
+| StatefulSet sem todas as réplicas prontas | Ordem de criação, readiness, PVCs e eventos |
+| ReplicaSet antigo permanece no cluster | Histórico de revisões mantido pelo Deployment |
+| PVC de StatefulSet permanece após remover Pods | Política de retenção de PVCs e StorageClass |
 
-```bash
-kubectl describe rs
-```
+## Boas práticas e limitações
 
-- Remover um ReplicaSet pelo nome
+- Não delete ReplicaSets de um Deployment como forma de atualizar a aplicação.
+- Não faça escala de nós do EKS como parte deste lab: o objetivo é observar o controlador, não modificar infraestrutura cloud.
+- Remover um StatefulSet não implica necessariamente apagar PVCs; revise a política de retenção antes de excluir armazenamento.
 
-```bash
-kubectl delete replicaset nginx-replicaset
-```
+## Referências oficiais
 
-- Remover o ReplicaSet definido em um arquivo
-
-```bash
-kubectl delete -f nginx-replicaset.yaml
-```
-
-# DaemonSet
-
-O que e um DaemonSet:
-
-O DaemonSet garante que todos os nos do cluster executem uma replica de um Pod. Isso e util para agentes que precisam rodar em cada no.
-
-## Casos de uso comuns
-
-- Agentes de monitoramento (ex: Prometheus Node Exporter, Fluentd).
-- Proxy de rede em todos os nos (ex: kube-proxy, Weave Net, Calico, Flannel).
-- Agentes de seguranca em cada no (ex: Falco, Sysdig).
-
-## Comandos (DaemonSet)
-
-- Aplicar o manifesto do DaemonSet
-
-```bash
-kubectl apply -f node-exporter-daemonset.yaml
-```
-
-- Listar DaemonSets
-
-```bash
-kubectl get daemonset
-```
-
-- Listar os Pods do DaemonSet pelo label
-
-```bash
-kubectl get pods -l app=node-exporter
-```
-
-- Listar os nos do cluster (para conferir onde o DaemonSet vai rodar)
-
-```bash
-kubectl get nodes
-```
-
-- Escalar um nodegroup no EKS (exemplo para aumentar a quantidade de nos)
-
-```bash
-eksctl scale nodegroup --cluster=eks-cluster --nodes 3 --name eks-cluster-nodegroup
-```
-
-- Remover o DaemonSet pelo nome
-
-```bash
-kubectl delete daemonset node-exporter
-```
-
-- Remover o DaemonSet definido em um arquivo
-
-```bash
-kubectl delete -f node-exporter-daemonset.yaml
-```
-
-## O que e um StatefulSet:
-
-StatefulSet e um controlador projetado para aplicacoes stateful. Ele garante identidade fixa para cada Pod (nome previsivel), ordem de criacao/remocao e volumes persistentes exclusivos por replica.
-
-Isso e fundamental para apps como bancos de dados (PostgreSQL, MongoDB) e sistemas distribuidos (Kafka, Zookeeper).
-
-## Comandos (StatefulSet)
-
-- Aplicar o manifesto do StatefulSet (Service headless + StatefulSet)
-
-```bash
-kubectl apply -f statefulset.yaml
-```
-
-- Listar StatefulSets
-
-```bash
-kubectl get statefulset
-```
-
-- Detalhar um StatefulSet
-
-```bash
-kubectl describe statefulset nginx-stateful
-```
-
-- Listar os Pods do StatefulSet
-
-```bash
-kubectl get pods -l app=nginx-stateful
-```
-
-- Listar PVCs criados pelo StatefulSet
-
-```bash
-kubectl get pvc
-```
-
-- Remover o StatefulSet pelo nome
-
-```bash
-kubectl delete statefulset nginx-stateful
-```
-
-- Remover o StatefulSet definido em um arquivo
-
-```bash
-kubectl delete -f statefulset.yaml
-```
+- [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+- [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+- [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)

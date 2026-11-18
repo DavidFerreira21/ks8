@@ -1,128 +1,59 @@
-# Deployment
+# Complementar 01.03 — Operação e investigação de Deployments
 
-## Indice
+[← Aula 01.03](../trilhas/01-fundamentos/deployments/README.md) · [🧪 Lab 01.03](../trilhas/01-fundamentos/labs/deployments-basico/README.md) · [↑ Camada 01](../trilhas/01-fundamentos/README.md)
 
-- [O que e um Deployment](#o-que-e-um-deployment)
-- [Aplicar e verificar](#aplicar-e-verificar)
-- [Estrategias de atualizacao do Deployment](#estrategias-de-atualizacao-do-deployment)
-- [Rollout (atualizacoes)](#rollout-atualizacoes)
-- [Remover o Deployment](#remover-o-deployment)
+> **Leitura opcional:** referência de comandos e sinais operacionais para Deployments. A criação declarativa pertence ao lab; os experimentos de atualização/rollback pertencem ao [Lab 01.12](../trilhas/01-fundamentos/labs/estrategias-deployment-basico/README.md).
 
-## O que e um Deployment:
+## Quando consultar
 
-O Deployment gerencia o ciclo de vida de Pods por meio de ReplicaSets. Ele permite criar, atualizar (rollout) e reverter versoes (rollback) de forma controlada.
+- Quando um rollout está parado ou demora mais que o esperado.
+- Quando precisar identificar qual ReplicaSet pertence a uma revisão.
+- Ao comparar reinício, atualização e rollback antes de operar um ambiente.
 
-## Aplicar e verificar
-
-- Aplicar o Deployment definido em `deployment.yaml`
+## Comandos de consulta
 
 ```bash
-kubectl apply -f deployment.yaml
+kubectl get deployment web -n NAMESPACE
+kubectl describe deployment web -n NAMESPACE
+kubectl get rs,pods -n NAMESPACE -l app=web
+kubectl rollout status deployment/web -n NAMESPACE --timeout=120s
+kubectl rollout history deployment/web -n NAMESPACE
+kubectl get deployment web -n NAMESPACE -o yaml
 ```
 
-- Verificar se o Deployment foi criado e esta saudavel
+Os nomes são ilustrativos: ajuste `NAMESPACE`, `web` e labels ao Deployment real.
 
-```bash
-kubectl get deployments -l app=nginx-deployment
-```
+## Referência de operações que modificam estado
 
-- Listar os Pods criados pelo Deployment
+| Operação | Comando | Efeito |
+| --- | --- | --- |
+| Alterar imagem | `kubectl set image deployment/web nginx=nginx:VERSAO -n NAMESPACE` | Altera o Pod template, iniciando nova revisão |
+| Reiniciar Pods | `kubectl rollout restart deployment/web -n NAMESPACE` | Atualiza o template com anotação de restart; recria Pods sem necessariamente mudar imagem |
+| Desfazer revisão | `kubectl rollout undo deployment/web -n NAMESPACE` | Restaura template de uma revisão anterior |
+| Pausar atualização | `kubectl rollout pause deployment/web -n NAMESPACE` | Suspende progresso de atualização do Deployment |
+| Retomar atualização | `kubectl rollout resume deployment/web -n NAMESPACE` | Retoma o rollout pausado |
 
-```bash
-kubectl get pods -l app=nginx
-```
+**Atenção:** os comandos acima alteram recursos. Execute-os apenas no seu cluster de estudo ou com autorização apropriada. Não use comandos incompletos como `kubectl rollout undo` sem indicar o recurso.
 
-- Detalhar o Deployment (status, eventos e estrategia)
+## Por que um rollout pode travar?
 
-```bash
-kubectl describe deployment nginx-deployment
-```
+| Sinal | O que investigar |
+| --- | --- |
+| `ProgressDeadlineExceeded` | Readiness, pull de imagem, recursos, quotas e erros nos novos Pods |
+| Novo ReplicaSet com réplicas indisponíveis | `kubectl describe pod`, eventos e logs |
+| ReplicaSets antigos e novos coexistem | Estratégia de RollingUpdate e quantidade de Pods prontos |
+| Histórico sem `change-cause` | O Kubernetes não registra automaticamente uma justificativa humana para cada revisão |
 
-- Listar os ReplicaSets gerados pelo Deployment
+O número de revisão está associado a mudanças no **Pod template**, não a qualquer edição de metadata do Deployment.
 
-```bash
-kubectl get replicasets -l app=nginx
-```
+## Boas práticas e limitações
 
-## Estrategias de atualizacao do Deployment
+- Compare `spec.replicas`, `status.readyReplicas` e `status.updatedReplicas` antes de concluir que terminou.
+- Em ambientes GitOps, alterações imperativas podem sofrer reconciliação de volta ao estado declarado no Git.
+- Rollback não corrige automaticamente falhas externas, como indisponibilidade de registry, volumes ou rede.
 
-O Kubernetes possui 2 estrategias de atualizacao para Deployments:
+## Referências oficiais
 
-- RollingUpdate (padrao): substitui os Pods aos poucos, mantendo parte das replicas antigas ativas para evitar indisponibilidade.
-- Recreate: encerra todas as replicas antigas primeiro e depois cria as novas, causando indisponibilidade temporaria.
-
-## Rollout (atualizacoes)
-
-- Acompanhar o status do rollout (geral)
-
-```bash
-kubectl rollout status
-```
-
-- Acompanhar o status do rollout de um Deployment especifico
-
-```bash
-kubectl rollout status deployment nginx-deployment
-```
-
-- Ver o historico de revisoes do Deployment (geral)
-
-```bash
-kubectl rollout history
-```
-
-- Ver o historico detalhado de uma revisao
-
-```bash
-kubectl rollout history deployment nginx-deployment --revision=1
-```
-
-- Voltar para a versao anterior do Deployment (geral)
-
-```bash
-kubectl rollout undo
-```
-
-- Voltar para a versao anterior de um Deployment especifico
-
-```bash
-kubectl rollout undo deployment nginx-deployment
-```
-
-- Pausar temporariamente o rollout do Deployment
-
-```bash
-kubectl rollout pause
-```
-
-- Retomar o rollout do Deployment apos a pausa
-
-```bash
-kubectl rollout resume
-```
-
-- Reiniciar o rollout do Deployment (forca nova atualizacao sem alterar a imagem)
-
-```bash
-kubectl rollout restart
-```
-
-- Reiniciar o rollout de um Deployment especifico
-
-```bash
-kubectl rollout restart deployment nginx-deployment
-```
-
-## Remover o Deployment
-
-- Remover o Deployment pelo nome
-
-```bash
-kubectl delete deployment nginx-deployment
-```
-
-- Remover o Deployment definido em um arquivo
-
-```bash
-kubectl delete -f deployment.yaml
-```
+- [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [kubectl rollout](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_rollout/)
+- [Aula 01.12 — Estratégias de Deployment](../trilhas/01-fundamentos/estrategias-deployment/README.md)
