@@ -5,7 +5,7 @@
 > **Objetivo da camada**  
 > Entender os objetos essenciais do Kubernetes, publicar uma aplicação e observar como o cluster mantém o estado desejado.
 
-**14 aulas com teoria e infográfico publicados** · **1 lab integrado com manifests**
+**14 aulas com teoria e infográfico publicados** · **2 labs com manifests**
 
 ---
 
@@ -23,7 +23,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 
 | Aula | Conceito | Aula teórica | Material de apoio |
 | --- | --- | --- | --- |
-| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [Anotações e exemplos](../../1-fundamentos/README.md) |
+| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) · [Anotações e exemplos](../../1-fundamentos/README.md) |
 | 01.02 | **Namespaces** | [📖 Estudar](namespaces/README.md) | — |
 | 01.03 | **Pods** | [📖 Estudar](pods/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
 | 01.04 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
@@ -38,7 +38,11 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 | 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | — |
 | 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | — |
 
-## 🧪 Laboratório em destaque
+## 🧪 Laboratórios
+
+Comece pelo [**Lab 01.01 — Explorar o cluster e a API**](labs/fundamentos-cluster/README.md), que ensina a observar o Control Plane e os Workers e a aplicar um objeto declarativo.
+
+### Aplicação integrada
 
 | **Primeira aplicação · Pod → Deployment → Service** | |
 | :--- | :--- |

@@ -17,7 +17,7 @@ diagnostics() {
     kubectl describe pods -A > "$report_dir/describe-pods.txt" 2>&1 || true
     kubectl logs -n k8s-lab deployment/web --all-containers=true > "$report_dir/web-logs.txt" 2>&1 || true
   fi
-  for lab in 02.04 02.02 01.06; do
+  for lab in 02.04 02.02 01.06 01.01; do
     make lab-down LAB="$lab" || true
   done
   exit "$code"
@@ -25,7 +25,7 @@ diagnostics() {
 trap diagnostics EXIT
 
 make validate
-for lab in 01.06 02.02 02.04; do
+for lab in 01.01 01.06 02.02 02.04; do
   echo "== Aplicando $lab =="
   make lab-up LAB="$lab"
   make lab-test LAB="$lab"
@@ -36,4 +36,4 @@ done
 make lab-experiment LAB=01.06 EXPERIMENT=controlled-rollout
 make lab-experiment LAB=02.04 EXPERIMENT=reject-pod
 
-echo "Smoke test de 3 laboratórios concluído com sucesso."
+echo "Smoke test de 4 laboratórios concluído com sucesso."
