@@ -1,5 +1,7 @@
 # Lab 01.02 — Pods: ciclo de vida e diagnostico
 
+> **MODO DESAFIO — o aluno constrói:** `make lab-prepare LAB=01.02` cria apenas o namespace e copia um YAML incompleto para `.labs/01.02/`. **Complete o arquivo usando o objetivo abaixo**, aplique você mesmo com `kubectl apply -f .labs/01.02/` e só então execute `make lab-test LAB=01.02`. O comando `make lab-up` é reservado à CI. `make lab-solution LAB=01.02` mostra o caminho da referência quando você quiser conferir.
+
 [← Camada 01](../../README.md) · [Guia de labs](../../../../docs/labs.md)
 
 ## Objetivo e hipótese
@@ -14,7 +16,7 @@ Pod é a unidade mínima de execução agendada. Hipótese: se eu excluir um Pod
 make doctor
 kubectl config current-context
 kubectl get nodes
-cat trilhas/01-fundamentos/labs/pods-basico/resources.yaml
+cat .labs/01.02/resources.yaml
 ```
 
 Antes de aplicar, preveja quais objetos serão criados e quais controladores participarão.
@@ -22,7 +24,9 @@ Antes de aplicar, preveja quais objetos serão criados e quais controladores par
 ## Fase 2 — Aplicar e observar
 
 ```bash
-make lab-up LAB=01.02
+make lab-prepare LAB=01.02
+# Complete primeiro o arquivo em .labs/01.02/
+kubectl apply -f .labs/01.02/
 make lab-test LAB=01.02
 make lab-observe LAB=01.02
 ```
@@ -40,7 +44,7 @@ kubectl logs pod-demo -n lab-01-02
 ```bash
 kubectl delete pod pod-demo -n lab-01-02
 kubectl get pods -n lab-01-02
-make lab-up LAB=01.02
+make lab-prepare LAB=01.02
 make lab-test LAB=01.02
 ```
 
