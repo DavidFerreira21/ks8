@@ -74,6 +74,7 @@ Os exercícios são executados em um **Kind local** com verificação de context
 
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |
+| [Fundamentos — primeiro contato com a API](trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) | Control Plane, Workers, ConfigMap e estado declarativo | 🧪 Manifestos disponíveis |
 | [Primeira aplicação](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) | Pod, Deployment, ReplicaSet, Service e reconciliação | 🧪 Manifestos disponíveis |
 | [RBAC mínimo](trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md) | ServiceAccount, Role, RoleBinding e permissões | 🧪 Manifestos disponíveis |
 | [Quotas e limites](trilhas/02-operacao-seguranca/labs/quota-namespace/README.md) | LimitRange e rejeição por ResourceQuota | 🧪 Manifestos disponíveis |
