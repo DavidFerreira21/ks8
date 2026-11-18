@@ -99,7 +99,7 @@ O namespace é preservado. Componentes compartilhados instalados nas etapas de p
 - Como distinguir métrica `<unknown>`, carga insuficiente e falta de capacidade no cluster usando `kubectl describe hpa`, `kubectl top pods` e eventos?
 - Registre utilização de CPU e réplicas desejadas/atuais antes, durante e depois da carga. Se não ocorrer escala, documente o diagnóstico em vez de considerar o teste funcional concluído.
 
-**Evidências mínimas:** registre o manifesto aplicado, o resultado real do experimento e a interpretação dos eventos/métricas. Se o teste funcional não ocorrer, registre-o como pendente, não como aprovado.
+**Evidências específicas:** registre disponibilidade do Metrics Server, utilização de CPU, réplicas atuais/desejadas e resultados antes, durante e após a carga; sem métricas, marque o teste funcional como pendente.
 
 ## Aprofunde seus conhecimentos
 
