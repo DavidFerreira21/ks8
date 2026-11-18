@@ -5,4 +5,6 @@ apply:
   - solution/resources.yaml
 starter:
   - starter/resources.yaml
-checks: []
+checks:
+  - type: pod-ready
+    name: prioritario

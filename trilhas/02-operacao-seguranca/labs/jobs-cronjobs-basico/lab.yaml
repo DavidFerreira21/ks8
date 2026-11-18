@@ -5,4 +5,10 @@ apply:
   - solution/resources.yaml
 starter:
   - starter/resources.yaml
-checks: []
+checks:
+  - type: resource
+    name: tarefa
+    kind: job
+  - type: resource
+    name: agenda
+    kind: cronjob

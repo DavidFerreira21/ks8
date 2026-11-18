@@ -5,4 +5,10 @@ apply:
   - solution/resources.yaml
 starter:
   - starter/resources.yaml
-checks: []
+checks:
+  - type: pod-ready
+    name: sem-recursos
+  - type: pod-ready
+    name: variavel
+  - type: pod-ready
+    name: garantido
