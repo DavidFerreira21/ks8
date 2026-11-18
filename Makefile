@@ -4,9 +4,9 @@ SHELL := /bin/bash
 CLUSTER_NAME ?= dev
 KIND_CONFIG ?= kind-config.yaml
 KUBE_CONTEXT ?= kind-$(CLUSTER_NAME)
-LAB ?= 01.06
+LAB ?= 01.01
 EXPERIMENT ?= controlled-rollout
-LAB_ID ?= 01.10
+LAB_ID ?= 01.07
 LAB_SLUG ?= configmaps-basico
 LAB_TITLE ?= Estudando ConfigMaps
 LAB_NAMESPACE := k8s-lab
@@ -55,10 +55,10 @@ validate: ## Validação estática dos manifests do lab (sem cluster)
 	@python3 scripts/labctl.py validate
 	@python3 scripts/validate_manifests.py
 
-lab-up: check-context ## Aplica apenas os manifests declarados para LAB=01.06
+lab-up: check-context ## Aplica manifests declarados para LAB (padrão 01.01)
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-up --lab "$(LAB)"
 
-lab-test: check-context ## Valida os checks declarados para LAB=01.06
+lab-test: check-context ## Valida checks do LAB selecionado
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-test --lab "$(LAB)"
 
 lab-status: check-context ## Mostra recursos do lab selecionado
@@ -80,5 +80,5 @@ doctor: ## Verifica ferramentas e Docker local
 labs: ## Lista os laboratórios registrados em lab.yaml
 	@python3 scripts/labctl.py labs
 
-new-lab: ## Gera esqueleto: make new-lab LAB_ID=01.10 LAB_SLUG=configmaps-basico
+new-lab: ## Gera esqueleto: make new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico
 	@python3 scripts/new_lab.py --id "$(LAB_ID)" --slug "$(LAB_SLUG)" --title "$(LAB_TITLE)"
