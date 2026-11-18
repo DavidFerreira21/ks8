@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TRILHAS = ROOT / "trilhas"
 ID_PATTERN = re.compile(r"^\d{2}\.\d{2}$")
 SAFE_NAME = re.compile(r"^[a-z0-9][a-z0-9-]{0,62}$")
-SUPPORTED_CHECKS = {"deployment", "service", "rbac", "rbac-deny", "quota"}
+SUPPORTED_CHECKS = {"deployment", "service", "rbac", "rbac-deny", "quota", "configmap"}
 SUPPORTED_EXPERIMENTS = {"expect-rejected-manifest", "rollout-restart"}
 
 
@@ -224,6 +224,9 @@ def execute_lab(lab: Lab, action: str) -> int:
                 # Um erro de impersonation não equivale a uma negativa RBAC.
                 if result.returncode not in (0, 1) or result.stdout.strip().lower() != expected_answer:
                     print(f"Falha RBAC ({expected_answer} esperado): {result.stdout} {result.stderr}", file=sys.stderr)
+                    return 1
+            elif typ == "configmap":
+                if kubectl("get", "configmap", check["name"], "-n", lab.namespace).returncode:
                     return 1
             elif typ == "quota":
                 if kubectl("get", "resourcequota", check["name"], "-n", lab.namespace).returncode:
