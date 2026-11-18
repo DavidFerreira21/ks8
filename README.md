@@ -104,7 +104,6 @@ Os **complementares são opcionais**: fornecem exemplos adicionais, comparação
 | [Deployment](3-deployment/README.md) | Referência operacional de rollout e rollback |
 | [ReplicaSet, DaemonSet e StatefulSet](4-replicaSet-daemonSet-statefulSet/README.md) | Comparação operacional entre controladores |
 | [Probes](5-probes/README.md) | Ajustes e diagnóstico de probes |
-| [Volumes — aula](trilhas/01-fundamentos/volumes/README.md) | [Lab 01.11](trilhas/01-fundamentos/labs/volumes-basico/README.md); sem complementar específico |
 | [Services](7-services/README.md) | Tipos de Services, DNS e EndpointSlices |
 
 [Resumo de conceitos](resume.md) · [Configuração do Kind](kind-config.yaml)
