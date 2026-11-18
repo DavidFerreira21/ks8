@@ -31,6 +31,21 @@ class FundamentalLabsTests(unittest.TestCase):
     def test_all_manifests_parse_and_match_namespaces(self):
         self.assertEqual(validate(), [])
 
+    def test_services_lab_is_independent_and_service_focused(self):
+        lab = labctl.load_labs()["01.05"]
+        self.assertEqual(lab.namespace, "lab-01-05")
+        self.assertEqual(lab.directory.name, "services-basico")
+        self.assertEqual(lab.experiments, ())
+        manifests = []
+        for path in lab.apply:
+            manifests.extend(yaml.safe_load_all(path.read_text(encoding="utf-8")))
+        self.assertEqual({obj["kind"] for obj in manifests}, {"Deployment", "Service"})
+        deployment = next(obj for obj in manifests if obj["kind"] == "Deployment")
+        service = next(obj for obj in manifests if obj["kind"] == "Service")
+        self.assertEqual(service["spec"]["selector"], deployment["spec"]["template"]["metadata"]["labels"])
+        self.assertEqual(service["spec"]["type"], "ClusterIP")
+        self.assertIn("EndpointSlices", (lab.directory / "README.md").read_text(encoding="utf-8"))
+
     def test_advanced_labs_explain_addons(self):
         labs = labctl.load_labs()
         for identifier, term in (("01.13", "Traefik"), ("01.14", "Metrics Server")):
