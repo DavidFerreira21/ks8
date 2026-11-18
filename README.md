@@ -52,6 +52,24 @@ make lab-down    # Remove apenas os recursos do lab
 
 > **Antes de executar:** confira `kubectl config current-context`. `make down` é diferente de `make lab-down`: o primeiro apaga o cluster Kind inteiro.
 
+## 🧰 Interface de laboratórios
+
+O projeto agora oferece uma interface única para descobrir, executar e diagnosticar os labs registrados em `lab.yaml`:
+
+```bash
+make doctor
+make up
+make labs
+make lab-up LAB=01.06
+make lab-observe LAB=01.06
+make lab-test LAB=01.06
+make lab-down LAB=01.06
+```
+
+Os exercícios são executados em um **Kind local** com verificação de contexto e limpeza restrita aos manifests registrados; namespaces são preservados. Para criar um novo exercício, use `make new-lab LAB_ID=01.10 LAB_SLUG=configmaps-basico` e revise o contrato antes de publicá-lo. Veja o [guia dos laboratórios](docs/labs.md).
+
+> O motor automatiza tarefas repetitivas, mas mantém a análise de eventos, hipóteses e experimentos como parte essencial do aprendizado. Resultados de execução devem ser conferidos no GitHub Actions e no cluster local.
+
 ## 🧪 Laboratórios disponíveis
 
 | Laboratório | O que demonstra | Situação |

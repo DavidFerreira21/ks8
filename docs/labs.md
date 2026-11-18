@@ -82,6 +82,31 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - A pipeline do GitHub mantém verificações estáticas e agora possui um **job de integração com Kind descartável**, que executa três labs, checks e experimentos. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
 - Os labs não foram executados manualmente durante a elaboração deste PR; a primeira validação real acontecerá quando o workflow de integração rodar.
 
+
+## Criar novos laboratórios sem copiar pastas
+
+```bash
+make new-lab LAB_ID=01.10 LAB_SLUG=configmaps-basico LAB_TITLE="ConfigMaps: variáveis"
+```
+
+Isso gera `trilhas/01-fundamentos/labs/configmaps-basico/` com:
+
+```text
+configmaps-basico/
+├── README.md
+├── lab.yaml.example
+├── manifests/
+│   └── configmap.yaml
+└── tests/
+    └── README.md
+```
+
+O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rascunho. Reescreva o README com objetivo, pré-requisitos, etapas, observação, diagnóstico, experimentos, limpeza e critérios de sucesso. Revise os manifests e os checks (`deployment`, `service`, `configmap`, `rbac`, `rbac-deny`, `quota`). Somente quando o exercício estiver pronto, renomeie para `lab.yaml`, execute `make validate` e `make labs`.
+
+**Regras de organização:** mantenha infográfico e teoria no diretório do conceito; coloque os labs em `trilhas/<camada>/labs/<slug>`; deixe `scripts/labctl.py` como motor compartilhado; não introduza comandos shell arbitrários no contrato. IDs seguem o catálogo oficial, e cada lab publicado deve usar um ID único.
+
+**Limitação atual:** o identificador de lab é único. Caso uma aula precise de múltiplos labs independentes, será necessário ampliar o contrato para IDs com sufixo, em uma evolução posterior.
+
 ## Referências oficiais
 
 - [Kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start/)
