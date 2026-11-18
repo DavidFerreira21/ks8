@@ -39,7 +39,7 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 | :---: | --- | --- |
 | **01** | Configure o cluster local com um Control Plane e dois Workers | [Guia Kind + WSL](install-kind.md) |
 | **02** | Explore a API e o estado declarativo, começando pelo Lab 01.01 | [Lab 01.01 — Fundamentos](trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) |
-| **03** | Evolua para Pod, Deployment, ReplicaSet e Service; siga o Lab 01.05 | [Lab 01.05 — Aplicação integrada](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) |
+| **03** | Após Pods e Deployments, estude como Services descobrem e acessam os backends | [Lab 01.05 — Services](trilhas/01-fundamentos/labs/services-basico/README.md) |
 
 ```bash
 make up          # Cria o cluster Kind local
@@ -78,7 +78,7 @@ A **Camada 01 agora reúne 14 laboratórios (01.01–01.14)**, cada um com contr
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |
 | [Fundamentos — primeiro contato com a API](trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) | Control Plane, Workers, ConfigMap e estado declarativo | 🧪 Manifestos disponíveis |
-| [Lab 01.05 — Primeira aplicação](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) | Pod, Deployment, ReplicaSet, Service e reconciliação | 🧪 Manifestos disponíveis |
+| [Lab 01.05 — Services](trilhas/01-fundamentos/labs/services-basico/README.md) | ClusterIP, selectors, EndpointSlices e descoberta DNS | 🧪 Manifestos disponíveis |
 | [RBAC mínimo](trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md) | ServiceAccount, Role, RoleBinding e permissões | 🧪 Manifestos disponíveis |
 | [Quotas e limites](trilhas/02-operacao-seguranca/labs/quota-namespace/README.md) | LimitRange e rejeição por ResourceQuota | 🧪 Manifestos disponíveis |
 | [Arquitetura](trilhas/03-arquitetura/README.md) | Observação dos componentes internos | 📘 Roteiro conceitual |
