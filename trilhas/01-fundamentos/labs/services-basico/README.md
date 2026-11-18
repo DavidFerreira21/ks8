@@ -1,6 +1,7 @@
 # Lab 01.05 — Services
 
 [← Aula 01.05](../../services/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.05` para preparar o namespace e os Pods de apoio e criar o arquivo `.labs/01.05/service.yaml`. Complete o YAML com base no objetivo desta aula. Execute `kubectl apply -f .labs/01.05/` e depois `make lab-test LAB=01.05`. **`make lab-up` é exclusivo da CI** e aplica a solução, portanto não é o fluxo do aluno. `make lab-solution LAB=01.05` mostra onde consultar a referência.
 
 
