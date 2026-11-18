@@ -2,7 +2,9 @@ id: "01.04"
 title: "Controladores: ReplicaSet, DaemonSet e StatefulSet"
 namespace: lab-01-04
 apply:
-  - resources.yaml
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
 checks:
   - type: resource
     name: observador
