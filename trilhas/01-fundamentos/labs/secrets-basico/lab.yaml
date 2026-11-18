@@ -1,0 +1,11 @@
+id: "01.08"
+title: "Secrets: referencia e consumo seguro"
+namespace: lab-01-08
+apply:
+  - resources.yaml
+checks:
+  - type: resource
+    name: exemplo-ficticio
+    kind: secret
+  - type: deployment
+    name: consumidor
