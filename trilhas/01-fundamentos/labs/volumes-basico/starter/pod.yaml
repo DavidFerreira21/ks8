@@ -1,0 +1,7 @@
+# EXERCICIO 01.11: configure spec.containers, volumeMounts e volumes referenciando dados-pvc
+apiVersion: v1
+kind: Pod
+metadata:
+  name: escritor
+  namespace: lab-01-11
+# TODO: escrever a especificacao do recurso
