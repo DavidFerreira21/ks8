@@ -94,7 +94,7 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 - Como você identificou quais nós são elegíveis para o DaemonSet?
 - O que mudou e o que permaneceu após excluir e recriar `stateful-demo-0`?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre os nós elegíveis ao DaemonSet e os Pods com seus nós; compare nome e UID de `stateful-demo-0` antes e depois da recriação.
 
 ## Aprofunde seus conhecimentos
 
