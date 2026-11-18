@@ -1,4 +1,4 @@
-# Lab integrado — Pod → Deployment → Service
+# Lab 01.05 — Pod → Deployment → Service
 
 [← Camada 01](../../README.md) · [Roadmap](../../../../docs/roadmap.md)
 
@@ -6,7 +6,9 @@
 
 Acompanhar a evolução de um Pod individual para um Deployment com três réplicas e expor a aplicação via Service. Ao final, observar os processos de agendamento, reconciliação e descoberta de serviços.
 
-**Status:** manifests revisados por inspeção, mas **não executados em um cluster** nesta mudança.
+**Status:** lab executado e validado manualmente no Kind durante a evolução do projeto. Execute novamente no seu ambiente após atualizar a branch.
+
+**Nota curricular:** este exercício integrado pertence à aula 01.05 (Services), pois revisita Pods (01.02), Deployments (01.03) e controladores (01.04) antes de introduzir o acesso via Service.
 
 ## Pré-requisitos
 
