@@ -293,7 +293,12 @@ def check_student_manifest(lab: Lab) -> int:
 
 
 def execute_lab(lab: Lab, action: str) -> int:
-    checked_cluster()  # Também para comandos somente de leitura.
+    if action == "lab-solution":
+        for path in lab.apply:
+            print(path.relative_to(ROOT))
+        print("Solucao de referencia: nao aplicada.")
+        return 0
+    checked_cluster()
     if action == "lab-observe":
         return observe_lab(lab)
     if action == "lab-status":
@@ -301,11 +306,6 @@ def execute_lab(lab: Lab, action: str) -> int:
                        lab.namespace, "--ignore-not-found", "-o", "wide").returncode
     if action == "lab-prepare":
         return prepare_lab(lab)
-    if action == "lab-solution":
-        for path in lab.apply:
-            print(path.relative_to(ROOT))
-        print("Solucao de referencia: nao aplicada.")
-        return 0
     if action == "lab-reset":
         if remove_lab_objects(lab):
             return 1
