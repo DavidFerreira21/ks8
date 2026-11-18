@@ -13,7 +13,7 @@ Um Secret permite referenciar informações sensíveis sem embuti-las no Pod spe
 
 ## Desafio — o que você vai construir
 
-Escreva um `Secret` Opaque chamado `exemplo-ficticio`, usando **apenas** o token de demonstração indicado na referência do desafio, e um Deployment `consumidor` que injeta `TOKEN_DEMO` por `secretKeyRef`. O container **não deve imprimir o token** em logs ou comandos do roteiro.
+Escreva um `Secret` Opaque chamado `exemplo-ficticio`, usando **apenas** o valor fictício `valor-ficticio-para-estudo` na chave `TOKEN_DEMO` (nenhuma credencial real), e um Deployment `consumidor` que injeta `TOKEN_DEMO` por `secretKeyRef`. O container **não deve imprimir o token** em logs ou comandos do roteiro.
 
 **Antes de aplicar:** use o arquivo incompleto em `.labs/01.08/` como ponto de partida. Confira campos com `kubectl explain`; não abra a solução antes de formular uma tentativa.
 
