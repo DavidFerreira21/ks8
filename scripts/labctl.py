@@ -117,7 +117,15 @@ def kubectl(*args: str, quiet: bool = False) -> subprocess.CompletedProcess[str]
 
 
 def ensure_namespace(namespace: str) -> int:
-    if kubectl("get", "namespace", namespace, quiet=True).returncode == 0:
+    # Namespace ausente e falha no API Server sao casos diferentes.
+    result = subprocess.run(
+        ["kubectl", "get", "namespace", namespace, "--ignore-not-found", "-o", "name"],
+        capture_output=True, text=True, check=False,
+    )
+    if result.returncode != 0:
+        print(f"Erro ao consultar namespace {namespace}: {result.stderr.strip()}", file=sys.stderr)
+        return result.returncode
+    if result.stdout.strip():
         return 0
     print(f"Criando namespace de estudo: {namespace}")
     return kubectl("create", "namespace", namespace).returncode
