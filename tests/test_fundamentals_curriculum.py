@@ -42,9 +42,9 @@ class FundamentalsCurriculumTests(unittest.TestCase):
 
     def test_lab_ids_are_aligned(self):
         fundamental = (ROOT / "trilhas/01-fundamentos/labs/fundamentos-cluster/lab.yaml").read_text(encoding="utf-8")
-        integrated = (ROOT / "trilhas/01-fundamentos/labs/primeira-aplicacao/lab.yaml").read_text(encoding="utf-8")
+        services = (ROOT / "trilhas/01-fundamentos/labs/services-basico/lab.yaml").read_text(encoding="utf-8")
         self.assertIn('id: "01.01"', fundamental)
-        self.assertIn('id: "01.05"', integrated)
+        self.assertIn('id: "01.05"', services)
         makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
         self.assertIn("LAB ?= 01.01", makefile)
 
