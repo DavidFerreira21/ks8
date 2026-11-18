@@ -33,7 +33,9 @@ jobs:
           make -n new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico > /dev/null
 
       - name: Validate example manifests
-        run: python scripts/validate_manifests.py
+        run: |
+          python scripts/validate_manifests.py
+          python scripts/validate_lab_resources.py
 
       - name: Verify shell scripts use LF and pass Bash syntax
         shell: bash
