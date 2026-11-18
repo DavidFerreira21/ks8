@@ -1,0 +1,8 @@
+id: "01.09"
+title: "Requests e Limits: recursos e scheduler"
+namespace: lab-01-09
+apply:
+  - resources.yaml
+checks:
+  - type: deployment
+    name: recursos
