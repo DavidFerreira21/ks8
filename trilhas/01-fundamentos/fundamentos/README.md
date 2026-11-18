@@ -75,4 +75,4 @@ kubectl api-resources
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Namespaces →](../namespaces/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Pods →](../pods/README.md)
