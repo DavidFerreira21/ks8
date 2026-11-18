@@ -100,4 +100,4 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ---
 
-[← Lab 02.06](../jobs-cronjobs-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.08 →](../topology-spread-basico/README.md)
+[← Lab 02.06](../jobs-cronjobs-basico/README.md) · [↑ Aula 02.07](../../taints-tolerations-affinity/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.08 →](../topology-spread-basico/README.md)

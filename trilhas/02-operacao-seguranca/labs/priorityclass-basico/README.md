@@ -91,4 +91,4 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ---
 
-[← Lab 02.08](../topology-spread-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.10 →](../qos-eviction-basico/README.md)
+[← Lab 02.08](../topology-spread-basico/README.md) · [↑ Aula 02.09](../../priorityclass-preemption/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.10 →](../qos-eviction-basico/README.md)

@@ -82,4 +82,4 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ---
 
-[← Lab 02.12](../node-maintenance-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.14 →](../troubleshooting-basico/README.md)
+[← Lab 02.12](../node-maintenance-basico/README.md) · [↑ Aula 02.13](../../networkpolicy/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.14 →](../troubleshooting-basico/README.md)

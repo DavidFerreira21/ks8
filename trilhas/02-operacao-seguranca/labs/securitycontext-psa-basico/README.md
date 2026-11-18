@@ -101,4 +101,4 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ---
 
-[← Lab 02.02](../rbac-minimo/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.04 →](../quota-namespace/README.md)
+[← Lab 02.02](../rbac-minimo/README.md) · [↑ Aula 02.03](../../securitycontext-pod-security/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.04 →](../quota-namespace/README.md)

@@ -100,4 +100,4 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ---
 
-[← Lab 02.11](../pdb-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.13 →](../networkpolicy-basico/README.md)
+[← Lab 02.11](../pdb-basico/README.md) · [↑ Aula 02.12](../../node-maintenance/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.13 →](../networkpolicy-basico/README.md)

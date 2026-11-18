@@ -102,4 +102,4 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ---
 
-[← Lab 02.07](../scheduling-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.09 →](../priorityclass-basico/README.md)
+[← Lab 02.07](../scheduling-basico/README.md) · [↑ Aula 02.08](../../topology-spread/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.09 →](../priorityclass-basico/README.md)

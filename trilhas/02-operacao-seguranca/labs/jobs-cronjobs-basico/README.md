@@ -84,4 +84,4 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ---
 
-[← Lab 02.05](../init-sidecars-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.07 →](../scheduling-basico/README.md)
+[← Lab 02.05](../init-sidecars-basico/README.md) · [↑ Aula 02.06](../../jobs-cronjobs/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.07 →](../scheduling-basico/README.md)

@@ -91,4 +91,4 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ---
 
-[← Lab 02.09](../priorityclass-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.11 →](../pdb-basico/README.md)
+[← Lab 02.09](../priorityclass-basico/README.md) · [↑ Aula 02.10](../../qos-eviction/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.11 →](../pdb-basico/README.md)
