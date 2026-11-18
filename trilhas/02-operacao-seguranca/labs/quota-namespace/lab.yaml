@@ -9,3 +9,7 @@ checks:
   - type: quota
     name: pod-count
     pod: demo-1
+experiments:
+  - id: reject-pod
+    type: expect-rejected-manifest
+    manifest: pod-rejected.yaml
