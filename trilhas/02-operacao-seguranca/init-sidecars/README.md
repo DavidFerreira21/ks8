@@ -18,6 +18,20 @@ Init containers comuns executam e terminam antes dos containers principais. Um s
 
 Os init containers comuns precisam concluir com sucesso; falhas são retentadas segundo as políticas aplicáveis. O sidecar nativo permanece em execução e seu status aparece em `initContainerStatuses`. Containers adicionais comuns em `containers` também podem fazer papel auxiliar, mas têm semântica de ciclo de vida diferente.
 
+### Exemplo interpretado (trecho)
+
+Sidecar nativo usa `restartPolicy: Always` sob `initContainers`, ao contrário do init comum que precisa terminar.
+
+```yaml
+initContainers:
+  - name: auxiliar
+    image: busybox:1.36
+    restartPolicy: Always
+    command: ["sh", "-c", "sleep 3600"]
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.

@@ -18,6 +18,22 @@ A pressão de memória ou disco em um nó pode obrigar o kubelet a encerrar Pods
 
 Guaranteed exige que cada container tenha requests iguais aos limits de CPU e memória; BestEffort não define requests nem limits desses recursos; os demais normalmente são Burstable. O kubelet também avalia uso acima de requests, prioridade e condições do nó.
 
+### Exemplo interpretado (trecho)
+
+A classe QoS decorre de requests e limits efetivamente admitidos no Pod.
+
+```yaml
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 50m
+    memory: 64Mi
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.
@@ -38,6 +54,8 @@ Não force OOM em cluster compartilhado. OOMKilled de um container e eviction de
 ## 🧪 Aplicação prática
 
 **[🧪 Lab 02.10](../labs/qos-eviction-basico/README.md):** escreva o YAML do desafio, compare resultados e investigue as condições de execução. O lab não exige leitura complementar.
+
+**Complementar opcional:** [Consultar aprofundamento 02.10](complementares/README.md). Referência adicional; não é necessária para executar o lab.
 
 ## ✅ Revisão do aprendizado
 

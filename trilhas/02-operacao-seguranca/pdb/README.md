@@ -18,6 +18,24 @@ A manutenção de nós pode interromper várias réplicas ao mesmo tempo. Um Pod
 
 A política seleciona Pods e define `minAvailable` ou `maxUnavailable`. O controller calcula `currentHealthy`, `desiredHealthy` e `disruptionsAllowed`. Exclusão direta de Pods, indisponibilidade involuntária e falhas de nó não são impedidas por PDB.
 
+### Exemplo interpretado (trecho)
+
+O PDB é calculado a partir da saúde real dos Pods selecionados, não apenas de replicas declaradas.
+
+```yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: disponibilidade
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: exemplo
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.

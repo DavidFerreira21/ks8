@@ -18,6 +18,18 @@ Manutenção planejada exige retirar workloads de nós sem interromper indiscrim
 
 `kubectl cordon` define `spec.unschedulable` no nó; Pods existentes permanecem. `kubectl drain` considera DaemonSets, mirror Pods, PDBs e opções de exclusão. `uncordon` não move automaticamente Pods de volta.
 
+### Exemplo interpretado (trecho)
+
+`cordon` e `uncordon` são operações administrativas sobre Node; não são objetos YAML para aplicar na aplicação.
+
+```bash
+kubectl cordon dev-worker
+kubectl get nodes
+kubectl uncordon dev-worker
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.

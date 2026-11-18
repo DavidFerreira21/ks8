@@ -18,6 +18,22 @@ LimitRange define restrições e valores padrão para requests e limits de conta
 
 O admission controller pode completar requests/limits ausentes a partir do LimitRange. O ResourceQuota compara a demanda resultante com o limite do namespace. Uma falha por quota é rejeição na API, não um Pod `Pending`.
 
+### Exemplo interpretado (trecho)
+
+Uma quota de contagem de Pods e defaults de CPU são políticas distintas; os valores reais só são observáveis após admissão.
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: pods-limitados
+spec:
+  hard:
+    pods: "2"
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.

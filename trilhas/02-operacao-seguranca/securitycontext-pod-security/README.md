@@ -18,6 +18,20 @@ O SecurityContext configura propriedades de execução, como usuário não-root,
 
 O PSA pode atuar em modos `enforce`, `audit` e `warn` via labels de namespace. `enforce` pode rejeitar um Pod antes do agendamento; `warn` alerta, mas não bloqueia. SecurityContext por si só não ativa uma política no namespace.
 
+### Exemplo interpretado (trecho)
+
+SecurityContext do container e a política PSA no namespace atuam em pontos diferentes. O trecho não substitui um Pod completo.
+
+```yaml
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  seccompProfile:
+    type: RuntimeDefault
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
@@ -38,6 +52,8 @@ Nunca aplique `enforce=restricted` indiscriminadamente em namespaces de sistema.
 ## 🧪 Aplicação prática
 
 **[🧪 Lab 02.03](../labs/securitycontext-psa-basico/README.md):** escreva o YAML do exercício, execute no Kind, registre evidências e explique as divergências. O complementar não é pré-requisito.
+
+**Complementar opcional:** [Consultar aprofundamento 02.03](complementares/README.md). Referência adicional; não é necessária para executar o lab.
 
 ## ✅ Revisão do aprendizado
 

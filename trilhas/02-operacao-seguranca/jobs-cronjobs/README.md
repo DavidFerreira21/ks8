@@ -18,6 +18,22 @@ Deployment mantém serviços em execução; Job busca conclusão finita. CronJob
 
 `completions` e `parallelism` controlam tarefas de Job, `backoffLimit` limita tentativas; CronJob usa `schedule`, `concurrencyPolicy` e `startingDeadlineSeconds`. CronJob não é garantia de execução exatamente uma vez: os Jobs devem tolerar repetição.
 
+### Exemplo interpretado (trecho)
+
+Um Job pode executar um único Pod até completar; CronJob agenda criações futuras de Jobs.
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: agendada
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.

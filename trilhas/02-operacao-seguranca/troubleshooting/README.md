@@ -18,6 +18,21 @@ Mensagens de erro semelhantes podem ter causas diferentes. Diagnóstico eficient
 
 Use a cadeia: contexto/namespace → objeto e condições → eventos → Pods/containers → logs → dependências → hipótese → intervenção controlada. Compare estado esperado com observado; evite corrigir sintomas aleatoriamente.
 
+### Exemplo interpretado (trecho)
+
+O estado do container explica erros como ImagePullBackOff; status.phase sozinho não responde a causa.
+
+```yaml
+status:
+  containerStatuses:
+    - name: app
+      state:
+        waiting:
+          reason: ImagePullBackOff
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.
@@ -40,6 +55,8 @@ Não use `kubectl delete -A`, `drain` ou `rollout restart` como primeiro diagnó
 ## 🧪 Aplicação prática
 
 **[🧪 Lab 02.14](../labs/troubleshooting-basico/README.md):** escreva o YAML do desafio, compare resultados e investigue as condições de execução. O lab não exige leitura complementar.
+
+**Complementar opcional:** [Consultar aprofundamento 02.14](complementares/README.md). Referência adicional; não é necessária para executar o lab.
 
 ## ✅ Revisão do aprendizado
 

@@ -18,6 +18,20 @@ Taints repelem Pods sem toleration correspondente. Toleration permite que um Pod
 
 `NoSchedule` evita novos agendamentos sem toleration; `NoExecute` pode provocar remoção de Pods existentes. `requiredDuringSchedulingIgnoredDuringExecution` impõe restrição de agendamento e `preferred...` adiciona preferência. Recursos e condições dos nós continuam valendo.
 
+### Exemplo interpretado (trecho)
+
+A toleration permite considerar um nó com taint compatível; não força a escolha do nó.
+
+```yaml
+tolerations:
+  - key: dedicado
+    operator: Equal
+    value: estudos
+    effect: NoSchedule
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
@@ -38,6 +52,8 @@ Alterar taints de nós compartilhados é operacionalmente perigoso. Em laborató
 ## 🧪 Aplicação prática
 
 **[🧪 Lab 02.07](../labs/scheduling-basico/README.md):** escreva o YAML do exercício, execute no Kind, registre evidências e explique as divergências. O complementar não é pré-requisito.
+
+**Complementar opcional:** [Consultar aprofundamento 02.07](complementares/README.md). Referência adicional; não é necessária para executar o lab.
 
 ## ✅ Revisão do aprendizado
 

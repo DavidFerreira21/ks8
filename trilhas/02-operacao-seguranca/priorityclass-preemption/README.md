@@ -18,6 +18,22 @@ Sob escassez de recursos, o scheduler prioriza Pods mais importantes. `PriorityC
 
 Um Pod pode referenciar `priorityClassName`. A política `preemptionPolicy: Never` permite prioridade de fila sem preempção iniciada por esse Pod. Preempção tenta abrir espaço respeitando restrições, mas não é garantia de agendamento ou disponibilidade imediata.
 
+### Exemplo interpretado (trecho)
+
+Uma PriorityClass com `preemptionPolicy: Never` participa da priorização sem iniciar preempção.
+
+```yaml
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: baixa-prioridade
+value: 1000
+globalDefault: false
+preemptionPolicy: Never
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.

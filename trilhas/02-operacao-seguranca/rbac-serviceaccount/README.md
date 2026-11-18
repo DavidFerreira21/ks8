@@ -18,6 +18,23 @@ Autenticação identifica quem faz a requisição. Autorização determina o que
 
 `Role` e `RoleBinding` trabalham no namespace. Um `RoleBinding` também pode referenciar uma `ClusterRole`, mas a concessão continua limitada ao namespace do binding. `ClusterRoleBinding` concede regras de cluster. Uma regra não nega explicitamente: falta de autorização normalmente resulta em `forbidden` quando nenhum autorizador concede o acesso.
 
+### Exemplo interpretado (trecho)
+
+A Role define regras; a permissão só existe para o sujeito depois da associação por binding.
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: somente-leitura
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
@@ -38,6 +55,8 @@ Evite verbos e resources com `*` sem justificativa; não associe ServiceAccounts
 ## 🧪 Aplicação prática
 
 **[🧪 Lab 02.02](../labs/rbac-minimo/README.md):** escreva o YAML do exercício, execute no Kind, registre evidências e explique as divergências. O complementar não é pré-requisito.
+
+**Complementar opcional:** [Consultar aprofundamento 02.02](complementares/README.md). Referência adicional; não é necessária para executar o lab.
 
 ## ✅ Revisão do aprendizado
 

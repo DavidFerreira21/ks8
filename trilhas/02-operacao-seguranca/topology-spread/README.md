@@ -18,6 +18,22 @@ Agendar todas as réplicas no mesmo nó cria risco concentrado. Topology Spread 
 
 O scheduler avalia `topologyKey`, `labelSelector`, `maxSkew` e `whenUnsatisfiable`. `DoNotSchedule` pode deixar Pods Pending quando a distribuição requerida não é possível; `ScheduleAnyway` é preferência. A distribuição depende dos domínios elegíveis e da quantidade de nós.
 
+### Exemplo interpretado (trecho)
+
+Um constraint impõe distribuição por hostname quando `DoNotSchedule` está selecionado.
+
+```yaml
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app: demo
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos são ilustrativos. Substitua nomes e confirme o contexto do Kind antes de executar.

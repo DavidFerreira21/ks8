@@ -18,6 +18,21 @@ Labels são pares chave/valor destinados à identificação e seleção. Selecto
 
 Selectors de igualdade usam `matchLabels` ou expressões; selectors de conjunto podem usar `In`, `NotIn`, `Exists` e `DoesNotExist` onde suportados. Labels são mutáveis, mas selectors em alguns controladores são imutáveis após criação. `kubectl get -l` filtra pelo valor observado, não pela intenção descrita no Git.
 
+### Exemplo interpretado (trecho)
+
+`metadata.labels` é utilizado em seleções, enquanto `metadata.annotations` atende ferramentas e contexto humano.
+
+```yaml
+metadata:
+  labels:
+    app: exemplo
+    tier: backend
+  annotations:
+    equipe: plataforma
+```
+
+Este é um **trecho ilustrativo**, não um manifesto para aplicar isoladamente. A implementação completa será escrita pelo aluno no laboratório.
+
 ### Exemplo de inspeção
 
 Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
