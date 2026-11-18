@@ -89,6 +89,13 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 - [ ] Observei os nomes estáveis e a troca do UID do StatefulSet.
 - [ ] Confirmei a função do Service headless e removi o lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Como você identificou quais nós são elegíveis para o DaemonSet?
+- O que mudou e o que permaneceu após excluir e recriar `stateful-demo-0`?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) · [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) · [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/).
