@@ -1,8 +1,8 @@
-# Lab 01.07 — ConfigMaps: configuracao da aplicacao
+# Lab 01.07 — ConfigMaps
 
+[← Aula 01.07](../../configmaps/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.07` para criar o namespace e copiar um arquivo incompleto para `.labs/01.07/resources.yaml`. **Escreva os campos TODO, aplique você mesmo com `kubectl apply -f .labs/01.07/` e valide com `make lab-test LAB=01.07`**. `make lab-up` é só para CI. Use `make lab-solution LAB=01.07` apenas depois de tentar.
 
-[← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
 
 ## Hipótese e objetivo
 
@@ -81,3 +81,7 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 - [ ] Executei a experiência e comparei resultados.
 - [ ] Consultei eventos e conditions quando aplicáveis.
 - [ ] Limpei os recursos criados.
+
+---
+
+[← Lab 01.06](../namespaces-basico/README.md) · [↑ Aula 01.07](../../configmaps/README.md) · [Próximo: Lab 01.08 →](../secrets-basico/README.md)
