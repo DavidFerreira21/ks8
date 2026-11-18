@@ -21,24 +21,24 @@
 
 ## 📚 Catálogo de aulas — ordem oficial
 
-A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). As **14 aulas já possuem explicação teórica e infográfico**. Os 14 labs da Camada 01 estão disponíveis como desafios de prática ativa, sem remover o material complementar existente.
+A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). As **14 aulas já possuem explicação teórica e infográfico**. Os 14 labs da Camada 01 estão disponíveis como desafios de prática ativa, sem remover os materiais complementares existentes. A coluna **Complementares** apresenta referências opcionais para aprofundamento; aulas e labs permanecem autocontidos.
 
-| Aula | Conceito | Aula teórica | Material de apoio |
-| --- | --- | --- | --- |
-| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) · [Anotações](../../1-fundamentos/README.md) |
-| 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [🧪 Lab 01.02](labs/pods-basico/README.md) · [Anotações](../../2-pod/README.md) |
-| 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [🧪 Lab 01.03](labs/deployments-basico/README.md) · [Anotações](../../3-deployment/README.md) |
-| 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [🧪 Lab 01.04](labs/controladores-basico/README.md) · [Anotações](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab 01.05](labs/services-basico/README.md) · [Anotações](../../7-services/README.md) |
-| 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | [🧪 Lab 01.06](labs/namespaces-basico/README.md) |
-| 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | [🧪 Lab 01.07](labs/configmaps-basico/README.md) |
-| 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | [🧪 Lab 01.08](labs/secrets-basico/README.md) |
-| 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [🧪 Lab 01.09](labs/requests-limits-basico/README.md) · [Anotações](../../2-pod/README.md) |
-| 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [🧪 Lab 01.10](labs/probes-basico/README.md) · [Anotações](../../5-probes/README.md) |
-| 01.11 | **Volumes** | [📖 Estudar](volumes/README.md) | [🧪 Lab 01.11](labs/volumes-basico/README.md) |
-| 01.12 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | [🧪 Lab 01.12](labs/estrategias-deployment-basico/README.md) |
-| 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | [🧪 Lab 01.13](labs/ingress-basico/README.md) |
-| 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | [🧪 Lab 01.14](labs/hpa-basico/README.md) |
+| Aula | Conceito | Aula | Lab | Complementares |
+| --- | --- | --- | --- | --- |
+| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) | [Consultar](../../1-fundamentos/README.md) |
+| 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [🧪 Lab 01.02](labs/pods-basico/README.md) | [Consultar](../../2-pod/README.md) |
+| 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [🧪 Lab 01.03](labs/deployments-basico/README.md) | [Consultar](../../3-deployment/README.md) |
+| 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [🧪 Lab 01.04](labs/controladores-basico/README.md) | [Consultar](../../4-replicaSet-daemonSet-statefulSet/README.md) |
+| 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab 01.05](labs/services-basico/README.md) | [Consultar](../../7-services/README.md) |
+| 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | [🧪 Lab 01.06](labs/namespaces-basico/README.md) | — |
+| 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | [🧪 Lab 01.07](labs/configmaps-basico/README.md) | — |
+| 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | [🧪 Lab 01.08](labs/secrets-basico/README.md) | — |
+| 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [🧪 Lab 01.09](labs/requests-limits-basico/README.md) | [Consultar](../../2-pod/README.md) |
+| 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [🧪 Lab 01.10](labs/probes-basico/README.md) | [Consultar](../../5-probes/README.md) |
+| 01.11 | **Volumes** | [📖 Estudar](volumes/README.md) | [🧪 Lab 01.11](labs/volumes-basico/README.md) | — |
+| 01.12 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | [🧪 Lab 01.12](labs/estrategias-deployment-basico/README.md) | — |
+| 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | [🧪 Lab 01.13](labs/ingress-basico/README.md) | — |
+| 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | [🧪 Lab 01.14](labs/hpa-basico/README.md) | — |
 
 ## 🧪 Laboratórios
 
