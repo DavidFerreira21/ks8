@@ -1,0 +1,12 @@
+id: "01.12"
+title: "Deployment: rollout e rollback"
+namespace: lab-01-12
+apply:
+  - resources.yaml
+checks:
+  - type: deployment
+    name: web
+experiments:
+  - id: controlled-rollout
+    type: rollout-restart
+    deployment: web
