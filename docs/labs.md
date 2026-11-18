@@ -14,6 +14,19 @@ Cada lab deve documentar: objetivo, pré-requisitos, manifests, sequência de co
 
 Confira as versões e os requisitos do [guia de instalação existente](../install-kind.md). A configuração principal do cluster continua em [kind-config.yaml](../kind-config.yaml).
 
+## Fluxo do aluno e CI
+
+```bash
+make lab-prepare LAB=01.02
+# Complete .labs/01.02/resources.yaml (comece pela aula)
+kubectl apply -f .labs/01.02/
+make lab-observe LAB=01.02
+make lab-test LAB=01.02
+make lab-down LAB=01.02
+```
+
+`make lab-reset LAB=01.02` remove os recursos declarados e restaura o setup, **sem sobrescrever seu YAML local**. `make lab-solution LAB=01.02` mostra os caminhos das soluções de referência. **`make lab-up` é exclusivo de CI** e aplica a solução, portanto não faz parte do exercício do aluno.
+
 ## Comandos padronizados
 
 A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.01` (Fundamentos); o laboratório dedicado a Services é `01.05`.
@@ -22,7 +35,9 @@ A interface do Makefile usa `LAB=<id>`. O lab padrão é `01.01` (Fundamentos); 
 make doctor
 make up
 make labs
-make lab-up LAB=01.05
+make lab-prepare LAB=01.05
+# Edite .labs/01.05/service.yaml
+kubectl apply -f .labs/01.05/
 make lab-status LAB=01.05
 make lab-test LAB=01.05
 make lab-observe LAB=01.05
@@ -34,6 +49,9 @@ make lab-down LAB=01.05
 | --- | --- |
 | `make doctor` | Conferir ferramentas e Docker |
 | `make labs` | Descobrir os labs cadastrados |
+| `make lab-prepare LAB=01.02` | Criar workspace de YAML para aluno, namespace e setup mínimo |
+| `make lab-solution LAB=01.02` | Mostrar caminhos da solução sem aplicá-la |
+| `make lab-reset LAB=01.02` | Limpar recursos declarados e refazer setup sem apagar arquivos locais |
 | `make validate` | Verificar contratos e manifests por inspeção |
 | `make lab-up LAB=02.02` | Aplicar o lab RBAC e seus pré-requisitos |
 | `make lab-test LAB=02.02` | Conferir permissões permitidas e negadas |
@@ -85,7 +103,7 @@ Ambos podem ser preparados e verificados usando `LAB=02.02` ou `LAB=02.04`. O ex
 
 ## Aprendizado orientado por observação
 
-O fluxo recomendado é **aplicar → observar → experimentar → testar → limpar**. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.
+O fluxo recomendado é **escrever YAML → aplicar com kubectl → observar → experimentar → testar → limpar**. `make lab-prepare` cria apenas o namespace, os recursos de apoio explicitamente declarados e uma cópia local do starter em `.labs/<ID>/`, preservando suas alterações existentes. A solução não é aplicada neste comando. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.
 
 Os experimentos têm **IDs pré-definidos** em `lab.yaml`, não aceitam comandos arbitrários e exigem confirmação explícita via `--confirm` no CLI (o alvo `make lab-experiment` confirma a ação por ser um comando dedicado). O rollout controlado exige que o Deployment já exista; o teste de quota depende do Pod inicial estar presente.
 
