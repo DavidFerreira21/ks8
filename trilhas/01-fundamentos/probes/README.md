@@ -72,4 +72,4 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Volumes →](../volumes/README.md)
+[← Aula 01.09 — Requests e Limits](../requests-limits/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.10](../labs/probes-basico/README.md) · [Próxima: Aula 01.11 — Volumes →](../volumes/README.md)
