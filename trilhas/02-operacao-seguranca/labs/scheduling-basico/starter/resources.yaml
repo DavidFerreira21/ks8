@@ -6,4 +6,5 @@ metadata:
   namespace: lab-02-07
 spec:
   # TODO: affinity nodeAffinity que exige hostname dev-worker
+  # TODO: toleration para estudo=true:NoSchedule
   # TODO: container BusyBox com sleep
