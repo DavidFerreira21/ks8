@@ -19,7 +19,7 @@ class LabRegistryTests(unittest.TestCase):
         (self.dir / "deployment.yaml").write_text("apiVersion: v1\nkind: ConfigMap\n", encoding="utf-8")
         self.metadata = self.dir / "lab.yaml"
         self.valid = (
-            'id: "01.06"\n'
+            'id: "01.05"\n'
             'title: "Aula demo"\n'
             'namespace: aula-demo\n'
             'apply:\n  - deployment.yaml\n'
@@ -33,8 +33,8 @@ class LabRegistryTests(unittest.TestCase):
 
     def test_discovers_registered_lab(self):
         labs = self.load()
-        self.assertEqual(list(labs), ["01.06"])
-        self.assertEqual(labs["01.06"].namespace, "aula-demo")
+        self.assertEqual(list(labs), ["01.05"])
+        self.assertEqual(labs["01.05"].namespace, "aula-demo")
 
     def test_rejects_path_traversal(self):
         self.metadata.write_text(self.valid.replace("deployment.yaml", "../other.yaml"), encoding="utf-8")
