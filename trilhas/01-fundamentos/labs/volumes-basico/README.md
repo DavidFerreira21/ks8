@@ -38,12 +38,13 @@ kubectl exec -n lab-01-11 pod/escritor -- cat /dados/mensagem.txt
 **Experimento — excluir Pod não apaga PVC:**
 
 ```bash
+kubectl exec -n lab-01-11 pod/escritor -- sh -c 'echo marcador > /dados/marcador.txt'
 kubectl delete pod escritor -n lab-01-11
 kubectl get pvc dados-pvc -n lab-01-11
 kubectl apply -f trilhas/01-fundamentos/labs/volumes-basico/claim.yaml
 kubectl apply -f trilhas/01-fundamentos/labs/volumes-basico/pod.yaml
 kubectl wait --for=condition=Ready pod/escritor -n lab-01-11 --timeout=120s
-kubectl exec -n lab-01-11 pod/escritor -- cat /dados/mensagem.txt
+kubectl exec -n lab-01-11 pod/escritor -- cat /dados/marcador.txt
 ```
 
 O arquivo inicial pode ser sobrescrito pelo script de inicialização. Para comprovar persistência, **antes de excluir o Pod**, execute `kubectl exec -n lab-01-11 pod/escritor -- sh -c 'echo marcador > /dados/marcador.txt'`. Após recriar o Pod, execute `kubectl exec -n lab-01-11 pod/escritor -- cat /dados/marcador.txt` e confirme que o marcador permaneceu. O Kind requer um StorageClass funcional, normalmente `standard`.
