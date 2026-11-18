@@ -1,4 +1,4 @@
-# 01.04 · Requests e Limits
+# 01.09 · Requests e Limits
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.04 — Requests e Limits](images/requests-limits.png)
+![01.09 — Requests e Limits](images/requests-limits.png)
 
 ## 📖 Aula teórica
 
@@ -74,4 +74,4 @@ kubectl top pods -A
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Probes →](../probes/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Probes — Liveness, Readiness e Startup →](../probes/README.md)
