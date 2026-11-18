@@ -1,0 +1,15 @@
+id: "02.04"
+title: "ResourceQuota e LimitRange: admissão"
+namespace: lab-ops-quota
+apply:
+  - namespace.yaml
+  - policy.yaml
+  - pod-ok.yaml
+checks:
+  - type: quota
+    name: pod-count
+    pod: demo-1
+experiments:
+  - id: reject-pod
+    type: expect-rejected-manifest
+    manifest: pod-rejected.yaml

@@ -1,0 +1,15 @@
+id: "02.02"
+title: "RBAC e ServiceAccount: menor privilégio"
+namespace: lab-ops-rbac
+apply:
+  - namespace.yaml
+  - rbac.yaml
+checks:
+  - type: rbac
+    service_account: lab-reader
+    resource: pods
+    verb: list
+  - type: rbac-deny
+    service_account: lab-reader
+    resource: secrets
+    verb: list

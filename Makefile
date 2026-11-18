@@ -7,7 +7,7 @@ KUBE_CONTEXT ?= kind-$(CLUSTER_NAME)
 LAB_DIR := trilhas/01-fundamentos/labs/primeira-aplicacao
 LAB_NAMESPACE := k8s-lab
 
-.PHONY: help check-tools check-context up nodes status down validate lab-up lab-test lab-down
+.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-up lab-test lab-down
 
 help: ## Exibe os alvos disponíveis
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z_-]+:.*## / {printf "  %-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -48,6 +48,7 @@ down: ## Remove somente o cluster Kind identificado por CLUSTER_NAME
 	fi
 
 validate: ## Validação estática dos manifests do lab (sem cluster)
+	@python3 scripts/labctl.py validate
 	@python3 scripts/validate_manifests.py
 
 lab-up: check-context ## Aplica Deployment e Service do laboratório integrado
@@ -63,3 +64,10 @@ lab-test: check-context ## Espera o Deployment ficar pronto e verifica Service
 lab-down: check-context ## Remove somente Deployment e Service criados pelo laboratório
 	@kubectl delete -f "$(LAB_DIR)/service.yaml" -f "$(LAB_DIR)/deployment.yaml" --ignore-not-found
 	@echo "Namespace $(LAB_NAMESPACE) preservado; remova-o manualmente se estiver vazio."
+
+# Interface de descoberta: não modifica recursos do cluster.
+doctor: ## Verifica ferramentas e Docker local
+	@python3 scripts/labctl.py doctor
+
+labs: ## Lista os laboratórios registrados em lab.yaml
+	@python3 scripts/labctl.py labs
