@@ -64,7 +64,7 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 ## 🧪 Aplicação prática
 
-**Lab integrado (aula 01.05):** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
+**🧪 Lab 01.02:** [abrir exercício guiado](../labs/pods-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../2-pod/README.md). Os conteúdos anteriores foram preservados.
 
