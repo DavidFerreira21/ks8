@@ -62,7 +62,7 @@ lab-prepare: check-context ## Prepara namespace, apoio e arquivos para o aluno (
 lab-reset: check-context ## Reinicia recursos declarados, preservando seus arquivos de estudo
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-reset --lab "$(LAB)"
 
-lab-solution: check-context ## Mostra caminhos das soluções sem aplicar nada
+lab-solution: ## Mostra caminhos das soluções sem aplicar nada
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-solution --lab "$(LAB)"
 
 lab-up: check-context ## Apenas CI: aplica a solução de referência para LAB
