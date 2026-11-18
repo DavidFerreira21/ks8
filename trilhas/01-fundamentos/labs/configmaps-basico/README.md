@@ -101,7 +101,7 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 - Por que um Pod já existente não recebeu automaticamente a nova variável de ambiente?
 - O que mudou nos logs após reiniciar o Deployment e como você registrou a diferença?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre `MENSAGEM` no ConfigMap e nos logs antes e após o patch, e novamente depois do restart; explique por que o Pod existente manteve o valor anterior.
 
 ## Aprofunde seus conhecimentos
 
