@@ -94,7 +94,7 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 - Que recurso recriou o Pod após a exclusão, e como você comprovou isso?
 - Como `readyReplicas` se relaciona ao número de réplicas desejadas do Deployment?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre Deployment/ReplicaSet/Pods e réplicas prontas antes e depois do experimento; explique qual controlador repôs os Pods.
 
 ## Aprofunde seus conhecimentos
 
