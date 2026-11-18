@@ -38,16 +38,16 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 | Passo | Sua ação | Material |
 | :---: | --- | --- |
 | **01** | Configure o cluster local com um Control Plane e dois Workers | [Guia Kind + WSL](install-kind.md) |
-| **02** | Crie uma aplicação, observe as réplicas e exponha via Service | [Lab Pod → Deployment → Service](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) |
-| **03** | Aprenda a validar, diagnosticar e limpar os recursos com segurança | [Guia de labs e Makefile](docs/labs.md) |
+| **02** | Explore a API e o estado declarativo, começando pelo Lab 01.01 | [Lab 01.01 — Fundamentos](trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) |
+| **03** | Evolua para Pod, Deployment, ReplicaSet e Service; siga o Lab 01.05 | [Lab 01.05 — Aplicação integrada](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) |
 
 ```bash
 make up          # Cria o cluster Kind local
 make nodes       # Confere os nós
 make validate    # Executa validação estática dos exemplos
-make lab-up      # Aplica Deployment e Service do primeiro lab
-make lab-test    # Verifica rollout e recursos do lab
-make lab-down    # Remove apenas os recursos do lab
+make lab-up      # Aplica ConfigMap do primeiro lab (01.01)
+make lab-test    # Confere o recurso registrado no lab
+make lab-down    # Remove apenas recursos do lab
 ```
 
 > **Antes de executar:** confira `kubectl config current-context`. `make down` é diferente de `make lab-down`: o primeiro apaga o cluster Kind inteiro.
@@ -60,13 +60,14 @@ O projeto agora oferece uma interface única para descobrir, executar e diagnost
 make doctor
 make up
 make labs
-make lab-up LAB=01.06
-make lab-observe LAB=01.06
-make lab-test LAB=01.06
-make lab-down LAB=01.06
+make lab-up LAB=01.01
+make lab-observe LAB=01.01
+make lab-test LAB=01.01
+make lab-down LAB=01.01
+# Após a aula 01.05: make lab-up LAB=01.05
 ```
 
-Os exercícios são executados em um **Kind local** com verificação de contexto e limpeza restrita aos manifests registrados; namespaces são preservados. Para criar um novo exercício, use `make new-lab LAB_ID=01.10 LAB_SLUG=configmaps-basico` e revise o contrato antes de publicá-lo. Veja o [guia dos laboratórios](docs/labs.md).
+Os exercícios são executados em um **Kind local** com verificação de contexto e limpeza restrita aos manifests registrados; namespaces são preservados. Para criar um novo exercício, use `make new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico` e revise o contrato antes de publicá-lo. Veja o [guia dos laboratórios](docs/labs.md).
 
 > O motor automatiza tarefas repetitivas, mas mantém a análise de eventos, hipóteses e experimentos como parte essencial do aprendizado. Resultados de execução devem ser conferidos no GitHub Actions e no cluster local.
 
@@ -75,7 +76,7 @@ Os exercícios são executados em um **Kind local** com verificação de context
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |
 | [Fundamentos — primeiro contato com a API](trilhas/01-fundamentos/labs/fundamentos-cluster/README.md) | Control Plane, Workers, ConfigMap e estado declarativo | 🧪 Manifestos disponíveis |
-| [Primeira aplicação](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) | Pod, Deployment, ReplicaSet, Service e reconciliação | 🧪 Manifestos disponíveis |
+| [Lab 01.05 — Primeira aplicação](trilhas/01-fundamentos/labs/primeira-aplicacao/README.md) | Pod, Deployment, ReplicaSet, Service e reconciliação | 🧪 Manifestos disponíveis |
 | [RBAC mínimo](trilhas/02-operacao-seguranca/labs/rbac-minimo/README.md) | ServiceAccount, Role, RoleBinding e permissões | 🧪 Manifestos disponíveis |
 | [Quotas e limites](trilhas/02-operacao-seguranca/labs/quota-namespace/README.md) | LimitRange e rejeição por ResourceQuota | 🧪 Manifestos disponíveis |
 | [Arquitetura](trilhas/03-arquitetura/README.md) | Observação dos componentes internos | 📘 Roteiro conceitual |

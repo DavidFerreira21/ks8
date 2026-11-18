@@ -1,4 +1,4 @@
-# 01.09 · Services
+# 01.05 · Services
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.09 — Services](images/services.png)
+![01.05 — Services](images/services.png)
 
 ## 📖 Aula teórica
 
@@ -78,4 +78,4 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: ConfigMaps →](../configmaps/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Namespaces →](../namespaces/README.md)

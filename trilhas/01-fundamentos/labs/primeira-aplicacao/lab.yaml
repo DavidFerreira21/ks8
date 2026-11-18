@@ -1,4 +1,4 @@
-id: "01.06"
+id: "01.05"
 title: "Primeira aplicação: Pod, Deployment e Service"
 namespace: k8s-lab
 apply:

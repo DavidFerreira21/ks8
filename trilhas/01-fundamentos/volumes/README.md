@@ -1,4 +1,4 @@
-# 01.12 · Volumes
+# 01.11 · Volumes
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.12 — Volumes](images/volumes.png)
+![01.11 — Volumes](images/volumes.png)
 
 ## 📖 Aula teórica
 
@@ -72,4 +72,4 @@ A última linha pressupõe um PVC existente. A escolha entre cache, volume efêm
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Ingress →](../ingress/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Estratégias avançadas de Deployment →](../estrategias-deployment/README.md)

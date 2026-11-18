@@ -1,4 +1,4 @@
-# 01.08 · Estratégias avançadas de Deployment
+# 01.12 · Estratégias avançadas de Deployment
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.08 — Estratégias avançadas de Deployment](images/estrategias-deployment.png)
+![01.12 — Estratégias avançadas de Deployment](images/estrategias-deployment.png)
 
 ## 📖 Aula teórica
 
@@ -69,4 +69,4 @@ Os comandos pressupõem um Deployment existente. O laboratório de blue/green ou
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Services →](../services/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Ingress →](../ingress/README.md)

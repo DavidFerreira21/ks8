@@ -1,4 +1,4 @@
-# 01.11 · Secrets
+# 01.08 · Secrets
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.11 — Secrets](images/secrets.png)
+![01.08 — Secrets](images/secrets.png)
 
 ## 📖 Aula teórica
 
@@ -70,4 +70,4 @@ kubectl describe secret exemplo-sem-credencial
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Volumes →](../volumes/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Requests e Limits →](../requests-limits/README.md)

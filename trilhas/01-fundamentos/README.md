@@ -17,24 +17,26 @@
 | **03 · Controlar e expor** | **04 · Observar e experimentar** |
 | 🔁 Aprenda Deployments, ReplicaSets e Services: como atualizar e acessar aplicações.<br><br>**[Deployments →](deployments/README.md)** | 🧪 Execute o lab integrado e investigue réplicas, Service e eventos.<br><br>**[Primeira aplicação →](labs/primeira-aplicacao/README.md)** |
 
+[**Consultar tabela de migração dos IDs antigos →**](../../docs/migracao-ids-fundamentos.md)
+
 ## 📚 Catálogo de aulas — ordem oficial
 
 A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/catalogo.md). As **14 aulas já possuem explicação teórica e infográfico**. Laboratórios executáveis continuam em evolução, sem remover o material complementar existente.
 
 | Aula | Conceito | Aula teórica | Material de apoio |
 | --- | --- | --- | --- |
-| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) · [Anotações e exemplos](../../1-fundamentos/README.md) |
-| 01.02 | **Namespaces** | [📖 Estudar](namespaces/README.md) | — |
-| 01.03 | **Pods** | [📖 Estudar](pods/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
-| 01.04 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [Anotações e exemplos](../../2-pod/README.md) |
-| 01.05 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [Anotações e exemplos](../../5-probes/README.md) |
-| 01.06 | **Deployments** | [📖 Estudar](deployments/README.md) | [Anotações e exemplos](../../3-deployment/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| 01.07 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações e exemplos](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| 01.08 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | — |
-| 01.09 | **Services** | [📖 Estudar](services/README.md) | [Anotações e exemplos](../../7-services/README.md) · [🧪 Lab](labs/primeira-aplicacao/README.md) |
-| 01.10 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | — |
-| 01.11 | **Secrets** | [📖 Estudar](secrets/README.md) | — |
-| 01.12 | **Volumes** | [📖 Estudar](volumes/README.md) | — |
+| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) · [Anotações](../../1-fundamentos/README.md) |
+| 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [Anotações](../../2-pod/README.md) |
+| 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [Anotações](../../3-deployment/README.md) |
+| 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [Anotações](../../4-replicaSet-daemonSet-statefulSet/README.md) |
+| 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab integrado 01.05](labs/primeira-aplicacao/README.md) · [Anotações](../../7-services/README.md) |
+| 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | — |
+| 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | — |
+| 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | — |
+| 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [Anotações](../../2-pod/README.md) |
+| 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [Anotações](../../5-probes/README.md) |
+| 01.11 | **Volumes** | [📖 Estudar](volumes/README.md) | — |
+| 01.12 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | — |
 | 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | — |
 | 01.14 | **Horizontal Pod Autoscaler (HPA)** | [📖 Estudar](hpa/README.md) | — |
 
@@ -44,14 +46,14 @@ Comece pelo [**Lab 01.01 — Explorar o cluster e a API**](labs/fundamentos-clus
 
 ### Aplicação integrada
 
-| **Primeira aplicação · Pod → Deployment → Service** | |
+| **Lab 01.05 · Pod → Deployment → Service** | |
 | :--- | :--- |
 | **O que você pratica** | Criar um Pod, gerenciar três réplicas com Deployment, disponibilizar um Service e inspecionar a reconciliação. |
 | **O que observar** | Pods recriados, ReplicaSet, EndpointSlices, rollout e eventos. |
 | **Ambiente** | Kind local, namespace de laboratório isolado. |
 | **Começar** | **[Abrir laboratório →](labs/primeira-aplicacao/README.md)** |
 
-> **Importante:** os manifests do lab integrado estão disponíveis, mas a execução ponta a ponta no Kind ainda precisa de validação. A teoria de Volumes está na aula 01.12; não existe um laboratório específico validado para o tema.
+> **Importante:** os labs 01.01 e 01.05 possuem contratos executáveis; valide-os em seu Kind. O conteúdo de Volumes está na aula 01.11; ainda não existe lab específico para ele.
 
 ## 🎯 Checklist de aprendizado
 

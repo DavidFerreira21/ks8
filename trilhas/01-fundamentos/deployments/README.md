@@ -1,4 +1,4 @@
-# 01.06 · Deployments
+# 01.03 · Deployments
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.06 — Deployments](images/deployments.png)
+![01.03 — Deployments](images/deployments.png)
 
 ## 📖 Aula teórica
 
@@ -71,7 +71,7 @@ Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, inv
 
 ## 🧪 Aplicação prática
 
-**Lab existente:** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
+**Lab integrado (aula 01.05):** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../3-deployment/README.md). Os conteúdos anteriores foram preservados.
 
