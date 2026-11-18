@@ -1,4 +1,4 @@
-# 01.03 · Pods
+# 01.02 · Pods
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.03 — Pods](images/pods.png)
+![01.02 — Pods](images/pods.png)
 
 ## 📖 Aula teórica
 
@@ -64,7 +64,7 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 ## 🧪 Aplicação prática
 
-**Lab existente:** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
+**Lab integrado (aula 01.05):** [abrir laboratório integrado](../labs/primeira-aplicacao/README.md). Os manifests e o roteiro estão disponíveis; a execução ponta a ponta ainda requer validação em Kind.
 
 **Anotações e exemplos complementares:** [consultar material já existente](../../../2-pod/README.md). Os conteúdos anteriores foram preservados.
 
@@ -80,4 +80,4 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Requests e Limits →](../requests-limits/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Deployments →](../deployments/README.md)
