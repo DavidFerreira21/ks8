@@ -1,0 +1,76 @@
+# Lab 01.10 — Probes: readiness e liveness
+
+[← Camada 01](../../README.md) · [Labs](../../../../docs/labs.md)
+
+## Objetivo e hipótese
+
+Uma aplicação Running pode estar NotReady. O experimento cria uma falha de readiness e restaura via rollback, sem atribuir a falha à liveness.
+
+**Escopo:** cluster Kind `dev`, namespace exclusivo `lab-01-10`.
+
+## Fase 1 — Preparar
+
+```bash
+kubectl config current-context
+kubectl get nodes
+cat trilhas/01-fundamentos/labs/probes-basico/resources.yaml
+```
+
+Preveja os objetos criados e seus estados.
+
+## Fase 2 — Executar
+
+```bash
+make lab-up LAB=01.10
+make lab-test LAB=01.10
+make lab-observe LAB=01.10
+```
+
+**Observe as condições:**
+
+```bash
+kubectl get pods -n lab-01-10 -w
+kubectl describe deployment web -n lab-01-10
+```
+
+**Experimento — readiness inválida sem derrubar a réplica anterior:** aplique um patch no template do Deployment, criando nova revisão com caminho inválido:
+
+```bash
+kubectl patch deployment web -n lab-01-10 --type=strategic -p '{"spec":{"template":{"spec":{"containers":[{"name":"nginx","readinessProbe":{"httpGet":{"path":"/nao-existe","port":80}}}]}}}}'
+kubectl get pods -n lab-01-10 -w
+```
+
+Interrompa o watch com Ctrl+C. Compare o novo Pod (não Ready) e o Pod da revisão anterior. Veja detalhes com `kubectl describe pod`. **Recupere o rollout:**
+
+```bash
+kubectl rollout undo deployment/web -n lab-01-10
+kubectl rollout status deployment/web -n lab-01-10 --timeout=120s
+make lab-test LAB=01.10
+```
+
+Repare que readiness controla elegibilidade ao tráfego e progressão do rollout; liveness decide quando reiniciar o container.
+
+## Fase 3 — Diagnosticar
+
+```bash
+kubectl get events -n lab-01-10 --sort-by=.lastTimestamp
+kubectl get all -n lab-01-10
+```
+
+Leia `describe`, compare `spec` e `status` e explique eventos. Testes automatizados conferem existência e readiness quando indicado, não o experimento pedagógico.
+
+## Fase 4 — Limpeza
+
+```bash
+make lab-down LAB=01.10
+make lab-status LAB=01.10
+```
+
+Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpar só um lab.
+
+## Checklist
+
+- [ ] Fiz uma hipótese antes de aplicar.
+- [ ] Identifiquei o comportamento do recurso.
+- [ ] Executei o experimento e interpretei eventos.
+- [ ] Removi os recursos do exercício.
