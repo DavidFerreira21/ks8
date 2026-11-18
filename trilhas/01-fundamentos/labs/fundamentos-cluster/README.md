@@ -58,11 +58,11 @@ Espere alguns segundos e consulte o valor novamente. **Ele não será revertido 
 Agora reaplique a intenção local:
 
 ```bash
-kubectl apply -f trilhas/01-fundamentos/labs/fundamentos-cluster/configmap.yaml
+kubectl apply --server-side --force-conflicts -f trilhas/01-fundamentos/labs/fundamentos-cluster/configmap.yaml
 kubectl get configmap estado-desejado -n lab-fundamentos -o jsonpath='{.data.etapa}{"\n"}'
 ```
 
-**Resultado esperado:** `primeira-versao`. Compare com o arquivo. Explique a diferença entre **reaplicar manualmente** e **reconciliação contínua**, que estudaremos em controllers e GitOps. Este experimento é manual e não aparece em `make lab-experiment`.
+**Resultado esperado:** `primeira-versao`. Usamos server-side apply com `--force-conflicts` para explicitar que os campos declarados devem prevalecer sobre a alteração manual; o apply client-side normal pode não reverter drift em um campo que não mudou no arquivo desde a última aplicação. Compare com o arquivo. Explique a diferença entre **reaplicar manualmente** e **reconciliação contínua**, que estudaremos em controllers e GitOps. Este experimento é manual e não aparece em `make lab-experiment`.
 
 ## Fase 5 — Observar, diagnosticar e limpar
 
