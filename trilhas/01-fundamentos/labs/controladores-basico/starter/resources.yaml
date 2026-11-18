@@ -1,0 +1,21 @@
+# EXERCICIO 01.04: escreva as definicoes e remova os TODO.
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: observador
+  namespace: lab-01-04
+# TODO: complete spec.selector e template.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stateful-headless
+  namespace: lab-01-04
+# TODO: complete spec para o recurso.
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: stateful-demo
+  namespace: lab-01-04
+# TODO: complete spec.serviceName, replicas, selector e template.
