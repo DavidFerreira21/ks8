@@ -134,6 +134,13 @@ O namespace é preservado; `lab-down` remove os recursos declarados no contrato.
 - [ ] Conferi Pod labels, selector e EndpointSlices antes e depois do erro.
 - [ ] Testei DNS interno, restaurei o selector e limpei o Pod cliente.
 
+## Perguntas de diagnóstico e reflexão
+
+- Qual evidência confirma que mudar o selector afeta os backends do Service?
+- Por que o Service ainda pode existir quando o acesso HTTP falha?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [Services](https://kubernetes.io/docs/concepts/services-networking/service/) · [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) · [DNS de Services e Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
