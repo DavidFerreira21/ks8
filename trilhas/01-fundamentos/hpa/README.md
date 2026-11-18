@@ -84,4 +84,4 @@ Compare métricas observadas, valores-alvo, `desiredReplicas`, `currentReplicas`
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima camada: Operação e Segurança →](../../02-operacao-seguranca/README.md)
+[← Aula 01.13 — Ingress](../ingress/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.14](../labs/hpa-basico/README.md) · [Próxima camada: Operação e Segurança →](../../02-operacao-seguranca/README.md)
