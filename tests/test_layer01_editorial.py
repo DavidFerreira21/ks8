@@ -52,12 +52,15 @@ class Layer01EditorialTests(unittest.TestCase):
                     "## Resultado esperado e evidências",
                     "## Critérios de conclusão",
                     "## Perguntas de diagnóstico e reflexão",
-                    "**Evidências mínimas:**",
+                    "**Evidências específicas:**",
                     "## Aprofunde seus conhecimentos",
                     "make lab-test LAB=01.",
                     "make lab-down LAB=01.",
                 ):
                     self.assertIn(required, body)
+                self.assertNotIn("**Evidências mínimas:**", body)
+                section = body.split("**Evidências específicas:**", 1)[1].splitlines()[0]
+                self.assertGreaterEqual(len(section.strip()), 75)
 
     def test_relative_links_in_layer_content(self):
         pages = [LAYER / "README.md", ROOT / "docs" / "padrao-editorial.md"]
@@ -73,6 +76,17 @@ class Layer01EditorialTests(unittest.TestCase):
                     continue
                 with self.subTest(path=str(path.relative_to(ROOT)), target=target):
                     self.assertTrue((path.parent / target).exists(), f"Link quebrado: {target}")
+
+    def test_complementaries_are_actual_optional_material(self):
+        body = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("## 📚 Materiais complementares", body)
+        extras = body.split("## 📚 Materiais complementares", 1)[1].split(
+            "## 🗺️ Como usar este repositório", 1
+        )[0]
+        self.assertNotIn("[Volumes — aula]", extras)
+        self.assertNotIn("sem complementar específico", extras)
+        self.assertNotIn("Anotações", extras)
+        self.assertIn("complementares são opcionais", extras)
 
     def test_layer_index_has_distinct_columns(self):
         body = (LAYER / "README.md").read_text(encoding="utf-8")

@@ -100,7 +100,7 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 - Por que excluir somente o Pod preservou `marcador.txt`, enquanto remover o PVC pode ter consequências diferentes conforme a política de reclaim do PV?
 - Registre como evidências o status do claim, o PV associado e o conteúdo de `marcador.txt` antes e depois da recriação.
 
-**Evidências mínimas:** registre o manifesto aplicado, o resultado real do experimento e a interpretação dos eventos/métricas. Se o teste funcional não ocorrer, registre-o como pendente, não como aprovado.
+**Evidências específicas:** registre PVC `Bound`, PV associado, Pod e conteúdo de `marcador.txt` antes e após recriar somente o Pod; explique o papel do PVC na persistência.
 
 ## Aprofunde seus conhecimentos
 

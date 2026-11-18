@@ -103,7 +103,7 @@ O namespace é preservado. Componentes compartilhados instalados nas etapas de p
 - Qual é o papel específico de Service, EndpointSlice, IngressClass e Ingress Controller neste caminho HTTP?
 - Anexe como evidência os status HTTP obtidos com e sem `Host: aula.local` e os endpoints associados ao Service.
 
-**Evidências mínimas:** registre o manifesto aplicado, o resultado real do experimento e a interpretação dos eventos/métricas. Se o teste funcional não ocorrer, registre-o como pendente, não como aprovado.
+**Evidências específicas:** registre IngressClass, Ingress, Service/EndpointSlices e os códigos HTTP com e sem `Host: aula.local`; se faltar controller, marque o teste funcional como pendente.
 
 ## Aprofunde seus conhecimentos
 

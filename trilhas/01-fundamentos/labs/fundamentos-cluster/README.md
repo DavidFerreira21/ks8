@@ -109,7 +109,7 @@ make lab-status LAB=01.01
 - Qual evidência mostra que um objeto foi aceito pelo API Server, mas o estado esperado ainda não foi observado?
 - Como a leitura de `spec` e `status` mudou sua hipótese sobre reconciliação?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** capture o contexto e os nós do Kind, o objeto declarado e seu `spec`/`status` antes e depois da alteração manual. Explique a reconciliação observada.
 
 ## Aprofunde seus conhecimentos
 

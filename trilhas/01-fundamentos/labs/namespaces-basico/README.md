@@ -97,7 +97,7 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 - Que consulta demonstra que um recurso com namespace não aparece automaticamente em outro?
 - Por que namespaces sozinhos não são uma política de isolamento de rede?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre recursos consultados em namespaces distintos e demonstre qual consulta foi limitada por namespace; explique o escopo observado.
 
 ## Aprofunde seus conhecimentos
 

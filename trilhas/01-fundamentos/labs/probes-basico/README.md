@@ -99,7 +99,7 @@ Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpa
 - Qual efeito observado diferencia falha de readiness de falha de liveness?
 - Que configuração evitaria reinícios prematuros em aplicações com startup demorada?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre condições Ready, eventos e contagem de reinícios antes e depois de provocar as falhas de probes; explique o efeito de liveness versus readiness.
 
 ## Aprofunde seus conhecimentos
 

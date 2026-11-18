@@ -95,7 +95,7 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 - Qual o efeito de excluir um Pod avulso e como isso contrasta com um Pod gerenciado por controlador?
 - Que evento ou campo permitiu identificar o motivo de o container estar pronto (ou não)?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre o YAML do Pod, seu estado/eventos e o comportamento após exclusão ou alteração. Diferencie Pod avulso de Pod sob controlador.
 
 ## Aprofunde seus conhecimentos
 
