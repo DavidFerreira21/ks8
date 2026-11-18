@@ -22,15 +22,15 @@ def scaffold(root: Path, identifier: str, slug: str, title: str) -> Path:
     if not title.strip() or len(title) > 120:
         raise ValueError("Informe um título de 1 a 120 caracteres")
     layer = LAYERS[identifier[:2]]
+    ns = "lab-" + identifier.replace(".", "-") + "-" + slug
+    if len(ns) > 63:
+        raise ValueError("Nome do namespace ficaria grande demais")
     lab_dir = root / "trilhas" / layer / "labs" / slug
     if lab_dir.exists():
         raise FileExistsError(f"Lab já existe: {lab_dir}")
     # Falha de validação deve ocorrer antes de criar qualquer diretório.
     (lab_dir / "manifests").mkdir(parents=True)
     (lab_dir / "tests").mkdir()
-    ns = "lab-" + identifier.replace(".", "-") + "-" + slug
-    if len(ns) > 63:
-        raise ValueError("Nome do namespace ficaria grande demais")
     contract = (
         f"id: {json.dumps(identifier)}\n"
         f"title: {json.dumps(title, ensure_ascii=False)}\n"
