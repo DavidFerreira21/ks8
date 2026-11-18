@@ -2,7 +2,9 @@ id: "01.07"
 title: "ConfigMaps: configuracao da aplicacao"
 namespace: lab-01-07
 apply:
-  - resources.yaml
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
 checks:
   - type: configmap
     name: app-config
