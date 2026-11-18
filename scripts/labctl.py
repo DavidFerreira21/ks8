@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import base64
+import json
 from dataclasses import dataclass
 from pathlib import Path
 import re
@@ -235,6 +237,61 @@ def remove_lab_objects(lab: Lab) -> int:
     return 0
 
 
+def expected_subset(actual, expected, prefix: str = "") -> list[str]:
+    """Compara somente os campos requeridos na solucao, ignorando defaults da API."""
+    if isinstance(expected, dict):
+        if not isinstance(actual, dict):
+            return [f"{prefix}: mapeamento esperado"]
+        issues = []
+        for key, value in expected.items():
+            location = f"{prefix}.{key}" if prefix else key
+            if key not in actual:
+                issues.append(f"{location}: campo ausente")
+            else:
+                issues.extend(expected_subset(actual[key], value, location))
+        return issues
+    if isinstance(expected, list):
+        if not isinstance(actual, list) or len(actual) < len(expected):
+            return [f"{prefix}: quantidade de itens insuficiente"]
+        issues = []
+        for i, item in enumerate(expected):
+            issues.extend(expected_subset(actual[i], item, f"{prefix}[{i}]"))
+        return issues
+    return [] if actual == expected else [f"{prefix}: esperado {expected!r}, observado {actual!r}"]
+
+
+def check_student_manifest(lab: Lab) -> int:
+    """Verifica campos funcionais da API contra a solucao, nao apenas existencia."""
+    for manifest in lab.apply:
+        for expected in yaml.safe_load_all(manifest.read_text(encoding="utf-8")):
+            metadata = expected["metadata"]
+            kind, name = expected["kind"], metadata["name"]
+            proc = subprocess.run(
+                ["kubectl", "get", kind, name, "-n", lab.namespace, "-o", "json"],
+                capture_output=True, text=True, check=False,
+            )
+            if proc.returncode:
+                print(f"FAIL: {kind}/{name} nao encontrado em {lab.namespace}", file=sys.stderr)
+                return 1
+            actual = json.loads(proc.stdout)
+            fields = {}
+            for field in ("spec", "data", "type"):
+                if field in expected:
+                    fields[field] = expected[field]
+            if kind == "Secret" and "stringData" in expected:
+                fields["data"] = {
+                    k: base64.b64encode(str(v).encode("utf-8")).decode("ascii")
+                    for k, v in expected["stringData"].items()
+                }
+            problems = expected_subset(actual, fields)
+            if problems:
+                print(f"FAIL: {kind}/{name} divergente da especificacao do desafio:", file=sys.stderr)
+                for issue in problems[:12]:
+                    print(f"  - {issue}", file=sys.stderr)
+                return 1
+    return 0
+
+
 def execute_lab(lab: Lab, action: str) -> int:
     checked_cluster()  # Também para comandos somente de leitura.
     if action == "lab-observe":
@@ -310,6 +367,8 @@ def execute_lab(lab: Lab, action: str) -> int:
                     return 1
                 if kubectl("get", "pod", check["pod"], "-n", lab.namespace).returncode:
                     return 1
+        if lab.starter and check_student_manifest(lab):
+            return 1
         print(f"PASS: checks declarados para {lab.identifier}")
         return 0
     raise ValueError(f"Ação não suportada: {action}")
