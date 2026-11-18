@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Identificar recursos com escopo de namespace e distinguir organização lógica de isolamento por segurança.
 
 ## 🎨 Infográfico
 
@@ -60,9 +60,9 @@ Não use namespace como única fronteira de isolamento entre ambientes com exig�
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Por que um Pod no namespace A não aparece em uma consulta restrita ao namespace B?
+- Namespaces isolam a comunicação de rede automaticamente? O que seria necessário para isso?
+- Quais recursos são de escopo de cluster e não pertencem a um namespace?
 
 ## 🔗 Referência oficial
 
