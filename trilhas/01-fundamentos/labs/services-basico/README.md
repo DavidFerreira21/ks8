@@ -13,6 +13,12 @@ Entender por que um **Service** fornece um endereço estável para Pods efêmero
 
 **Hipótese:** o Service continuará existindo mesmo que seu selector não encontre nenhum Pod. Mas continuará encaminhando tráfego?
 
+## Desafio — o que você vai construir
+
+O `make lab-prepare` cria o **Deployment de apoio**. Você escreve **somente o Service** `web`, do tipo `ClusterIP`, namespace `lab-01-05`, selecionando `app: services-demo`, expondo a porta 80 e encaminhando à porta 80 do container. Compare selector, labels e EndpointSlices.
+
+**Antes de aplicar:** tente explicar o comportamento esperado sem consultar `solution/`. Se precisar, use `kubectl explain` ou a documentação abaixo. A solução de referência só deve ser consultada depois da tentativa.
+
 ## Fase 1 — Inspecionar a intenção
 
 ```bash
@@ -27,8 +33,7 @@ Identifique `metadata.name`, `spec.type: ClusterIP`, `spec.selector`, `port` e `
 ## Fase 2 — Criar e observar
 
 ```bash
-make lab-prepare LAB=01.05
-# Complete os campos TODO do arquivo local
+# Você já preparou o ambiente na Fase 1; complete agora o YAML local.
 kubectl apply -f .labs/01.05/
 make lab-test LAB=01.05
 make lab-observe LAB=01.05
@@ -92,6 +97,14 @@ make lab-test LAB=01.05
 
 Finalize o watch com Ctrl+C. Explique a diferença entre Service existente, endpoint disponível e tráfego realmente funcionando.
 
+## Resultado esperado e evidências
+
+- O Deployment de apoio fica disponível; seu Service recebe um ClusterIP e EndpointSlices com endereços dos Pods `Ready`.
+- O `port-forward` permite HTTP local, enquanto o Pod temporário testa DNS e ClusterIP **de dentro do cluster**.
+- Com o selector `app: nao-existe`, o Service **continua existindo**, mas os endpoints disponíveis desaparecem. Após restaurar `app: services-demo`, eles reaparecem.
+
+**Se o resultado divergir:** consulte `kubectl describe`, `kubectl get events` e os logs quando existirem Pods. Diferencie erro de YAML, problema no cluster e comportamento intencional do experimento.
+
 ## Fase 5 — Diagnóstico
 
 ```bash
@@ -114,17 +127,22 @@ make lab-status LAB=01.05
 
 O namespace é preservado; `lab-down` remove os recursos declarados no contrato. Não use `make down` para limpar este exercício.
 
-## Checklist de conclusão
+## Critérios de conclusão
 
-- [ ] Sei explicar ClusterIP, selector, port e targetPort.
-- [ ] Relacionei Pod IP e EndpointSlices ao Service.
-- [ ] Testei o acesso via port-forward e DNS interno.
-- [ ] Quebrei e restaurei o selector, observando o desaparecimento dos backends.
-- [ ] Fiz a limpeza sem excluir o cluster Kind.
+- [ ] Criei somente o Service; o backend veio do `lab-prepare`.
+- [ ] Distingui ClusterIP, porta do Service e `targetPort`.
+- [ ] Conferi Pod labels, selector e EndpointSlices antes e depois do erro.
+- [ ] Testei DNS interno, restaurei o selector e limpei o Pod cliente.
 
 ## Referências
 
 [Service](https://kubernetes.io/docs/concepts/services-networking/service/) · [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) · [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+
+## Aprofunde seus conhecimentos
+
+[Services](https://kubernetes.io/docs/concepts/services-networking/service/) · [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) · [DNS de Services e Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+
+Use essas referências para entender **por que** o Kubernetes se comportou assim; depois compare com a [aula teórica](../../services/README.md).
 
 ---
 
