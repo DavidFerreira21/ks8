@@ -1,6 +1,7 @@
 # Lab 01.12 — Estratégias de Deployment
 
 [← Aula 01.12](../../estrategias-deployment/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.12`, complete `.labs/01.12/resources.yaml` e execute **`kubectl apply -f .labs/01.12/`**. Só depois valide com `make lab-test LAB=01.12`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.12` revela seus arquivos para estudo posterior.
 
 
