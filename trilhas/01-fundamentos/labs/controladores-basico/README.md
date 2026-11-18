@@ -15,6 +15,7 @@ Compare três padrões de gerenciamento de Pods: réplicas intercambiáveis, um 
 ```bash
 kubectl config current-context
 kubectl get nodes
+make lab-prepare LAB=01.04
 cat .labs/01.04/resources.yaml
 ```
 
