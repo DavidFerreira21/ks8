@@ -1,0 +1,7 @@
+# EXERCICIO 01.01: complete os campos TODO. Nao copie a solucao antes de tentar.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: estado-desejado
+  namespace: lab-fundamentos
+# TODO: configure data e as chaves de configuracao.
