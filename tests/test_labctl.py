@@ -55,5 +55,26 @@ class LabRegistryTests(unittest.TestCase):
             self.load()
 
 
+class NamespaceUXTests(unittest.TestCase):
+    def test_present_namespace_skips_creation(self):
+        result = labctl.subprocess.CompletedProcess([], 0, stdout="namespace/lab-fundamentos\n", stderr="")
+        with patch.object(labctl.subprocess, "run", return_value=result), patch.object(labctl, "kubectl") as kubectl:
+            self.assertEqual(labctl.ensure_namespace("lab-fundamentos"), 0)
+            kubectl.assert_not_called()
+
+    def test_absent_namespace_is_created(self):
+        result = labctl.subprocess.CompletedProcess([], 0, stdout="", stderr="")
+        with patch.object(labctl.subprocess, "run", return_value=result), patch.object(labctl, "kubectl") as kubectl:
+            kubectl.return_value.returncode = 0
+            self.assertEqual(labctl.ensure_namespace("lab-fundamentos"), 0)
+            kubectl.assert_called_once_with("create", "namespace", "lab-fundamentos")
+
+    def test_api_failure_is_not_treated_as_absent_namespace(self):
+        result = labctl.subprocess.CompletedProcess([], 1, stdout="", stderr="connection refused")
+        with patch.object(labctl.subprocess, "run", return_value=result), patch.object(labctl, "kubectl") as kubectl:
+            self.assertEqual(labctl.ensure_namespace("lab-fundamentos"), 1)
+            kubectl.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()
