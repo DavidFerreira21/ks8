@@ -9,6 +9,8 @@
 
 ---
 
+**Padrão de referência da trilha:** [Contrato editorial e checklist de qualidade](../../docs/padrao-editorial.md). A estrutura está documentada; a homologação funcional dos 14 labs em Kind continua sujeita a evidências de execução.
+
 ## 🚀 Seu primeiro percurso
 
 | **01 · Preparar o ambiente** | **02 · Entender o workload** |
@@ -59,12 +61,13 @@ Cada aula da Camada 01 tem um lab próprio. **O aluno escreve os manifests**, ap
 
 > **Importante:** os 14 labs da camada possuem contratos executáveis; valide-os em seu Kind. O conteúdo de Volumes está na aula 01.11; o Lab 01.11 está disponível.
 
-## 🎯 Checklist de aprendizado
+## 🎯 Checklist de conclusão da camada
 
-- [ ] Diferenciar Pod, Deployment, ReplicaSet e Service.
-- [ ] Explicar por que um Pod controlado é recriado após exclusão.
-- [ ] Consultar logs, eventos e status de readiness.
-- [ ] Executar o lab de Services e limpar somente os recursos criados.
+- [ ] Criei e inspecionei Pods, Deployments, Services e controladores.
+- [ ] Diferenciei ConfigMaps, Secrets, Requests/Limits, Probes e Volumes.
+- [ ] Observei rollout/rollback, tráfego por Ingress e escala por HPA (quando os addons estiverem disponíveis).
+- [ ] Registrei evidências de comportamento, expliquei falhas e limpei os labs sem excluir o Kind.
+- [ ] Identifiquei quais testes dependem de StorageClass, Traefik e Metrics Server.
 
 ## 🔗 Continue aprendendo
 
