@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Explicar como Ingress, IngressClass, controlador e Service colaboram para encaminhar requisições HTTP.
 
 ## 🎨 Infográfico
 
@@ -74,9 +74,9 @@ Se o endereço externo não foi atribuído, verifique controller, classe, Servic
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Por que criar um Ingress válido não garante que o tráfego chegará ao Service?
+- Como uma regra com host específico muda o resultado de um `curl` com e sem cabeçalho `Host`?
+- Qual o papel de IngressClass e EndpointSlice no diagnóstico de falhas?
 
 ## 🔗 Referência oficial
 
