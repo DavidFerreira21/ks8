@@ -1,4 +1,4 @@
-# 01.05 · Probes — Liveness, Readiness e Startup
+# 01.10 · Probes — Liveness, Readiness e Startup
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.05 — Probes — Liveness, Readiness e Startup](images/probes.png)
+![01.10 — Probes — Liveness, Readiness e Startup](images/probes.png)
 
 ## 📖 Aula teórica
 
@@ -72,4 +72,4 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Deployments →](../deployments/README.md)
+[↑ Índice da camada](../README.md) · [Próxima: Volumes →](../volumes/README.md)
