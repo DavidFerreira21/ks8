@@ -90,6 +90,13 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 - [ ] Confirmei que um Pod isolado não é recriado após a exclusão.
 - [ ] Reapliquei meu YAML e fiz a limpeza do lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Qual o efeito de excluir um Pod avulso e como isso contrasta com um Pod gerenciado por controlador?
+- Que evento ou campo permitiu identificar o motivo de o container estar pronto (ou não)?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) · [Ciclo de vida do Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/) · [Depuração de Pods](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/).
