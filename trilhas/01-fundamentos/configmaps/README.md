@@ -1,4 +1,4 @@
-# 01.10 · ConfigMaps
+# 01.07 · ConfigMaps
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![01.10 — ConfigMaps](images/configmaps.png)
+![01.07 — ConfigMaps](images/configmaps.png)
 
 ## 📖 Aula teórica
 
