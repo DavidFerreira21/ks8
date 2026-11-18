@@ -1,45 +1,55 @@
-# Taints, Tolerations e Node Affinity
+# 02.07 · Taints, Tolerations e Node Affinity
 
-[← Camada 02](../README.md) · [Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 02](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Prever agendamento a partir de taints, tolerations e afinidade com nós e diagnosticar Pods Pending.
 
 ## 🎨 Infográfico
 
 ![02.07 — Taints, Tolerations e Node Affinity](images/taints-tolerations-affinity.png)
 
-> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+## 📖 Aula teórica
 
+### O problema que este recurso resolve
 
-## O que você vai aprender
+Taints repelem Pods sem toleration correspondente. Toleration permite que um Pod seja considerado, mas não obriga o scheduler a escolher aquele nó. Node affinity expressa preferência ou exigência de labels do nó.
 
-Taints afastam Pods sem tolerations compatíveis; tolerations permitem agendamento, mas não escolhem um nó por si; affinity expressa exigências ou preferências.
+### Como funciona no Kubernetes
 
-## Como funciona
+`NoSchedule` evita novos agendamentos sem toleration; `NoExecute` pode provocar remoção de Pods existentes. `requiredDuringSchedulingIgnoredDuringExecution` impõe restrição de agendamento e `preferred...` adiciona preferência. Recursos e condições dos nós continuam valendo.
 
-Scheduler filtra e pontua nós com base em recursos, restrições e preferências.
+### Exemplo de inspeção
 
-## Experimento recomendado
+Os comandos abaixo são exemplos para um cluster de estudo. Substitua os nomes ilustrativos e confirme o contexto antes de executar.
 
-Rotule um worker e compare Pod com nodeAffinity; depois observe efeito de taint NoSchedule em Pods ainda não agendados.
+```bash
+kubectl config current-context
+kubectl get nodes --show-labels
+kubectl describe node NODE
+kubectl describe pod POD -n NAMESPACE
+```
 
-**Status do lab:** roteiro conceitual; manifests e validação prática serão adicionados em uma etapa posterior.
+**O que observar:** Compare eventos `FailedScheduling` com labels/taints e a expressão de affinity no Pod. Uma toleration sozinha não força um node específico.
 
-## O que observar
+### Cuidados e limitações
 
-- Resultado e eventos dos recursos envolvidos.
-- Diferença entre configuração desejada, decisão do Control Plane e resultado observado.
-- Regras, condições e pré-requisitos particulares deste mecanismo.
+Alterar taints de nós compartilhados é operacionalmente perigoso. Em laboratório, use somente workers do Kind e reverta todas as alterações.
 
+## 🧪 Aplicação prática
 
+**[🧪 Lab 02.07](../labs/scheduling-basico/README.md):** escreva o YAML do exercício, execute no Kind, registre evidências e explique as divergências. O complementar não é pré-requisito.
 
-## Referência oficial
+## ✅ Revisão do aprendizado
 
-- [Documentação Kubernetes — Taints, Tolerations e Node Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+- Por que toleration não equivale a nodeSelector?
+- O que significa `IgnoredDuringExecution` na node affinity?
+- Que evento indica que nenhum nó satisfaz as restrições?
 
-**Próxima etapa:** [índice completo da Camada 02](../README.md).
+## 🔗 Referências oficiais
 
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 
 ---
 
-### Navegação
-
-[← Anterior](../labels-selectors-annotations/README.md) · [↑ Voltar à camada](../README.md) · [Próximo →](../resourcequota-limitrange/README.md)
+[↑ Camada 02](../README.md) · [🧪 Lab 02.07](../labs/scheduling-basico/README.md) · [← Aula 02.06](../jobs-cronjobs/README.md) · [Próxima: 02.08 →](../topology-spread/README.md)
