@@ -60,10 +60,11 @@ O projeto agora oferece uma interface única para descobrir, executar e diagnost
 make doctor
 make up
 make labs
-make lab-up LAB=01.05
-make lab-observe LAB=01.05
-make lab-test LAB=01.05
-make lab-down LAB=01.05
+make lab-up LAB=01.01
+make lab-observe LAB=01.01
+make lab-test LAB=01.01
+make lab-down LAB=01.01
+# Após a aula 01.05: make lab-up LAB=01.05
 ```
 
 Os exercícios são executados em um **Kind local** com verificação de contexto e limpeza restrita aos manifests registrados; namespaces são preservados. Para criar um novo exercício, use `make new-lab LAB_ID=01.07 LAB_SLUG=configmaps-basico` e revise o contrato antes de publicá-lo. Veja o [guia dos laboratórios](docs/labs.md).
