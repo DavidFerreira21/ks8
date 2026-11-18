@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recursos
+  namespace: lab-01-09
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: recursos-demo}
+  template:
+    metadata:
+      labels: {app: recursos-demo}
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 150m
+              memory: 96Mi
