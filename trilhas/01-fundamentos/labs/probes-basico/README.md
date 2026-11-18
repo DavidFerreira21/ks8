@@ -1,6 +1,7 @@
 # Lab 01.10 — Probes
 
 [← Aula 01.10](../../probes/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.10`, complete `.labs/01.10/resources.yaml` e execute **`kubectl apply -f .labs/01.10/`**. Só depois valide com `make lab-test LAB=01.10`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.10` revela seus arquivos para estudo posterior.
 
 
