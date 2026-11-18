@@ -1,6 +1,7 @@
 # Lab 01.14 — HPA
 
 [← Aula 01.14](../../hpa/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+
 > **MODO DESAFIO:** primeiro configure os addons do roteiro. Depois, `make lab-prepare LAB=01.14` prepara somente o Deployment e Service de apoio e cria `.labs/01.14/php-apache.yaml`. **Escreva o HPA**, execute `kubectl apply -f .labs/01.14/` e valide com `make lab-test LAB=01.14`. `make lab-up` é reservado à CI, não ao aluno.
 
 
