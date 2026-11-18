@@ -139,7 +139,7 @@ O namespace é preservado; `lab-down` remove os recursos declarados no contrato.
 - Qual evidência confirma que mudar o selector afeta os backends do Service?
 - Por que o Service ainda pode existir quando o acesso HTTP falha?
 
-**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+**Evidências específicas:** registre Service, selectors, EndpointSlices e resultado de conectividade antes e depois de alterar o selector; explique a mudança.
 
 ## Aprofunde seus conhecimentos
 
