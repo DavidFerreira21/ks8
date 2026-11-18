@@ -64,7 +64,7 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 **🧪 Lab 01.05:** [🧪 Lab 01.05](../labs/services-basico/README.md). Exercício independente, com Deployment apenas como backend de teste.
 
-**Anotações e exemplos complementares:** [consultar material já existente](../../../7-services/README.md). Os conteúdos anteriores foram preservados.
+**Complementar opcional:** [Consultar material complementar](../../../7-services/README.md). Referência adicional para consulta após a aula e o lab.
 
 ## ✅ Revisão do aprendizado
 
