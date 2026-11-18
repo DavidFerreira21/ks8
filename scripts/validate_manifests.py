@@ -14,11 +14,8 @@ ROOT = Path(__file__).resolve().parent.parent
 FILES = {
     "kind-config.yaml": (["Cluster"], None),
     "trilhas/01-fundamentos/labs/services-basico/resources.yaml": (["Deployment", "Service"], "lab-01-05"),
-    "trilhas/02-operacao-seguranca/labs/rbac-minimo/namespace.yaml": (["Namespace"], None),
-    "trilhas/02-operacao-seguranca/labs/rbac-minimo/rbac.yaml": (["ServiceAccount", "Role", "RoleBinding"], "lab-ops-rbac"),
-    "trilhas/02-operacao-seguranca/labs/quota-namespace/namespace.yaml": (["Namespace"], None),
-    "trilhas/02-operacao-seguranca/labs/quota-namespace/policy.yaml": (["ResourceQuota", "LimitRange"], "lab-ops-quota"),
-    "trilhas/02-operacao-seguranca/labs/quota-namespace/pod-ok.yaml": (["Pod"], "lab-ops-quota"),
+    "trilhas/02-operacao-seguranca/labs/rbac-minimo/solution/resources.yaml": (["ServiceAccount", "Role", "RoleBinding"], "lab-02-02"),
+    "trilhas/02-operacao-seguranca/labs/quota-namespace/solution/resources.yaml": (["ResourceQuota", "LimitRange", "Pod"], "lab-02-04"),
     "trilhas/02-operacao-seguranca/labs/quota-namespace/pod-rejected.yaml": (["Pod"], "lab-02-04"),
 }
 
