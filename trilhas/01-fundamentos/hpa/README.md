@@ -2,7 +2,7 @@
 
 [⌂ Início](../../../README.md) · [↑ Camada 01](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** compreender o conceito, interpretar seu comportamento no cluster e conectar a teoria à prática.
+> **Ao concluir esta aula, você será capaz de:** Explicar como o HPA calcula réplicas desejadas a partir de métricas e reconhecer dependências operacionais no Kind.
 
 ## 🎨 Infográfico
 
@@ -74,9 +74,9 @@ Compare métricas observadas, valores-alvo, `desiredReplicas`, `currentReplicas`
 
 ## ✅ Revisão do aprendizado
 
-- Qual problema este conceito resolve?
-- Que campos ou estados da API permitem verificar o comportamento real?
-- Que erro ou decisão equivocada você conseguiria diagnosticar após esta aula?
+- Por que a existência do HPA não é evidência de escalabilidade funcional?
+- Que informações de Metrics Server e `requests.cpu` são necessárias para calcular utilização de CPU?
+- Por que réplicas podem demorar a subir ou cair mesmo após alteração da carga?
 
 ## 🔗 Referência oficial
 
