@@ -78,4 +78,4 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 ---
 
-[↑ Índice da camada](../README.md) · [Próxima: Namespaces →](../namespaces/README.md)
+[← Aula 01.04 — ReplicaSet, DaemonSet e StatefulSet](../controladores/README.md) · [↑ Camada 01](../README.md) · [🧪 Lab 01.05](../labs/services-basico/README.md) · [Próxima: Aula 01.06 — Namespaces →](../namespaces/README.md)
