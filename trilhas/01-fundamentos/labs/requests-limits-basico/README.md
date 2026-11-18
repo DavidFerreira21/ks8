@@ -89,6 +89,13 @@ Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpa
 - [ ] Expliquei o `Pending` e o evento `FailedScheduling` do Pod exagerado.
 - [ ] Removi o Pod temporário e os objetos do lab.
 
+## Perguntas de diagnóstico e reflexão
+
+- Como os valores de `requests` e `limits` afetam agendamento e consumo?
+- Que evidência separa limitação de CPU de encerramento por falta de memória?
+
+**Evidências mínimas:** manifeste o recurso criado, registre um resultado observável do experimento e explique a causa desse comportamento. Se divergir, documente o diagnóstico antes da limpeza.
+
 ## Aprofunde seus conhecimentos
 
 [Gerenciamento de recursos](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) · [Scheduler e recursos](https://kubernetes.io/docs/concepts/scheduling-eviction/resource-bin-packing/) · [Diagnóstico de Pods Pending](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/).
