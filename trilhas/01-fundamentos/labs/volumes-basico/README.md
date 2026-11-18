@@ -1,6 +1,7 @@
 # Lab 01.11 — Volumes
 
 [← Aula 01.11](../../volumes/README.md) · [↑ Camada 01](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+
 > **MODO DESAFIO:** execute `make lab-prepare LAB=01.11`, complete `.labs/01.11/claim.yaml` e `.labs/01.11/pod.yaml` e execute **`kubectl apply -f .labs/01.11/`**. Só depois valide com `make lab-test LAB=01.11`. `make lab-up` aplica a solução completa e fica reservado à CI; `make lab-solution LAB=01.11` revela seus arquivos para estudo posterior.
 
 
