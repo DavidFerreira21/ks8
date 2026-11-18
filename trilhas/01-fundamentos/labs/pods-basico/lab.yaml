@@ -1,0 +1,8 @@
+id: "01.02"
+title: "Pods: ciclo de vida e diagnostico"
+namespace: lab-01-02
+apply:
+  - resources.yaml
+checks:
+  - type: pod-ready
+    name: pod-demo
