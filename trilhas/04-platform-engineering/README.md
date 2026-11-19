@@ -1,57 +1,67 @@
 # 🧰 Camada 04 · Ferramentas do ecossistema Kubernetes
 
-[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [🧪 Labs](../../docs/labs.md)
+[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [🧪 Guia dos labs](../../docs/labs.md)
 
-> **Objetivo da camada**  
-> Conhecer sete conjuntos de ferramentas relevantes do ecossistema cloud-native e compreender quais problemas resolvem no Kubernetes. O estudo aprofundado de Platform Engineering como disciplina pertence ao laboratório dedicado.
+> **Objetivo da camada:** compreender, configurar e investigar ferramentas de GitOps, API de plataforma, políticas, segredos, capacidade, rede e métricas, sem confundir YAML válido com controladores realmente instalados.
 
-**7 infográficos publicados** · **roteiro de ferramentas** · **labs introdutórios ainda não implementados**
+**7 aulas com infográfico e teoria** · **7 labs com desafios de YAML real** · **7 complementares opcionais de arquitetura e diagnóstico**
 
----
+## 🧭 Capacidades por domínio
 
-## 🧭 Mapa de capacidades
+| GitOps e infraestrutura | Governança e segredos |
+| --- | --- |
+| Argo CD reconcilia Git/cluster; Crossplane define APIs de plataforma e composições. | Kyverno aplica políticas CEL; External Secrets Operator sincroniza dados de stores externos. |
+| Capacidade e comunicação | Observabilidade |
+| Karpenter provisiona nós em clouds compatíveis; Cilium oferece networking, políticas e observabilidade eBPF. | Prometheus coleta métricas; Grafana consulta séries e fornece dashboards/alertas. |
 
-| **ENTREGA E INFRAESTRUTURA** | **GOVERNANÇA E SEGREDOS** |
-| :--- | :--- |
-| 🔁 **GitOps e reconciliação**<br>Argo CD aplica configurações declarativas. Crossplane estende Kubernetes para recursos de infraestrutura. | 🛡️ **Políticas e integrações**<br>Kyverno aplica políticas; External Secrets Operator sincroniza segredos externos. |
-| **CAPACIDADE E REDE** | **OBSERVABILIDADE** |
-| ☁️ **Nódulos e conectividade**<br>Karpenter ajusta capacidade em clouds compatíveis. Cilium combina networking, eBPF e políticas. | 📊 **Sinais operacionais**<br>Prometheus coleta métricas; Grafana permite explorá-las em dashboards e alertas. |
+## 📚 Catálogo oficial da Camada 04
 
-## 📚 Sete ferramentas para conhecer — ordem de estudo
+| Aula | Conceito | Aula | Lab | Complementares |
+| --- | --- | --- | --- | --- |
+| 04.01 | **Argo CD** | [📖 Estudar](argo-cd/README.md) | [🧪 Lab 04.01](labs/argo-cd-basico/README.md) | [Consultar](argo-cd/complementares/README.md) |
+| 04.02 | **Crossplane** | [📖 Estudar](crossplane/README.md) | [🧪 Lab 04.02](labs/crossplane-basico/README.md) | [Consultar](crossplane/complementares/README.md) |
+| 04.03 | **Kyverno** | [📖 Estudar](kyverno/README.md) | [🧪 Lab 04.03](labs/kyverno-basico/README.md) | [Consultar](kyverno/complementares/README.md) |
+| 04.04 | **External Secrets Operator** | [📖 Estudar](external-secrets-operator/README.md) | [🧪 Lab 04.04](labs/external-secrets-operator-basico/README.md) | [Consultar](external-secrets-operator/complementares/README.md) |
+| 04.05 | **Karpenter** | [📖 Estudar](karpenter/README.md) | [🧪 Lab 04.05](labs/karpenter-basico/README.md) | [Consultar](karpenter/complementares/README.md) |
+| 04.06 | **Cilium** | [📖 Estudar](cilium/README.md) | [🧪 Lab 04.06](labs/cilium-basico/README.md) | [Consultar](cilium/complementares/README.md) |
+| 04.07 | **Prometheus + Grafana** | [📖 Estudar](prometheus-grafana/README.md) | [🧪 Lab 04.07](labs/prometheus-grafana-basico/README.md) | [Consultar](prometheus-grafana/complementares/README.md) |
 
-| Aula | Ferramenta | Capacidade | Referência |
+## 🧪 Como estudar
+
+Siga o [contrato editorial](../../docs/padrao-editorial.md). Comece pela aula, preveja o comportamento, complete o starter do lab e consulte os complementares **apenas quando fizer sentido**.
+
+Os labs usam tipos de **API próprios das ferramentas**. Em geral, é necessário **instalar o controlador e as CRDs** antes do `kubectl apply`; `make lab-prepare LAB=04.XX` apenas cria o namespace local e copia o YAML incompleto. `make lab-up` é caminho da CI com addons, não do estudante. Para Karpenter há um **roteiro especial de análise offline** no Kind, porque o motor local bloqueia contextos não Kind.
+
+## ⚠️ Matriz de dependências e homologação
+
+| Lab | Recurso real | Dependência para teste funcional | Kind padrão |
 | --- | --- | --- | --- |
-| 04.01 | **[Argo CD](argo-cd/README.md)** | GitOps e entrega contínua | [Documentação](https://argo-cd.readthedocs.io/en/stable/) |
-| 04.02 | **[Crossplane](crossplane/README.md)** | Infraestrutura declarativa via Kubernetes | [Documentação](https://docs.crossplane.io/) |
-| 04.03 | **[Kyverno](kyverno/README.md)** | Policy as Code e governança | [Documentação](https://kyverno.io/docs/) |
-| 04.04 | **[External Secrets Operator](external-secrets-operator/README.md)** | Integração com provedores de segredos | [Documentação](https://external-secrets.io/latest/) |
-| 04.05 | **[Karpenter](karpenter/README.md)** | Provisionamento e autoscaling de nós | [Documentação](https://karpenter.sh/docs/) |
-| 04.06 | **[Cilium](cilium/README.md)** | Networking, eBPF e segurança | [Documentação](https://docs.cilium.io/) |
-| 04.07 | **[Prometheus + Grafana](prometheus-grafana/README.md)** | Métricas, dashboards e alertas | [Prometheus](https://prometheus.io/docs/) · [Grafana](https://grafana.com/docs/) |
+| 04.01 | Argo CD Application | Argo CD instalado e autorizado a observar namespace do lab | Não |
+| 04.02 | Crossplane XRD v2 | Crossplane v2, registro da XRD; Composition separada para recursos derivados | Não |
+| 04.03 | Kyverno NamespacedValidatingPolicy | Kyverno compatível com API CEL estável e admission controller | Não |
+| 04.04 | ESO SecretStore e ExternalSecret | External Secrets Operator e Fake Provider | Não |
+| 04.05 | Karpenter NodePool | EKS AWS sandbox e provider, com **aprovação/custos** | Não (design offline) |
+| 04.06 | Cilium CiliumNetworkPolicy | Kind dedicado com Cilium funcionando como CNI | Não |
+| 04.07 | Prometheus Operator ServiceMonitor | Prometheus Operator, seleção de ServiceMonitor e datasource Grafana | Não |
 
-**Pré-requisito recomendado:** estudar [CRDs e Custom Resources](../03-arquitetura/crds-custom-resources/README.md) e [Custom Controllers e Operators](../03-arquitetura/custom-controllers-operators/README.md), na Camada 03, antes de aprofundar Crossplane e outros operadores.
+**Níveis de evidência:**
+- **Editorial/contrato:** conteúdo, links, starter, schema básico e checks do motor.
+- **Declarativo:** recurso aceito pelo API Server **com a CRD instalada**.
+- **Funcional:** reconciliação, tráfego, scrape, segredo ou capacidade observados em ambiente adequado.
+- **Diagnóstico:** uma falha reproduzida foi explicada e revertida.
 
-## 🧪 Ideias de laboratórios introdutórios
+Um teste estático aprovado **não homologa** os sete cenários de ferramentas. Nunca adicione credenciais reais aos manifests e não altere cloud/CNI de um ambiente compartilhado.
 
-| Ferramenta | Experimento proposto | Observação |
-| --- | --- | --- |
-| Argo CD | Sincronizar um Deployment a partir de Git | Estado desejado e drift |
-| Crossplane | Declarar e reconciliar recurso de exemplo | Escolher provider apropriado ao ambiente |
-| Kyverno | Impedir criação de recurso sem label | Admission e política |
-| External Secrets | Sincronizar um segredo de provedor de testes | Evitar credenciais de produção |
-| Karpenter | Inspecionar NodePool e escalabilidade | Requer cloud/provedor compatível; não é lab Kind puro |
-| Cilium | Validar políticas de rede e observar fluxos | Exige CNI configurado |
-| Prometheus + Grafana | Coletar métricas e construir dashboard | Diferenciar métricas, logs e traces |
+## ✅ Checklist de conclusão
 
-> **Status:** este é um catálogo de estudo. Os sete labs não foram implementados nem testados neste PR; os sete infográficos estão publicados nas páginas respectivas; a revisão técnica e os laboratórios completos permanecem pendentes.
-
-## 🎯 Checklist de aprendizado
-
-- [ ] Associar cada ferramenta ao problema que resolve.
-- [ ] Explicar a diferença entre sincronização GitOps e reconciliação de recursos externos.
-- [ ] Reconhecer políticas, sincronização de segredos, rede e escalabilidade como capacidades distintas.
-- [ ] Identificar quais ferramentas podem ser experimentadas localmente e quais requerem cloud.
+- [ ] Diferenciei Argo CD GitOps de reconciliação Crossplane de recursos compostos.
+- [ ] Identifiquei quais políticas são validadas por Kyverno CEL e quais são suas condições de admissão.
+- [ ] Sincronizei valores fictícios com ESO sem imprimir dados de Secrets.
+- [ ] Comparei NodePool, NodeClass, NodeClaim e limites de custo sem provisionar cloud involuntariamente.
+- [ ] Expliquei quando Cilium realmente aplica uma NetworkPolicy.
+- [ ] Relacionei endpoint /metrics, ServiceMonitor, Prometheus targets e painéis Grafana.
+- [ ] Registrei evidências específicas e dependências não atendidas, sem afirmar sucesso inexistente.
 
 ---
 
-[**← 03 · Arquitetura**](../03-arquitetura/README.md) · [↑ Roadmap](../../docs/roadmap.md) · [⌂ Início](../../README.md)
+[← Camada 03](../03-arquitetura/README.md) · [↑ Roadmap](../../docs/roadmap.md) · [↑ Catálogo](../../docs/catalogo.md)
