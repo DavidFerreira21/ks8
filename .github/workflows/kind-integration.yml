@@ -9,8 +9,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: kind-integration
-  cancel-in-progress: false
+  # Por PR/ref, sem fila global: a revisão mais nova substitui runs antigas.
+  group: kind-integration-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   kind-integration:
