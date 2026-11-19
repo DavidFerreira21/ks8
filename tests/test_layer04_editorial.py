@@ -14,7 +14,8 @@ LINK_RE = re.compile(r"!?\[[^\]]+\]\(([^)]+)\)")
 class Layer04EditorialTests(unittest.TestCase):
     def test_seven_lessons_and_labs(self):
         catalog = (LAYER / "README.md").read_text(encoding="utf-8")
-        self.assertEqual(len(re.findall(r"^\| 04\.\d{2} \|", catalog, re.M)), 7)
+        curriculum = catalog.split("## 📚 Catálogo oficial da Camada 04", 1)[1].split("## 🧪 Como estudar", 1)[0]
+        self.assertEqual(len(re.findall(r"^\| 04\.\d{2} \|", curriculum, re.M)), 7)
         for i, slug in enumerate(SLUGS, 1):
             with self.subTest(i=i):
                 lesson = (LAYER / slug / "README.md").read_text(encoding="utf-8")
