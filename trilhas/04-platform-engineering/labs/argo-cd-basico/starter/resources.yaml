@@ -1,0 +1,7 @@
+# EXERCÍCIO 04.01 — escreva os campos TODO sem consultar solution/
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-estudo
+  namespace: lab-04-01
+# TODO: project default, source repo/path/targetRevision e destination

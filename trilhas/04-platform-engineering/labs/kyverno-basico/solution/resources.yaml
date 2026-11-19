@@ -1,0 +1,16 @@
+apiVersion: policies.kyverno.io/v1
+kind: NamespacedValidatingPolicy
+metadata:
+  name: requer-equipe
+  namespace: lab-04-03
+spec:
+  validationActions: [Deny]
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: [configmaps]
+  validations:
+    - expression: "has(object.metadata.labels) && 'equipe' in object.metadata.labels"
+      message: "label equipe obrigatoria no namespace de estudo"

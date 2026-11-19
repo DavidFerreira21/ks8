@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sem-equipe
+  namespace: lab-04-03
+data:
+  exemplo: "sem label equipe"

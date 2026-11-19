@@ -1,0 +1,11 @@
+id: "04.05"
+title: "Karpenter"
+namespace: lab-04-05
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: resource
+    name: estudo-sem-provisionar
+    kind: nodepool

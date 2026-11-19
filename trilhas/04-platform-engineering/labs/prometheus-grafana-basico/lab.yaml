@@ -1,0 +1,15 @@
+id: "04.07"
+title: "Prometheus + Grafana"
+namespace: lab-04-07
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: deployment
+    name: metrics-demo
+  - type: service
+    name: metrics-demo
+  - type: resource
+    name: metrics-demo
+    kind: servicemonitor
