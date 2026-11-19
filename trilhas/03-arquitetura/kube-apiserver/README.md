@@ -1,25 +1,71 @@
 # 03.02 · kube-apiserver
 
-[↑ Camada 03](../README.md) · [📚 Catálogo de 52 aulas](../../../docs/catalogo.md)
+[⌂ Início](../../../README.md) · [↑ Camada 03](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Distinguir descoberta, autenticação, autorização, validação e persistência ao investigar requisições à API Kubernetes.
 
 ## 🎨 Infográfico
 
 ![03.02 — kube-apiserver](images/kube-apiserver.png)
 
-> O infográfico oferece uma visão geral. Confira os detalhes técnicos durante o estudo da aula.
-
 ## 📖 Aula teórica
 
-**Em preparação.** A imagem está publicada, mas a explicação aprofundada, os exemplos e as referências ainda serão adicionados.
+### Contexto e responsabilidade
 
-## 🧪 Laboratório / observação
+O API Server é a porta de entrada da API declarativa. CLI, controladores e operadores dependem dele para ler, gravar e observar recursos. Expor um endpoint não concede acesso: a identidade é autenticada, autorizada e a requisição pode ser rejeitada por validação ou admissão.
 
-**Planejado.** Ainda não há um roteiro executável validado para este tema. A proposta será completar a aula com pré-requisitos, experimentos, resultados esperados e limpeza segura.
+### Como o mecanismo funciona
 
-## 🔎 Diagnóstico e conclusão
+Uma operação segue, conceitualmente, autenticação → autorização → mutação/validação de admissão → persistência, com detalhes que variam segundo tipo e subrecurso. O API Server disponibiliza discovery e OpenAPI; `kubectl explain` e `--dry-run=server` ajudam a verificar schema. Leituras podem passar por cache e autorização sem criar estado.
 
-O roteiro de diagnóstico e o checklist de aprendizado serão incluídos com a aula completa.
+### Exemplo interpretado
+
+A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: exemplo-de-estado
+data:
+  expectativa: "comparar spec, status, eventos e comportamento"
+```
+
+O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de kube-apiserver**. A verificação específica está no lab correspondente.
+
+### Inspeção no Kind
+
+```bash
+kubectl config current-context
+kubectl api-resources --api-group=apps
+kubectl explain deployment.spec.replicas
+kubectl auth can-i create configmaps -n lab-03-02
+kubectl get --raw /readyz
+```
+
+**Interpretação:** Compare o comportamento de um YAML válido com um campo desconhecido enviado em `--dry-run=server`. A saída de `auth can-i` refere-se ao usuário/contexto atual.
+
+### Limites e segurança
+
+`kubectl apply --dry-run=client` não valida políticas do servidor. Endpoints `/readyz` e `/livez` dependem de autorização e do cluster; não confunda um 403 com API fora do ar.
+
+## 🧪 Aplicação prática
+
+[🧪 Lab 03.02 — kube-apiserver](../labs/kube-apiserver-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.
+
+**Complementar opcional:** [Guia de decisões e diagnóstico](complementares/README.md). Útil para aprofundar, não é pré-requisito.
+
+## ✅ Revisão do aprendizado
+
+- Por que `kubectl explain` não prova que uma policy de admissão aceita um objeto?
+- Qual diferença existe entre autenticação e autorização?
+- Que evidência distingue um 403 de uma falha de conexão com o API Server?
+
+## 🔗 Referências oficiais
+
+- [Kubernetes — documentação do componente](https://kubernetes.io/docs/reference/using-api/)
+- [Arquitetura e componentes](https://kubernetes.io/docs/concepts/overview/components/)
 
 ---
 
-[↑ Índice da camada](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+[← Aula 03.01](../arquitetura-cluster/README.md) · [↑ Camada 03](../README.md) · [🧪 Lab 03.02](../labs/kube-apiserver-basico/README.md) · [Próxima: Aula 03.03 →](../etcd/README.md)

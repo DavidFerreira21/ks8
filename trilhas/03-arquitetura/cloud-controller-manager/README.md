@@ -1,25 +1,68 @@
 # 03.09 · cloud-controller-manager
 
-[↑ Camada 03](../README.md) · [📚 Catálogo de 52 aulas](../../../docs/catalogo.md)
+[⌂ Início](../../../README.md) · [↑ Camada 03](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Identificar as responsabilidades de integração entre Kubernetes e provedor cloud e explicar por que o Kind não expõe recursos cloud nativos.
 
 ## 🎨 Infográfico
 
 ![03.09 — cloud-controller-manager](images/cloud-controller-manager.png)
 
-> O infográfico oferece uma visão geral. Confira os detalhes técnicos durante o estudo da aula.
-
 ## 📖 Aula teórica
 
-**Em preparação.** A imagem está publicada, mas a explicação aprofundada, os exemplos e as referências ainda serão adicionados.
+### Contexto e responsabilidade
 
-## 🧪 Laboratório / observação
+O cloud-controller-manager separa lógica específica de provedor das responsabilidades genéricas do cluster. Integra informações de nós, rotas e load balancers, conforme implementação do provedor, e pode trabalhar com outros componentes externos.
 
-**Planejado.** Ainda não há um roteiro executável validado para este tema. A proposta será completar a aula com pré-requisitos, experimentos, resultados esperados e limpeza segura.
+### Como o mecanismo funciona
 
-## 🔎 Diagnóstico e conclusão
+Um Service `type: LoadBalancer` é uma intenção na API. Em cloud com integração adequada, um controlador/provedor pode provisionar endereço e atualizar `.status.loadBalancer`. No Kind padrão, não há obrigação de existir cloud-controller-manager nem load balancer externo; um objeto pode permanecer sem IP externo sem estar inválido.
 
-O roteiro de diagnóstico e o checklist de aprendizado serão incluídos com a aula completa.
+### Exemplo interpretado
+
+A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: exemplo-de-estado
+data:
+  expectativa: "comparar spec, status, eventos e comportamento"
+```
+
+O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de cloud-controller-manager**. A verificação específica está no lab correspondente.
+
+### Inspeção no Kind
+
+```bash
+kubectl config current-context
+kubectl get service exposicao -n lab-03-09 -o yaml
+kubectl get pods -n kube-system -o wide
+kubectl describe service exposicao -n lab-03-09
+```
+
+**Interpretação:** Compare `spec.type=LoadBalancer` com `status.loadBalancer.ingress` no Kind. A inexistência de IP externo é um resultado esperado sem controlador compatível.
+
+### Limites e segurança
+
+Não instale controlador cloud nem utilize credenciais de cloud para simular esse efeito no Kind. Não confunda cloud-controller-manager com autoscaler de nós ou Karpenter.
+
+## 🧪 Aplicação prática
+
+[🧪 Lab 03.09 — cloud-controller-manager](../labs/cloud-controller-manager-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.
+
+## ✅ Revisão do aprendizado
+
+- Por que declarar um Service LoadBalancer não garante um IP externo?
+- Como provar que o Kind não provisionou um balanceador cloud?
+- Quais responsabilidades de integração mudam num Kubernetes gerenciado?
+
+## 🔗 Referências oficiais
+
+- [Kubernetes — documentação do componente](https://kubernetes.io/docs/concepts/architecture/cloud-controller/)
+- [Arquitetura e componentes](https://kubernetes.io/docs/concepts/overview/components/)
 
 ---
 
-[↑ Índice da camada](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+[← Aula 03.08](../kube-scheduler/README.md) · [↑ Camada 03](../README.md) · [🧪 Lab 03.09](../labs/cloud-controller-manager-basico/README.md) · [Próxima: Aula 03.10 →](../kubelet/README.md)
