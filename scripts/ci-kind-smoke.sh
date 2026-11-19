@@ -81,9 +81,30 @@ spread_manifest="trilhas/02-operacao-seguranca/labs/topology-spread-basico/exper
 kubectl apply -f "$spread_manifest"
 spread_ok=false
 for attempt in $(seq 1 40); do
-  ready="$(kubectl get deployment spread-impossivel -n lab-02-08 -o jsonpath='{.status.readyReplicas}')"
-  pending="$(kubectl get pods -n lab-02-08 -l app=spread-impossivel --field-selector=status.phase=Pending -o name)"
-  if [[ "$ready" == "2" && -n "$pending" ]]; then
+  # Evita depender de field selectors e torna qualquer falha na consulta explícita.
+  if ! kubectl get deployment spread-impossivel -n lab-02-08 -o json > "$report_dir/spread-deployment.json" 2>"$report_dir/spread-query-error.txt"; then
+    echo "Falha consultando o Deployment (tentativa $attempt); confira spread-query-error.txt" >&2
+    sleep 3
+    continue
+  fi
+  if ! kubectl get pods -n lab-02-08 -l app=spread-impossivel -o json > "$report_dir/spread-pods.json" 2>"$report_dir/spread-query-error.txt"; then
+    echo "Falha consultando Pods (tentativa $attempt); confira spread-query-error.txt" >&2
+    sleep 3
+    continue
+  fi
+  snapshot="$(python3 - "$report_dir/spread-deployment.json" "$report_dir/spread-pods.json" <<'PY'
+import json
+import sys
+deployment = json.load(open(sys.argv[1], encoding="utf-8"))
+pods = json.load(open(sys.argv[2], encoding="utf-8")).get("items", [])
+ready = deployment.get("status", {}).get("readyReplicas", 0)
+pending = sum(p.get("status", {}).get("phase") == "Pending" for p in pods)
+print(f"{ready} {pending} {len(pods)}")
+PY
+)"
+  read -r ready pending total <<< "$snapshot"
+  echo "Topology Spread: tentativa=$attempt ready=$ready pending=$pending pods=$total"
+  if [[ "$ready" == "2" && "$pending" -ge 1 && "$total" -eq 3 ]]; then
     spread_ok=true
     break
   fi
@@ -92,10 +113,13 @@ done
 kubectl get pods -n lab-02-08 -l app=spread-impossivel -o wide > "$report_dir/spread-pods.txt"
 kubectl describe pods -n lab-02-08 -l app=spread-impossivel > "$report_dir/spread-describe.txt"
 if [[ "$spread_ok" != true ]]; then
-  echo "FAIL: topology spread não demonstrou duas réplicas prontas e uma Pending" >&2
+  echo "FAIL: Topology Spread não comprovou 2 Ready + 1 Pending; veja spread-pods.txt e spread-describe.txt" >&2
   exit 1
 fi
-grep -q 'FailedScheduling' "$report_dir/spread-describe.txt"
+if ! grep -q 'FailedScheduling' "$report_dir/spread-describe.txt"; then
+  echo "FAIL: não há evento FailedScheduling documentado no experimento de Topology Spread" >&2
+  exit 1
+fi
 kubectl delete -f "$spread_manifest"
 
 # Testes intencionais de reconciliação e de negação de admissão.
