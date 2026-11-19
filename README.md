@@ -31,7 +31,7 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 | :--- | :--- |
 | 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🧰 **Ferramentas cloud-native**<br>Argo CD, Crossplane, Kyverno, External Secrets, Karpenter, Cilium e Prometheus/Grafana.<br><br>**[Explorar ferramentas →](trilhas/04-platform-engineering/README.md)** |
 
-> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados e outros planejados; nem todos possuem laboratório executável. **Os 52 infográficos PNG estão no repositório**, integrados às páginas das aulas. A revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
+> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados para todos os temas. Os 52 roteiros de lab possuem contratos e pré-requisitos próprios; alguns exigem addons ou cloud para execução funcional. **Os 52 infográficos PNG estão no repositório**, integrados às páginas das aulas. A revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
 
 ## 🚀 Comece em 3 passos
 
@@ -77,7 +77,7 @@ Os exercícios são executados em um **Kind local** com verificação de context
 
 ## 🧪 Laboratórios disponíveis
 
-As **Camadas 01 e 02 reúnem 14 laboratórios cada (28 no total)**, com contratos, starters e desafios de escrita de YAML. A CI executa automaticamente 12 da Camada 01 e 10 da Camada 02; os casos restantes dependem de validação específica. A execução funcional completa depende de validação por tema. Os exercícios 01.13 (Ingress) e 01.14 (HPA) requerem addons para testes funcionais. [**Abrir Camada 01**](trilhas/01-fundamentos/README.md) · [**Abrir Camada 02**](trilhas/02-operacao-seguranca/README.md).
+As **4 camadas reúnem 52 labs documentados** (14 + 14 + 17 + 7). A CI Kind cobre cenários selecionados das Camadas 01–03; a Camada 04 exige controllers e/ou cloud para homologação funcional. Consulte os pré-requisitos antes de executar. [**Camada 01**](trilhas/01-fundamentos/README.md) · [**Camada 02**](trilhas/02-operacao-seguranca/README.md) · [**Camada 03**](trilhas/03-arquitetura/README.md) · [**Camada 04**](trilhas/04-platform-engineering/README.md).
 
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |

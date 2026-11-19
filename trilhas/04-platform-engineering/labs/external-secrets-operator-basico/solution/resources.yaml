@@ -1,0 +1,30 @@
+apiVersion: external-secrets.io/v1
+kind: SecretStore
+metadata:
+  name: simulado
+  namespace: lab-04-04
+spec:
+  provider:
+    fake:
+      data:
+        - key: /lab/exemplo
+          version: v1
+          value: TREINO-SEM-SEGREDO
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: demo
+  namespace: lab-04-04
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: simulado
+    kind: SecretStore
+  target:
+    name: segredo-didatico
+  data:
+    - secretKey: valor
+      remoteRef:
+        key: /lab/exemplo
+        version: v1

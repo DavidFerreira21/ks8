@@ -4,6 +4,8 @@
 
 > **Finalidade:** contrato de autoria e revisão de novas aulas e labs nas quatro camadas. A **Camada 01 é a referência editorial**; a homologação funcional no Kind é uma etapa distinta e depende de evidências. O objetivo é padronizar qualidade, não produzir documentação repetitiva.
 
+**Aplicabilidade às quatro camadas:** o contrato vale para todos os 52 temas. Uma ferramenta que não existe no Kind padrão pode ter lab com CRs reais e instruções de instalação controlada, desde que informe dependência, evidência possível, cleanup e **não alegue homologação funcional sem execução adequada**. Os complementares só aparecem onde agregam análise ou diagnóstico.
+
 ## Três tipos de conteúdo, três funções
 
 | Conteúdo | Obrigatório? | O que deve entregar | O que não deve fazer |
@@ -44,6 +46,8 @@ O aluno deve conseguir concluir a prática estudando a aula e usando documentaç
 **Cada lab deve detalhar suas evidências específicas** (por exemplo, HTTP para Ingress, métricas e réplicas para HPA, arquivo persistente para Volumes). O texto genérico de evidências permanece neste contrato, sem ser repetido literalmente em todos os laboratórios.
 
 **Evidências mínimas de conclusão:** (a) manifesto/recurso criado pelo aluno; (b) comportamento real observado; (c) explicação do motivo e, se falhou, diagnóstico. O laboratório pode ter mais de quatro fases quando o experimento justificar (Services, por exemplo). Não renumerar fases sem necessidade.
+
+**Segurança de APIs globais:** CRDs/XRDs podem atender instâncias de múltiplos namespaces. Antes de excluir a definição, inventarie recursos dependentes; recuse a operação se houver instâncias não removidas. Não use um cleanup automático cego em objetos de escopo do cluster.
 
 **Evidência pedagógica:** além dos critérios genéricos, todo lab deve possuir ao menos um critério de aprovação exclusivo, verificável por observação. Para testes que alteram políticas, nós ou recursos temporários, inclua reversão explícita mesmo em caso de falha. Separe validação declarativa, comportamento real e diagnóstico.
 

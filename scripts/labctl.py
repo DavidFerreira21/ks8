@@ -92,10 +92,16 @@ def load_labs() -> dict[str, Lab]:
                     raise ValueError(f"{metadata}: rollout deve referenciar Deployment declarado nos checks")
         for check in checks:
             if check["type"] in {"resource", "pod-ready", "pvc-bound"}:
-                if not isinstance(check.get("name"), str) or not SAFE_NAME.fullmatch(check["name"]):
+                check_name = check.get("name")
+                xrd_name = (check.get("type") == "resource"
+                            and check.get("kind") == "compositeresourcedefinition"
+                            and isinstance(check_name, str)
+                            and re.fullmatch(r"[a-z0-9]+(?:[a-z0-9.-]*[a-z0-9])?", check_name)
+                            and len(check_name) <= 253)
+                if not isinstance(check_name, str) or not (SAFE_NAME.fullmatch(check_name) or xrd_name):
                     raise ValueError(f"{metadata}: nome de check inválido")
                 if check["type"] == "resource":
-                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy", "appenvironments.learning.example"}
+                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy", "appenvironments.learning.example", "applications.argoproj.io", "compositeresourcedefinition", "namespacedvalidatingpolicy", "secretstore", "externalsecret", "nodepool", "ciliumnetworkpolicy", "servicemonitor"}
                     if check.get("kind") not in allowed:
                         raise ValueError(f"{metadata}: kind de check não permitido")
         labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments), setup, starter)
@@ -228,9 +234,92 @@ def prepare_lab(lab: Lab) -> int:
     return 0
 
 
+def _verify_global_api_deletion_safety(lab: Lab) -> int:
+    """Bloqueia remoção de CRD/XRD que ainda possua instâncias não removidas.
+
+    Kubernetes pode apagar Custom Resources em cascata quando a definição
+    global é excluída. A checagem falha fechada se não puder consultar a API.
+    """
+    for manifest in (*lab.setup, *lab.apply):
+        for document in yaml.safe_load_all(manifest.read_text(encoding="utf-8")):
+            if not isinstance(document, dict):
+                continue
+            kind = document.get("kind")
+            if kind == "CustomResourceDefinition":
+                definition = document.get("spec") or {}
+                group = definition.get("group")
+                plural = (definition.get("names") or {}).get("plural")
+            elif kind == "CompositeResourceDefinition":
+                definition = document.get("spec") or {}
+                group = definition.get("group")
+                plural = (definition.get("names") or {}).get("plural")
+            else:
+                continue
+            if not isinstance(group, str) or not isinstance(plural, str):
+                print(f"FAIL: definição {kind} sem group/plural verificável", file=sys.stderr)
+                return 1
+            resource = f"{plural}.{group}"
+            proc = subprocess.run(
+                ["kubectl", "get", resource, "-A", "-o", "json"],
+                capture_output=True, text=True, check=False,
+            )
+            if proc.returncode:
+                # Quando a CRD nunca foi instalada, não há nada a remover
+                # além do manifesto ausente. Diferencie tipo não registrado de
+                # falhas de API, RBAC ou rede para não perder recursos.
+                api = subprocess.run(
+                    ["kubectl", "get", "crd", resource, "--ignore-not-found", "-o", "name"],
+                    capture_output=True, text=True, check=False,
+                )
+                if api.returncode or api.stdout.strip():
+                    print(f"FAIL: não foi possível verificar instâncias de {resource}: "
+                          f"{proc.stderr.strip()}", file=sys.stderr)
+                    return 1
+                continue
+            try:
+                items = json.loads(proc.stdout).get("items", [])
+            except (ValueError, AttributeError):
+                print(f"FAIL: retorno inválido ao consultar {resource}", file=sys.stderr)
+                return 1
+            if items:
+                examples = ", ".join(
+                    f"{x.get('metadata', {}).get('namespace', 'cluster')}/"
+                    f"{x.get('metadata', {}).get('name', '?')}"
+                    for x in items[:5]
+                )
+                print(f"FAIL: recuso excluir {kind}: {resource} ainda possui "
+                      f"{len(items)} instância(s): {examples}. "
+                      "Remova somente as instâncias do laboratório, "
+                      "verifique as demais e repita a limpeza.",
+                      file=sys.stderr)
+                return 1
+    return 0
+
+
 def remove_lab_objects(lab: Lab) -> int:
+    # Primeiro apaga recursos de solução namespaced (incluindo CRs), e só
+    # depois considera exclusão das definições de API de escopo global.
+    for manifest in reversed(lab.apply):
+        documents = list(yaml.safe_load_all(manifest.read_text(encoding="utf-8")))
+        is_definition = any(isinstance(d, dict) and d.get("kind") in
+                            {"CustomResourceDefinition", "CompositeResourceDefinition"}
+                            for d in documents)
+        if manifest.name == "namespace.yaml" or is_definition:
+            continue
+        if kubectl("delete", "-f", str(manifest), "--ignore-not-found").returncode:
+            return 1
+    # Impede que o nome de uma CRD/XRD de laboratório seja usado para apagar
+    # recursos de outros namespaces ou instalados por terceiros.
+    if _verify_global_api_deletion_safety(lab):
+        return 1
     for manifest in reversed((*lab.setup, *lab.apply)):
+        documents = list(yaml.safe_load_all(manifest.read_text(encoding="utf-8")))
+        is_definition = any(isinstance(d, dict) and d.get("kind") in
+                            {"CustomResourceDefinition", "CompositeResourceDefinition"}
+                            for d in documents)
         if manifest.name == "namespace.yaml":
+            continue
+        if manifest in lab.apply and not is_definition:
             continue
         if kubectl("delete", "-f", str(manifest), "--ignore-not-found").returncode:
             return 1

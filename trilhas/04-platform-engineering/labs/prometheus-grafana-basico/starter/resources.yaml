@@ -1,0 +1,21 @@
+# EXERCÍCIO 04.07 — escreva os campos TODO sem consultar solution/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-demo
+  namespace: lab-04-07
+# TODO: Node Exporter em porta 9100 com nome metrics
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metrics-demo
+  namespace: lab-04-07
+# TODO: selector app=metrics-demo e porta nomeada metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: metrics-demo
+  namespace: lab-04-07
+# TODO: selector por label, namespaceSelector e endpoints.port=metrics

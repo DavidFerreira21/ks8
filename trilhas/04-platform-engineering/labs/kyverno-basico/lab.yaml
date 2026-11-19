@@ -1,0 +1,11 @@
+id: "04.03"
+title: "Kyverno"
+namespace: lab-04-03
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: resource
+    name: requer-equipe
+    kind: namespacedvalidatingpolicy

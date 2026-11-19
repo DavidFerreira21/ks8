@@ -165,6 +165,24 @@ Os 17 labs seguem o [contrato editorial](padrao-editorial.md) e o [índice da Ca
 
 **Validação:** use os testes Python, make validate e integração Kind quando habilitada. Testes editoriais, contratos, cluster e comportamento funcional são níveis distintos.
 
+## Camada 04 — Ferramentas do ecossistema
+
+Sete labs usam **APIs reais dos produtos**; não são simulações que aplicam um ConfigMap no lugar de Argo CD, Crossplane ou outro controlador. Os manifests de solução ficam separados dos starters incompletos.
+
+| ID | Laboratório | Dependência de execução |
+| --- | --- | --- |
+| 04.01 | [🧪 Lab 04.01](../trilhas/04-platform-engineering/labs/argo-cd-basico/README.md) | Argo CD instalado |
+| 04.02 | [🧪 Lab 04.02](../trilhas/04-platform-engineering/labs/crossplane-basico/README.md) | Crossplane v2 instalado |
+| 04.03 | [🧪 Lab 04.03](../trilhas/04-platform-engineering/labs/kyverno-basico/README.md) | Kyverno CEL instalado |
+| 04.04 | [🧪 Lab 04.04](../trilhas/04-platform-engineering/labs/external-secrets-operator-basico/README.md) | ESO + Fake Provider |
+| 04.05 | [🧪 Lab 04.05](../trilhas/04-platform-engineering/labs/karpenter-basico/README.md) | EKS/Karpenter autorizado (design offline no Kind) |
+| 04.06 | [🧪 Lab 04.06](../trilhas/04-platform-engineering/labs/cilium-basico/README.md) | Cilium como CNI |
+| 04.07 | [🧪 Lab 04.07](../trilhas/04-platform-engineering/labs/prometheus-grafana-basico/README.md) | Prometheus Operator e Grafana |
+
+**Atenção:** a CI Kind padrão **não instala esses addons nem configura AWS**. Os testes Python/manifestos comprovam contratos e sintaxe estrutural básica, mas não funcionamento da reconciliação de Argo CD, Crossplane, Kyverno, ESO, Karpenter, Cilium ou Prometheus. O lab 04.05 prepara o YAML somente em Kind; a execução opcional em EKS deve usar `kubectl --context` explícito, nunca o motor de lab que exige Kind.
+
+Consulte [dependências e níveis de homologação](../trilhas/04-platform-engineering/README.md) para decidir o que pode ser concluído com segurança no seu ambiente.
+
 ## Aprendizado orientado por observação
 
 O fluxo recomendado é **escrever YAML → aplicar com kubectl → observar → experimentar → testar → limpar**. `make lab-prepare` cria apenas o namespace, os recursos de apoio explicitamente declarados e uma cópia local do starter em `.labs/<ID>/`, preservando suas alterações existentes. A solução não é aplicada neste comando. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.
