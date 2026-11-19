@@ -125,6 +125,8 @@ Os **complementares são opcionais**: fornecem exemplos adicionais, comparação
 
 [**Ver o roadmap completo →**](docs/roadmap.md) · [**Entender a convenção visual →**](docs/infograficos.md)
 
+**Manutenção contínua:** links internos são validados na CI, e um [workflow semanal](.github/workflows/external-links.yml) publica relatório de links externos com confirmação de 404/410. [Consulte o contrato editorial](docs/padrao-editorial.md).
+
 ## 🔗 Fontes oficiais
 
 [Documentação Kubernetes](https://kubernetes.io/docs/home/) · [Kubernetes Concepts](https://kubernetes.io/docs/concepts/) · [Kubernetes Tutorials](https://kubernetes.io/docs/tutorials/) · [Kind](https://kind.sigs.k8s.io/)
