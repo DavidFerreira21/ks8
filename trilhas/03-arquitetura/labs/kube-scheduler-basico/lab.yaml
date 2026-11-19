@@ -1,0 +1,11 @@
+id: "03.08"
+title: "kube-scheduler"
+namespace: lab-03-08
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: resource
+    name: sem-no
+    kind: pod

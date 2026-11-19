@@ -1,0 +1,7 @@
+# EXERCÍCIO 03.01: complete o manifesto sem consultar solution/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: percurso
+  namespace: lab-03-01
+# TODO: replicas=2, selector e template compatíveis, container nginx

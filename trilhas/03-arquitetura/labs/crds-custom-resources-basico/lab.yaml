@@ -1,0 +1,13 @@
+id: "03.06"
+title: "CRDs e Custom Resources"
+namespace: lab-03-06
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+setup:
+  - setup/crd.yaml
+checks:
+  - type: resource
+    name: demonstra
+    kind: appenvironments.learning.example

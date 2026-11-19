@@ -1,0 +1,9 @@
+# EXERCÍCIO 03.08: complete o manifesto sem consultar solution/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sem-no
+  namespace: lab-03-08
+spec:
+  # TODO: nodeSelector impossivel (estudo=inexistente)
+  # TODO: container BusyBox com sleep

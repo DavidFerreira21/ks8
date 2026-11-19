@@ -1,0 +1,7 @@
+# EXERCÍCIO 03.07: complete o manifesto sem consultar solution/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operator-demo
+  namespace: lab-03-07
+# TODO: replicas, selector, template e nginx

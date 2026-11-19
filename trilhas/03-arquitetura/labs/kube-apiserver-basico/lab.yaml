@@ -1,0 +1,10 @@
+id: "03.02"
+title: "kube-apiserver"
+namespace: lab-03-02
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: configmap
+    name: api-demo
