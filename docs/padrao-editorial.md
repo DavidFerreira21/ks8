@@ -4,6 +4,8 @@
 
 > **Finalidade:** contrato de autoria e revisão de novas aulas e labs nas quatro camadas. A **Camada 01 é a referência editorial**; a homologação funcional no Kind é uma etapa distinta e depende de evidências. O objetivo é padronizar qualidade, não produzir documentação repetitiva.
 
+**Aplicabilidade às quatro camadas:** o contrato vale para todos os 52 temas. Uma ferramenta que não existe no Kind padrão pode ter lab com CRs reais e instruções de instalação controlada, desde que informe dependência, evidência possível, cleanup e **não alegue homologação funcional sem execução adequada**. Os complementares só aparecem onde agregam análise ou diagnóstico.
+
 ## Três tipos de conteúdo, três funções
 
 | Conteúdo | Obrigatório? | O que deve entregar | O que não deve fazer |

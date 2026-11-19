@@ -4,7 +4,7 @@
 
 Este é o **catálogo curricular**, não uma indicação de que todos os conteúdos, imagens e laboratórios já foram publicados.
 
-**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A experiência prática pode ser um lab executável ou uma observação guiada, conforme o tema. As Camadas 01, 02 e 03 possuem, respectivamente, 14, 14 e 17 labs documentados; a homologação funcional depende de execução e evidências específicas na CI.
+**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A prática possui lab próprio para cada aula: a execução local ou com addons depende dos pré-requisitos e limites de cada tema. As quatro camadas agora possuem 52 aulas e 52 roteiros de lab (14 + 14 + 17 + 7). Os labs da Camada 04 exigem instalação de ferramentas e homologação funcional separada; quantidade de arquivos não é prova de execução.
 
 **Situação:** 📖 aula teórica disponível · 🎨 infográfico publicado. O estado e a homologação dos labs são registrados nos índices de cada camada. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 52 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
 
@@ -80,13 +80,13 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 
 | Aula | Tema | Guia |
 | --- | --- | --- |
-| 04.01 | Argo CD | [🎨 Infográfico · teoria em preparação](../trilhas/04-platform-engineering/argo-cd/README.md) |
-| 04.02 | Crossplane | [🎨 Infográfico · teoria em preparação](../trilhas/04-platform-engineering/crossplane/README.md) |
-| 04.03 | Kyverno | [🎨 Infográfico · teoria em preparação](../trilhas/04-platform-engineering/kyverno/README.md) |
-| 04.04 | External Secrets Operator | [🎨 Infográfico · teoria em preparação](../trilhas/04-platform-engineering/external-secrets-operator/README.md) |
-| 04.05 | Karpenter | [🎨 Infográfico · teoria em preparação](../trilhas/04-platform-engineering/karpenter/README.md) |
-| 04.06 | Cilium | [🎨 Infográfico · teoria em preparação](../trilhas/04-platform-engineering/cilium/README.md) |
-| 04.07 | Prometheus + Grafana | [🎨 Infográfico · teoria em preparação](../trilhas/04-platform-engineering/prometheus-grafana/README.md) |
+| 04.01 | Argo CD | [📖 Aula + infográfico](../trilhas/04-platform-engineering/argo-cd/README.md) |
+| 04.02 | Crossplane | [📖 Aula + infográfico](../trilhas/04-platform-engineering/crossplane/README.md) |
+| 04.03 | Kyverno | [📖 Aula + infográfico](../trilhas/04-platform-engineering/kyverno/README.md) |
+| 04.04 | External Secrets Operator | [📖 Aula + infográfico](../trilhas/04-platform-engineering/external-secrets-operator/README.md) |
+| 04.05 | Karpenter | [📖 Aula + infográfico](../trilhas/04-platform-engineering/karpenter/README.md) |
+| 04.06 | Cilium | [📖 Aula + infográfico](../trilhas/04-platform-engineering/cilium/README.md) |
+| 04.07 | Prometheus + Grafana | [📖 Aula + infográfico](../trilhas/04-platform-engineering/prometheus-grafana/README.md) |
 
 ## Como será cada aula
 
