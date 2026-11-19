@@ -56,7 +56,7 @@ Verifique quantos Pods cada controlador deseja, onde executam e quais são suas 
 - O que torna a identidade de um Pod de StatefulSet diferente da identidade de um Pod de Deployment?
 - Por que StatefulSet não equivale automaticamente a banco de dados replicado ou backup?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — ReplicaSet, DaemonSet e StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/)
 

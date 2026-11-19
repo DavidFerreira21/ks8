@@ -67,7 +67,7 @@ kubectl top pods -A
 - Por que exceder o limite de memória costuma ter consequência diferente de exceder o limite de CPU?
 - Por que o HPA de utilização de CPU depende de `requests.cpu`?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Requests e Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
 

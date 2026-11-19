@@ -64,7 +64,7 @@ kubectl describe secret exemplo-sem-credencial
 - Como RBAC e criptografia em repouso contribuem para reduzir exposição?
 - Que cuidados você tomaria ao montar um Secret em variável de ambiente ou volume?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 

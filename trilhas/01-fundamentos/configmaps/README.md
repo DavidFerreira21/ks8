@@ -71,7 +71,7 @@ O objeto `app-config` precisa existir. Se a variável não aparece no Pod, confi
 - Por que reiniciar os Pods pode ser necessário para consumir um novo valor de variável de ambiente?
 - Quando usar ConfigMap em vez de Secret?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/)
 

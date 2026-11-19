@@ -74,7 +74,7 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 - Por que excluir um Pod avulso é diferente de excluir um Pod controlado por Deployment?
 - Que sinais diferenciam `Running`, prontidão e um container em `CrashLoopBackOff`?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
 

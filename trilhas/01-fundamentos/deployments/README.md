@@ -81,7 +81,7 @@ Compare `desired`, `updated`, `ready` e `available`. Quando o rollout trava, inv
 - O que acontece com o número de réplicas quando um Pod do Deployment é excluído?
 - Que diferença existe entre `replicas`, `readyReplicas` e `updatedReplicas`?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 

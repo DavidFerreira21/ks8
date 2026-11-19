@@ -78,7 +78,7 @@ Compare métricas observadas, valores-alvo, `desiredReplicas`, `currentReplicas`
 - Que informações de Metrics Server e `requests.cpu` são necessárias para calcular utilização de CPU?
 - Por que réplicas podem demorar a subir ou cair mesmo após alteração da carga?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Horizontal Pod Autoscaler (HPA)](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 

@@ -72,7 +72,7 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 - Qual a diferença entre `port`, `targetPort` e a porta realmente escutada pelo processo?
 - Por que um Service pode existir e ter DNS válido mesmo sem backends prontos?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 

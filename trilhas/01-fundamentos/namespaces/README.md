@@ -64,7 +64,7 @@ Não use namespace como única fronteira de isolamento entre ambientes com exig�
 - Namespaces isolam a comunicação de rede automaticamente? O que seria necessário para isso?
 - Quais recursos são de escopo de cluster e não pertencem a um namespace?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 

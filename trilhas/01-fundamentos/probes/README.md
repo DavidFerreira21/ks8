@@ -66,7 +66,7 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 - Por que uma liveness dependente de serviço externo pode provocar reinícios desnecessários?
 - Como startupProbe protege aplicações com inicialização lenta?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Probes — Liveness, Readiness e Startup](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
 
