@@ -96,6 +96,8 @@ Namespace preservado intencionalmente. Nunca apague o cluster inteiro para limpa
 
 **Evidências específicas:** registre requests/limits declarados, estado e eventos do Pod durante o experimento; diferencie agendamento, limitação de CPU e eventual OOM.
 
+- Por que aumentar `limits.cpu` pode não resolver um Pod Pending causado por requests acima da capacidade do nó?
+
 ## Aprofunde seus conhecimentos
 
 [Gerenciamento de recursos](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) · [Scheduler e recursos](https://kubernetes.io/docs/concepts/scheduling-eviction/resource-bin-packing/) · [Diagnóstico de Pods Pending](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/).

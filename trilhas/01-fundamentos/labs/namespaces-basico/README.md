@@ -99,6 +99,8 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 
 **Evidências específicas:** registre recursos consultados em namespaces distintos e demonstre qual consulta foi limitada por namespace; explique o escopo observado.
 
+- Que papel RBAC e NetworkPolicy cumprem no isolamento que não é fornecido por namespace isoladamente?
+
 ## Aprofunde seus conhecimentos
 
 [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) · [Organização de objetos](https://kubernetes.io/docs/concepts/overview/working-with-objects/) · [DNS e Namespaces](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
