@@ -193,6 +193,8 @@ Os experimentos têm **IDs pré-definidos** em `lab.yaml`, não aceitam comandos
 
 ## Evidências de homologação
 
+A [matriz de homologação de todos os 52 labs](matriz-homologacao.md) registra cobertura automática, dependências e evidências específicas, sem tratar CI de contrato como prova funcional.
+
 Classifique cada resultado como **declarativo** (objeto e campos aceitos), **funcional** (comportamento realmente observado no Kind) ou **diagnóstico** (falha reproduzida, causa identificada e reversão). `make lab-test` confirma os checks declarados, não a execução manual de todo o roteiro. Não declare aprovado um job de Kind apenas porque existe ou está em andamento.
 
 ## Diagnóstico

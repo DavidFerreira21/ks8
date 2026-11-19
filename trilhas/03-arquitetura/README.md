@@ -41,6 +41,8 @@ Em cada aula, leia o conceito e o exemplo interpretado, depois abra o lab. O alu
 
 **Evidência obrigatória:** estado declarado, comportamento observado, interpretação causal e cleanup. **Complementares não são pré-requisitos**: existem somente quando oferecem comparações, matrizes de decisão ou diagnóstico adicional.
 
+[📊 Matriz de homologação dos 52 labs](../../docs/matriz-homologacao.md) · [🧪 Experimento real de Operator](labs/custom-controllers-operators-basico/examples/reconciler-real/README.md)
+
 ## ⚠️ Limites da prática
 
 - **03.03:** o lab observa persistência via API; não acessa diretamente as chaves do etcd nem executa restore.
