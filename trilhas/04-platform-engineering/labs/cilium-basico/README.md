@@ -2,7 +2,8 @@
 
 [← Aula 04.06](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.06` cria o namespace e copia um starter incompleto para `.labs/04.06/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.06/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.06` cria o namespace e copia um starter incompleto para `.labs/04.06/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply --dry-run=server --validate=strict -f .labs/04.06/
+kubectl apply -f .labs/04.06/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
@@ -11,6 +12,8 @@ Permitir ingress ao Pod backend apenas de cliente rotulado, comprovando policy v
 **Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-06`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
+
+**Guia de instalação, versões e reversão:** [🛠️ Preparar Cilium](../../../../docs/ambientes/04-cilium.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
 
 **Requer Kind dedicado com Cilium instalado e operando como CNI**, conforme guia oficial; Kind padrão não oferece `CiliumNetworkPolicy`. Instalar Cilium significa preparar cluster compatível, não adicionar policy sobre CNI desconhecida.
 

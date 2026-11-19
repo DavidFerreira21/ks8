@@ -2,7 +2,8 @@
 
 [← Aula 04.03](../../kyverno/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.03` cria o namespace e copia um starter incompleto para `.labs/04.03/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.03/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.03` cria o namespace e copia um starter incompleto para `.labs/04.03/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply --dry-run=server --validate=strict -f .labs/04.03/
+kubectl apply -f .labs/04.03/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
@@ -11,6 +12,8 @@ Aplicar política namespaced CEL de validação e comprovar rejeição de um Con
 **Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-03`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
+
+**Guia de instalação, versões e reversão:** [🛠️ Preparar Kyverno](../../../../docs/ambientes/04-kyverno.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
 
 **Instale Kyverno v1.17 ou superior** com `policies.kyverno.io/v1` disponível e aguarde os controladores de admissão. Este lab usa API CEL, não ClusterPolicy legada.
 

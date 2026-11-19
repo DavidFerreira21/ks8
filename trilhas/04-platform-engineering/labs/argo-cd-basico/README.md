@@ -2,7 +2,8 @@
 
 [← Aula 04.01](../../argo-cd/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.01` cria o namespace e copia um starter incompleto para `.labs/04.01/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.01/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.01` cria o namespace e copia um starter incompleto para `.labs/04.01/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply --dry-run=server --validate=strict -f .labs/04.01/
+kubectl apply -f .labs/04.01/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
@@ -11,6 +12,8 @@ Criar uma Application real e comparar o estado sincronizado com o destino no Kub
 **Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-01`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
+
+**Guia de instalação, versões e reversão:** [🛠️ Preparar Argo CD](../../../../docs/ambientes/04-argo-cd.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
 
 **Instale Argo CD no próprio namespace `lab-04-01` com o procedimento oficial de instalação (ou configure Applications in any namespace se a instalação estiver em outro namespace).** Confirme `kubectl api-resources --api-group=argoproj.io` e o controller Ready antes do apply. O projeto default deve permitir o repositório e o destino do lab.
 
