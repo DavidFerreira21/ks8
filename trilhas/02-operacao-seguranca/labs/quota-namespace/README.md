@@ -65,6 +65,7 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.04:** LimitRange inseriu os defaults observados, e o segundo Pod foi recusado pela quota com erro de admissão.
 - [ ] Completei o YAML sem copiar a solução e confirmei o contexto esperado.
 - [ ] Observei o comportamento específico descrito em **Resultado esperado**.
 - [ ] Registrei o resultado do experimento, uma hipótese e a explicação técnica.
@@ -75,10 +76,12 @@ A limpeza remove os objetos declarados no contrato e preserva o namespace. Desfa
 - O que o LimitRange injeta em um Pod sem requests definidos?
 - Por que a rejeição ocorre na admissão e não no scheduler?
 
+- Que campo da API mostra que o limite de Pods do namespace foi atingido?
+
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://kubernetes.io/docs/concepts/policy/resource-quotas/) · [Aula 02.04](../../resourcequota-limitrange/README.md)
+[Documentação Kubernetes](https://kubernetes.io/docs/concepts/policy/resource-quotas/) · [Aula 02.04](../../resourcequota-limitrange/README.md)
 
 ---
 
-[← Lab 02.03](../securitycontext-psa-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.05 →](../init-sidecars-basico/README.md)
+[← Lab 02.03](../securitycontext-psa-basico/README.md) · [↑ Aula 02.04](../../resourcequota-limitrange/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.05 →](../init-sidecars-basico/README.md)

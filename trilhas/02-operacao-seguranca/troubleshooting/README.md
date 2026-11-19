@@ -66,8 +66,8 @@ Não use `kubectl delete -A`, `drain` ou `rollout restart` como primeiro diagnó
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/tasks/debug/debug-application/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/tasks/debug/debug-application/)
 
 ---
 
-[← Aula 02.13](../networkpolicy/README.md) · [↑ Camada 02](../README.md) · [Próxima camada: Arquitetura →](../../03-arquitetura/README.md)
+[← Aula 02.13 — NetworkPolicy](../networkpolicy/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.14](../labs/troubleshooting-basico/README.md) · [Próxima: Camada 03 →](../../03-arquitetura/README.md)

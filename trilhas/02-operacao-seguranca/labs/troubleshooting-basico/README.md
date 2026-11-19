@@ -63,6 +63,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.14:** um erro de imagem impediu o início, os eventos identificaram a causa e a correção permitiu o Pod ficar Running.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -73,10 +74,12 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 - Por que um Pod Pending pode não ter logs de aplicação?
 - Como diferenciar erro de imagem de falha da aplicação após iniciar?
 
+- Por que `ImagePullBackOff` não é o mesmo que `CrashLoopBackOff`?
+
 ## Aprofunde seus conhecimentos
 
 [Documentação Kubernetes](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/) · [Aula 02.14](../../troubleshooting/README.md)
 
 ---
 
-[← Lab 02.13](../networkpolicy-basico/README.md) · [↑ Camada 02](../../README.md) · [Próxima camada: Arquitetura →](../../../03-arquitetura/README.md)
+[← Lab 02.13](../networkpolicy-basico/README.md) · [↑ Aula 02.14](../../troubleshooting/README.md) · [↑ Camada 02](../../README.md) · [Próxima: Camada 03 →](../../../03-arquitetura/README.md)

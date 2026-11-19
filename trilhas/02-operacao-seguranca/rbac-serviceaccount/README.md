@@ -66,9 +66,9 @@ Evite verbos e resources com `*` sem justificativa; não associe ServiceAccounts
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/security/service-accounts/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/security/service-accounts/)
 
 ---
 
-[↑ Camada 02](../README.md) · [🧪 Lab 02.02](../labs/rbac-minimo/README.md) · [← Aula 02.01](../labels-selectors-annotations/README.md) · [Próxima: 02.03 →](../securitycontext-pod-security/README.md)
+[← Aula 02.01 — Labels, Selectors e Annotations](../labels-selectors-annotations/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.02](../labs/rbac-minimo/README.md) · [Próxima: Aula 02.03 — SecurityContext e Pod Security Admission →](../securitycontext-pod-security/README.md)

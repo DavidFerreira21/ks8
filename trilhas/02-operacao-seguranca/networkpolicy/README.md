@@ -66,8 +66,8 @@ Um default-deny de egress pode bloquear DNS. Mudanças de rede podem interromper
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
 ---
 
-[← Aula 02.12](../node-maintenance/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.14 →](../troubleshooting/README.md)
+[← Aula 02.12 — Node Maintenance](../node-maintenance/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.13](../labs/networkpolicy-basico/README.md) · [Próxima: Aula 02.14 — Kubernetes Troubleshooting →](../troubleshooting/README.md)

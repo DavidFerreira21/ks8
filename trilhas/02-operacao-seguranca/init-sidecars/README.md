@@ -61,9 +61,9 @@ Um sidecar nativo não é um Job; processos eternos como init containers comuns 
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 
 ---
 
-[↑ Camada 02](../README.md) · [🧪 Lab 02.05](../labs/init-sidecars-basico/README.md) · [← Aula 02.04](../resourcequota-limitrange/README.md) · [Próxima: 02.06 →](../jobs-cronjobs/README.md)
+[← Aula 02.04 — ResourceQuota e LimitRange](../resourcequota-limitrange/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.05](../labs/init-sidecars-basico/README.md) · [Próxima: Aula 02.06 — Jobs e CronJobs →](../jobs-cronjobs/README.md)

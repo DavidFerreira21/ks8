@@ -62,9 +62,9 @@ Não armazene credenciais em annotations; elas não são um cofre. Diferencie se
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
 
 ---
 
-[↑ Camada 02](../README.md) · [🧪 Lab 02.01](../labs/labels-selectors-basico/README.md) · [← Camada 01](../../01-fundamentos/README.md) · [Próxima: 02.02 →](../rbac-serviceaccount/README.md)
+[← Camada 01](../../01-fundamentos/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.01](../labs/labels-selectors-basico/README.md) · [Próxima: Aula 02.02 — RBAC e ServiceAccount →](../rbac-serviceaccount/README.md)

@@ -63,9 +63,9 @@ Para teste determinístico, execute primeiro um Job sem esperar pela agenda do C
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
 
 ---
 
-[↑ Camada 02](../README.md) · [🧪 Lab 02.06](../labs/jobs-cronjobs-basico/README.md) · [← Aula 02.05](../init-sidecars/README.md) · [Próxima: 02.07 →](../taints-tolerations-affinity/README.md)
+[← Aula 02.05 — Init Containers e Sidecars](../init-sidecars/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.06](../labs/jobs-cronjobs-basico/README.md) · [Próxima: Aula 02.07 — Taints, Tolerations e Node Affinity →](../taints-tolerations-affinity/README.md)

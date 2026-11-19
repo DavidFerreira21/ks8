@@ -1,0 +1,38 @@
+# Segundo cenário: apenas os workers com labels hostname dev-worker/dev-worker2 são elegíveis.
+# minDomains=3 => mínimo global zero quando só dois domínios elegíveis existem.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spread-impossivel
+  namespace: lab-02-08
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: spread-impossivel
+  template:
+    metadata:
+      labels:
+        app: spread-impossivel
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values: [dev-worker, dev-worker2]
+      topologySpreadConstraints:
+        - maxSkew: 1
+          minDomains: 3
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: spread-impossivel
+      containers:
+        - name: web
+          image: nginx:1.27
+          ports:
+            - containerPort: 80

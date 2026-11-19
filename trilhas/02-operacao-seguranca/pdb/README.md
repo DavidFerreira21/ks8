@@ -65,8 +65,8 @@ Nunca presuma que PDB protege contra qualquer interrupção. Ao testar drains, i
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/)
 
 ---
 
-[← Aula 02.10](../qos-eviction/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.12 →](../node-maintenance/README.md)
+[← Aula 02.10 — QoS Classes e Eviction](../qos-eviction/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.11](../labs/pdb-basico/README.md) · [Próxima: Aula 02.12 — Node Maintenance →](../node-maintenance/README.md)

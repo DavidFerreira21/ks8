@@ -63,9 +63,9 @@ Alterar taints de nós compartilhados é operacionalmente perigoso. Em laborató
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
 
 ---
 
-[↑ Camada 02](../README.md) · [🧪 Lab 02.07](../labs/scheduling-basico/README.md) · [← Aula 02.06](../jobs-cronjobs/README.md) · [Próxima: 02.08 →](../topology-spread/README.md)
+[← Aula 02.06 — Jobs e CronJobs](../jobs-cronjobs/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.07](../labs/scheduling-basico/README.md) · [Próxima: Aula 02.08 — Topology Spread Constraints →](../topology-spread/README.md)

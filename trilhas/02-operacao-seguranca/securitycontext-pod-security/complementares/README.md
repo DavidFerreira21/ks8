@@ -8,7 +8,7 @@
 
 Ao aplicar políticas de segurança de Pods ou interpretar rejeições na admissão.
 
-## Matriz
+## Comparação de níveis e modos
 
 | Nível | Aplicação |
 | --- | --- |

@@ -63,6 +63,7 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 
 ## Critérios de conclusão
 
+- [ ] **Evidência funcional do Lab 02.11:** o PDB passou de orçamento disponível para zero após reduzir réplicas saudáveis e foi restaurado.
 - [ ] Completei o YAML sem copiar a solução e validei o contexto `kind-dev`.
 - [ ] Observei a condição específica descrita no resultado esperado.
 - [ ] Registrei a hipótese inicial, evidências e explicação técnica.
@@ -73,10 +74,12 @@ O namespace é preservado; desfaça **separadamente** alterações manuais de n�
 - Por que um PDB não impede falhas involuntárias?
 - Como readiness influencia `disruptionsAllowed`?
 
+- Por que apagar diretamente um Pod não equivale a uma eviction protegida pelo PDB?
+
 ## Aprofunde seus conhecimentos
 
 [Documentação Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) · [Aula 02.11](../../pdb/README.md)
 
 ---
 
-[← Lab 02.10](../qos-eviction-basico/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.12 →](../node-maintenance-basico/README.md)
+[← Lab 02.10](../qos-eviction-basico/README.md) · [↑ Aula 02.11](../../pdb/README.md) · [↑ Camada 02](../../README.md) · [Próximo: Lab 02.12 →](../node-maintenance-basico/README.md)

@@ -43,10 +43,12 @@ A **aula** ensina o conceito e suas decisões; o **lab** orienta a prática e a 
 
 Em cada lab, execute `make lab-prepare LAB=02.XX`, complete o YAML em `.labs/02.XX/`, aplique usando `kubectl apply`, observe com `make lab-observe` e valide com `make lab-test`. O comando `make lab-up` **aplica a solução e pertence à CI**, nunca ao fluxo inicial do aluno. Use `make lab-down` para limpar recursos declarados; não execute `make down`.
 
+**Tipos de evidência:** declarativa (configuração aplicada), funcional (comportamento no Kind) e diagnóstica (falha, causa e reversão). Cada lab possui seu próprio critério de conclusão.
+
 **Limitações e segurança:**
 
-- **02.03:** PSA deve ser testado em namespace exclusivo e preferencialmente no modo `warn`.
-- **02.07–02.08:** dependem dos dois workers do Kind e das respectivas labels.
+- **02.03:** demonstra `warn` e `enforce` por `--dry-run=server`, sem criar Pod privilegiado.
+- **02.07–02.08:** dependem de dois workers do Kind; o experimento 02.08 usa `minDomains: 3` em apenas dois domínios elegíveis.
 - **02.09:** cria PriorityClass com escopo do cluster; limpe-a após usar.
 - **02.11–02.12:** PDB e manutenção devem ser observados no Kind, sem drenagem de nós compartilhados.
 - **02.13:** NetworkPolicy aceita pela API não demonstra bloqueio sem CNI com enforcement.

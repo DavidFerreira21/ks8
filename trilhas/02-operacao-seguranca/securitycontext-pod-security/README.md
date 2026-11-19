@@ -63,9 +63,9 @@ Nunca aplique `enforce=restricted` indiscriminadamente em namespaces de sistema.
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 
 ---
 
-[↑ Camada 02](../README.md) · [🧪 Lab 02.03](../labs/securitycontext-psa-basico/README.md) · [← Aula 02.02](../rbac-serviceaccount/README.md) · [Próxima: 02.04 →](../resourcequota-limitrange/README.md)
+[← Aula 02.02 — RBAC e ServiceAccount](../rbac-serviceaccount/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.03](../labs/securitycontext-psa-basico/README.md) · [Próxima: Aula 02.04 — ResourceQuota e LimitRange →](../resourcequota-limitrange/README.md)

@@ -63,8 +63,8 @@ PriorityClass é de escopo de cluster; valores muito altos e defaults impróprio
 
 ## 🔗 Referências oficiais
 
-- [Documentação Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/)
 
 ---
 
-[← Aula 02.08](../topology-spread/README.md) · [↑ Camada 02](../README.md) · [Próxima: Aula 02.10 →](../qos-eviction/README.md)
+[← Aula 02.08 — Topology Spread Constraints](../topology-spread/README.md) · [↑ Camada 02](../README.md) · [🧪 Lab 02.09](../labs/priorityclass-basico/README.md) · [Próxima: Aula 02.10 — QoS Classes e Eviction →](../qos-eviction/README.md)
