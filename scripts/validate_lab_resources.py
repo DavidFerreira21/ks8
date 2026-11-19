@@ -7,7 +7,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 LABS = ROOT / "trilhas"
 CLUSTER_SCOPED = {"Namespace", "Node", "PersistentVolume", "StorageClass",
-                  "ClusterRole", "ClusterRoleBinding", "PriorityClass", "CustomResourceDefinition"}
+                  "ClusterRole", "ClusterRoleBinding", "PriorityClass", "CustomResourceDefinition", "CompositeResourceDefinition", "NodePool"}
 
 def validate() -> list[str]:
     errors = []

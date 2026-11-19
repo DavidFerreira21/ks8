@@ -2,13 +2,13 @@
 
 [← Aula 04.05](../../karpenter/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.05` cria o namespace e copia um starter incompleto para `.labs/04.05/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.05/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO — cloud opcional:** use `make lab-prepare LAB=04.05` **somente no Kind local** para obter o starter. Complete o NodePool e valide o desenho por inspeção estática. O motor de labs é bloqueado para qualquer contexto que não seja Kind; **não use `make lab-up`, `make lab-test` ou `make lab-down` contra EKS**. A aplicação real é uma etapa separada e só deve ocorrer em cluster AWS de sandbox autorizado, com contextos explícitos.
 
 ## Objetivo e hipótese
 
 Escrever NodePool com NodeClass explícita e limites que impedem provisionamento, distinguindo configuração de capacidade real.
 
-**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-05`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
+**Contexto:** use `kind-dev` para preparar/validar arquivos localmente. Para API Karpenter real, utilize apenas EKS de sandbox **explicitamente autorizado**, com `kubectl --context` apontando para esse ambiente. A ferramenta `labctl` não suporta operar no EKS.
 
 ## Pré-requisitos da ferramenta
 
@@ -34,13 +34,14 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 
 ## Fase 2 — Aplicar e observar
 
-Complete os TODOs:
+Complete os TODOs, depois execute **somente validação estática local**:
 
 ```bash
-kubectl apply -f .labs/04.05/
-make lab-test LAB=04.05
-make lab-observe LAB=04.05
+make validate
+kubectl config current-context
 ```
+
+**Execução AWS opcional, somente após autorização:** confirme um contexto EKS de sandbox, leia os manifests com atenção e aplique explicitamente usando `kubectl --context CONTEXTO-EKS-SANDBOX apply -f .labs/04.05/resources.yaml`. Não faça isso em contexto de produção. O NodePool está limitado a **zero nós** e aponta para NodeClass inexistente justamente para evitar provisionamento. Sem EKS autorizado, registre **dependência funcional não atendida**.
 
 Use `kubectl get nodepool estudo-sem-provisionar -o yaml`, `kubectl get nodeclaims` e `kubectl describe nodepool estudo-sem-provisionar`. Confirme NodeClass ausente/NotReady e zero NodeClaims do lab.
 
@@ -61,11 +62,13 @@ Investigue CRDs, condições dos custom resources, logs do controller instalado 
 ## Fase 5 — Limpar com segurança
 
 ```bash
-make lab-down LAB=04.05
+# Na sessão Kind local, apenas confira arquivos e namespace.
 make lab-status LAB=04.05
 ```
 
-A limpeza remove os objetos declarados neste contrato, **não desinstala automaticamente o addon**. Revise recursos filhos, credenciais e qualquer custo externo antes de excluir a instalação. Na ausência do addon, não tente remoção indiscriminada.
+**Se a aplicação opcional ocorreu no EKS autorizado**, elimine o NodePool com `kubectl --context CONTEXTO-EKS-SANDBOX delete -f .labs/04.05/resources.yaml --ignore-not-found` e confira que nenhum NodeClaim/nó foi provisionado. `make lab-down` não atua sobre o contexto EKS.
+
+A prática local não cria NodePool. Qualquer limpeza de recurso AWS aplicada manualmente deve usar o **mesmo contexto EKS aprovado**, com conferência de NodeClaims e custos. Nunca altere o contexto do laboratório automaticamente.
 
 ## Critérios de conclusão
 

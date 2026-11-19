@@ -95,7 +95,7 @@ def load_labs() -> dict[str, Lab]:
                 if not isinstance(check.get("name"), str) or not SAFE_NAME.fullmatch(check["name"]):
                     raise ValueError(f"{metadata}: nome de check inválido")
                 if check["type"] == "resource":
-                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy", "appenvironments.learning.example"}
+                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy", "appenvironments.learning.example", "applications.argoproj.io", "compositeresourcedefinition", "namespacedvalidatingpolicy", "secretstore", "externalsecret", "nodepool", "ciliumnetworkpolicy", "servicemonitor"}
                     if check.get("kind") not in allowed:
                         raise ValueError(f"{metadata}: kind de check não permitido")
         labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments), setup, starter)
