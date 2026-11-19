@@ -46,6 +46,15 @@ kubectl get configmap registro -n lab-03-03 --watch
 
 Não leia diretamente `/var/lib/etcd` ou execute snapshots de clusters compartilhados para este lab. O Kind permite demonstrar persistência de objetos sem tocar no armazenamento interno.
 
+### Quatro metadados que não significam a mesma coisa
+
+- **`resourceVersion`:** token de controle de concorrência e observação; não interprete como relógio global.
+- **`uid`:** identidade da instância. Excluir e recriar um ConfigMap com o mesmo nome produz novo UID.
+- **`generation`:** mudanças significativas na especificação de certos recursos.
+- **`observedGeneration`:** avanço reportado pelo controlador, quando o tipo expõe esse campo.
+
+Ao modificar o ConfigMap do lab, observe sua persistência por meio do API Server, e não por acesso direto a arquivos do etcd. **Snapshot/restore é operação de recuperação do Control Plane** e exige compatibilidade de versão, janela e plano de rollback; não pertence a este exercício básico.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.03 — etcd](../labs/etcd-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.

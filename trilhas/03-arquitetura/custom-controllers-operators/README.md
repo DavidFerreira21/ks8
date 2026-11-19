@@ -49,6 +49,12 @@ kubectl get deploy operator-demo -n lab-03-07 -o jsonpath='{.status.observedGene
 
 Este lab não implementa um operador completo. Não afirme teste de reconciler personalizado apenas porque um Deployment nativo reconciliou; instalação de controller próprio pertence a projeto avançado.
 
+### O que torna um controller personalizado real?
+
+Um Operator precisa observar um recurso da sua API, comparar intenção com recursos dependentes, reconciliar diferenças de forma idempotente e publicar sinais verificáveis de progresso/erro. `ownerReferences` ajudam na limpeza e `status.conditions` ajudam na operação, mas nenhum dos dois cria lógica de reconciliação por si só.
+
+O Deployment do exercício principal representa **somente um controller nativo**. Para ir além, faça o [reconciler opcional de AppEnvironment](../labs/custom-controllers-operators-basico/examples/reconciler-real/README.md): uma ServiceAccount limitada lê CRs e cria/atualiza ConfigMaps; ao mudar `spec.tier` ou apagar o ConfigMap, o controller restaura o estado. Depois avalie limitações didáticas de polling, retry, liderança e finalizers.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.07 — Custom Controllers e Operators](../labs/custom-controllers-operators-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.

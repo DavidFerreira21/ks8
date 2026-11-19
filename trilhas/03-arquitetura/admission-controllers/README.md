@@ -47,6 +47,12 @@ kubectl get events -n lab-03-04 --sort-by=.lastTimestamp
 
 Nem toda mutação é aplicada por admission webhook externo. Se um manifesto for rejeitado, não procure um Pod Pending inexistente; examine a resposta da API.
 
+### Diferenciar alteração automática e negação
+
+Um controle **mutating** pode adicionar defaults e um controle **validating** pode recusar criação ou atualização. O mesmo manifesto pode ser aceito em um namespace e rejeitado em outro por ResourceQuota, LimitRange, Pod Security Admission ou webhook configurado.
+
+No laboratório, o segundo Pod viola `hard.pods: 1`: a própria requisição de criação é negada antes de existir um objeto Pod extra. Isso é diferente de `FailedScheduling`, em que o Pod existe, mas não encontra nó elegível. Para documentar a causa, capture o **erro da API**, a quota usada e o conjunto de objetos realmente persistidos.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.04 — Admission Controllers](../labs/admission-controllers-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.

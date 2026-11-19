@@ -49,6 +49,17 @@ kubectl get deployment percurso -n lab-03-01 -o yaml
 
 Evite interpretar todos os Pods `kube-system` como componentes do Control Plane. No Kind, alguns componentes são static Pods; em serviços gerenciados, sua visibilidade varia.
 
+### Fluxo para explicar uma aplicação que não está pronta
+
+| Etapa | Objeto ou sinal | Pergunta diagnóstica |
+| --- | --- | --- |
+| Declaração | Deployment `spec.replicas` | API aceitou a intenção? |
+| Reconciliação | ReplicaSet e Pods | Controller criou as unidades desejadas? |
+| Agendamento | Pod `spec.nodeName` | Scheduler selecionou nó elegível? |
+| Execução | Container status e probes | Kubelet iniciou o container e ele está Ready? |
+
+**Hipótese testável:** ao apagar apenas um Pod gerenciado, sua identidade muda, mas o Deployment continua declarando a mesma quantidade desejada. O controller e o scheduler podem atuar em momentos diferentes; por isso `kubectl apply` com exit code zero não prova saúde de aplicação.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.01 — Arquitetura do Cluster Kubernetes](../labs/arquitetura-cluster-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.
