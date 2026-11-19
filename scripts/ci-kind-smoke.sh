@@ -116,8 +116,38 @@ if [[ "$spread_ok" != true ]]; then
   echo "FAIL: Topology Spread não comprovou 2 Ready + 1 Pending; veja spread-pods.txt e spread-describe.txt" >&2
   exit 1
 fi
-if ! grep -q 'FailedScheduling' "$report_dir/spread-describe.txt"; then
-  echo "FAIL: não há evento FailedScheduling documentado no experimento de Topology Spread" >&2
+# Eventos do scheduler são assíncronos. Aguarde a avaliação do Pod Pending
+# e procure o motivo tanto em eventos quanto em condições do Pod.
+scheduling_evidence=false
+for attempt in $(seq 1 30); do
+  kubectl describe pods -n lab-02-08 -l app=spread-impossivel > "$report_dir/spread-describe.txt"
+  kubectl get events -n lab-02-08 --sort-by=.lastTimestamp > "$report_dir/spread-events.txt"
+  kubectl get pods -n lab-02-08 -l app=spread-impossivel -o json > "$report_dir/spread-pods.json"
+  if grep -Eq 'FailedScheduling|Unschedulable' "$report_dir/spread-describe.txt" "$report_dir/spread-events.txt"; then
+    scheduling_evidence=true
+    break
+  fi
+  if python3 - "$report_dir/spread-pods.json" <<'PY'
+import json
+import sys
+pods = json.load(open(sys.argv[1], encoding="utf-8")).get("items", [])
+for pod in pods:
+    if pod.get("status", {}).get("phase") != "Pending":
+        continue
+    for condition in pod.get("status", {}).get("conditions", []):
+        if condition.get("type") == "PodScheduled" and condition.get("reason") == "Unschedulable":
+            sys.exit(0)
+sys.exit(1)
+PY
+  then
+    scheduling_evidence=true
+    break
+  fi
+  echo "Aguardando evento ou condição Unschedulable ($attempt/30)"
+  sleep 2
+done
+if [[ "$scheduling_evidence" != true ]]; then
+  echo "FAIL: sem evidência de agendamento impossível; veja spread-events.txt e spread-describe.txt" >&2
   exit 1
 fi
 kubectl delete -f "$spread_manifest"
