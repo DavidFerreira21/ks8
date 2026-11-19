@@ -59,7 +59,7 @@ make lab-down LAB=03.06
 make lab-status LAB=03.06
 ```
 
-**Segurança:** o namespace é preservado. Remova recursos temporários que criou fora do contrato; em 03.06 a limpeza não deve afetar outros labs. Não execute `make down`.
+**Segurança:** o namespace é preservado. A limpeza apaga primeiro a Custom Resource `demonstra`, consulta todas as instâncias `AppEnvironment` no cluster e **recusa apagar a CRD se restarem instâncias**. Não use `kubectl delete crd` manualmente para contornar essa proteção; verifique dependências de outros namespaces.
 
 ## Critérios de conclusão
 

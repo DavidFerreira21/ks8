@@ -44,6 +44,8 @@ Os labs usam tipos de **API próprios das ferramentas**. Em geral, é necessári
 | 04.06 | Cilium CiliumNetworkPolicy | Kind dedicado com Cilium funcionando como CNI | Não |
 | 04.07 | Prometheus Operator ServiceMonitor | Prometheus Operator, seleção de ServiceMonitor e datasource Grafana | Não |
 
+**Exclusão segura:** o motor de laboratórios verifica instâncias existentes antes de excluir CRD/XRD; a exclusão é bloqueada se houver recursos dependentes. A prática do Karpenter é validada offline contra o arquivo escrito pelo aluno e nunca aplica NodePool por meio do motor no EKS.
+
 **Níveis de evidência:**
 - **Editorial/contrato:** conteúdo, links, starter, schema básico e checks do motor.
 - **Declarativo:** recurso aceito pelo API Server **com a CRD instalada**.

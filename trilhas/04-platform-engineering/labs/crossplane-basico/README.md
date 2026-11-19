@@ -65,7 +65,7 @@ make lab-down LAB=04.02
 make lab-status LAB=04.02
 ```
 
-A limpeza remove os objetos declarados neste contrato, **não desinstala automaticamente o addon**. Revise recursos filhos, credenciais e qualquer custo externo antes de excluir a instalação. Na ausência do addon, não tente remoção indiscriminada.
+**Proteção global:** `make lab-down` recusa excluir a XRD enquanto houver instâncias `XEnvironment` em qualquer namespace. Exclua somente a XR didática que você criou; nunca force a exclusão da XRD de outros consumidores. A limpeza remove os objetos declarados neste contrato, **não desinstala automaticamente o addon**. Revise recursos filhos, credenciais e qualquer custo externo antes de excluir a instalação. Na ausência do addon, não tente remoção indiscriminada.
 
 ## Critérios de conclusão
 
