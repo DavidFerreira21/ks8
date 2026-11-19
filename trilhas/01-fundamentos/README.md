@@ -27,16 +27,16 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 
 | Aula | Conceito | Aula | Lab | Complementares |
 | --- | --- | --- | --- | --- |
-| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) | [Consultar](../../1-fundamentos/README.md) |
-| 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [🧪 Lab 01.02](labs/pods-basico/README.md) | [Consultar](../../2-pod/README.md) |
-| 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [🧪 Lab 01.03](labs/deployments-basico/README.md) | [Consultar](../../3-deployment/README.md) |
-| 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [🧪 Lab 01.04](labs/controladores-basico/README.md) | [Consultar](../../4-replicaSet-daemonSet-statefulSet/README.md) |
-| 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab 01.05](labs/services-basico/README.md) | [Consultar](../../7-services/README.md) |
+| 01.01 | **Fundamentos Kubernetes** | [📖 Estudar](fundamentos/README.md) | [🧪 Lab 01.01](labs/fundamentos-cluster/README.md) | [Consultar](fundamentos/complementares/README.md) |
+| 01.02 | **Pods** | [📖 Estudar](pods/README.md) | [🧪 Lab 01.02](labs/pods-basico/README.md) | [Consultar](pods/complementares/README.md) |
+| 01.03 | **Deployments** | [📖 Estudar](deployments/README.md) | [🧪 Lab 01.03](labs/deployments-basico/README.md) | [Consultar](deployments/complementares/README.md) |
+| 01.04 | **ReplicaSet, DaemonSet e StatefulSet** | [📖 Estudar](controladores/README.md) | [🧪 Lab 01.04](labs/controladores-basico/README.md) | [Consultar](controladores/complementares/README.md) |
+| 01.05 | **Services** | [📖 Estudar](services/README.md) | [🧪 Lab 01.05](labs/services-basico/README.md) | [Consultar](services/complementares/README.md) |
 | 01.06 | **Namespaces** | [📖 Estudar](namespaces/README.md) | [🧪 Lab 01.06](labs/namespaces-basico/README.md) | — |
 | 01.07 | **ConfigMaps** | [📖 Estudar](configmaps/README.md) | [🧪 Lab 01.07](labs/configmaps-basico/README.md) | — |
 | 01.08 | **Secrets** | [📖 Estudar](secrets/README.md) | [🧪 Lab 01.08](labs/secrets-basico/README.md) | — |
 | 01.09 | **Requests e Limits** | [📖 Estudar](requests-limits/README.md) | [🧪 Lab 01.09](labs/requests-limits-basico/README.md) | — |
-| 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [🧪 Lab 01.10](labs/probes-basico/README.md) | [Consultar](../../5-probes/README.md) |
+| 01.10 | **Probes — Liveness, Readiness e Startup** | [📖 Estudar](probes/README.md) | [🧪 Lab 01.10](labs/probes-basico/README.md) | [Consultar](probes/complementares/README.md) |
 | 01.11 | **Volumes** | [📖 Estudar](volumes/README.md) | [🧪 Lab 01.11](labs/volumes-basico/README.md) | — |
 | 01.12 | **Estratégias avançadas de Deployment** | [📖 Estudar](estrategias-deployment/README.md) | [🧪 Lab 01.12](labs/estrategias-deployment-basico/README.md) | — |
 | 01.13 | **Ingress** | [📖 Estudar](ingress/README.md) | [🧪 Lab 01.13](labs/ingress-basico/README.md) | — |
@@ -44,7 +44,7 @@ A sequência abaixo acompanha o [catálogo curricular de 52 aulas](../../docs/ca
 
 ## 📚 Como usar os complementares
 
-Os **complementares são opcionais**: a aula ensina o conceito e o lab valida a prática. Eles servem como referência para decisões, comandos adicionais, troubleshooting, limitações e fontes oficiais. Não precisam existir para todas as aulas. A mesma página não deve ser usada como complementar de um assunto diferente apenas porque menciona esse tema.
+As referências históricas originais permanecem acessíveis; os seis complementares curriculares agora possuem endereço padronizado dentro de cada aula. Os **complementares são opcionais**: a aula ensina o conceito e o lab valida a prática. Eles servem como referência para decisões, comandos adicionais, troubleshooting, limitações e fontes oficiais. Não precisam existir para todas as aulas. A mesma página não deve ser usada como complementar de um assunto diferente apenas porque menciona esse tema.
 
 ## 🧪 Laboratórios
 

@@ -61,7 +61,7 @@ kubectl api-resources
 
 **Atividade prática:** [🧪 Lab 01.01](../labs/fundamentos-cluster/README.md). Exercício guiado com ConfigMap, comparação entre manifesto e objeto no cluster e limpeza segura.
 
-**Complementar opcional:** [Consultar material complementar](../../../1-fundamentos/README.md). Referência adicional para consulta após a aula e o lab.
+**Complementar opcional:** [Consultar material complementar](complementares/README.md). Referência adicional para consulta após a aula e o lab.
 
 ## ✅ Revisão do aprendizado
 
