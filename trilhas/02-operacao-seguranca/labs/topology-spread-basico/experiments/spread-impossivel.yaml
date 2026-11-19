@@ -1,4 +1,4 @@
-# Segundo cenário: apenas dev-worker e dev-worker2 são elegíveis.
+# Segundo cenário: apenas os workers com labels hostname dev-worker/dev-worker2 são elegíveis.
 # minDomains=3 => mínimo global zero quando só dois domínios elegíveis existem.
 apiVersion: apps/v1
 kind: Deployment
@@ -19,8 +19,8 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-              - matchFields:
-                  - key: metadata.name
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
                     operator: In
                     values: [dev-worker, dev-worker2]
       topologySpreadConstraints:
