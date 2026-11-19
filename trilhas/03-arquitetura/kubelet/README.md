@@ -47,6 +47,14 @@ kubectl get pod agente-demo -n lab-03-10 -o yaml
 
 Não altere configuração do kubelet em nós compartilhados. Um Pod em `Running` não garante que sua aplicação esteja pronta; associe readiness e eventos.
 
+### Decisão arquitetural e diagnóstico
+
+### Por que o kubelet é o agente da execução
+
+Ao vincular um Pod a um nó, o scheduler não inicia nenhum processo. O kubelet consome o `PodSpec`, pede ao CRI para iniciar containers, monta volumes e avalia probes. Por isso, `spec.nodeName` preenchido não significa que a aplicação está saudável.
+
+**Comparação causal:** se a readiness falhar, o container pode continuar `Running` mas `Ready=False`; se o processo morrer, `restartCount` e `lastState` ajudam a determinar a causa. No Lab 03.10, remova temporariamente o arquivo usado na readiness e recoloque-o sem reiniciar o Pod — é um teste da lógica do kubelet, não do scheduler.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.10](../labs/kubelet-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.

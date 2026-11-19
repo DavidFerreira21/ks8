@@ -46,6 +46,14 @@ kubectl get node dev-worker -o jsonpath='{.status.nodeInfo.containerRuntimeVersi
 
 Não confunda Docker no host do Kind com o runtime utilizado dentro do nó Kubernetes. Não manipule diretamente containers via `docker rm` para 'consertar' Pods gerenciados.
 
+### Decisão arquitetural e diagnóstico
+
+### Separar imagem, runtime e processo
+
+`spec.containers[].image` é uma referência declarativa. Após um pull bem-sucedido, `status.containerStatuses[].imageID` identifica a imagem efetivamente obtida; `containerID` identifica a execução criada pelo runtime no nó. A runtime interface **CRI** permite ao kubelet solicitar operações sem falar diretamente com Docker como ferramenta de desenvolvimento.
+
+**Diagnóstico:** `ErrImagePull` ocorre antes de existir processo e pode transitar a `ImagePullBackOff`. `CrashLoopBackOff` pressupõe um container que iniciou e terminou repetidas vezes. Ações de debugging devem respeitar essa diferença e evitar `docker rm` direto contra Pods gerenciados.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.11](../labs/container-runtime-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.

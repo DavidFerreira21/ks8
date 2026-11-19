@@ -50,6 +50,14 @@ kubectl exec -n lab-03-14 cliente -- nslookup web.lab-03-14.svc.cluster.local
 
 A imagem de teste precisa conter cliente DNS (por exemplo BusyBox). `cluster.local` não é universal: consulte `/etc/resolv.conf` e a configuração do ambiente.
 
+### Decisão arquitetural e diagnóstico
+
+### DNS resolve nomes, mas não fabrica backends saudáveis
+
+O FQDN de Service segue normalmente `<service>.<namespace>.svc.<cluster-domain>`; o sufixo pode ser diferente de `cluster.local`, conforme configuração. CoreDNS responde às consultas com base no estado da API. Um Service ClusterIP pode ter registro DNS mesmo quando seu selector não encontra Pods.
+
+**Hipótese do Lab 03.14:** depois de alterar o selector para algo inexistente, `nslookup web.lab-03-14.svc.cluster.local` ainda deve resolver, enquanto o acesso HTTP ao Service pode falhar por ausência de endpoints. Esse contraste evita que o aluno confunda Service Discovery com disponibilidade do aplicativo.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.14](../labs/coredns-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.

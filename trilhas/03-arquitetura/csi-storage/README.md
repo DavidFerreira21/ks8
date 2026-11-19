@@ -49,6 +49,14 @@ kubectl describe pvc dados -n lab-03-15
 
 Não suponha que todo StorageClass local é CSI. Evite excluir PVC antes de registrar evidência de persistência e política de reclaim.
 
+### Decisão arquitetural e diagnóstico
+
+### Provisão de volume e persistência são evidências distintas
+
+A StorageClass determina o provisionador e políticas do volume; o PVC representa a solicitação no namespace; o PV representa o recurso vinculado. **`Bound` não comprova que dados persistem após recriação**. O experimento precisa gravar e reler o mesmo arquivo em outro ciclo de vida do Pod.
+
+O Kind pode oferecer provisionamento local sem um driver CSI cloud. Antes de declarar que aprendeu **CSI**, inspecione `CSIDriver` e `PV.spec.csi.driver`. O [experimento avançado com CSI Hostpath](../labs/csi-storage-basico/experiments/README.md) é opcional, requer um driver de exemplo instalado e tem cleanup próprio — a política de reclaim pode destruir os dados do volume de teste.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.15](../labs/csi-storage-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.

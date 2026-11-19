@@ -47,6 +47,19 @@ kubectl get daemonsets -n kube-system
 
 Não declare NetworkPolicy funcional apenas por existir um YAML. Comunicação IP não prova que o CNI implementa enforcement.
 
+### Decisão arquitetural e diagnóstico
+
+### Caminhos de rede que precisam ser investigados separadamente
+
+| Caminho | Componente decisivo | Prova |
+| --- | --- | --- |
+| Pod IP → Pod IP | CNI, rotas e listener de destino | HTTP por IP observado |
+| Pod → ClusterIP | Service, EndpointSlice e dataplane | Backend recebido via Service |
+| Nome → endereço | CoreDNS e resolução configurada | `nslookup` |
+| Permitir/negar fluxo | CNI que suporta enforcement | Origem aceita e origem bloqueada |
+
+Um Pod receber IP não prova que uma aplicação esteja escutando. O teste por IP do Lab 03.12 precede DNS/Service para isolar a causa; também não comprova automaticamente política de rede ou comunicação criptografada.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.12](../labs/cni-comunicacao-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.

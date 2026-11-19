@@ -49,6 +49,17 @@ kubectl get svc -n lab-03-16
 
 Não instale CRDs de Gateway API sem versionamento e plano de limpeza. Não confunda declaração HTTPRoute com teste HTTP; a fase funcional exige controller instalado.
 
+### Decisão arquitetural e diagnóstico
+
+### Controlador, configuração e dataplane são três coisas
+
+- **GatewayClass:** indica qual implementação pode atender a Gateway API.
+- **Gateway:** declara listeners/endereços e tem condições como `Accepted` e `Programmed`.
+- **HTTPRoute:** associa matches, filtros e backends a um Gateway, com condições como `Accepted` e `ResolvedRefs`.
+- **Service/EndpointSlices:** indicam a aplicação de destino, independente do controller.
+
+Sem CRD, a API não reconhece esses tipos; com CRD, mas sem controlador, os objetos podem existir sem programação real. O [experimento avançado com Envoy Gateway](../labs/gateway-api-basico/experiments/README.md) fornece recurso real e prova HTTP via port-forward, evitando confundir ausência de LoadBalancer externo no Kind com erro de roteamento.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.16](../labs/gateway-api-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.
