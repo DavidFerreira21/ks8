@@ -37,7 +37,7 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 Complete os TODOs, depois execute **somente validação estática local**:
 
 ```bash
-make validate
+python3 scripts/validate_karpenter_lab.py .labs/04.05/resources.yaml
 kubectl config current-context
 ```
 
@@ -68,7 +68,7 @@ make lab-status LAB=04.05
 
 **Se a aplicação opcional ocorreu no EKS autorizado**, elimine o NodePool com `kubectl --context CONTEXTO-EKS-SANDBOX delete -f .labs/04.05/resources.yaml --ignore-not-found` e confira que nenhum NodeClaim/nó foi provisionado. `make lab-down` não atua sobre o contexto EKS.
 
-A prática local não cria NodePool. Qualquer limpeza de recurso AWS aplicada manualmente deve usar o **mesmo contexto EKS aprovado**, com conferência de NodeClaims e custos. Nunca altere o contexto do laboratório automaticamente.
+A validação offline lê **o arquivo realmente escrito pelo aluno**, sem chamar o API Server e sem criar NodePool. `make validate` sozinho valida os manifests de referência do repositório, não substitui essa conferência. Qualquer limpeza de recurso AWS aplicada manualmente deve usar o **mesmo contexto EKS aprovado**, com conferência de NodeClaims e custos. Nunca altere o contexto do laboratório automaticamente.
 
 ## Critérios de conclusão
 
