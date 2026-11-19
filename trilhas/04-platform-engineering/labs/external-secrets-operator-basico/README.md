@@ -2,8 +2,7 @@
 
 [← Aula 04.04](../../external-secrets-operator/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.04` cria o namespace e copia um starter incompleto para `.labs/04.04/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply --dry-run=server --validate=strict -f .labs/04.04/
-kubectl apply -f .labs/04.04/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.04` cria o namespace e copia um starter incompleto para `.labs/04.04/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.04/` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
@@ -40,6 +39,7 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 Complete os TODOs:
 
 ```bash
+kubectl apply --dry-run=server --validate=strict -f .labs/04.04/
 kubectl apply -f .labs/04.04/
 make lab-test LAB=04.04
 make lab-observe LAB=04.04
