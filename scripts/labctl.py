@@ -92,7 +92,13 @@ def load_labs() -> dict[str, Lab]:
                     raise ValueError(f"{metadata}: rollout deve referenciar Deployment declarado nos checks")
         for check in checks:
             if check["type"] in {"resource", "pod-ready", "pvc-bound"}:
-                if not isinstance(check.get("name"), str) or not SAFE_NAME.fullmatch(check["name"]):
+                check_name = check.get("name")
+                xrd_name = (check.get("type") == "resource"
+                            and check.get("kind") == "compositeresourcedefinition"
+                            and isinstance(check_name, str)
+                            and re.fullmatch(r"[a-z0-9]+(?:[a-z0-9.-]*[a-z0-9])?", check_name)
+                            and len(check_name) <= 253)
+                if not isinstance(check_name, str) or not (SAFE_NAME.fullmatch(check_name) or xrd_name):
                     raise ValueError(f"{metadata}: nome de check inválido")
                 if check["type"] == "resource":
                     allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy", "appenvironments.learning.example", "applications.argoproj.io", "compositeresourcedefinition", "namespacedvalidatingpolicy", "secretstore", "externalsecret", "nodepool", "ciliumnetworkpolicy", "servicemonitor"}
