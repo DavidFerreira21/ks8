@@ -26,6 +26,9 @@ for n in $(seq 1 17); do
     kubectl wait --for=condition=Established crd/appenvironments.learning.example --timeout=120s
   fi
   make lab-up LAB="$lab"
+  # OpenAPI/admissao reais, depois que CRDs/pre-requisitos do lab ja existem.
+  solution="$(python3 scripts/labctl.py lab-solution --lab "$lab" | head -n 1)"
+  kubectl apply --dry-run=server --validate=strict -f "$solution" > "$report_dir/schema-${lab}.txt"
   make lab-test LAB="$lab"
   make lab-observe LAB="$lab" > "$report_dir/observe-${lab}.txt" 2>&1
 done
