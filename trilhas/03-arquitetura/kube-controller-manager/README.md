@@ -18,20 +18,21 @@ Controllers mantêm o estado observado convergindo ao estado declarado. O kube-c
 
 Um Deployment cria/gerencia ReplicaSets e estes mantêm Pods desejados. Os controllers observam o API Server, fazem alterações e atualizam status. Eles não executam containers diretamente. A reconciliação pode ocorrer várias vezes, e o sistema deve lidar com eventos repetidos.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
-apiVersion: v1
-kind: ConfigMap
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: exemplo-de-estado
-data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  name: controlador
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: controlador
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de kube-controller-manager**. A verificação específica está no lab correspondente.
+O Deployment expressa a quantidade desejada. O trabalho dos controladores aparece em ReplicaSets, Pods e no status atualizado. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

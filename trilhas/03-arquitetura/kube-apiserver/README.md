@@ -18,20 +18,18 @@ O API Server é a porta de entrada da API declarativa. CLI, controladores e oper
 
 Uma operação segue, conceitualmente, autenticação → autorização → mutação/validação de admissão → persistência, com detalhes que variam segundo tipo e subrecurso. O API Server disponibiliza discovery e OpenAPI; `kubectl explain` e `--dry-run=server` ajudam a verificar schema. Leituras podem passar por cache e autorização sem criar estado.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: exemplo-de-estado
+  name: api-demo
 data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  revisao: "v1"
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de kube-apiserver**. A verificação específica está no lab correspondente.
+Uma criação válida é persistida; um campo inválido ou uma política de admissão pode rejeitar a mesma operação antes de salvar o objeto. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

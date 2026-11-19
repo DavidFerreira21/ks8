@@ -18,20 +18,22 @@ O cloud-controller-manager separa lógica específica de provedor das responsabi
 
 Um Service `type: LoadBalancer` é uma intenção na API. Em cloud com integração adequada, um controlador/provedor pode provisionar endereço e atualizar `.status.loadBalancer`. No Kind padrão, não há obrigação de existir cloud-controller-manager nem load balancer externo; um objeto pode permanecer sem IP externo sem estar inválido.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
 apiVersion: v1
-kind: ConfigMap
+kind: Service
 metadata:
-  name: exemplo-de-estado
-data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  name: exposicao
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+    - port: 80
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de cloud-controller-manager**. A verificação específica está no lab correspondente.
+A intenção de provisionar LoadBalancer não produz IP externo no Kind sem integração de cloud apropriada. Esse status ausente é esperado, não um erro de sintaxe. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

@@ -18,20 +18,21 @@ O Kubernetes separa a declaração central do estado da execução. Um cliente e
 
 O **Control Plane** inclui API Server, etcd, scheduler e controller-manager. Os **workers** executam kubelet e runtime; os componentes de rede viabilizam comunicação. O controle ocorre em loops assíncronos: sucesso na requisição de criação não significa aplicação pronta. Em clusters gerenciados, parte do Control Plane é operada pelo provedor.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
-apiVersion: v1
-kind: ConfigMap
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: exemplo-de-estado
-data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  name: percurso
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: percurso
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de Arquitetura do Cluster Kubernetes**. A verificação específica está no lab correspondente.
+O API Server persiste `spec.replicas` como intenção. O controller cria réplicas e o scheduler atribui nós; a disponibilidade só é comprovada pelas condições e Pods observados. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

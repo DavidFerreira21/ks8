@@ -18,20 +18,18 @@ etcd armazena estado que o API Server persiste: metadados, especificações e pa
 
 Quando um ConfigMap muda, o API Server grava o novo estado, altera `resourceVersion` e os observadores recebem atualizações. `resourceVersion` serve como mecanismo de controle de concorrência/observação; não é timestamp nem contador global para ordenar todos os objetos. Snapshots/restore de etcd são tarefas administrativas sensíveis.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: exemplo-de-estado
+  name: registro
 data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  revisao: "primeira"
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de etcd**. A verificação específica está no lab correspondente.
+O objeto é persistido pelo API Server. A `resourceVersion` muda após atualizações; ela não equivale ao conteúdo de `data.revisao`. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

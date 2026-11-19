@@ -18,20 +18,18 @@ Uma CustomResourceDefinition registra um grupo, versão, escopo e schema de recu
 
 Em `apiextensions.k8s.io/v1`, uma CRD define `spec.group`, `names`, `scope`, versões `served/storage` e `openAPIV3Schema`. O schema pode exigir campos e restringir tipos. `spec` representa a intenção; `status` somente representa observação real quando um controlador o atualiza. A exclusão da CRD pode remover todas as instâncias vinculadas.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
-apiVersion: v1
-kind: ConfigMap
+apiVersion: learning.example/v1
+kind: AppEnvironment
 metadata:
-  name: exemplo-de-estado
-data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  name: demonstra
+spec:
+  tier: sandbox
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de CRDs e Custom Resources**. A verificação específica está no lab correspondente.
+A instância é aceita apenas depois de registrar uma CRD compatível. A presença da CR não instala um reconciler nem cria outros recursos. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

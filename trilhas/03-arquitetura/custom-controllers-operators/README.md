@@ -18,20 +18,21 @@ Um controller observa objetos e reage a diferenças entre estado desejado e obse
 
 Um reconciler normalmente lê um recurso, avalia dependências, atualiza objetos dependentes e registra status. Deve ser idempotente e tolerante a eventos repetidos. `ownerReferences` e finalizers ajudam a representar dependência e limpeza, mas não substituem lógica de negócio. CRD registra um tipo; reconciler é a implementação que produz comportamento.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
-apiVersion: v1
-kind: ConfigMap
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: exemplo-de-estado
-data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  name: operator-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: operator-demo
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de Custom Controllers e Operators**. A verificação específica está no lab correspondente.
+Deployment ilustra reconciliação nativa; um Operator customizado precisaria de controller próprio que reage à Custom Resource. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

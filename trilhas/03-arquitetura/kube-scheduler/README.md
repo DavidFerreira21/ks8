@@ -18,20 +18,22 @@ O scheduler atribui nós a Pods ainda não vinculados a um Node. Ele considera r
 
 O processo de scheduling avalia filtros de elegibilidade e pontuação entre nós candidatos. Restrições `required` podem deixar Pod Pending. Ao marcar um `nodeSelector` com label inexistente, geramos uma falha reproduzível sem alterar o nó. `status.conditions` e Events indicam o motivo; `spec.nodeName` é preenchido após a vinculação.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
 apiVersion: v1
-kind: ConfigMap
+kind: Pod
 metadata:
-  name: exemplo-de-estado
-data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  name: sem-no
+spec:
+  nodeSelector:
+    estudo: inexistente
+  containers:
+    - name: app
+      image: busybox:1.36
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de kube-scheduler**. A verificação específica está no lab correspondente.
+A API admite esse Pod, mas a exigência de uma label inexistente impede a seleção de um nó e aparece nos eventos de scheduling. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 

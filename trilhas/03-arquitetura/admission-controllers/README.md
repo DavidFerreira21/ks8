@@ -18,20 +18,19 @@ Após autenticar e autorizar, o API Server pode invocar admission controllers pa
 
 Controles mutating podem preencher campos; validating podem rejeitar requisições. Policies e webhooks podem ter comportamento diferente por namespace, versão e operação; uma rejeição por quota ou política de segurança acontece na admissão e não gera Pod Pending. O uso de `--dry-run=server` depende de suporte dos admission webhooks para operações sem efeitos colaterais.
 
-### Exemplo interpretado
-
-A observação depende do estado real do cluster. O seguinte trecho exemplifica **um sinal ou campo de API**, não constitui solução completa para o laboratório:
+### Exemplo interpretado (trecho)
 
 ```yaml
 apiVersion: v1
-kind: ConfigMap
+kind: ResourceQuota
 metadata:
-  name: exemplo-de-estado
-data:
-  expectativa: "comparar spec, status, eventos e comportamento"
+  name: limites
+spec:
+  hard:
+    pods: "1"
 ```
 
-O ConfigMap acima ilustra uma declaração persistida pelo API Server. **Não representa, por si só, o funcionamento de Admission Controllers**. A verificação específica está no lab correspondente.
+Com quota de um Pod, a segunda criação pode ser rejeitada diretamente pelo API Server, sem gerar outro Pod Pending. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
 ### Inspeção no Kind
 
