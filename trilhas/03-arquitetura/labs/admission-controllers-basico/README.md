@@ -42,6 +42,16 @@ make lab-observe LAB=03.04
 
 Tente criar `kubectl run extra -n lab-03-04 --image=busybox:1.36 --restart=Never -- sleep 3600`. Registre o erro esperado de quota excedida; se inesperadamente admitido, exclua o Pod extra e investigue. Não modifique a quota global.
 
+### Comparação de admissão com scheduling
+
+```bash
+kubectl describe resourcequota limites -n lab-03-04
+kubectl run extra -n lab-03-04 --restart=Never --image=busybox:1.36 -- sleep 3600
+kubectl get pod extra -n lab-03-04 --ignore-not-found
+```
+
+A segunda criação deve receber um erro de quota. **Esse erro é esperado**: o Pod adicional não deve existir na API. Se existir, apague-o explicitamente e investigue a ResourceQuota antes de marcar o experimento como aprovado. Compare com o Pod `admitido`: não houve tentativa de scheduling para `extra`.
+
 ## Resultado esperado e evidências
 
 A segunda criação é rejeitada diretamente pela admissão por exceder quota, sem produzir Pod extra Pending.

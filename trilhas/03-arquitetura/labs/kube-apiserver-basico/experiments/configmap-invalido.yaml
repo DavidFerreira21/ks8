@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-invalido
+  namespace: lab-03-02
+data:
+  revisao: teste
+spec:
+  naoExiste: true

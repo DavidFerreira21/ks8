@@ -42,6 +42,19 @@ Depois de preparar, aguarde `kubectl wait --for=condition=Established crd/appenv
 
 Copie o manifesto para arquivo temporário com `spec.tier: numero-invalido`? Isso ainda é string; use `tier: 123` e `kubectl apply --dry-run=server --validate=strict` para observar rejeição de tipo. Não crie recursos de infraestrutura.
 
+### Testar uma CR que viola o schema
+
+Depois de registrar a CRD e criar a instância válida, compare com um exemplar que define `spec.tier` como número, em vez de string:
+
+```bash
+kubectl wait --for=condition=Established crd/appenvironments.learning.example --timeout=120s
+kubectl apply --dry-run=server --validate=strict \
+  -f trilhas/03-arquitetura/labs/crds-custom-resources-basico/experiments/appenv-invalido.yaml
+kubectl get appenvironments.learning.example -n lab-03-06
+```
+
+A falha de schema é **esperada** e a CR `demonstra` não deve ser alterada. Em seguida, registre também o que **não** foi criado: CRD + CR sem controller não geram infraestrutura por conta própria.
+
 ## Resultado esperado e evidências
 
 O tipo aparece no discovery, o recurso válido pode ser criado e valores de tipo errado são rejeitados. Nenhum Deployment é gerado sem controller próprio.

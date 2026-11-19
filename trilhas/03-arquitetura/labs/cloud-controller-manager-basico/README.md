@@ -42,6 +42,16 @@ Execute `kubectl get svc exposicao -n lab-03-09 -o yaml` e confira `status.loadB
 
 Compare `kubectl get service exposicao -n lab-03-09` com `kubectl get endpointslices -n lab-03-09 -l kubernetes.io/service-name=exposicao`. Discuta o que falta para prover IP externo sem instalar componente cloud.
 
+### Distinguir intenção cloud de backend real
+
+```bash
+kubectl get service exposicao -n lab-03-09 -o yaml
+kubectl get endpointslices -n lab-03-09 -l kubernetes.io/service-name=exposicao
+kubectl get pods -n lab-03-09 -l app=web -o wide
+```
+
+**Evidência:** compare o endereço `ClusterIP`, os endpoints do Service e `status.loadBalancer.ingress` vazio. Endpoints prontos demonstram backend disponível dentro do cluster; a ausência de IP externo no Kind demonstra **dependência de integração cloud**, não falha na API.
+
 ## Resultado esperado e evidências
 
 Service e endpoint podem existir, mas o endereço externo não é provisionado no Kind padrão. Isso não invalida o manifesto.

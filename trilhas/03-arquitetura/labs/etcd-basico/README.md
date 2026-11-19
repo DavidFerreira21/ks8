@@ -42,6 +42,18 @@ Execute `kubectl get cm registro -n lab-03-03 -o jsonpath='{.metadata.resourceVe
 
 Atualize temporariamente com `kubectl patch configmap registro -n lab-03-03 --type merge -p '{"data":{"revisao":"segunda"}}'`; compare `resourceVersion` e conteúdo. Reaplique o YAML local para restaurar `primeira`.
 
+### Antes, durante e depois da persistência
+
+```bash
+kubectl get cm registro -n lab-03-03 -o jsonpath='{.metadata.resourceVersion}{"\n"}{.data.revisao}{"\n"}'
+kubectl patch cm registro -n lab-03-03 --type merge -p '{"data":{"revisao":"segunda"}}'
+kubectl get cm registro -n lab-03-03 -o jsonpath='{.metadata.resourceVersion}{"\n"}{.data.revisao}{"\n"}'
+kubectl apply -f .labs/03.03/resources.yaml
+kubectl get cm registro -n lab-03-03 -o jsonpath='{.data.revisao}'
+```
+
+**Evidência:** `resourceVersion` muda e não volta ao valor anterior ao restaurar o conteúdo. O experimento observa armazenamento **via API**, não operações diretas de etcd.
+
 ## Resultado esperado e evidências
 
 A atualização altera o valor persistido e a `resourceVersion`. Reaplicar o manifesto original reverte os dados por nova operação, não pelo retorno ao mesmo número de versão.

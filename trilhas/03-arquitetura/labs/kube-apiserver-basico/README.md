@@ -42,6 +42,18 @@ Inspecione o campo `data` com `kubectl get configmap api-demo -n lab-03-02 -o ya
 
 Produza um YAML temporário com campo inválido `spec.naoExiste`, usando `kubectl apply --dry-run=server --validate=strict -f ARQUIVO`. Compare a rejeição da API com o ConfigMap existente, sem modificar a solução principal.
 
+### Teste de validação por fase
+
+Prepare uma cópia do ConfigMap **sem substituir a solução** e adicione `spec:` fictício ao documento. O comando abaixo deve falhar na validação rígida; o original deve continuar acessível:
+
+```bash
+kubectl apply --dry-run=server --validate=strict \
+  -f trilhas/03-arquitetura/labs/kube-apiserver-basico/experiments/configmap-invalido.yaml
+kubectl get configmap api-demo -n lab-03-02 -o jsonpath='{.data.revisao}'
+```
+
+**Evidência:** o erro ocorre na API (campo desconhecido), enquanto o ConfigMap original mantém `revisao=v1`. Esse teste **não** avalia RBAC de um usuário diferente.
+
 ## Resultado esperado e evidências
 
 O ConfigMap correto é persistido; o YAML inválido recebe erro de validação no servidor e não cria objeto adicional.
