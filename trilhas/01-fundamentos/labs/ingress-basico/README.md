@@ -101,7 +101,7 @@ O namespace é preservado. Componentes compartilhados instalados nas etapas de p
 
 - Por que um Ingress válido na API pode não encaminhar tráfego quando o controller ou os endpoints estão indisponíveis?
 - Qual é o papel específico de Service, EndpointSlice, IngressClass e Ingress Controller neste caminho HTTP?
-- Anexe como evidência os status HTTP obtidos com e sem `Host: aula.local` e os endpoints associados ao Service.
+- Como distinguir falha de resolução do `Host`, rota HTTP incompatível e Service sem EndpointSlices prontos?
 
 **Evidências específicas:** registre IngressClass, Ingress, Service/EndpointSlices e os códigos HTTP com e sem `Host: aula.local`; se faltar controller, marque o teste funcional como pendente.
 

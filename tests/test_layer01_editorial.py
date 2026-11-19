@@ -34,9 +34,9 @@ class Layer01EditorialTests(unittest.TestCase):
                 self.assertIn("## 🎨 Infográfico", body)
                 self.assertIn("## 🧪 Aplicação prática", body)
                 self.assertIn("## ✅ Revisão do aprendizado", body)
-                self.assertIn("## 🔗 Referência oficial", body)
+                self.assertIn("## 🔗 Referências oficiais", body)
                 review = body.split("## ✅ Revisão do aprendizado", 1)[1].split(
-                    "## 🔗 Referência oficial", 1
+                    "## 🔗 Referências oficiais", 1
                 )[0]
                 self.assertGreaterEqual(len(re.findall(r"(?m)^- .+\?", review)), 3)
                 self.assertNotIn("Qual problema este conceito resolve?", review)

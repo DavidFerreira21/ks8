@@ -98,7 +98,7 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 
 - Se o PVC permanecer em `Pending`, quais evidências em `kubectl describe pvc` e `kubectl get storageclass` ajudam a identificar o problema?
 - Por que excluir somente o Pod preservou `marcador.txt`, enquanto remover o PVC pode ter consequências diferentes conforme a política de reclaim do PV?
-- Registre como evidências o status do claim, o PV associado e o conteúdo de `marcador.txt` antes e depois da recriação.
+- Como `persistentVolumeReclaimPolicy` muda o risco de perda de dados quando você exclui o PVC, mesmo que a aplicação tenha sido removida?
 
 **Evidências específicas:** registre PVC `Bound`, PV associado, Pod e conteúdo de `marcador.txt` antes e após recriar somente o Pod; explique o papel do PVC na persistência.
 

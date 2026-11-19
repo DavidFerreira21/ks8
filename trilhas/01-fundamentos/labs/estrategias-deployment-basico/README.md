@@ -101,7 +101,7 @@ O namespace é preservado; não utilize `make down` para limpar um único exerc�
 
 - Com três réplicas, `maxSurge: 1` e `maxUnavailable: 0`, quantos Pods podem existir durante um RollingUpdate saudável, e qual é a disponibilidade mínima desejada?
 - Compare `rollout restart` com uma alteração de imagem: ambos modificam o template do Pod, mas o que muda na revisão e na imagem efetiva?
-- Registre as revisões antes da atualização, depois da atualização e após o rollback. Confirme qual imagem ficou em execução.
+- Por que uma aplicação pode ficar disponível durante o rollout e ainda precisar de rollback após falhas de negócio detectadas no tráfego?
 
 **Evidências específicas:** registre réplicas prontas, ReplicaSets, histórico de revisões e imagem em execução antes da atualização, após o rollout e depois do rollback.
 

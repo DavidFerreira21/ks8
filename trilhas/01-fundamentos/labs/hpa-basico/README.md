@@ -97,7 +97,7 @@ O namespace é preservado. Componentes compartilhados instalados nas etapas de p
 
 - Por que o HPA baseado em utilização de CPU depende de `resources.requests.cpu`, além de métricas disponibilizadas pelo Metrics Server?
 - Como distinguir métrica `<unknown>`, carga insuficiente e falta de capacidade no cluster usando `kubectl describe hpa`, `kubectl top pods` e eventos?
-- Registre utilização de CPU e réplicas desejadas/atuais antes, durante e depois da carga. Se não ocorrer escala, documente o diagnóstico em vez de considerar o teste funcional concluído.
+- Por que o HPA pode aumentar `desiredReplicas` e ainda assim observar Pods `Pending`, mesmo com a métrica de CPU disponível?
 
 **Evidências específicas:** registre disponibilidade do Metrics Server, utilização de CPU, réplicas atuais/desejadas e resultados antes, durante e após a carga; sem métricas, marque o teste funcional como pendente.
 
