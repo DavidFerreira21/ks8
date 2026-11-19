@@ -1,0 +1,7 @@
+# EXERCÍCIO 03.02: complete o manifesto sem consultar solution/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-demo
+  namespace: lab-03-02
+# TODO: data.revisao = v1

@@ -1,72 +1,74 @@
 # 🧩 Camada 03 · Arquitetura e infraestrutura
 
-[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [⚙️ Kind](../../kind-config.yaml)
+[⌂ Início](../../README.md) · [🗺️ Roadmap](../../docs/roadmap.md) · [🧪 Guia dos labs](../../docs/labs.md)
 
-> **Objetivo da camada**  
-> Investigar como Control Plane, Workers, rede e armazenamento cooperam para transformar objetos declarativos em aplicações executadas.
+> **Objetivo da camada:** compreender como o Control Plane, os workers, a rede, a persistência e os mecanismos de extensão cooperam para transformar estado declarado em comportamento observado.
 
-**17 temas no catálogo · 17 infográficos vinculados · 2 guias teóricos em evolução** · **visão arquitetural e referências oficiais** · **labs de observação em planejamento**
+**17 aulas com infográfico e teoria** · **17 labs com YAML escrito pelo aluno** · **9 complementares opcionais**
+
+## 🧭 Sequência de aprendizagem
+
+1. **API e reconciliação:** arquitetura, API Server, etcd, admission, controllers, CRDs e Operators.
+2. **Decisões e execução:** scheduler, cloud-controller-manager, kubelet e runtime.
+3. **Rede e armazenamento:** CNI, Service dataplane, CoreDNS e CSI.
+4. **Extensão e entrega:** Gateway API, Kustomize e Helm.
+
+## 📚 Catálogo oficial da Camada 03
+
+| Aula | Conceito | Aula | Lab | Complementares |
+| --- | --- | --- | --- | --- |
+| 03.01 | **Arquitetura do Cluster Kubernetes** | [📖 Estudar](arquitetura-cluster/README.md) | [🧪 Lab 03.01](labs/arquitetura-cluster-basico/README.md) | — |
+| 03.02 | **kube-apiserver** | [📖 Estudar](kube-apiserver/README.md) | [🧪 Lab 03.02](labs/kube-apiserver-basico/README.md) | [Consultar](kube-apiserver/complementares/README.md) |
+| 03.03 | **etcd** | [📖 Estudar](etcd/README.md) | [🧪 Lab 03.03](labs/etcd-basico/README.md) | [Consultar](etcd/complementares/README.md) |
+| 03.04 | **Admission Controllers** | [📖 Estudar](admission-controllers/README.md) | [🧪 Lab 03.04](labs/admission-controllers-basico/README.md) | — |
+| 03.05 | **kube-controller-manager** | [📖 Estudar](kube-controller-manager/README.md) | [🧪 Lab 03.05](labs/kube-controller-manager-basico/README.md) | — |
+| 03.06 | **CRDs e Custom Resources** | [📖 Estudar](crds-custom-resources/README.md) | [🧪 Lab 03.06](labs/crds-custom-resources-basico/README.md) | [Consultar](crds-custom-resources/complementares/README.md) |
+| 03.07 | **Custom Controllers e Operators** | [📖 Estudar](custom-controllers-operators/README.md) | [🧪 Lab 03.07](labs/custom-controllers-operators-basico/README.md) | [Consultar](custom-controllers-operators/complementares/README.md) |
+| 03.08 | **kube-scheduler** | [📖 Estudar](kube-scheduler/README.md) | [🧪 Lab 03.08](labs/kube-scheduler-basico/README.md) | — |
+| 03.09 | **cloud-controller-manager** | [📖 Estudar](cloud-controller-manager/README.md) | [🧪 Lab 03.09](labs/cloud-controller-manager-basico/README.md) | — |
+| 03.10 | **kubelet** | [📖 Estudar](kubelet/README.md) | [🧪 Lab 03.10](labs/kubelet-basico/README.md) | — |
+| 03.11 | **Container Runtime** | [📖 Estudar](container-runtime/README.md) | [🧪 Lab 03.11](labs/container-runtime-basico/README.md) | — |
+| 03.12 | **CNI e comunicação de rede** | [📖 Estudar](cni-comunicacao/README.md) | [🧪 Lab 03.12](labs/cni-comunicacao-basico/README.md) | [Consultar](cni-comunicacao/complementares/README.md) |
+| 03.13 | **kube-proxy e eBPF** | [📖 Estudar](kube-proxy-ebpf/README.md) | [🧪 Lab 03.13](labs/kube-proxy-ebpf-basico/README.md) | [Consultar](kube-proxy-ebpf/complementares/README.md) |
+| 03.14 | **CoreDNS e Service Discovery** | [📖 Estudar](coredns/README.md) | [🧪 Lab 03.14](labs/coredns-basico/README.md) | — |
+| 03.15 | **CSI e Storage** | [📖 Estudar](csi-storage/README.md) | [🧪 Lab 03.15](labs/csi-storage-basico/README.md) | [Consultar](csi-storage/complementares/README.md) |
+| 03.16 | **Gateway API** | [📖 Estudar](gateway-api/README.md) | [🧪 Lab 03.16](labs/gateway-api-basico/README.md) | [Consultar](gateway-api/complementares/README.md) |
+| 03.17 | **Kustomize e Helm** | [📖 Estudar](kustomize-helm/README.md) | [🧪 Lab 03.17](labs/kustomize-helm-basico/README.md) | [Consultar](kustomize-helm/complementares/README.md) |
+
+## 🧪 Como estudar
+
+Em cada aula, leia o conceito e o exemplo interpretado, depois abra o lab. O aluno executa `make lab-prepare LAB=03.XX`, preenche o starter em `.labs/03.XX/`, aplica com `kubectl apply`, observa, executa `make lab-test` e remove recursos com `make lab-down`. `make lab-up` usa a solução e **não é a prática inicial do aluno**.
+
+**Evidência obrigatória:** estado declarado, comportamento observado, interpretação causal e cleanup. **Complementares não são pré-requisitos**: existem somente quando oferecem comparações, matrizes de decisão ou diagnóstico adicional.
+
+## ⚠️ Limites da prática
+
+- **03.03:** o lab observa persistência via API; não acessa diretamente as chaves do etcd nem executa restore.
+- **03.06:** instala CRD didática de escopo do cluster. Use **somente Kind descartável**; a exclusão de uma CRD pode excluir suas instâncias.
+- **03.07:** usa Deployment para observar **reconciliação nativa**. Não implementa um Operator personalizado.
+- **03.08:** Pod Pending é o resultado esperado do exercício de scheduler, não um erro do lab.
+- **03.09:** Kind sem integração cloud não fornece LoadBalancer externo, e isso é esperado.
+- **03.13:** declarar Service e observar EndpointSlices não prova implementação eBPF.
+- **03.15:** exige StorageClass funcional; o Kind pode usar provisionador local em vez de CSI.
+- **03.16:** sem CRDs/controlador Gateway, a experiência funcional de HTTPRoute é **dependência não atendida**. O lab básico valida somente backend nativo.
+- **03.17:** `kubectl kustomize` funciona sem Helm; comparação com Helm depende do binário e chart inspecionado.
+
+**Homologação:** arquivos e contratos não são equivalentes a execução funcional. A CI verifica construção, schema básico, links e um smoke Kind definido por versão. Experimentos guiados só podem ser considerados homologados com evidências específicas.
+
+## ✅ Conclusão da camada
+
+- [ ] Expliquei separadamente persistência, reconciliação, scheduling e execução.
+- [ ] Observei recursos de Control Plane e Workers sem alterar componentes do sistema.
+- [ ] Criei e consultei uma CR, distinguindo a API customizada de seu controlador.
+- [ ] Comparei Pod IP, Service, EndpointSlices e DNS com resultados reais.
+- [ ] Demonstrei persistência de PVC e distingui CSI de provisionador local.
+- [ ] Identifiquei pré-requisitos ausentes para cloud-controller e Gateway API.
+- [ ] Registrei hipótese, evidência, interpretação e limpeza de cada lab.
+
+## 🔗 Referências oficiais
+
+[Componentes Kubernetes](https://kubernetes.io/docs/concepts/overview/components/) · [Extensão da API](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/) · [Rede](https://kubernetes.io/docs/concepts/cluster-administration/networking/) · [Storage](https://kubernetes.io/docs/concepts/storage/)
 
 ---
 
-## 🧭 Mapa dos componentes
-
-| **CONTROL PLANE** | **WORKER NODES** |
-| :--- | :--- |
-| 🎛️ **Decidem, coordenam e reconciliam.**<br>API Server, etcd, Scheduler, Controller Manager, CRDs e reconciliação personalizada.<br><br>[**Conhecer os componentes oficiais →**](https://kubernetes.io/docs/concepts/overview/components/) | ⚙️ **Executam e conectam os Pods.**<br>kubelet, container runtime e mecanismos de rede.<br><br>[**Explorar a arquitetura de nós →**](https://kubernetes.io/docs/concepts/architecture/nodes/) |
-| **REDE E DESCOBERTA** | **ARMAZENAMENTO E EXTENSÃO** |
-| 🌐 CNI, Service networking, CoreDNS, Gateway API e opções de dataplane.<br><br>[**Entender a rede →**](https://kubernetes.io/docs/concepts/cluster-administration/networking/) | 💾 CSI, provisionamento de volumes, extensibilidade da API, Kustomize e Helm.<br><br>[**Conceitos de storage →**](https://kubernetes.io/docs/concepts/storage/) |
-
-## 📚 Catálogo de arquitetura — ordem de estudo
-
-Os números refletem a sequência didática. **Páginas visuais** existem para os 17 temas. Os guias de CRDs e Controllers já têm conteúdo teórico introdutório; as demais páginas possuem o infográfico e aguardam aprofundamento.
-
-| Aula | Conceito | O que aprender | Material |
-| --- | --- | --- | --- |
-| 03.01 | Arquitetura do Cluster Kubernetes | Control Plane e Workers | [🎨 Infográfico](arquitetura-cluster/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/) |
-| 03.02 | kube-apiserver | API, autenticação e autorização | [🎨 Infográfico](kube-apiserver/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver) |
-| 03.03 | etcd | Persistência do estado | [🎨 Infográfico](etcd/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#etcd) |
-| 03.04 | Admission Controllers | Validação e mutação de requisições | [🎨 Infográfico](admission-controllers/README.md) · [Referência](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) |
-| 03.05 | kube-controller-manager | Loops de reconciliação nativos | [🎨 Infográfico](kube-controller-manager/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager) |
-| **03.06** | **CRDs e Custom Resources** | **Estender a API Kubernetes** | **[📖 Estudar](crds-custom-resources/README.md)** |
-| **03.07** | **Custom Controllers e Operators** | **Implementar reconciliação própria** | **[📖 Estudar](custom-controllers-operators/README.md)** |
-| 03.08 | kube-scheduler | Agendamento de Pods | [🎨 Infográfico](kube-scheduler/README.md) · [Referência](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/) |
-| 03.09 | cloud-controller-manager | Integração com provedores cloud | [🎨 Infográfico](cloud-controller-manager/README.md) · [Referência](https://kubernetes.io/docs/concepts/architecture/cloud-controller/) |
-| 03.10 | kubelet | Agente em cada nó | [🎨 Infográfico](kubelet/README.md) · [Referência](https://kubernetes.io/docs/concepts/overview/components/#kubelet) |
-| 03.11 | Container Runtime | Execução via CRI | [🎨 Infográfico](container-runtime/README.md) · [Referência](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) |
-| 03.12 | CNI e comunicação de rede | Conectividade dos Pods | [🎨 Infográfico](cni-comunicacao/README.md) · [Referência](https://kubernetes.io/docs/concepts/cluster-administration/networking/) |
-| 03.13 | kube-proxy e eBPF | Dataplane de Services | [🎨 Infográfico](kube-proxy-ebpf/README.md) · [Referência](https://kubernetes.io/docs/reference/networking/virtual-ips/) |
-| 03.14 | CoreDNS e Service Discovery | DNS de serviços e Pods | [🎨 Infográfico](coredns/README.md) · [Referência](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) |
-| 03.15 | CSI e Storage | Integração de volumes e drivers | [🎨 Infográfico](csi-storage/README.md) · [Referência](https://kubernetes.io/docs/concepts/storage/volumes/#csi) |
-| 03.16 | Gateway API | APIs de roteamento de tráfego | [🎨 Infográfico](gateway-api/README.md) · [Referência](https://gateway-api.sigs.k8s.io/) |
-| 03.17 | Kustomize e Helm | Customização e empacotamento | [🎨 Infográfico](kustomize-helm/README.md) · [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/) · [Helm](https://helm.sh/docs/) |
-
-> **Status:** 17 infográficos publicados e vinculados às páginas; dois guias de introdução com teoria. Os labs de observação, CRDs e controllers ainda são roteiros, não exercícios validados.
-
-## 🔎 Observação guiada — próximos labs
-
-| Etapa | Pergunta para investigar | Ponto de observação |
-| :---: | --- | --- |
-| **01** | Onde ficam os componentes do Control Plane no Kind? | Pods do namespace `kube-system` |
-| **02** | O que acontece com um Pod sem nó elegível? | Pending e eventos de scheduling |
-| **03** | Como identificar em qual Worker um Pod roda? | `kubectl get pods -o wide` e Node |
-| **04** | Como um Service é descoberto por DNS? | CoreDNS e consultas internas |
-| **05** | Qual a diferença entre Service e implementação do dataplane? | kube-proxy ou solução alternativa instalada |
-
-Esses são **roteiros de investigação**, não scripts testados. O cloud-controller-manager pode não existir no Kind, e a implementação de rede depende da configuração do cluster.
-
-## 🎯 Checklist de aprendizado
-
-- [ ] Explicar o fluxo `kubectl → API Server → controllers/scheduler → kubelet`.
-- [ ] Distinguir estado persistido no etcd e execução dos containers.
-- [ ] Identificar responsabilidades de CNI, CoreDNS, kube-proxy e CSI.
-- [ ] Descrever as diferenças entre arquitetura local e gerenciada em cloud.
-- [ ] Diferenciar CRDs, Custom Resources e controladores que reconciliam o estado.
-
-## 🔗 Materiais relacionados
-
-[Fundamentos originais](../../1-fundamentos/README.md) · [Topologia Kind](../../kind-config.yaml) · [Documentação Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components/)
-
----
-
-[**← 02 · Operação e Segurança**](../02-operacao-seguranca/README.md) · [↑ Roadmap](../../docs/roadmap.md) · **[04 · Platform Engineering →](../04-platform-engineering/README.md)**
+[← Camada 02](../02-operacao-seguranca/README.md) · [↑ Roadmap](../../docs/roadmap.md) · [Próxima: Camada 04 →](../04-platform-engineering/README.md)

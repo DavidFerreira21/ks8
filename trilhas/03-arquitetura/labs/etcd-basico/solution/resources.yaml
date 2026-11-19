@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registro
+  namespace: lab-03-03
+data:
+  revisao: primeira

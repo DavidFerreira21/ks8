@@ -1,50 +1,69 @@
-# 🧩 03.06 · CRDs e Custom Resources
+# 03.06 · CRDs e Custom Resources
 
-[⌂ Início](../../../README.md) · [↑ Camada 03](../README.md) · [🗺️ Roadmap](../../../docs/roadmap.md)
+[⌂ Início](../../../README.md) · [↑ Camada 03](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
-> **Objetivo:** entender como estender a API Kubernetes com novos tipos de recursos e diferenciá-los dos controladores que atuam sobre eles.
+> **Ao concluir esta aula, você será capaz de:** Criar um novo tipo de API e uma instância validada por schema, distinguindo armazenamento de reconciliação.
 
 ## 🎨 Infográfico
 
 ![03.06 — CRDs e Custom Resources](images/crds-custom-resources.png)
 
-> Imagem disponível no repositório; confira detalhes técnicos na documentação da aula.
+## 📖 Aula teórica
 
+### Contexto e responsabilidade
 
-## 📖 Conceito
+Uma CustomResourceDefinition registra um grupo, versão, escopo e schema de recursos personalizados. Uma Custom Resource é uma instância desse tipo. O API Server passa a aceitar e armazenar o objeto, mas não cria automaticamente recursos de infraestrutura ou aplicações.
 
-Uma **CustomResourceDefinition (CRD)** registra um novo tipo de recurso na API Kubernetes. Uma **Custom Resource (CR)** é uma instância desse tipo, declarada e consultada com as ferramentas usuais do cluster.
+### Como o mecanismo funciona
 
-Por exemplo, uma CRD poderia definir o tipo fictício `AppEnvironment`, com campos em `spec` para indicar a configuração desejada. A presença do objeto na API **não cria automaticamente** Deployments, ConfigMaps ou infraestrutura: essa lógica exige um controlador.
+Em `apiextensions.k8s.io/v1`, uma CRD define `spec.group`, `names`, `scope`, versões `served/storage` e `openAPIV3Schema`. O schema pode exigir campos e restringir tipos. `spec` representa a intenção; `status` somente representa observação real quando um controlador o atualiza. A exclusão da CRD pode remover todas as instâncias vinculadas.
 
-| Conceito | Papel |
-| --- | --- |
-| **CRD** | Define grupo, versões, escopo e schema de um tipo personalizado |
-| **Custom Resource** | Instância declarativa do tipo, com `metadata` e `spec` |
-| **Schema / OpenAPI** | Valida campos e ajuda a orientar consumidores da API |
-| **Status** | Representa o estado observado, normalmente atualizado por um controlador |
+### Exemplo interpretado (trecho)
 
-## 🔎 Experimento guiado — planejado
+```yaml
+apiVersion: learning.example/v1
+kind: AppEnvironment
+metadata:
+  name: demonstra
+spec:
+  tier: sandbox
+```
 
-1. Criar uma CRD de laboratório para `AppEnvironment`, preferencialmente em um Kind descartável.
-2. Confirmar a descoberta do novo tipo com `kubectl api-resources`.
-3. Criar e consultar uma instância da Custom Resource.
-4. Testar a validação de schema alterando um campo obrigatório.
-5. Remover os recursos com cuidado; **apagar a CRD remove também todas as instâncias desse tipo**.
+A instância é aceita apenas depois de registrar uma CRD compatível. A presença da CR não instala um reconciler nem cria outros recursos. O trecho ilustra campos essenciais; consulte o lab para escrever o manifesto completo.
 
-**Status:** guia conceitual publicado; manifests e lab executável ainda não adicionados nem testados.
+### Inspeção no Kind
 
-## 🎯 Você deverá conseguir
+```bash
+kubectl config current-context
+kubectl get crd appenvironments.learning.example
+kubectl api-resources --api-group=learning.example
+kubectl get appenvironments -n lab-03-06
+kubectl explain appenvironment.spec
+```
 
-- [ ] Explicar a diferença entre CRD e instância de Custom Resource.
-- [ ] Descrever a função de `spec`, `status` e validação por schema.
-- [ ] Explicar por que uma CRD isolada não implementa reconciliação.
-- [ ] Reconhecer o risco de apagar uma CRD com instâncias existentes.
+**Interpretação:** Observe a descoberta de `AppEnvironment` depois de registrar a CRD. Crie um recurso válido e tente um manifesto inválido com `--dry-run=server` para obter erro de schema.
 
-## 🔗 Referências
+### Limites e segurança
 
-[Kubernetes · Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) · [Kubernetes · Extend the API](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/)
+CRDs são cluster-scoped, ainda que as instâncias possam ser namespaced. Nunca reutilize nomes reais de CRDs de uma plataforma; exclua a definição apenas no Kind descartável e registre dependências.
+
+## 🧪 Aplicação prática
+
+[🧪 Lab 03.06 — CRDs e Custom Resources](../labs/crds-custom-resources-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.
+
+**Complementar opcional:** [Guia de decisões e diagnóstico](complementares/README.md). Útil para aprofundar, não é pré-requisito.
+
+## ✅ Revisão do aprendizado
+
+- Por que uma Custom Resource existente não cria infraestrutura sem um reconciler?
+- Que diferença existe entre uma CRD e uma instância da Custom Resource?
+- O que acontece com as instâncias ao excluir a CRD e por que isso importa?
+
+## 🔗 Referências oficiais
+
+- [Kubernetes — documentação do componente](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
+- [Arquitetura e componentes](https://kubernetes.io/docs/concepts/overview/components/)
 
 ---
 
-[← kube-controller-manager: índice da camada](../README.md) · [Próximo: Custom Controllers e Operators →](../custom-controllers-operators/README.md)
+[← Aula 03.05](../kube-controller-manager/README.md) · [↑ Camada 03](../README.md) · [🧪 Lab 03.06](../labs/crds-custom-resources-basico/README.md) · [Próxima: Aula 03.07 →](../custom-controllers-operators/README.md)

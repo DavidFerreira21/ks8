@@ -1,0 +1,8 @@
+# EXERCÍCIO 03.11: complete o YAML sem copiar a solução
+apiVersion: v1
+kind: Pod
+metadata:
+  name: runtime-demo
+  namespace: lab-03-11
+spec:
+  # TODO: container BusyBox app com sleep

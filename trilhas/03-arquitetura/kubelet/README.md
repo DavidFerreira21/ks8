@@ -1,25 +1,67 @@
 # 03.10 · kubelet
 
-[↑ Camada 03](../README.md) · [📚 Catálogo de 52 aulas](../../../docs/catalogo.md)
+[⌂ Início](../../../README.md) · [↑ Camada 03](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Explicar como o kubelet transforma uma atribuição de Pod ao nó em execução e diagnosticar divergências entre node, Pod e container.
 
 ## 🎨 Infográfico
 
 ![03.10 — kubelet](images/kubelet.png)
 
-> O infográfico oferece uma visão geral. Confira os detalhes técnicos durante o estudo da aula.
-
 ## 📖 Aula teórica
 
-**Em preparação.** A imagem está publicada, mas a explicação aprofundada, os exemplos e as referências ainda serão adicionados.
+### Responsabilidade na arquitetura
 
-## 🧪 Laboratório / observação
+O kubelet é o agente em cada nó. Ele observa Pods atribuídos ao nó, interage com o container runtime via CRI, gerencia volumes e probes e publica status das execuções de volta ao API Server.
 
-**Planejado.** Ainda não há um roteiro executável validado para este tema. A proposta será completar a aula com pré-requisitos, experimentos, resultados esperados e limpeza segura.
+### Mecanismo e fluxo de execução
 
-## 🔎 Diagnóstico e conclusão
+O scheduler escolhe o nó, mas não cria processos. Kubelet lê `PodSpec` e mantém containers em execução, coordena probes e reporta `containerStatuses`, reinícios e condições. A ausência de kubelet saudável pode produzir nó `NotReady` e Pods sem status atualizado. Static Pods são definidos localmente e refletidos como mirror Pods na API, com semântica distinta de Deployments.
 
-O roteiro de diagnóstico e o checklist de aprendizado serão incluídos com a aula completa.
+### Exemplo interpretado (trecho)
+
+```yaml
+spec:
+  nodeName: dev-worker
+status:
+  phase: Running
+  containerStatuses:
+    - name: app
+      ready: true
+```
+
+O fragmento é uma representação didática: os campos de status são observados, não editados pelo aluno; os demais exemplos podem exigir objetos adicionais para constituir um manifesto completo.
+
+### Inspeção e sinais observáveis
+
+```bash
+kubectl config current-context
+kubectl get nodes -o wide
+kubectl describe node dev-worker
+kubectl get pod agente-demo -n lab-03-10 -o yaml
+```
+
+**Interpretação:** Observe o Node atribuído e `containerStatuses`, incluindo contagem de reinícios. Mude a probe do Pod didático por uma hipótese testável e compare eventos.
+
+### Cuidados e limites
+
+Não altere configuração do kubelet em nós compartilhados. Um Pod em `Running` não garante que sua aplicação esteja pronta; associe readiness e eventos.
+
+## 🧪 Aplicação prática
+
+[🧪 Lab 03.10](../labs/kubelet-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.
+
+## ✅ Revisão do aprendizado
+
+- Qual diferença existe entre atribuir Pod a nó e iniciar o container?
+- Como kubelet participa das probes e dos eventos de reinício?
+- Que sinal você examinaria antes de atribuir um problema ao runtime?
+
+## 🔗 Referências oficiais
+
+- [Documentação oficial do conceito](https://kubernetes.io/docs/concepts/architecture/nodes/)
+- [Arquitetura e componentes](https://kubernetes.io/docs/concepts/overview/components/)
 
 ---
 
-[↑ Índice da camada](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+[← Aula 03.09](../cloud-controller-manager/README.md) · [↑ Camada 03](../README.md) · [🧪 Lab 03.10](../labs/kubelet-basico/README.md) · [Próxima: Aula 03.11 →](../container-runtime/README.md)

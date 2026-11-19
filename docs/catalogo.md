@@ -4,9 +4,9 @@
 
 Este é o **catálogo curricular**, não uma indicação de que todos os conteúdos, imagens e laboratórios já foram publicados.
 
-**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A experiência prática pode ser um lab executável ou uma observação guiada, conforme o tema. As Camadas 01 e 02 agora possuem 14 roteiros de lab cada; a homologação funcional depende de cobertura e execução específica na CI.
+**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A experiência prática pode ser um lab executável ou uma observação guiada, conforme o tema. As Camadas 01, 02 e 03 possuem, respectivamente, 14, 14 e 17 labs documentados; a homologação funcional depende de execução e evidências específicas na CI.
 
-**Situação:** 📖 aula com material teórico · 🎨 infográfico publicado, teoria em preparação. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 52 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
+**Situação:** 📖 aula teórica disponível · 🎨 infográfico publicado. O estado e a homologação dos labs são registrados nos índices de cada camada. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 52 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
 
 ## 01 · Fundamentos e recursos essenciais
 
@@ -56,23 +56,23 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 
 | Aula | Tema | Guia |
 | --- | --- | --- |
-| 03.01 | Arquitetura do Cluster Kubernetes | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/arquitetura-cluster/README.md) |
-| 03.02 | kube-apiserver | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/kube-apiserver/README.md) |
-| 03.03 | etcd | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/etcd/README.md) |
-| 03.04 | Admission Controllers | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/admission-controllers/README.md) |
-| 03.05 | kube-controller-manager | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/kube-controller-manager/README.md) |
+| 03.01 | Arquitetura do Cluster Kubernetes | [📖 Aula + infográfico](../trilhas/03-arquitetura/arquitetura-cluster/README.md) |
+| 03.02 | kube-apiserver | [📖 Aula + infográfico](../trilhas/03-arquitetura/kube-apiserver/README.md) |
+| 03.03 | etcd | [📖 Aula + infográfico](../trilhas/03-arquitetura/etcd/README.md) |
+| 03.04 | Admission Controllers | [📖 Aula + infográfico](../trilhas/03-arquitetura/admission-controllers/README.md) |
+| 03.05 | kube-controller-manager | [📖 Aula + infográfico](../trilhas/03-arquitetura/kube-controller-manager/README.md) |
 | 03.06 | CRDs e Custom Resources | [📖 Aula + infográfico](../trilhas/03-arquitetura/crds-custom-resources/README.md) |
 | 03.07 | Custom Controllers e Operators | [📖 Aula + infográfico](../trilhas/03-arquitetura/custom-controllers-operators/README.md) |
-| 03.08 | kube-scheduler | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/kube-scheduler/README.md) |
-| 03.09 | cloud-controller-manager | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/cloud-controller-manager/README.md) |
-| 03.10 | kubelet | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/kubelet/README.md) |
-| 03.11 | Container Runtime | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/container-runtime/README.md) |
-| 03.12 | CNI e comunicação de rede | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/cni-comunicacao/README.md) |
-| 03.13 | kube-proxy e eBPF | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/kube-proxy-ebpf/README.md) |
-| 03.14 | CoreDNS e Service Discovery | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/coredns/README.md) |
-| 03.15 | CSI e Storage | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/csi-storage/README.md) |
-| 03.16 | Gateway API | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/gateway-api/README.md) |
-| 03.17 | Kustomize e Helm | [🎨 Infográfico · teoria em preparação](../trilhas/03-arquitetura/kustomize-helm/README.md) |
+| 03.08 | kube-scheduler | [📖 Aula + infográfico](../trilhas/03-arquitetura/kube-scheduler/README.md) |
+| 03.09 | cloud-controller-manager | [📖 Aula + infográfico](../trilhas/03-arquitetura/cloud-controller-manager/README.md) |
+| 03.10 | kubelet | [📖 Aula + infográfico](../trilhas/03-arquitetura/kubelet/README.md) |
+| 03.11 | Container Runtime | [📖 Aula + infográfico](../trilhas/03-arquitetura/container-runtime/README.md) |
+| 03.12 | CNI e comunicação de rede | [📖 Aula + infográfico](../trilhas/03-arquitetura/cni-comunicacao/README.md) |
+| 03.13 | kube-proxy e eBPF | [📖 Aula + infográfico](../trilhas/03-arquitetura/kube-proxy-ebpf/README.md) |
+| 03.14 | CoreDNS e Service Discovery | [📖 Aula + infográfico](../trilhas/03-arquitetura/coredns/README.md) |
+| 03.15 | CSI e Storage | [📖 Aula + infográfico](../trilhas/03-arquitetura/csi-storage/README.md) |
+| 03.16 | Gateway API | [📖 Aula + infográfico](../trilhas/03-arquitetura/gateway-api/README.md) |
+| 03.17 | Kustomize e Helm | [📖 Aula + infográfico](../trilhas/03-arquitetura/kustomize-helm/README.md) |
 
 ## 04 · Ferramentas do ecossistema Kubernetes
 

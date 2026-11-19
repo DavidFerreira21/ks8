@@ -1,0 +1,7 @@
+# EXERCÍCIO 03.03: complete o manifesto sem consultar solution/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registro
+  namespace: lab-03-03
+# TODO: data.revisao = primeira

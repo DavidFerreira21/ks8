@@ -137,6 +137,34 @@ Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incomple
 **CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. Os labs 02.09, 02.12, 02.13 e 02.14 permanecem fora do smoke Kind geral por exigirem validação específica de PriorityClass, manutenção de nó, enforcement de NetworkPolicy ou diagnóstico de imagem inválida.
 **Experimentos adicionais:** 02.03 compara `warn` com `enforce` por dry-run de servidor, sem criar Pod privilegiado; 02.08 demonstra agendamento impossível com `minDomains: 3` e dois workers elegíveis; 02.10 compara QoS de um quarto Pod; 02.12 demonstra que cordon impede novos agendamentos. Os arquivos ficam em `experiments/` e exigem limpeza própria.
 
+## Camada 03 — Arquitetura e infraestrutura
+
+Os 17 labs seguem o [contrato editorial](padrao-editorial.md) e o [índice da Camada 03](../trilhas/03-arquitetura/README.md). O aluno começa no starter, escreve e aplica seu próprio YAML, compara estado declarado com comportamento observado e limpa recursos.
+
+| ID | Laboratório |
+| --- | --- |
+| 03.01 | [🧪 Lab 03.01](../trilhas/03-arquitetura/labs/arquitetura-cluster-basico/README.md) |
+| 03.02 | [🧪 Lab 03.02](../trilhas/03-arquitetura/labs/kube-apiserver-basico/README.md) |
+| 03.03 | [🧪 Lab 03.03](../trilhas/03-arquitetura/labs/etcd-basico/README.md) |
+| 03.04 | [🧪 Lab 03.04](../trilhas/03-arquitetura/labs/admission-controllers-basico/README.md) |
+| 03.05 | [🧪 Lab 03.05](../trilhas/03-arquitetura/labs/kube-controller-manager-basico/README.md) |
+| 03.06 | [🧪 Lab 03.06](../trilhas/03-arquitetura/labs/crds-custom-resources-basico/README.md) |
+| 03.07 | [🧪 Lab 03.07](../trilhas/03-arquitetura/labs/custom-controllers-operators-basico/README.md) |
+| 03.08 | [🧪 Lab 03.08](../trilhas/03-arquitetura/labs/kube-scheduler-basico/README.md) |
+| 03.09 | [🧪 Lab 03.09](../trilhas/03-arquitetura/labs/cloud-controller-manager-basico/README.md) |
+| 03.10 | [🧪 Lab 03.10](../trilhas/03-arquitetura/labs/kubelet-basico/README.md) |
+| 03.11 | [🧪 Lab 03.11](../trilhas/03-arquitetura/labs/container-runtime-basico/README.md) |
+| 03.12 | [🧪 Lab 03.12](../trilhas/03-arquitetura/labs/cni-comunicacao-basico/README.md) |
+| 03.13 | [🧪 Lab 03.13](../trilhas/03-arquitetura/labs/kube-proxy-ebpf-basico/README.md) |
+| 03.14 | [🧪 Lab 03.14](../trilhas/03-arquitetura/labs/coredns-basico/README.md) |
+| 03.15 | [🧪 Lab 03.15](../trilhas/03-arquitetura/labs/csi-storage-basico/README.md) |
+| 03.16 | [🧪 Lab 03.16](../trilhas/03-arquitetura/labs/gateway-api-basico/README.md) |
+| 03.17 | [🧪 Lab 03.17](../trilhas/03-arquitetura/labs/kustomize-helm-basico/README.md) |
+
+**Escopo da homologação:** 03.06 requer CRD de teste no Kind isolado; 03.08 produz Pod Pending por design; 03.09 não provisiona LoadBalancer externo; 03.13 não prova eBPF; 03.15 depende de StorageClass; 03.16 não instala Gateway Controller. Esses limites não podem ser ocultados por um check declarativo aprovado.
+
+**Validação:** use os testes Python, make validate e integração Kind quando habilitada. Testes editoriais, contratos, cluster e comportamento funcional são níveis distintos.
+
 ## Aprendizado orientado por observação
 
 O fluxo recomendado é **escrever YAML → aplicar com kubectl → observar → experimentar → testar → limpar**. `make lab-prepare` cria apenas o namespace, os recursos de apoio explicitamente declarados e uma cópia local do starter em `.labs/<ID>/`, preservando suas alterações existentes. A solução não é aplicada neste comando. O comando `lab-observe` mostra recursos do namespace e eventos recentes, além de destacar Deployments, quotas e EndpointSlices quando relevantes.

@@ -47,6 +47,9 @@ jobs:
       - name: Run integrated labs
         run: bash scripts/ci-kind-smoke.sh
 
+      - name: Run Camada 03 integrated labs
+        run: bash scripts/ci-kind-layer03.sh
+
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4

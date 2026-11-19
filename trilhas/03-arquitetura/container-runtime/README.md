@@ -1,25 +1,66 @@
 # 03.11 · Container Runtime
 
-[↑ Camada 03](../README.md) · [📚 Catálogo de 52 aulas](../../../docs/catalogo.md)
+[⌂ Início](../../../README.md) · [↑ Camada 03](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+
+> **Ao concluir esta aula, você será capaz de:** Diferenciar kubelet, CRI, runtime e imagem OCI ao explicar o ciclo de vida de um container Kubernetes.
 
 ## 🎨 Infográfico
 
 ![03.11 — Container Runtime](images/container-runtime.png)
 
-> O infográfico oferece uma visão geral. Confira os detalhes técnicos durante o estudo da aula.
-
 ## 📖 Aula teórica
 
-**Em preparação.** A imagem está publicada, mas a explicação aprofundada, os exemplos e as referências ainda serão adicionados.
+### Responsabilidade na arquitetura
 
-## 🧪 Laboratório / observação
+O container runtime executa containers segundo solicitações do kubelet, geralmente via Container Runtime Interface (CRI). Containerd e CRI-O são exemplos. A imagem define camadas e metadados para execução; o PodSpec determina como ela será iniciada.
 
-**Planejado.** Ainda não há um roteiro executável validado para este tema. A proposta será completar a aula com pré-requisitos, experimentos, resultados esperados e limpeza segura.
+### Mecanismo e fluxo de execução
 
-## 🔎 Diagnóstico e conclusão
+Kubelet solicita pull, criação e início de containers ao runtime. O runtime lida com isolamento e execução, mas não decide scheduling e não define controllers. Falhas de imagem como `ErrImagePull` e `ImagePullBackOff` ocorrem antes do início do processo; `CrashLoopBackOff` exige um processo que iniciou e encerrou repetidamente.
 
-O roteiro de diagnóstico e o checklist de aprendizado serão incluídos com a aula completa.
+### Exemplo interpretado (trecho)
+
+```yaml
+status:
+  containerStatuses:
+    - name: app
+      image: busybox:1.36
+      imageID: "sha256:..."
+      containerID: "containerd://..."
+```
+
+O fragmento é uma representação didática: os campos de status são observados, não editados pelo aluno; os demais exemplos podem exigir objetos adicionais para constituir um manifesto completo.
+
+### Inspeção e sinais observáveis
+
+```bash
+kubectl config current-context
+kubectl get pod runtime-demo -n lab-03-11 -o yaml
+kubectl describe pod runtime-demo -n lab-03-11
+kubectl get node dev-worker -o jsonpath='{.status.nodeInfo.containerRuntimeVersion}'
+```
+
+**Interpretação:** Compare `image`, `imageID`, `containerID` e `containerStatuses` para reconhecer como a imagem declarada se relaciona com o container efetivo.
+
+### Cuidados e limites
+
+Não confunda Docker no host do Kind com o runtime utilizado dentro do nó Kubernetes. Não manipule diretamente containers via `docker rm` para 'consertar' Pods gerenciados.
+
+## 🧪 Aplicação prática
+
+[🧪 Lab 03.11](../labs/container-runtime-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.
+
+## ✅ Revisão do aprendizado
+
+- Por que `ImagePullBackOff` ocorre antes de um processo iniciar?
+- Qual interface o kubelet usa com o runtime?
+- Onde aparecem os IDs de imagem e do container observado?
+
+## 🔗 Referências oficiais
+
+- [Documentação oficial do conceito](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
+- [Arquitetura e componentes](https://kubernetes.io/docs/concepts/overview/components/)
 
 ---
 
-[↑ Índice da camada](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
+[← Aula 03.10](../kubelet/README.md) · [↑ Camada 03](../README.md) · [🧪 Lab 03.11](../labs/container-runtime-basico/README.md) · [Próxima: Aula 03.12 →](../cni-comunicacao/README.md)
