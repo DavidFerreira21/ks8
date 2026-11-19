@@ -40,6 +40,18 @@ Confirme Service/EndpointSlices e execute `kubectl api-resources --api-group=gat
 
 Leia `examples/httproute.yaml` e identifique parentRefs/backendRefs. **Somente se CRDs Gateway API e Gateway Controller estiverem instalados**, crie Gateway apropriado e aplique a rota; caso contrário, registre ausência de dependência e NÃO afirme teste de HTTPRoute.
 
+### Separar o backend HTTP da Gateway API
+
+Com o Service nginx pronto, em outro terminal execute:
+
+```bash
+kubectl -n lab-03-16 port-forward svc/web 18080:80
+```
+
+No terminal principal use `curl --fail http://127.0.0.1:18080/`. Esse sucesso **confirma apenas o backend**, não a Gateway API.
+
+Para obter condições `Accepted`, `Programmed` e `ResolvedRefs` e tráfego através de Gateway/HTTPRoute reais, execute o [roteiro opcional com Envoy Gateway](experiments/README.md). Se a API/controller não existir no Kind, registre **pendência funcional**, e não sucesso fictício.
+
 ## Resultado esperado e evidências
 
 Backend nativo pode ser testado no Kind. Uma HTTPRoute sem API/controller não resulta em tráfego; existência do YAML não é prova de programação.

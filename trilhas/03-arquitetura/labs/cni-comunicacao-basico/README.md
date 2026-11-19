@@ -40,6 +40,17 @@ Anote IP e nó do Pod nginx via `kubectl get pods -n lab-03-12 -o wide`.
 
 Use `kubectl exec -n lab-03-12 cliente -- wget -qO- http://IP_DO_POD_NGINX` substituindo pelo IP observado. Compare o resultado com o estado do Pod, sem criar um Service.
 
+### Testar comunicação por IP de Pod sem DNS
+
+```bash
+kubectl rollout status deploy/web -n lab-03-12 --timeout=120s
+kubectl get pods -n lab-03-12 -o wide
+WEB_IP=$(kubectl get pods -n lab-03-12 -l app=web -o jsonpath='{.items[0].status.podIP}')
+kubectl exec -n lab-03-12 cliente -- wget -T 5 -qO- "http://$WEB_IP"
+```
+
+**Interpretação:** um HTTP válido por IP demonstra conectividade com o listener nginx; não prova DNS, Service nem políticas de rede. Registre também os nós de origem e destino para caracterizar a topologia observada.
+
 ## Resultado esperado e evidências
 
 Com processo nginx disponível e rede Pod funcional, o cliente alcança o IP do Pod. Isso **não** testa NetworkPolicy ou DNS.

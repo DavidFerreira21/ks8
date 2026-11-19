@@ -40,6 +40,16 @@ Compare `status.containerStatuses`, `Ready`, `spec.nodeName` e `kubectl describe
 
 Execute `kubectl exec -n lab-03-10 agente-demo -- rm /tmp/pronto` e observe `Ready` ficar False; recrie o arquivo com `kubectl exec -n lab-03-10 agente-demo -- touch /tmp/pronto` e espere a condição voltar. O kubelet avalia a probe.
 
+### Instrumentação da readiness pelo kubelet
+
+```bash
+kubectl get pod agente-demo -n lab-03-10 -o jsonpath='{.status.containerStatuses[0].ready}{" "}{.status.containerStatuses[0].restartCount}{"\n"}'
+kubectl exec -n lab-03-10 agente-demo -- rm /tmp/pronto
+kubectl get pod agente-demo -n lab-03-10 -w
+```
+
+Espere a condição Ready tornar-se False e interrompa `-w` com Ctrl+C. Restaure `kubectl exec -n lab-03-10 agente-demo -- touch /tmp/pronto` e observe Ready=True. **Compare restartCount**: readiness falhar não deveria reiniciar o processo por si só. Esse contraste diferencia observação do kubelet de decisões do scheduler.
+
 ## Resultado esperado e evidências
 
 O processo continua executando, mas a readiness muda conforme o arquivo. Kubelet publica status; isso não é ação do scheduler.

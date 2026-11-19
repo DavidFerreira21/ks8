@@ -40,6 +40,19 @@ Execute `kubectl exec cliente -n lab-03-14 -- nslookup web.lab-03-14.svc.cluster
 
 Após confirmar resposta DNS e HTTP (`kubectl exec cliente -n lab-03-14 -- wget -qO- http://web:80`), altere temporariamente selector do Service para `app=nenhum`. DNS deve continuar resolvendo ClusterIP, mas o backend pode ficar indisponível. Restaure com apply.
 
+### Separar DNS de disponibilidade do backend
+
+```bash
+kubectl exec -n lab-03-14 cliente -- nslookup web.lab-03-14.svc.cluster.local
+kubectl exec -n lab-03-14 cliente -- wget -T 5 -qO- http://web
+kubectl patch service web -n lab-03-14 -p '{"spec":{"selector":{"app":"nao-existe"}}}'
+kubectl get endpointslices -n lab-03-14 -l kubernetes.io/service-name=web
+kubectl exec -n lab-03-14 cliente -- nslookup web.lab-03-14.svc.cluster.local
+kubectl apply -f .labs/03.14/resources.yaml
+```
+
+**Contraste:** mesmo quando o backend deixa de ter endpoints, DNS pode continuar resolvendo o `ClusterIP`. A recuperação dos endpoints exige restaurar o Service; não confunda sucesso do `nslookup` com HTTP disponível.
+
 ## Resultado esperado e evidências
 
 DNS retorna endereço do Service enquanto os endpoints podem deixar de apontar para Pods. Isso diferencia resolução de nome de roteamento/aplicação.

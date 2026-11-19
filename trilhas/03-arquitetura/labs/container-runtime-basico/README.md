@@ -40,6 +40,17 @@ Use `kubectl get pod runtime-demo -n lab-03-11 -o jsonpath='{.status.containerSt
 
 Em um Pod **temporário** `kubectl run imagem-invalida -n lab-03-11 --image=busybox:tag-ficticia-lab --restart=Never -- sleep 3600`, observe eventos de pull e remova com `kubectl delete pod imagem-invalida -n lab-03-11 --ignore-not-found`. Não modifique o runtime do nó.
 
+### Identificar a etapa em que a imagem falha
+
+```bash
+kubectl get pod runtime-demo -n lab-03-11 -o jsonpath='{.status.containerStatuses[0].containerID}{"\n"}'
+kubectl run imagem-invalida -n lab-03-11 --restart=Never --image=busybox:tag-ficticia-lab -- sleep 3600
+kubectl describe pod imagem-invalida -n lab-03-11
+kubectl delete pod imagem-invalida -n lab-03-11 --ignore-not-found
+```
+
+**Evidência:** compare `imageID/containerID` do Pod funcional com os eventos `ErrImagePull` ou `ImagePullBackOff` do outro. Erro de pull ocorre **antes** de criar o processo; não confunda com `CrashLoopBackOff`.
+
 ## Resultado esperado e evidências
 
 O Pod principal mostra `containerID` e `imageID`. O segundo Pod fica sem processo iniciado por falha de pull; não é CrashLoopBackOff.

@@ -40,6 +40,16 @@ Execute `kubectl kustomize trilhas/03-arquitetura/labs/kustomize-helm-basico/exa
 
 Altere somente o overlay `examples/overlays/staging/kustomization.yaml` em uma cópia local e compare a saída `kubectl kustomize`; não aplique saída imprevista automaticamente. Se Helm estiver instalado, use `helm template` apenas sobre chart que você mesmo criou/inspecionou.
 
+### Inspecionar renderização e diferença de ambientes
+
+```bash
+kubectl kustomize trilhas/03-arquitetura/labs/kustomize-helm-basico/examples/base
+kubectl kustomize trilhas/03-arquitetura/labs/kustomize-helm-basico/examples/overlays/staging
+kubectl get cm config-renderizada -n lab-03-17 -o jsonpath='{.data.ambiente}'
+```
+
+**Prova:** o overlay deve renderizar `ambiente: staging`, enquanto o recurso originalmente aplicado mantém `base`. Renderizar **não aplica** o patch no cluster. Caso Helm esteja instalado, compare sua etapa de template com o resultado do Kustomize, sem instalar charts de terceiros não revisados.
+
 ## Resultado esperado e evidências
 
 A base produz valor `base`; o overlay produz `staging`. Kustomize transforma YAML; Helm, quando disponível, renderiza templates e gerencia releases — capacidades relacionadas, não idênticas.
