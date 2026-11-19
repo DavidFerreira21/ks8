@@ -1,0 +1,10 @@
+id: "03.17"
+title: "Kustomize e Helm"
+namespace: lab-03-17
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: configmap
+    name: config-renderizada

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: agente-demo
+  namespace: lab-03-10
+spec:
+  containers:
+    - name: app
+      image: busybox:1.36
+      command: ["sh", "-c", "touch /tmp/pronto; sleep 3600"]
+      readinessProbe:
+        exec:
+          command: ["sh", "-c", "test -f /tmp/pronto"]
+        periodSeconds: 3

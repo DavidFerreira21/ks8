@@ -1,0 +1,14 @@
+# EXERCÍCIO 03.15: complete o YAML sem copiar a solução
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dados
+  namespace: lab-03-15
+# TODO: spec accessModes RWO e storage 256Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: escritor
+  namespace: lab-03-15
+# TODO: BusyBox monta PVC dados em /dados e preserva marcador

@@ -1,0 +1,7 @@
+# EXERCÍCIO 03.17: complete o YAML sem copiar a solução
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-renderizada
+  namespace: lab-03-17
+# TODO: data.ambiente=base

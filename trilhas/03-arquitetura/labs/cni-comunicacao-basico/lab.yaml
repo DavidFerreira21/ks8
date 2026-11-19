@@ -1,0 +1,12 @@
+id: "03.12"
+title: "CNI e comunicação de rede"
+namespace: lab-03-12
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: deployment
+    name: web
+  - type: pod-ready
+    name: cliente

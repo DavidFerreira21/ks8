@@ -1,0 +1,21 @@
+# EXERCÍCIO 03.14: complete o YAML sem copiar a solução
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: lab-03-14
+# TODO: nginx app=web
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: lab-03-14
+# TODO: ClusterIP selector app=web porta 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cliente
+  namespace: lab-03-14
+# TODO: BusyBox persistente

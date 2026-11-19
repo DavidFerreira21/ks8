@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-renderizada
+  namespace: lab-03-17
+data:
+  ambiente: base

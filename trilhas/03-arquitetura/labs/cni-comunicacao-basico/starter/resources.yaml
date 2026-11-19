@@ -1,0 +1,14 @@
+# EXERCÍCIO 03.12: complete o YAML sem copiar a solução
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: lab-03-12
+# TODO: selector, Pod template nginx
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cliente
+  namespace: lab-03-12
+# TODO: container BusyBox com sleep

@@ -1,0 +1,12 @@
+id: "03.15"
+title: "CSI e Storage"
+namespace: lab-03-15
+apply:
+  - solution/resources.yaml
+starter:
+  - starter/resources.yaml
+checks:
+  - type: pvc-bound
+    name: dados
+  - type: pod-ready
+    name: escritor

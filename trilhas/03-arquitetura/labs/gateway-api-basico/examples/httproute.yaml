@@ -1,0 +1,17 @@
+# Exemplo opcional: depende de Gateway API CRDs e de Gateway chamado demo.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: rota
+  namespace: lab-03-16
+spec:
+  parentRefs:
+    - name: demo
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: web
+          port: 80

@@ -1,0 +1,9 @@
+# EXERCÍCIO 03.10: complete o YAML sem copiar a solução
+apiVersion: v1
+kind: Pod
+metadata:
+  name: agente-demo
+  namespace: lab-03-10
+spec:
+  # TODO: container BusyBox que cria /tmp/pronto e permanece ativo
+  # TODO: readinessProbe exec que verifica /tmp/pronto
