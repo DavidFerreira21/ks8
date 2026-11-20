@@ -56,6 +56,24 @@ class CriticalLabSafetyTests(unittest.TestCase):
                 self.assertEqual(labctl.apply_student_lab(lab), 1)
                 kubectl.assert_not_called()
 
+    def test_student_apply_requires_explicit_namespace(self):
+        base = Path(__file__).resolve().parents[1]
+        metadata = base / "trilhas/03-arquitetura/labs/kube-apiserver-basico"
+        lab = labctl.Lab("03.02", "API", "lab-03-02", metadata,
+                         (metadata / "solution/resources.yaml",), (), (), (),
+                         (metadata / "starter/resources.yaml",))
+        with tempfile.TemporaryDirectory() as td:
+            local_root = Path(td)
+            ws = local_root / ".labs" / "03.02"
+            ws.mkdir(parents=True)
+            (ws / "resources.yaml").write_text(
+                "apiVersion: v1\\nkind: ConfigMap\\nmetadata:\\n  name: demo\\n",
+                encoding="utf-8")
+            with patch.object(labctl, "ROOT", local_root), \\
+                 patch.object(labctl, "kubectl") as kubectl:
+                self.assertEqual(labctl.apply_student_lab(lab), 1)
+                kubectl.assert_not_called()
+
     def test_student_apply_rejects_cross_namespace(self):
         base = Path(__file__).resolve().parents[1]
         metadata = base / "trilhas/03-arquitetura/labs/kube-apiserver-basico"

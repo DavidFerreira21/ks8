@@ -165,7 +165,7 @@ Os 17 labs seguem o [contrato editorial](padrao-editorial.md) e o [índice da Ca
 
 **Validação:** use os testes Python, make validate e integração Kind quando habilitada. Testes editoriais, contratos, cluster e comportamento funcional são níveis distintos.
 
-**Aplicação segura do YAML do aluno:** `make lab-apply LAB=XX.XX` aplica os arquivos em `.labs/XX.XX/` após conferir o contexto Kind, o namespace e a propriedade de objetos globais. Ele é **obrigatório nos roteiros 02.09 e 04.02**, que criam PriorityClass e XRD, e pode ser usado nos demais labs. Evite `kubectl apply` direto sobre recursos de escopo do cluster sem conferir a propriedade.
+**Aplicação segura do YAML do aluno:** `make lab-apply LAB=XX.XX` aplica os arquivos em `.labs/XX.XX/` após conferir o contexto Kind, exigir `metadata.namespace` explícito nos recursos namespaced, fixar o namespace da aplicação e verificar a propriedade de objetos globais. Ele é **obrigatório nos roteiros 02.09 e 04.02**, que criam PriorityClass e XRD, e pode ser usado nos demais labs. Evite `kubectl apply` direto sobre recursos de escopo do cluster sem conferir a propriedade.
 
 ## Camada 04 — Ferramentas do ecossistema
 

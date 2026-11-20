@@ -291,8 +291,9 @@ def apply_student_lab(lab: Lab) -> int:
                 print(f"FAIL: o lab não autoriza criar {kind}/{metadata['name']}",
                       file=sys.stderr)
                 return 1
-            if kind not in GLOBAL_LAB_KINDS and metadata.get("namespace", lab.namespace) != lab.namespace:
-                print(f"FAIL: namespace fora do escopo do lab: {metadata.get('namespace')}",
+            if kind not in GLOBAL_LAB_KINDS and metadata.get("namespace") != lab.namespace:
+                print(f"FAIL: informe metadata.namespace={lab.namespace} no objeto "
+                      f"{kind}/{metadata['name']}; namespace ausente ou fora do escopo",
                       file=sys.stderr)
                 return 1
     if _check_global_resources_ownership(lab, manifests):
@@ -300,7 +301,7 @@ def apply_student_lab(lab: Lab) -> int:
     if ensure_namespace(lab.namespace):
         return 1
     for source in manifests:
-        if kubectl("apply", "-f", str(source)).returncode:
+        if kubectl("apply", "-n", lab.namespace, "-f", str(source)).returncode:
             return 1
     return 0
 
