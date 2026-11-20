@@ -20,7 +20,9 @@ diagnostics() {
   # Reversão dos experimentos fora do contrato, também em falhas da CI.
   kubectl label namespace lab-02-03 pod-security.kubernetes.io/warn- pod-security.kubernetes.io/enforce- >/dev/null 2>&1 || true
   kubectl delete -f trilhas/02-operacao-seguranca/labs/topology-spread-basico/experiments/spread-impossivel.yaml --ignore-not-found >/dev/null 2>&1 || true
-  for lab in 02.11 02.10 02.08 02.07 02.06 02.05 02.04 02.03 02.02 02.01 01.12 01.11 01.10 01.09 01.08 01.07 01.06 01.05 01.04 01.03 01.02 01.01; do
+  kubectl uncordon dev-worker >/dev/null 2>&1 || true
+  kubectl delete -f trilhas/02-operacao-seguranca/labs/node-maintenance-basico/experiments/novo-pod.yaml --ignore-not-found >/dev/null 2>&1 || true
+  for lab in 02.14 02.12 02.11 02.10 02.09 02.08 02.07 02.06 02.05 02.04 02.03 02.02 02.01 01.12 01.11 01.10 01.09 01.08 01.07 01.06 01.05 01.04 01.03 01.02 01.01; do
     make lab-down LAB="$lab" || true
   done
   exit "$code"
@@ -61,6 +63,58 @@ for entry in 'sem-recursos:BestEffort' 'variavel:Burstable' 'garantido:Guarantee
 done
 kubectl rollout status deployment/replicas -n lab-02-11 --timeout=180s
 kubectl get pdb disponibilidade -n lab-02-11 -o yaml > "$report_dir/pdb-02.11.yaml"
+
+# Labs adicionais com comportamento funcional determinístico no Kind.
+# 02.09: a classe é global, mas pertence explicitamente ao lab.
+make lab-up LAB=02.09
+make lab-test LAB=02.09
+test "$(kubectl get priorityclass lab-02-priority -o jsonpath='{.preemptionPolicy}')" = Never
+test "$(kubectl get pod prioritario -n lab-02-09 -o jsonpath='{.spec.priority}')" = 1000
+kubectl get priorityclass lab-02-priority -o yaml > "$report_dir/priorityclass-02.09.yaml"
+
+# 02.12: cordon impede novos Pods mas não encerra Pod existente.
+make lab-up LAB=02.12
+make lab-test LAB=02.12
+test "$(kubectl get pod manutencao -n lab-02-12 -o jsonpath='{.spec.nodeName}')" = dev-worker
+kubectl cordon dev-worker
+kubectl apply -f trilhas/02-operacao-seguranca/labs/node-maintenance-basico/experiments/novo-pod.yaml
+for attempt in $(seq 1 20); do
+  phase="$(kubectl get pod novo-bloqueado -n lab-02-12 -o jsonpath='{.status.phase}')"
+  node="$(kubectl get pod novo-bloqueado -n lab-02-12 -o jsonpath='{.spec.nodeName}')"
+  if [[ "$phase" == Pending && -z "$node" ]]; then
+    break
+  fi
+  sleep 2
+done
+test "$phase" = Pending
+test -z "$node"
+test "$(kubectl get pod manutencao -n lab-02-12 -o jsonpath='{.status.phase}')" = Running
+kubectl describe pod novo-bloqueado -n lab-02-12 > "$report_dir/node-maintenance-02.12.txt"
+kubectl uncordon dev-worker
+kubectl wait --for=condition=Ready pod/novo-bloqueado -n lab-02-12 --timeout=120s
+kubectl delete -f trilhas/02-operacao-seguranca/labs/node-maintenance-basico/experiments/novo-pod.yaml --ignore-not-found
+
+# 02.14: falha intencional da imagem, seguida de correção demonstrável.
+make lab-up LAB=02.14
+make lab-test LAB=02.14
+image_failure=false
+for attempt in $(seq 1 40); do
+  reason="$(kubectl get pod diagnostico -n lab-02-14 -o jsonpath='{.status.containerStatuses[0].state.waiting.reason}')"
+  if [[ "$reason" == ErrImagePull || "$reason" == ImagePullBackOff ]]; then
+    image_failure=true
+    break
+  fi
+  sleep 3
+done
+if [[ "$image_failure" != true ]]; then
+  kubectl describe pod diagnostico -n lab-02-14 > "$report_dir/troubleshooting-02.14.txt"
+  echo "FAIL: 02.14 não demonstrou ErrImagePull/ImagePullBackOff" >&2
+  exit 1
+fi
+kubectl describe pod diagnostico -n lab-02-14 > "$report_dir/troubleshooting-02.14.txt"
+kubectl set image pod/diagnostico app=busybox:1.36 -n lab-02-14
+kubectl wait --for=condition=Ready pod/diagnostico -n lab-02-14 --timeout=180s
+kubectl get pod diagnostico -n lab-02-14 -o wide > "$report_dir/troubleshooting-recovered-02.14.txt"
 
 # PSA: contraste real entre warn e enforce sem criar Pod privilegiado.
 psa_manifest="trilhas/02-operacao-seguranca/labs/securitycontext-psa-basico/experiments/psa-incompativel.yaml"
@@ -159,4 +213,4 @@ kubectl get endpointslices -n lab-01-05 -l kubernetes.io/service-name=web \
 make lab-experiment LAB=01.12 EXPERIMENT=controlled-rollout
 make lab-experiment LAB=02.04 EXPERIMENT=reject-pod
 
-echo "Smoke test de 22 laboratórios e experimentos de PSA/Topology Spread concluído."
+echo "Smoke test de 25 laboratórios e experimentos de PSA/Topology Spread concluído."
