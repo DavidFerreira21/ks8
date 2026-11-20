@@ -89,4 +89,4 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 
 ---
 
-[← Lab 04.02](../crossplane-basico/README.md) · [↑ Aula 04.03](../../kyverno/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.04 →](../external-secrets-operator-basico/README.md)
+[← Lab 04.02](../crossplane-basico/README.md) · [↑ Aula 04.03](../../kyverno/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.06 →](../cilium-basico/README.md)

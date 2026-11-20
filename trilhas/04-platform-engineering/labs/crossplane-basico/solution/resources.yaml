@@ -2,6 +2,8 @@ apiVersion: apiextensions.crossplane.io/v2
 kind: CompositeResourceDefinition
 metadata:
   name: xenvironments.platform.example.org
+  annotations:
+    learning-path.example/lab-id: "04.02"
 spec:
   scope: Namespaced
   group: platform.example.org

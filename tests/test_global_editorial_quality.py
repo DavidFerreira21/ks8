@@ -179,7 +179,7 @@ LAYERS = {
 
 
 class GlobalEditorialQualityTests(unittest.TestCase):
-    def test_fifty_two_lessons_labs_and_twenty_eight_optional_references(self):
+    def test_fifty_two_lessons_fifty_labs_and_twenty_eight_optional_references(self):
         lessons = labs = refs = 0
         for layer_id, (folder, lesson_slugs, lab_slugs, complement_indices) in LAYERS.items():
             root = ROOT / "trilhas" / folder
@@ -189,46 +189,56 @@ class GlobalEditorialQualityTests(unittest.TestCase):
                 cid = f"{layer_id}.{i:02d}"
                 with self.subTest(id=cid):
                     page = (root / slug / "README.md").read_text(encoding="utf-8")
-                    lab = (root / "labs" / labslug / "README.md").read_text(encoding="utf-8")
+                    labdir = root / "labs" / labslug
+                    theory_only = (layer_id == "04" and i in (4, 5))
+                    self.assertEqual(labdir.exists(), not theory_only)
+                    lab = (labdir / "README.md").read_text(encoding="utf-8") if not theory_only else None
                     self.assertTrue(page.startswith(f"# {cid} ·"))
-                    self.assertTrue(lab.startswith(f"# Lab {cid}"))
+                    if lab is not None:
+                        self.assertTrue(lab.startswith(f"# Lab {cid}"))
                     self.assertIn("**Ao concluir esta aula, você será capaz de:**", page)
                     self.assertIn("## 📖 Aula teórica", page)
                     self.assertIn("## ✅ Revisão do aprendizado", page)
                     self.assertIn("## 🔗 Referências oficiais", page)
                     self.assertIn("## 🧪 Aplicação prática", page)
-                    self.assertIn(f"[🧪 Lab {cid}]", page)
-                    self.assertIn(f"Lab {cid}", index)
+                    if theory_only:
+                        self.assertNotIn(f"[🧪 Lab {cid}]", page)
+                        self.assertIn("Sem laboratório nesta etapa", page)
+                        self.assertIn("— *Aula teórica, sem lab*", index)
+                    else:
+                        self.assertIn(f"[🧪 Lab {cid}]", page)
+                        self.assertIn(f"Lab {cid}", index)
                     lesson_q = page.split("## ✅ Revisão do aprendizado", 1)[1].split("## 🔗 Referências oficiais", 1)[0]
                     self.assertGreaterEqual(sum(line.strip().startswith("- ") and "?" in line for line in lesson_q.splitlines()), 3)
-                    self.assertIn("**Evidências específicas:**", lab)
-                    self.assertIn("## Perguntas de diagnóstico e reflexão", lab)
-                    lab_q = lab.split("## Perguntas de diagnóstico e reflexão", 1)[1].split("## Aprofunde seus conhecimentos", 1)[0]
-                    self.assertGreaterEqual(sum(line.strip().startswith("- ") and "?" in line for line in lab_q.splitlines()), 3)
-                    meta = yaml.safe_load((root / "labs" / labslug / "lab.yaml").read_text(encoding="utf-8"))
-                    self.assertEqual(meta["id"], cid)
-                    self.assertTrue(meta.get("checks"))
+                    if lab is not None:
+                        self.assertIn("**Evidências específicas:**", lab)
+                        self.assertIn("## Perguntas de diagnóstico e reflexão", lab)
+                        lab_q = lab.split("## Perguntas de diagnóstico e reflexão", 1)[1].split("## Aprofunde seus conhecimentos", 1)[0]
+                        self.assertGreaterEqual(sum(line.strip().startswith("- ") and "?" in line for line in lab_q.splitlines()), 3)
+                        meta = yaml.safe_load((root / "labs" / labslug / "lab.yaml").read_text(encoding="utf-8"))
+                        self.assertEqual(meta["id"], cid)
+                        self.assertTrue(meta.get("checks"))
+                        labs += 1
                     lessons += 1
-                    labs += 1
                     comp = root / slug / "complementares" / "README.md"
                     self.assertEqual(comp.exists(), i in complement_indices)
                     self.assertEqual("complementares/README.md" in page, i in complement_indices)
                     if comp.exists():
                         self.assertIn("Leitura opcional", comp.read_text(encoding="utf-8"))
                         refs += 1
-        self.assertEqual((lessons, labs, refs), (52, 52, 28))
+        self.assertEqual((lessons, labs, refs), (52, 50, 28))
 
     def test_legacy_complementaries_preserved(self):
         for folder in ("1-fundamentos", "2-pod", "3-deployment",
                        "4-replicaSet-daemonSet-statefulSet", "7-services", "5-probes"):
             self.assertTrue((ROOT / folder / "README.md").exists())
 
-    def test_coverage_matrix_has_exactly_52_curricular_rows(self):
+    def test_coverage_matrix_has_exactly_50_lab_rows(self):
         matrix = (ROOT / "docs/matriz-homologacao.md").read_text(encoding="utf-8")
         rows = [line for line in matrix.splitlines() if line.startswith("| [0")]
-        self.assertEqual(len(rows), 52)
-        self.assertIn("39 labs", matrix)
-        self.assertIn("13 cenários", matrix)
+        self.assertEqual(len(rows), 50)
+        self.assertIn("42 labs", matrix)
+        self.assertIn("8 labs", matrix)
 
     def test_advanced_resources_have_coherent_dependencies(self):
         p = ROOT / "trilhas/04-platform-engineering/labs/crossplane-basico/examples/composition-avancada"

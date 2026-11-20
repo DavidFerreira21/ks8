@@ -6,7 +6,7 @@
 
 **14 aulas com teoria e infográfico** · **14 labs com desafios YAML e soluções separadas** · **6 complementares opcionais**
 
-O [padrão editorial](../../docs/padrao-editorial.md) é o mesmo da Camada 01. Os labs possuem contratos e validação estática; **não confunda publicação com homologação funcional integral**. A CI Kind executa 10 labs da Camada 02 (02.01–02.08, 02.10 e 02.11), conforme os checks de cada caso. Os labs 02.09, 02.12, 02.13 e 02.14 exigem validação específica; smoke test não substitui experimentos manuais.
+O [padrão editorial](../../docs/padrao-editorial.md) é o mesmo da Camada 01. Os labs possuem contratos e validação estática; **não confunda publicação com homologação funcional integral**. A CI Kind cobre 13 labs da Camada 02, incluindo testes controlados de PriorityClass (02.09), cordon/uncordon (02.12) e falha/recuperação de imagem (02.14). O Lab 02.13 não pode comprovar enforcement sem CNI compatível; existe um [experimento funcional opcional com Cilium](labs/networkpolicy-basico/experiments/README.md). CI verde comprova somente os cenários automatizados, não todas as fases manuais.
 
 ## 🚀 Percurso recomendado
 

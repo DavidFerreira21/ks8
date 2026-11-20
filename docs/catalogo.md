@@ -4,7 +4,7 @@
 
 Este é o **catálogo curricular**, não uma indicação de que todos os conteúdos, imagens e laboratórios já foram publicados.
 
-**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A prática possui lab próprio para cada aula: a execução local ou com addons depende dos pré-requisitos e limites de cada tema. As quatro camadas agora possuem 52 aulas e 52 roteiros de lab (14 + 14 + 17 + 7). Os labs da Camada 04 exigem instalação de ferramentas e homologação funcional separada; quantidade de arquivos não é prova de execução.
+**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → aplicação orientada → diagnóstico → conclusão**. Há **50 laboratórios** (14 + 14 + 17 + 5): os temas 04.04 (ESO) e 04.05 (Karpenter) permanecem **somente teóricos**, com complementares opcionais e sem lab. Os cinco labs restantes da Camada 04 exigem instalação de ferramentas e homologação funcional separada; quantidade de arquivos não é prova de execução.
 
 **Situação:** 📖 aula teórica disponível · 🎨 infográfico publicado. O estado e a homologação dos labs são registrados nos índices de cada camada. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 52 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
 

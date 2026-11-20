@@ -111,7 +111,7 @@ A criação de namespaces ausentes não imprime mais um erro esperado de `NotFou
 
 ## Camada 02 — Operação e Segurança
 
-Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incompleto e solução de referência separada. Os complementares só existem onde agregam aprofundamento. Os testes da CI atual não equivalem à homologação funcional dos 14 labs: o smoke Kind cobre **10 labs** (02.01–02.08, 02.10 e 02.11), enquanto 02.09, 02.12, 02.13 e 02.14 exigem validação específica e evidências próprias.
+Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incompleto e solução de referência separada. Os complementares só existem onde agregam aprofundamento. Os testes da CI atual não equivalem à homologação funcional dos 14 labs: o smoke Kind cobre **13 labs** (todos exceto 02.13). A CI agora verifica também PriorityClass, cordon/uncordon e recuperação de imagem em 02.09, 02.12 e 02.14. O isolamento da NetworkPolicy (02.13) exige CNI com enforcement e [experimento opcional dedicado](../trilhas/02-operacao-seguranca/labs/networkpolicy-basico/experiments/README.md).
 
 | ID | Prática | Lab |
 | --- | --- | --- |
@@ -134,7 +134,7 @@ Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incomple
 
 **Dependências:** os labs 02.07 e 02.12 pressupõem Kind com worker `dev-worker`. O 02.09 usa PriorityClass de escopo do cluster; limpe-a ao concluir. O 02.13 requer CNI compatível para comprovar isolamento; sem ele, somente a validação declarativa fica disponível. O 02.14 usa uma imagem inválida intencionalmente. Em qualquer lab, não confunda `make lab-test` com prova do experimento completo.
 
-**CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. Os labs 02.09, 02.12, 02.13 e 02.14 permanecem fora do smoke Kind geral por exigirem validação específica de PriorityClass, manutenção de nó, enforcement de NetworkPolicy ou diagnóstico de imagem inválida.
+**CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. O smoke Kind cobre 02.09, 02.12 e 02.14 com testes de comportamento. Somente 02.13 permanece sem prova de rede na CI Kind padrão, por exigir CNI com enforcement.
 **Experimentos adicionais:** 02.03 compara `warn` com `enforce` por dry-run de servidor, sem criar Pod privilegiado; 02.08 demonstra agendamento impossível com `minDomains: 3` e dois workers elegíveis; 02.10 compara QoS de um quarto Pod; 02.12 demonstra que cordon impede novos agendamentos. Os arquivos ficam em `experiments/` e exigem limpeza própria.
 
 ## Camada 03 — Arquitetura e infraestrutura
@@ -165,21 +165,21 @@ Os 17 labs seguem o [contrato editorial](padrao-editorial.md) e o [índice da Ca
 
 **Validação:** use os testes Python, make validate e integração Kind quando habilitada. Testes editoriais, contratos, cluster e comportamento funcional são níveis distintos.
 
+**Aplicação segura do YAML do aluno:** `make lab-apply LAB=XX.XX` aplica os arquivos em `.labs/XX.XX/` após conferir o contexto Kind, exigir `metadata.namespace` explícito nos recursos namespaced, fixar o namespace da aplicação e verificar a propriedade de objetos globais. Ele é **obrigatório nos roteiros 02.09 e 04.02**, que criam PriorityClass e XRD, e pode ser usado nos demais labs. Evite `kubectl apply` direto sobre recursos de escopo do cluster sem conferir a propriedade.
+
 ## Camada 04 — Ferramentas do ecossistema
 
-Sete labs usam **APIs reais dos produtos**; não são simulações que aplicam um ConfigMap no lugar de Argo CD, Crossplane ou outro controlador. Os manifests de solução ficam separados dos starters incompletos.
+Cinco labs usam **APIs reais dos produtos**; não são simulações que aplicam um ConfigMap no lugar de Argo CD, Crossplane ou outro controlador. Os manifests de solução ficam separados dos starters incompletos.
 
 | ID | Laboratório | Dependência de execução |
 | --- | --- | --- |
 | 04.01 | [🧪 Lab 04.01](../trilhas/04-platform-engineering/labs/argo-cd-basico/README.md) | Argo CD instalado |
 | 04.02 | [🧪 Lab 04.02](../trilhas/04-platform-engineering/labs/crossplane-basico/README.md) | Crossplane v2 instalado |
 | 04.03 | [🧪 Lab 04.03](../trilhas/04-platform-engineering/labs/kyverno-basico/README.md) | Kyverno CEL instalado |
-| 04.04 | [🧪 Lab 04.04](../trilhas/04-platform-engineering/labs/external-secrets-operator-basico/README.md) | ESO + Fake Provider |
-| 04.05 | [🧪 Lab 04.05](../trilhas/04-platform-engineering/labs/karpenter-basico/README.md) | EKS/Karpenter autorizado (design offline no Kind) |
 | 04.06 | [🧪 Lab 04.06](../trilhas/04-platform-engineering/labs/cilium-basico/README.md) | Cilium como CNI |
 | 04.07 | [🧪 Lab 04.07](../trilhas/04-platform-engineering/labs/prometheus-grafana-basico/README.md) | Prometheus Operator e Grafana |
 
-**Atenção:** a CI Kind padrão **não instala esses addons nem configura AWS**. Os testes Python/manifestos comprovam contratos e sintaxe estrutural básica, mas não funcionamento da reconciliação de Argo CD, Crossplane, Kyverno, ESO, Karpenter, Cilium ou Prometheus. O lab 04.05 prepara o YAML somente em Kind; a execução opcional em EKS deve usar `kubectl --context` explícito, nunca o motor de lab que exige Kind.
+**Aulas sem laboratório:** [04.04 — External Secrets Operator](../trilhas/04-platform-engineering/external-secrets-operator/README.md) e [04.05 — Karpenter](../trilhas/04-platform-engineering/karpenter/README.md). Seus complementares continuam disponíveis, mas os IDs não são executáveis por `make lab-prepare`/`make lab-test`. **Os cinco labs listados acima** dependem dos controladores correspondentes; a CI Kind padrão não os instala. Testes Python/manifestos validam contratos, não a reconciliação real de Argo CD, Crossplane, Kyverno, Cilium ou Prometheus.
 
 Consulte [dependências e níveis de homologação](../trilhas/04-platform-engineering/README.md) para decidir o que pode ser concluído com segurança no seu ambiente.
 
@@ -193,7 +193,7 @@ Os experimentos têm **IDs pré-definidos** em `lab.yaml`, não aceitam comandos
 
 ## Evidências de homologação
 
-A [matriz de homologação de todos os 52 labs](matriz-homologacao.md) registra cobertura automática, dependências e evidências específicas, sem tratar CI de contrato como prova funcional.
+A [matriz de homologação dos 50 labs](matriz-homologacao.md) registra cobertura automática, dependências e evidências específicas, sem tratar CI de contrato como prova funcional.
 
 Classifique cada resultado como **declarativo** (objeto e campos aceitos), **funcional** (comportamento realmente observado no Kind) ou **diagnóstico** (falha reproduzida, causa identificada e reversão). `make lab-test` confirma os checks declarados, não a execução manual de todo o roteiro. Não declare aprovado um job de Kind apenas porque existe ou está em andamento.
 
@@ -211,7 +211,7 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - `make down` remove o cluster Kind indicado por `CLUSTER_NAME`. Verifique esse valor antes da execução.
 - `make lab-down` **preserva o namespace** para evitar excluir recursos não relacionados.
 - `make validate` analisa todos os manifests declarados nos contratos e executa checks didáticos, **não substituindo a validação completa do schema Kubernetes**.
-- A pipeline do GitHub possui **job de integração com Kind descartável**, com cobertura declarada de 22 labs (12 da Camada 01 e 10 da Camada 02). A cobertura só pode ser considerada validada quando a execução correspondente terminar em `success`. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
+- A pipeline do GitHub possui **job de integração com Kind descartável**, com cobertura declarada de 25 labs (12 da Camada 01 e 13 da Camada 02). A cobertura só pode ser considerada validada quando a execução correspondente terminar em `success`. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
 - Os novos labs não foram executados manualmente durante a elaboração deste PR. A CI os valida conforme a cobertura descrita; os labs 01.13 e 01.14 exigem teste funcional em Kind com addons.
 
 
@@ -249,7 +249,7 @@ O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rasc
 
 ## CI: Kind descartável
 
-O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O smoke abrange 22 laboratórios sem addons (01.01–01.12 e 10 da Camada 02), valida os checks e exercita rollout, quota, PSA e agendamento por Topology Spread, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O smoke abrange 25 laboratórios sem addons (01.01–01.12 e 13 da Camada 02), valida os checks e exercita rollout, quota, PSA e agendamento por Topology Spread, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
 
 Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
 

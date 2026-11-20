@@ -29,6 +29,7 @@ jobs:
           test ! -f makefile
           make -n labs > /dev/null
           make -n lab-prepare LAB=01.02 > /dev/null
+          make -n lab-apply LAB=02.09 > /dev/null
           make -n lab-reset LAB=01.02 > /dev/null
           make -n lab-solution LAB=01.02 > /dev/null
           make -n lab-observe LAB=01.05 > /dev/null
@@ -44,6 +45,11 @@ jobs:
         run: |
           python scripts/validate_manifests.py
           python scripts/validate_lab_resources.py
+
+      - name: Full unit tests and semantic validation (52 labs)
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py' -v
+          make validate
 
       - name: Verify shell scripts use LF and pass Bash syntax
         shell: bash

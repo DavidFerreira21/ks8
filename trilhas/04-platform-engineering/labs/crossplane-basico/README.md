@@ -2,7 +2,7 @@
 
 [← Aula 04.02](../../crossplane/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.02` cria o namespace e copia um starter incompleto para `.labs/04.02/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.02/` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.02` cria o namespace e copia um starter incompleto para `.labs/04.02/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `make lab-apply LAB=04.02` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
@@ -22,6 +22,8 @@ Criar uma XRD v2 e comprovar registro da API sem confundir XR com infraestrutura
 
 Escreva uma CompositeResourceDefinition `xenvironments.platform.example.org` com `scope: Namespaced`, grupo e versão `v1alpha1`, tipo `XEnvironment` e schema exigindo `spec.tier` como string enum `sandbox/staging`.
 
+**Segurança de escopo global:** inclua `metadata.annotations.learning-path.example/lab-id: "04.02"` na XRD. Antes de aplicar/excluir a definição, o motor impede a reutilização de uma XRD preexistente sem essa anotação de propriedade. Mesmo com a anotação, a remoção é bloqueada se houver XRs dependentes.
+
 Defina sua hipótese antes de consultar `solution/`. Se o tipo não aparecer em `kubectl api-resources`, registre dependência ausente e não tente contornar com recursos fictícios.
 
 ## Fase 1 — Preparar e prever
@@ -34,13 +36,15 @@ cat .labs/04.02/resources.yaml
 
 Confirme disponibilidade da API específica da ferramenta e o namespace alvo antes de aplicar.
 
+**Por segurança, use `make lab-apply LAB=04.02` no lugar de `kubectl apply` direto. O comando verifica propriedade e escopo da definição global antes da aplicação.**
+
 ## Fase 2 — Aplicar e observar
 
 Complete os TODOs:
 
 ```bash
 kubectl apply --dry-run=server --validate=strict -f .labs/04.02/
-kubectl apply -f .labs/04.02/
+make lab-apply LAB=04.02
 make lab-test LAB=04.02
 make lab-observe LAB=04.02
 ```

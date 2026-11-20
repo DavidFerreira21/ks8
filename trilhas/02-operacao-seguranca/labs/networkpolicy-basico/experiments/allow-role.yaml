@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-only-role
+  namespace: lab-02-13
+spec:
+  podSelector:
+    matchLabels:
+      app: policy-server
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              role: allowed
+      ports:
+        - protocol: TCP
+          port: 80

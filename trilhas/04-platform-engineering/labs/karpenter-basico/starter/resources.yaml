@@ -1,6 +1,0 @@
-# EXERCÍCIO 04.05 — escreva os campos TODO sem consultar solution/
-apiVersion: karpenter.sh/v1
-kind: NodePool
-metadata:
-  name: estudo-sem-provisionar
-# TODO: nodeClassRef para EC2NodeClass nao-configurada; requirements amd64/on-demand e limits.nodes = 0

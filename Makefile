@@ -11,7 +11,7 @@ LAB_SLUG ?= configmaps-basico
 LAB_TITLE ?= Estudando ConfigMaps
 LAB_NAMESPACE := k8s-lab
 
-.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-prepare lab-reset lab-solution lab-up lab-test lab-status lab-observe lab-experiment lab-down new-lab
+.PHONY: help check-tools check-context up nodes status down validate doctor labs lab-prepare lab-apply lab-reset lab-solution lab-up lab-test lab-status lab-observe lab-experiment lab-down new-lab
 
 help: ## Exibe os alvos disponíveis
 	@awk 'BEGIN {FS = ":.*## "}; /^[a-zA-Z_-]+:.*## / {printf "  %-18s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -59,6 +59,9 @@ validate: ## Validação estática dos manifests do lab (sem cluster)
 
 lab-prepare: check-context ## Prepara namespace, apoio e arquivos para o aluno (sem aplicar a solução)
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-prepare --lab "$(LAB)"
+
+lab-apply: check-context ## Aplica YAML do aluno com guarda de namespace e APIs globais
+	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-apply --lab "$(LAB)"
 
 lab-reset: check-context ## Reinicia recursos declarados, preservando seus arquivos de estudo
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-reset --lab "$(LAB)"

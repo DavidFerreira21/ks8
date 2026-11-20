@@ -17,6 +17,8 @@ Com Metrics Server funcional, o `lab-prepare` cria Deployment e Service `php-apa
 
 **Antes de aplicar:** confirme os pré-requisitos, complete o YAML em `.labs/01.14/` e faça uma hipótese sobre o resultado. Recorra a `kubectl explain` ou às referências abaixo; não copie a solução antes de tentar.
 
+**Preparação reproduzível:** [Guia opcional de Metrics Server no Kind](../../../../docs/ambientes/01-hpa-metrics-server.md), com escolha de versão, validação de `metrics.k8s.io`, geração de carga e rollback.
+
 ## Fase 1 — Pré-requisitos
 
 Para o HPA de CPU funcionar, o API Server precisa disponibilizar `metrics.k8s.io` via Metrics Server. Confira:

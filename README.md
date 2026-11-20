@@ -31,7 +31,7 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 | :--- | :--- |
 | 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🧰 **Ferramentas cloud-native**<br>Argo CD, Crossplane, Kyverno, External Secrets, Karpenter, Cilium e Prometheus/Grafana.<br><br>**[Explorar ferramentas →](trilhas/04-platform-engineering/README.md)** |
 
-> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados para todos os temas. Os 52 roteiros de lab possuem contratos e pré-requisitos próprios; alguns exigem addons ou cloud para execução funcional. **Os 52 infográficos PNG estão no repositório**, integrados às páginas das aulas. A revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
+> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados para todos os temas. Os 50 roteiros de lab possuem contratos e pré-requisitos próprios; alguns exigem addons ou cloud para execução funcional. **Os 52 infográficos PNG estão no repositório**, integrados às páginas das aulas. A revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
 
 ## 🚀 Comece em 3 passos
 
@@ -77,11 +77,11 @@ Os exercícios são executados em um **Kind local** com verificação de context
 
 ## 📊 Homologação e cobertura
 
-A [matriz de homologação dos 52 labs](docs/matriz-homologacao.md) diferencia CI Kind, validação de contratos e execução funcional com addons; consulte antes de declarar uma camada inteiramente homologada.
+A [matriz de homologação dos 50 labs](docs/matriz-homologacao.md) diferencia CI Kind, validação de contratos e execução funcional com addons; consulte antes de declarar uma camada inteiramente homologada.
 
 ## 🧪 Laboratórios disponíveis
 
-As **4 camadas reúnem 52 labs documentados** (14 + 14 + 17 + 7). A CI Kind cobre cenários selecionados das Camadas 01–03; a Camada 04 exige controllers e/ou cloud para homologação funcional. Consulte os pré-requisitos antes de executar. [**Camada 01**](trilhas/01-fundamentos/README.md) · [**Camada 02**](trilhas/02-operacao-seguranca/README.md) · [**Camada 03**](trilhas/03-arquitetura/README.md) · [**Camada 04**](trilhas/04-platform-engineering/README.md).
+As **4 camadas reúnem 50 labs documentados** (14 + 14 + 17 + 5), com 52 aulas. ESO (04.04) e Karpenter (04.05) seguem como **teoria sem lab**. A CI Kind cobre cenários selecionados das Camadas 01–03; a Camada 04 exige controllers e/ou cloud para homologação funcional. Consulte os pré-requisitos antes de executar. [**Camada 01**](trilhas/01-fundamentos/README.md) · [**Camada 02**](trilhas/02-operacao-seguranca/README.md) · [**Camada 03**](trilhas/03-arquitetura/README.md) · [**Camada 04**](trilhas/04-platform-engineering/README.md).
 
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |

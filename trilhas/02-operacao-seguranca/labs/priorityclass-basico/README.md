@@ -2,7 +2,7 @@
 
 [← Aula 02.09](../../priorityclass-preemption/README.md) · [↑ Camada 02](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=02.09` cria o namespace e copia o starter **incompleto** em `.labs/02.09/resources.yaml`. Complete-o, execute `kubectl apply -f .labs/02.09/`, depois `make lab-test LAB=02.09` e `make lab-observe LAB=02.09`. **`make lab-up` aplica a solução e é exclusivo da CI.**
+> **MODO DESAFIO:** `make lab-prepare LAB=02.09` cria o namespace e copia o starter **incompleto** em `.labs/02.09/resources.yaml`. Complete-o, execute `make lab-apply LAB=02.09`, depois `make lab-test LAB=02.09` e `make lab-observe LAB=02.09`. **`make lab-up` aplica a solução e é exclusivo da CI.**
 
 ## Objetivo e hipótese
 
@@ -14,6 +14,8 @@ Criar uma PriorityClass de baixo valor sem preempção e observar sua associaç�
 
 Crie PriorityClass `lab-02-priority` com valor 1000, `globalDefault: false`, `preemptionPolicy: Never`, e Pod `prioritario` que referencia a classe. O Pod deve executar BusyBox com sleep.
 
+**Segurança de escopo global:** no YAML da PriorityClass, declare `metadata.annotations.learning-path.example/lab-id: "02.09"`. O motor verifica se já existe uma PriorityClass com o mesmo nome antes de aplicar ou excluir; se pertencer a outro uso, interrompe a operação sem sobrescrever.
+
 Preveja o que deve acontecer antes de abrir `solution/`. Use `kubectl explain` e a aula para esclarecer a API.
 
 ## Fase 1 — Preparar e prever
@@ -24,12 +26,14 @@ make lab-prepare LAB=02.09
 cat .labs/02.09/resources.yaml
 ```
 
+**Por segurança, use `make lab-apply LAB=02.09` no lugar de `kubectl apply` direto. O comando verifica propriedade e escopo da definição global antes da aplicação.**
+
 ## Fase 2 — Aplicar e observar
 
 Complete os TODOs e execute:
 
 ```bash
-kubectl apply -f .labs/02.09/
+make lab-apply LAB=02.09
 make lab-test LAB=02.09
 make lab-observe LAB=02.09
 ```

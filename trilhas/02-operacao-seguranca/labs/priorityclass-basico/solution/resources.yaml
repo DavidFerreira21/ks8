@@ -2,6 +2,8 @@ apiVersion: scheduling.k8s.io/v1
 kind: PriorityClass
 metadata:
   name: lab-02-priority
+  annotations:
+    learning-path.example/lab-id: "02.09"
 value: 1000
 globalDefault: false
 preemptionPolicy: Never

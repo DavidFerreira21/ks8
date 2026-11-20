@@ -17,6 +17,8 @@ Após instalar e confirmar Traefik/IngressClass no Kind, o `lab-prepare` cria **
 
 **Antes de aplicar:** confirme os pré-requisitos, complete o YAML em `.labs/01.13/` e faça uma hipótese sobre o resultado. Recorra a `kubectl explain` ou às referências abaixo; não copie a solução antes de tentar.
 
+**Preparação reproduzível:** [Guia opcional de Traefik no Kind](../../../../docs/ambientes/01-ingress-traefik.md), com seleção de versão, instalação, verificação HTTP e limpeza.
+
 ## Fase 1 — Pré-requisitos
 
 Ingress é um recurso de roteamento; **sem controller, não existe dataplane HTTP**. Para um cluster Kind de estudo, instale o Helm e o Traefik no namespace dedicado (execute uma vez, fora do namespace de lab):

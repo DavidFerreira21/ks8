@@ -89,4 +89,4 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 
 ---
 
-[← Lab 04.05](../karpenter-basico/README.md) · [↑ Aula 04.06](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.07 →](../prometheus-grafana-basico/README.md)
+[← Lab 04.03](../kyverno-basico/README.md) · [↑ Aula 04.06](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.07 →](../prometheus-grafana-basico/README.md)
