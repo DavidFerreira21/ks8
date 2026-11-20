@@ -1,6 +1,6 @@
-id: "04.06"
+id: "04.03"
 title: "Cilium"
-namespace: lab-04-06
+namespace: lab-04-03
 apply:
   - solution/resources.yaml
 starter:

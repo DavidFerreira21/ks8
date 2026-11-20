@@ -1,8 +1,8 @@
 # 🗺️ Roadmap · Kubernetes Visual Guide
 
-[⌂ Início](../README.md) · [📚 Catálogo de 52 aulas](catalogo.md) · [🧪 Labs](labs.md) · [☸️ Kind](../install-kind.md)
+[⌂ Início](../README.md) · [📚 Catálogo de 49 aulas](catalogo.md) · [🧪 Labs](labs.md) · [☸️ Kind](../install-kind.md)
 
-> **Sua jornada:** fundamentos → operação → arquitetura → ferramentas do ecossistema. As 52 aulas compõem o [catálogo curricular](catalogo.md); **laboratórios são adicionados progressivamente; 52 PNGs já estão integrados**.
+> **Sua jornada:** fundamentos → operação → arquitetura → ferramentas do ecossistema. As 49 aulas compõem o [catálogo curricular](catalogo.md); **laboratórios são adicionados progressivamente; 49 PNGs já estão integrados**.
 
 ## Visão geral da jornada
 
@@ -13,7 +13,7 @@
 
 | **03 · Arquitetura e Infraestrutura** | **04 · Ferramentas do ecossistema** |
 | :--- | :--- |
-| 🧩 **17 aulas**<br>Investigue Control Plane, Workers, rede e storage.<br><br>[**Entrar na Camada 03 →**](../trilhas/03-arquitetura/README.md) | 🧰 **7 aulas**<br>Conheça ferramentas para GitOps, governança, rede e observabilidade.<br><br>[**Entrar na Camada 04 →**](../trilhas/04-platform-engineering/README.md) |
+| 🧩 **17 aulas**<br>Investigue Control Plane, Workers, rede e storage.<br><br>[**Entrar na Camada 03 →**](../trilhas/03-arquitetura/README.md) | 🧰 **4 aulas**<br>Conheça ferramentas para GitOps, governança, rede e observabilidade.<br><br>[**Entrar na Camada 04 →**](../trilhas/04-platform-engineering/README.md) |
 
 ## Método de estudo
 

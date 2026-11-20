@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: backend
-  namespace: lab-04-06
+  namespace: lab-04-03
   labels:
     app: backend
 spec:
@@ -14,7 +14,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: frontend
-  namespace: lab-04-06
+  namespace: lab-04-03
   labels:
     role: frontend
 spec:
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: externo
-  namespace: lab-04-06
+  namespace: lab-04-03
   labels:
     role: outsider
 spec:
@@ -40,7 +40,7 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: apenas-frontend
-  namespace: lab-04-06
+  namespace: lab-04-03
 spec:
   endpointSelector:
     matchLabels:

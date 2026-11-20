@@ -119,12 +119,6 @@ Gerenciador de pacotes do Kubernetes para instalar, versionar e distribuir aplic
 Link oficial:
 https://helm.sh/
 
-## Karpenter
-
-Autoscaler de nodes para Kubernetes que provisiona capacidade de forma dinâmica com base nos Pods pendentes, otimizando custo e performance em ambientes cloud.
-
-Link oficial:
-https://karpenter.sh/
 
 ## Prometheus
 

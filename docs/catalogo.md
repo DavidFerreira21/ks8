@@ -1,12 +1,12 @@
-# 📚 Catálogo oficial — 52 aulas
+# 📚 Catálogo oficial — 49 aulas
 
 [⌂ Início](../README.md) · [🗺️ Roadmap](roadmap.md) · [🎨 Infográficos](infograficos.md)
 
 Este é o **catálogo curricular**, não uma indicação de que todos os conteúdos, imagens e laboratórios já foram publicados.
 
-**52 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 7 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A prática possui lab próprio para cada aula: a execução local ou com addons depende dos pré-requisitos e limites de cada tema. As quatro camadas agora possuem 52 aulas e 52 roteiros de lab (14 + 14 + 17 + 7). Os labs da Camada 04 exigem instalação de ferramentas e homologação funcional separada; quantidade de arquivos não é prova de execução.
+**49 aulas = 14 Fundamentos + 14 Operação + 17 Arquitetura + 4 Ferramentas.** Cada aula segue o padrão **infográfico → teoria → prática → diagnóstico → conclusão**. A prática possui lab próprio para cada aula: a execução local ou com addons depende dos pré-requisitos e limites de cada tema. As quatro camadas agora possuem 49 aulas e 49 roteiros de lab (14 + 14 + 17 + 4). Os labs da Camada 04 exigem instalação de ferramentas e homologação funcional separada; quantidade de arquivos não é prova de execução.
 
-**Situação:** 📖 aula teórica disponível · 🎨 infográfico publicado. O estado e a homologação dos labs são registrados nos índices de cada camada. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 52 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
+**Situação:** 📖 aula teórica disponível · 🎨 infográfico publicado. O estado e a homologação dos labs são registrados nos índices de cada camada. **As 14 aulas da Camada 01 possuem teoria e infográfico**; os 49 PNGs estão vinculados às respectivas páginas. A revisão técnica das ilustrações e a evolução dos laboratórios continuam em andamento.
 
 ## 01 · Fundamentos e recursos essenciais
 
@@ -81,16 +81,13 @@ Este é o **catálogo curricular**, não uma indicação de que todos os conteú
 | Aula | Tema | Guia |
 | --- | --- | --- |
 | 04.01 | Argo CD | [📖 Aula + infográfico](../trilhas/04-platform-engineering/argo-cd/README.md) |
-| 04.02 | Crossplane | [📖 Aula + infográfico](../trilhas/04-platform-engineering/crossplane/README.md) |
-| 04.03 | Kyverno | [📖 Aula + infográfico](../trilhas/04-platform-engineering/kyverno/README.md) |
-| 04.04 | External Secrets Operator | [📖 Aula + infográfico](../trilhas/04-platform-engineering/external-secrets-operator/README.md) |
-| 04.05 | Karpenter | [📖 Aula + infográfico](../trilhas/04-platform-engineering/karpenter/README.md) |
-| 04.06 | Cilium | [📖 Aula + infográfico](../trilhas/04-platform-engineering/cilium/README.md) |
-| 04.07 | Prometheus + Grafana | [📖 Aula + infográfico](../trilhas/04-platform-engineering/prometheus-grafana/README.md) |
+| 04.02 | Kyverno | [📖 Aula + infográfico](../trilhas/04-platform-engineering/kyverno/README.md) |
+| 04.03 | Cilium | [📖 Aula + infográfico](../trilhas/04-platform-engineering/cilium/README.md) |
+| 04.04 | Prometheus + Grafana | [📖 Aula + infográfico](../trilhas/04-platform-engineering/prometheus-grafana/README.md) |
 
 ## Como será cada aula
 
-1. **Infográfico:** visualização sintética do conceito, publicada nos 52 temas.
+1. **Infográfico:** visualização sintética do conceito, publicada nos 49 temas.
 2. **Teoria:** funcionamento, arquitetura, exemplos e referências oficiais.
 3. **Prática:** laboratório ou observação guiada com pré-requisitos e resultado esperado.
 4. **Diagnóstico:** comandos, eventos e falhas a investigar.

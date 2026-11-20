@@ -1,6 +1,0 @@
-# EXERCÍCIO 04.02 — escreva os campos TODO sem consultar solution/
-apiVersion: apiextensions.crossplane.io/v2
-kind: CompositeResourceDefinition
-metadata:
-  name: xenvironments.platform.example.org
-# TODO: scope Namespaced, group platform.example.org, names, served/referenceable version e schema spec.tier

@@ -1,9 +1,9 @@
-# EXERCÍCIO 04.06 — escreva os campos TODO sem consultar solution/
+# EXERCÍCIO 04.03 — escreva os campos TODO sem consultar solution/
 apiVersion: v1
 kind: Pod
 metadata:
   name: backend
-  namespace: lab-04-06
+  namespace: lab-04-03
   # TODO: label app=backend
 # TODO: container nginx
 ---
@@ -11,7 +11,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: frontend
-  namespace: lab-04-06
+  namespace: lab-04-03
   # TODO: label role=frontend
 # TODO: BusyBox sleep
 ---
@@ -19,7 +19,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: externo
-  namespace: lab-04-06
+  namespace: lab-04-03
   # TODO: label role=outsider
 # TODO: BusyBox sleep
 ---
@@ -27,5 +27,5 @@ apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
   name: apenas-frontend
-  namespace: lab-04-06
+  namespace: lab-04-03
 # TODO: endpointSelector backend e ingress fromEndpoints role frontend

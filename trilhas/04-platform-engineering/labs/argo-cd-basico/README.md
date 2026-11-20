@@ -89,4 +89,4 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 
 ---
 
-[← Camada 03](../../../03-arquitetura/README.md) · [↑ Aula 04.01](../../argo-cd/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.02 →](../crossplane-basico/README.md)
+[← Camada 03](../../../03-arquitetura/README.md) · [↑ Aula 04.01](../../argo-cd/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.02 →](../kyverno-basico/README.md)

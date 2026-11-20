@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: metrics-demo
-  namespace: lab-04-07
+  namespace: lab-04-04
 spec:
   replicas: 1
   selector:
@@ -24,7 +24,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: metrics-demo
-  namespace: lab-04-07
+  namespace: lab-04-04
   labels:
     app: metrics-demo
 spec:
@@ -39,12 +39,12 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: metrics-demo
-  namespace: lab-04-07
+  namespace: lab-04-04
   labels:
     release: prometheus
 spec:
   namespaceSelector:
-    matchNames: [lab-04-07]
+    matchNames: [lab-04-04]
   selector:
     matchLabels:
       app: metrics-demo

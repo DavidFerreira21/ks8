@@ -93,15 +93,10 @@ def load_labs() -> dict[str, Lab]:
         for check in checks:
             if check["type"] in {"resource", "pod-ready", "pvc-bound"}:
                 check_name = check.get("name")
-                xrd_name = (check.get("type") == "resource"
-                            and check.get("kind") == "compositeresourcedefinition"
-                            and isinstance(check_name, str)
-                            and re.fullmatch(r"[a-z0-9]+(?:[a-z0-9.-]*[a-z0-9])?", check_name)
-                            and len(check_name) <= 253)
-                if not isinstance(check_name, str) or not (SAFE_NAME.fullmatch(check_name) or xrd_name):
+                if not isinstance(check_name, str) or not SAFE_NAME.fullmatch(check_name):
                     raise ValueError(f"{metadata}: nome de check inválido")
                 if check["type"] == "resource":
-                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy", "appenvironments.learning.example", "applications.argoproj.io", "compositeresourcedefinition", "namespacedvalidatingpolicy", "secretstore", "externalsecret", "nodepool", "ciliumnetworkpolicy", "servicemonitor"}
+                    allowed = {"daemonset", "statefulset", "ingress", "hpa", "secret", "namespace", "configmap", "service", "deployment", "pvc", "pod", "limitRange", "job", "cronjob", "networkpolicy", "appenvironments.learning.example", "applications.argoproj.io", "namespacedvalidatingpolicy", "ciliumnetworkpolicy", "servicemonitor"}
                     if check.get("kind") not in allowed:
                         raise ValueError(f"{metadata}: kind de check não permitido")
         labs[identifier] = Lab(identifier, title, namespace, metadata.parent, apply, tuple(checks), tuple(experiments), setup, starter)
@@ -235,7 +230,7 @@ def prepare_lab(lab: Lab) -> int:
 
 
 def _verify_global_api_deletion_safety(lab: Lab) -> int:
-    """Bloqueia remoção de CRD/XRD que ainda possua instâncias não removidas.
+    """Bloqueia remoção de CRD que ainda possua instâncias não removidas.
 
     Kubernetes pode apagar Custom Resources em cascata quando a definição
     global é excluída. A checagem falha fechada se não puder consultar a API.
@@ -246,10 +241,6 @@ def _verify_global_api_deletion_safety(lab: Lab) -> int:
                 continue
             kind = document.get("kind")
             if kind == "CustomResourceDefinition":
-                definition = document.get("spec") or {}
-                group = definition.get("group")
-                plural = (definition.get("names") or {}).get("plural")
-            elif kind == "CompositeResourceDefinition":
                 definition = document.get("spec") or {}
                 group = definition.get("group")
                 plural = (definition.get("names") or {}).get("plural")
@@ -302,20 +293,20 @@ def remove_lab_objects(lab: Lab) -> int:
     for manifest in reversed(lab.apply):
         documents = list(yaml.safe_load_all(manifest.read_text(encoding="utf-8")))
         is_definition = any(isinstance(d, dict) and d.get("kind") in
-                            {"CustomResourceDefinition", "CompositeResourceDefinition"}
+                            {"CustomResourceDefinition"}
                             for d in documents)
         if manifest.name == "namespace.yaml" or is_definition:
             continue
         if kubectl("delete", "-f", str(manifest), "--ignore-not-found").returncode:
             return 1
-    # Impede que o nome de uma CRD/XRD de laboratório seja usado para apagar
+    # Impede que o nome de uma CRD de laboratório seja usado para apagar
     # recursos de outros namespaces ou instalados por terceiros.
     if _verify_global_api_deletion_safety(lab):
         return 1
     for manifest in reversed((*lab.setup, *lab.apply)):
         documents = list(yaml.safe_load_all(manifest.read_text(encoding="utf-8")))
         is_definition = any(isinstance(d, dict) and d.get("kind") in
-                            {"CustomResourceDefinition", "CompositeResourceDefinition"}
+                            {"CustomResourceDefinition"}
                             for d in documents)
         if manifest.name == "namespace.yaml":
             continue

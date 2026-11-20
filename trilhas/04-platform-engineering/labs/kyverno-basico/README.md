@@ -1,14 +1,14 @@
-# Lab 04.03 — Kyverno
+# Lab 04.02 — Kyverno
 
-[← Aula 04.03](../../kyverno/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+[← Aula 04.02](../../kyverno/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.03` cria o namespace e copia um starter incompleto para `.labs/04.03/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.03/` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.02` cria o namespace e copia um starter incompleto para `.labs/04.02/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.02/` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
 Aplicar política namespaced CEL de validação e comprovar rejeição de um ConfigMap sem label obrigatória.
 
-**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-03`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
+**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-02`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
 
@@ -28,8 +28,8 @@ Defina sua hipótese antes de consultar `solution/`. Se o tipo não aparecer em 
 
 ```bash
 kubectl config current-context
-make lab-prepare LAB=04.03
-cat .labs/04.03/resources.yaml
+make lab-prepare LAB=04.02
+cat .labs/04.02/resources.yaml
 ```
 
 Confirme disponibilidade da API específica da ferramenta e o namespace alvo antes de aplicar.
@@ -39,13 +39,13 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 Complete os TODOs:
 
 ```bash
-kubectl apply --dry-run=server --validate=strict -f .labs/04.03/
-kubectl apply -f .labs/04.03/
-make lab-test LAB=04.03
-make lab-observe LAB=04.03
+kubectl apply --dry-run=server --validate=strict -f .labs/04.02/
+kubectl apply -f .labs/04.02/
+make lab-test LAB=04.02
+make lab-observe LAB=04.02
 ```
 
-Verifique `kubectl get namespacedvalidatingpolicy requer-equipe -n lab-04-03 -o yaml`. Compare com os testes em `examples/` por dry-run de servidor.
+Verifique `kubectl get namespacedvalidatingpolicy requer-equipe -n lab-04-02 -o yaml`. Compare com os testes em `examples/` por dry-run de servidor.
 
 ## Fase 3 — Experimento controlado
 
@@ -64,8 +64,8 @@ Investigue CRDs, condições dos custom resources, logs do controller instalado 
 ## Fase 5 — Limpar com segurança
 
 ```bash
-make lab-down LAB=04.03
-make lab-status LAB=04.03
+make lab-down LAB=04.02
+make lab-status LAB=04.02
 ```
 
 A limpeza remove os objetos declarados neste contrato, **não desinstala automaticamente o addon**. Revise recursos filhos, credenciais e qualquer custo externo antes de excluir a instalação. Na ausência do addon, não tente remoção indiscriminada.
@@ -73,7 +73,7 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 ## Critérios de conclusão
 
 - [ ] Escrevi o manifesto principal sem copiar a solução e validei as APIs necessárias.
-- [ ] **Critério exclusivo 04.03:** registre policy, versão do Kyverno, retorno da API para os dois exemplos e motivo da rejeição; caso nenhum seja barrado, investigue controller e admission.
+- [ ] **Critério exclusivo 04.02:** registre policy, versão do Kyverno, retorno da API para os dois exemplos e motivo da rejeição; caso nenhum seja barrado, investigue controller e admission.
 - [ ] Diferenciei validação declarativa de comportamento funcional realmente observado.
 - [ ] Reverti mudanças temporárias e executei a limpeza segura.
 
@@ -85,8 +85,8 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://kyverno.io/docs/policy-types/validating-policy/) · [Aula 04.03](../../kyverno/README.md)
+[Documentação oficial](https://kyverno.io/docs/policy-types/validating-policy/) · [Aula 04.02](../../kyverno/README.md)
 
 ---
 
-[← Lab 04.02](../crossplane-basico/README.md) · [↑ Aula 04.03](../../kyverno/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.04 →](../external-secrets-operator-basico/README.md)
+[← Lab 04.01](../argo-cd-basico/README.md) · [↑ Aula 04.02](../../kyverno/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.03 →](../cilium-basico/README.md)

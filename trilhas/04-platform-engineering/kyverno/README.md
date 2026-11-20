@@ -1,4 +1,4 @@
-# 04.03 · Kyverno
+# 04.02 · Kyverno
 
 [⌂ Início](../../../README.md) · [↑ Camada 04](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![04.03 — Kyverno](images/kyverno.png)
+![04.02 — Kyverno](images/kyverno.png)
 
 ## 📖 Aula teórica
 
@@ -37,7 +37,7 @@ spec:
 kubectl config current-context
 kubectl api-resources --api-group=policies.kyverno.io
 kubectl get namespacedvalidatingpolicies -A
-kubectl get events -n lab-04-03
+kubectl get events -n lab-04-02
 ```
 
 **O que observar:** Com Kyverno instalado, o manifesto sem label definido deve ser rejeitado na admissão; o equivalente com label deve ser aceito.
@@ -48,7 +48,7 @@ A API CEL estável depende da versão instalada do Kyverno; não aplique um exem
 
 ## 🧪 Aplicação prática
 
-[🧪 Lab 04.03 — Kyverno](../labs/kyverno-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
+[🧪 Lab 04.02 — Kyverno](../labs/kyverno-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
 
 **Complementar opcional:** [Aprofundamento e diagnóstico](complementares/README.md) para decisões e falhas comuns, sem substituir a aula e o lab.
 
@@ -64,4 +64,4 @@ A API CEL estável depende da versão instalada do Kyverno; não aplique um exem
 
 ---
 
-[← Aula 04.02](../crossplane/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.03](../labs/kyverno-basico/README.md) · [Próxima: Aula 04.04 →](../external-secrets-operator/README.md)
+[← Aula 04.01](../argo-cd/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.02](../labs/kyverno-basico/README.md) · [Próxima: Aula 04.03 →](../cilium/README.md)

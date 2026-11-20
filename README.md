@@ -7,12 +7,12 @@
 Aprenda os conceitos, execute laboratórios com **Kind**, investigue o comportamento do cluster e avance até **extensibilidade, GitOps e ferramentas cloud-native**.
 
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Learning%20Path-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
-![Tópicos](https://img.shields.io/badge/52%20aulas-no%20cat%C3%A1logo-334155?style=flat-square)
+![Tópicos](https://img.shields.io/badge/49%20aulas-no%20cat%C3%A1logo-334155?style=flat-square)
 ![Camadas](https://img.shields.io/badge/4%20camadas-de%20estudo-0F766E?style=flat-square)
 ![Ambiente](https://img.shields.io/badge/Labs-Kind-8B5CF6?style=flat-square)
 ![Status](https://img.shields.io/badge/Projeto-em%20evolu%C3%A7%C3%A3o-D97706?style=flat-square)
 
-[**Catálogo de 52 aulas e imagens**](docs/catalogo.md) · [**Começar a estudar**](docs/roadmap.md) · [**Preparar o Kind**](install-kind.md) · [**Explorar os labs**](docs/labs.md)
+[**Catálogo de 49 aulas e imagens**](docs/catalogo.md) · [**Começar a estudar**](docs/roadmap.md) · [**Preparar o Kind**](install-kind.md) · [**Explorar os labs**](docs/labs.md)
 
 </div>
 
@@ -29,9 +29,9 @@ Quatro camadas complementares: **usar → operar → compreender → explorar fe
 
 | **03 · Arquitetura e Infraestrutura** | **04 · Ferramentas do Ecossistema** |
 | :--- | :--- |
-| 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🧰 **Ferramentas cloud-native**<br>Argo CD, Crossplane, Kyverno, External Secrets, Karpenter, Cilium e Prometheus/Grafana.<br><br>**[Explorar ferramentas →](trilhas/04-platform-engineering/README.md)** |
+| 🧩 **Como o cluster funciona**<br>API Server, etcd, Scheduler, kubelet, CNI, CSI e DNS.<br><br>**[Explorar arquitetura →](trilhas/03-arquitetura/README.md)** | 🧰 **Ferramentas cloud-native**<br>Argo CD, Kyverno, Cilium e Prometheus/Grafana.<br><br>**[Explorar ferramentas →](trilhas/04-platform-engineering/README.md)** |
 
-> **Como interpretar a trilha:** as **52 aulas** formam o catálogo curricular, com guias publicados para todos os temas. Os 52 roteiros de lab possuem contratos e pré-requisitos próprios; alguns exigem addons ou cloud para execução funcional. **Os 52 infográficos PNG estão no repositório**, integrados às páginas das aulas. A revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
+> **Como interpretar a trilha:** as **49 aulas** formam o catálogo curricular, com guias publicados para todos os temas. Os 49 roteiros de lab possuem contratos e pré-requisitos próprios; alguns exigem addons para execução funcional. **Os 49 infográficos PNG estão no repositório**, integrados às páginas das aulas. A revisão técnica das ilustrações continua recomendada. As páginas mostram o estado real de cada exercício.
 
 ## 🚀 Comece em 3 passos
 
@@ -77,11 +77,11 @@ Os exercícios são executados em um **Kind local** com verificação de context
 
 ## 📊 Homologação e cobertura
 
-A [matriz de homologação dos 52 labs](docs/matriz-homologacao.md) diferencia CI Kind, validação de contratos e execução funcional com addons; consulte antes de declarar uma camada inteiramente homologada.
+A [matriz de homologação dos 49 labs](docs/matriz-homologacao.md) diferencia CI Kind, validação de contratos e execução funcional com addons; consulte antes de declarar uma camada inteiramente homologada.
 
 ## 🧪 Laboratórios disponíveis
 
-As **4 camadas reúnem 52 labs documentados** (14 + 14 + 17 + 7). A CI Kind cobre cenários selecionados das Camadas 01–03; a Camada 04 exige controllers e/ou cloud para homologação funcional. Consulte os pré-requisitos antes de executar. [**Camada 01**](trilhas/01-fundamentos/README.md) · [**Camada 02**](trilhas/02-operacao-seguranca/README.md) · [**Camada 03**](trilhas/03-arquitetura/README.md) · [**Camada 04**](trilhas/04-platform-engineering/README.md).
+As **4 camadas reúnem 49 labs documentados** (14 + 14 + 17 + 4). A CI Kind cobre cenários selecionados das Camadas 01–03; a Camada 04 exige controllers ou addons para homologação funcional. Consulte os pré-requisitos antes de executar. [**Camada 01**](trilhas/01-fundamentos/README.md) · [**Camada 02**](trilhas/02-operacao-seguranca/README.md) · [**Camada 03**](trilhas/03-arquitetura/README.md) · [**Camada 04**](trilhas/04-platform-engineering/README.md).
 
 | Laboratório | O que demonstra | Situação |
 | --- | --- | --- |

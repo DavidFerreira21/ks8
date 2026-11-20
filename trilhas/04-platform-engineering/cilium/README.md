@@ -1,4 +1,4 @@
-# 04.06 · Cilium
+# 04.03 · Cilium
 
 [⌂ Início](../../../README.md) · [↑ Camada 04](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![04.06 — Cilium](images/cilium.png)
+![04.03 — Cilium](images/cilium.png)
 
 ## 📖 Aula teórica
 
@@ -52,7 +52,7 @@ kubectl get ciliumendpoints -A
 
 ## 🧪 Aplicação prática
 
-[🧪 Lab 04.06 — Cilium](../labs/cilium-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
+[🧪 Lab 04.03 — Cilium](../labs/cilium-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
 
 **Complementar opcional:** [Aprofundamento e diagnóstico](complementares/README.md) para decisões e falhas comuns, sem substituir a aula e o lab.
 
@@ -68,4 +68,4 @@ kubectl get ciliumendpoints -A
 
 ---
 
-[← Aula 04.05](../karpenter/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.06](../labs/cilium-basico/README.md) · [Próxima: Aula 04.07 →](../prometheus-grafana/README.md)
+[← Aula 04.02](../kyverno/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.03](../labs/cilium-basico/README.md) · [Próxima: Aula 04.04 →](../prometheus-grafana/README.md)

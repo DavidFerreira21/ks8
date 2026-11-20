@@ -1,20 +1,20 @@
-# Lab 04.07 — Prometheus + Grafana
+# Lab 04.04 — Prometheus + Grafana
 
-[← Aula 04.07](../../prometheus-grafana/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+[← Aula 04.04](../../prometheus-grafana/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.07` cria o namespace e copia um starter incompleto para `.labs/04.07/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.07/` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.04` cria o namespace e copia um starter incompleto para `.labs/04.04/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.04/` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
 Criar endpoint de métricas e ServiceMonitor, distinguindo presença do recurso de scrape e visualização reais.
 
-**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-07`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
+**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-04`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
 
 **Guia de instalação, versões e reversão:** [🛠️ Preparar Prometheus + Grafana](../../../../docs/ambientes/04-prometheus-grafana.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
 
-**Instale Prometheus Operator ou kube-prometheus-stack e Grafana** conforme as instruções oficiais, com descoberta de ServiceMonitors do namespace `lab-04-07`. A label `release: prometheus` é ilustrativa; o selector da instância Prometheus deve corresponder.
+**Instale Prometheus Operator ou kube-prometheus-stack e Grafana** conforme as instruções oficiais, com descoberta de ServiceMonitors do namespace `lab-04-04`. A label `release: prometheus` é ilustrativa; o selector da instância Prometheus deve corresponder.
 
 **Segurança:** Requer Operator, Prometheus configurado e Grafana; Kind padrão não executa scrape por instalar só ServiceMonitor.
 
@@ -28,8 +28,8 @@ Defina sua hipótese antes de consultar `solution/`. Se o tipo não aparecer em 
 
 ```bash
 kubectl config current-context
-make lab-prepare LAB=04.07
-cat .labs/04.07/resources.yaml
+make lab-prepare LAB=04.04
+cat .labs/04.04/resources.yaml
 ```
 
 Confirme disponibilidade da API específica da ferramenta e o namespace alvo antes de aplicar.
@@ -39,13 +39,13 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 Complete os TODOs:
 
 ```bash
-kubectl apply --dry-run=server --validate=strict -f .labs/04.07/
-kubectl apply -f .labs/04.07/
-make lab-test LAB=04.07
-make lab-observe LAB=04.07
+kubectl apply --dry-run=server --validate=strict -f .labs/04.04/
+kubectl apply -f .labs/04.04/
+make lab-test LAB=04.04
+make lab-observe LAB=04.04
 ```
 
-`kubectl get servicemonitor -n lab-04-07`, `kubectl get endpointslices -n lab-04-07` e `kubectl port-forward -n lab-04-07 svc/metrics-demo 9100:9100` para verificar `/metrics` localmente.
+`kubectl get servicemonitor -n lab-04-04`, `kubectl get endpointslices -n lab-04-04` e `kubectl port-forward -n lab-04-04 svc/metrics-demo 9100:9100` para verificar `/metrics` localmente.
 
 ## Fase 3 — Experimento controlado
 
@@ -64,8 +64,8 @@ Investigue CRDs, condições dos custom resources, logs do controller instalado 
 ## Fase 5 — Limpar com segurança
 
 ```bash
-make lab-down LAB=04.07
-make lab-status LAB=04.07
+make lab-down LAB=04.04
+make lab-status LAB=04.04
 ```
 
 A limpeza remove os objetos declarados neste contrato, **não desinstala automaticamente o addon**. Revise recursos filhos, credenciais e qualquer custo externo antes de excluir a instalação. Na ausência do addon, não tente remoção indiscriminada.
@@ -73,7 +73,7 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 ## Critérios de conclusão
 
 - [ ] Escrevi o manifesto principal sem copiar a solução e validei as APIs necessárias.
-- [ ] **Critério exclusivo 04.07:** registre resposta `/metrics` sem dados sensíveis, alvo UP, consulta PromQL e painel Grafana (quando disponível). Apenas existência do ServiceMonitor é validação declarativa.
+- [ ] **Critério exclusivo 04.04:** registre resposta `/metrics` sem dados sensíveis, alvo UP, consulta PromQL e painel Grafana (quando disponível). Apenas existência do ServiceMonitor é validação declarativa.
 - [ ] Diferenciei validação declarativa de comportamento funcional realmente observado.
 - [ ] Reverti mudanças temporárias e executei a limpeza segura.
 
@@ -85,8 +85,8 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://prometheus-operator.dev/docs/) · [Aula 04.07](../../prometheus-grafana/README.md)
+[Documentação oficial](https://prometheus-operator.dev/docs/) · [Aula 04.04](../../prometheus-grafana/README.md)
 
 ---
 
-[← Lab 04.06](../cilium-basico/README.md) · [↑ Aula 04.07](../../prometheus-grafana/README.md) · [↑ Camada 04](../../README.md) · [↑ Catálogo](../../../../docs/catalogo.md)
+[← Lab 04.03](../cilium-basico/README.md) · [↑ Aula 04.04](../../prometheus-grafana/README.md) · [↑ Camada 04](../../README.md) · [↑ Catálogo](../../../../docs/catalogo.md)
