@@ -72,17 +72,6 @@ def check_solution(solution: list[dict], label: str) -> list[str]:
                 errors.append(f"{prefix}: policy nao demonstra Deny")
             if not spec.get("validations") or not spec.get("matchConstraints"):
                 errors.append(f"{prefix}: policy sem expressao/matching")
-        if kind == "NodePool":
-            if (spec.get("limits") or {}).get("nodes") != 0:
-                errors.append(f"{prefix}: NodePool didatico nao esta desarmado")
-            ref = ((spec.get("template") or {}).get("spec") or {}).get("nodeClassRef") or {}
-            if ref.get("kind") != "EC2NodeClass" or ref.get("name") != "nao-configurada":
-                errors.append(f"{prefix}: NodeClass deve ser ficticia")
-        if kind == "ExternalSecret":
-            if not (spec.get("secretStoreRef") or {}).get("name"):
-                errors.append(f"{prefix}: SecretStoreRef ausente")
-            if not (spec.get("target") or {}).get("name"):
-                errors.append(f"{prefix}: target ausente")
         if kind == "CiliumNetworkPolicy":
             if not (spec.get("endpointSelector") or {}).get("matchLabels"):
                 errors.append(f"{prefix}: sem endpoints selecionados")
@@ -129,8 +118,8 @@ def validate(root: Path = LABS) -> list[str]:
                         errors.append(f"{manifest}: YAML de exemplo vazio")
         except (OSError, ValueError, TypeError, yaml.YAMLError, AttributeError) as exc:
             errors.append(f"{contract}: {exc}")
-    if count != 52:
-        errors.append(f"Esperados 52 contratos, encontrados {count}")
+    if count != 50:
+        errors.append(f"Esperados 50 contratos, encontrados {count}")
     return errors
 
 
@@ -139,5 +128,5 @@ if __name__ == "__main__":
     if problems:
         print("\n".join(problems), file=sys.stderr)
         sys.exit(1)
-    print("PASS: 52 contratos, semantica de APIs e YAMLs opcionais validos; "
+    print("PASS: 50 contratos, semantica de APIs e YAMLs opcionais validos; "
           "schema da API exige dry-run de servidor.")

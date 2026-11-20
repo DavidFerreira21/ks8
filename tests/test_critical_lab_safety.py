@@ -1,4 +1,4 @@
-"""Testa as proteções de recursos de cluster e NodePool offline."""
+"""Testa as proteções de recursos globais e fluxo seguro do aluno."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -7,31 +7,7 @@ import unittest
 from unittest.mock import patch
 from types import SimpleNamespace
 
-from scripts.validate_karpenter_lab import validate
 from scripts import labctl
-
-
-VALID = """apiVersion: karpenter.sh/v1
-kind: NodePool
-metadata:
-  name: estudo-sem-provisionar
-spec:
-  template:
-    spec:
-      nodeClassRef:
-        group: karpenter.k8s.aws
-        kind: EC2NodeClass
-        name: nao-configurada
-      requirements:
-        - key: kubernetes.io/arch
-          operator: In
-          values: [amd64]
-        - key: karpenter.sh/capacity-type
-          operator: In
-          values: [on-demand]
-  limits:
-    nodes: 0
-"""
 
 
 class CriticalLabSafetyTests(unittest.TestCase):
@@ -127,16 +103,6 @@ class CriticalLabSafetyTests(unittest.TestCase):
         broken = SimpleNamespace(returncode=1, stdout="", stderr="forbidden")
         with patch.object(labctl.subprocess, "run", return_value=broken):
             self.assertEqual(labctl._check_global_resources_ownership(lab), 1)
-
-    def test_karpenter_validates_student_yaml_not_reference(self):
-        with tempfile.TemporaryDirectory() as td:
-            file = Path(td) / "resources.yaml"
-            file.write_text(VALID, encoding="utf-8")
-            self.assertEqual(validate(file), [])
-            file.write_text(VALID.replace("nodes: 0", "nodes: 1"), encoding="utf-8")
-            self.assertTrue(any("SEGURANÇA" in x for x in validate(file)))
-            file.write_text(VALID.replace("nao-configurada", "real-provider"), encoding="utf-8")
-            self.assertTrue(any("NodeClass" in x for x in validate(file)))
 
     def test_crd_cleanup_rejects_any_remaining_instances(self):
         base = Path(__file__).resolve().parents[1]
