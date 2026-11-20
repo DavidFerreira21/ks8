@@ -4,7 +4,7 @@
 
 > **Finalidade:** contrato de autoria e revisão de novas aulas e labs nas quatro camadas. A **Camada 01 é a referência editorial**; a homologação funcional no Kind é uma etapa distinta e depende de evidências. O objetivo é padronizar qualidade, não produzir documentação repetitiva.
 
-**Aplicabilidade às quatro camadas:** o contrato vale para todos os 52 temas. Uma ferramenta que não existe no Kind padrão pode ter lab com CRs reais e instruções de instalação controlada, desde que informe dependência, evidência possível, cleanup e **não alegue homologação funcional sem execução adequada**. Os complementares só aparecem onde agregam análise ou diagnóstico.
+**Aplicabilidade às quatro camadas:** o contrato vale para todos os 49 temas. Uma ferramenta que não existe no Kind padrão pode ter lab com CRs reais e instruções de instalação controlada, desde que informe dependência, evidência possível, cleanup e **não alegue homologação funcional sem execução adequada**. Os complementares só aparecem onde agregam análise ou diagnóstico.
 
 ## Três tipos de conteúdo, três funções
 
@@ -69,7 +69,7 @@ Não criar uma página vazia só para preencher a coluna `Complementares`.
 - Comandos de alteração de estado devem destacar impacto, namespace/contexto e limpeza segura.
 - Preferir documentação oficial estável e revisitar exemplos conforme novas versões do Kubernetes.
 
-**Checklist transversal da trilha:** todos os 52 temas precisam de objetivo e três perguntas específicas por aula, três questões de diagnóstico por lab, material complementar **somente quando houver ganho real** e links de retorno. A coluna Complementares deve usar a página curricular canônica e conservar o acesso ao histórico. Subtítulos internos podem variar quando isso melhora a didática, mas a seção final `## 🔗 Referências oficiais` é estável em todas as aulas.
+**Checklist transversal da trilha:** todos os 49 temas precisam de objetivo e três perguntas específicas por aula, três questões de diagnóstico por lab, material complementar **somente quando houver ganho real** e links de retorno. A coluna Complementares deve usar a página curricular canônica e conservar o acesso ao histórico. Subtítulos internos podem variar quando isso melhora a didática, mas a seção final `## 🔗 Referências oficiais` é estável em todas as aulas.
 
 **Links e atualizações:** os links relativos/imagens são testados em todo PR; a [auditoria semanal de URLs externas](../.github/workflows/external-links.yml) confirma 404/410 e publica relatório, sem confundir rate-limit ou bloqueio antibot com link definitivamente quebrado.
 

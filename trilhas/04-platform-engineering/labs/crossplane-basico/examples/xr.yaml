@@ -1,7 +1,0 @@
-apiVersion: platform.example.org/v1alpha1
-kind: XEnvironment
-metadata:
-  name: ambiente-didatico
-  namespace: lab-04-02
-spec:
-  tier: sandbox
