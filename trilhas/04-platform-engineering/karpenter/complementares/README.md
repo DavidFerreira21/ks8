@@ -1,8 +1,8 @@
 # Complementar 04.05 — Capacidade: NodePool e custo
 
-[← Aula 04.05](../README.md) · [🧪 Lab 04.05](../../labs/karpenter-basico/README.md) · [↑ Camada 04](../../README.md)
+[← Aula 04.05](../README.md) · [↑ Camada 04](../../README.md)
 
-> **Leitura opcional:** matriz de decisão e diagnóstico para consulta. Não é pré-requisito para executar o laboratório.
+> **Leitura opcional:** matriz de decisão e diagnóstico para consulta. Não há laboratório 04.05 nesta trilha: esta é uma leitura conceitual opcional.
 
 ## Quando consultar
 
@@ -20,7 +20,7 @@ Ao avaliar pools de nós, consolidar capacidade, restringir custos e escolher en
 
 **Karpenter AWS provider:** usa `EC2NodeClass` e `karpenter.k8s.aws`. **EKS Auto Mode:** expõe NodeClass gerenciada no grupo `eks.amazonaws.com`; configuração e responsabilidades diferem. Não misture os dois manifests.
 
-O exemplo do lab usa `limits.nodes: 0` e NodeClass inexistente para impedir provisionamento. Isso valida o desenho do contrato, não escala operacional. Qualquer exercício de escala real exige conta de sandbox, IAM, orçamento e aprovação.
+Em qualquer análise real, `limits.nodes` restringe capacidade, mas não substitui controle de custos, quotas ou a revisão da `EC2NodeClass`. Provisionamento real exige conta de sandbox, IAM, orçamento e aprovação; **não é objeto de exercício nesta trilha**.
 
 ## Referências oficiais
 

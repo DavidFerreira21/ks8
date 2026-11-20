@@ -39,11 +39,10 @@ spec:
 ```bash
 kubectl config current-context
 kubectl api-resources --api-group=external-secrets.io
-kubectl get secretstore,externalsecret -n lab-04-04
-kubectl describe externalsecret demo -n lab-04-04
+kubectl get secretstore,externalsecret -A  # apenas se ESO já estiver instalado em cluster autorizado
 ```
 
-**O que observar:** Observe condições Ready de SecretStore e ExternalSecret e a existência do Secret alvo sem imprimir seu valor. Mudanças de refresh podem não ser imediatas.
+**Como interpretar:** em um ambiente que já utilize ESO, condições Ready de SecretStore/ExternalSecret e a existência do Secret alvo são sinais úteis. Isso não constitui laboratório nesta trilha; não instale o controlador nem exiba valores de Secrets para completar a aula.
 
 ### Limites e segurança
 
@@ -51,9 +50,9 @@ Use **somente valores fictícios** no Fake Provider. Mesmo em testes, evite impr
 
 ## 🧪 Aplicação prática
 
-[🧪 Lab 04.04 — External Secrets Operator](../labs/external-secrets-operator-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
+**Sem laboratório nesta etapa.** Analise um cenário fictício: uma aplicação precisa receber um Secret de um cofre externo. Identifique a responsabilidade de `SecretStore`, `ExternalSecret` e Secret de destino; explique como tratar identidade, refresh, revogação e falha de sincronização. Não utilize credenciais reais nem crie recursos em cluster.
 
-**Complementar opcional:** [Aprofundamento e diagnóstico](complementares/README.md) para decisões e falhas comuns, sem substituir a aula e o lab.
+**Complementar opcional:** [Aprofundamento e diagnóstico](complementares/README.md) para decisões e falhas comuns, sem exigir execução prática.
 
 ## ✅ Revisão do aprendizado
 
@@ -67,4 +66,4 @@ Use **somente valores fictícios** no Fake Provider. Mesmo em testes, evite impr
 
 ---
 
-[← Aula 04.03](../kyverno/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.04](../labs/external-secrets-operator-basico/README.md) · [Próxima: Aula 04.05 →](../karpenter/README.md)
+[← Aula 04.03](../kyverno/README.md) · [↑ Camada 04](../README.md) · [Próxima: Aula 04.05 →](../karpenter/README.md)

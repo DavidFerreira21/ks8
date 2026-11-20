@@ -43,17 +43,17 @@ kubectl get nodepools,nodeclaims
 kubectl get nodes -o wide
 ```
 
-**O que observar:** NodePool pode existir sem gerar nós. Conclusão funcional exige Pods pendentes elegíveis, NodeClaims criados e Nodes Ready, em um cluster EKS autorizado.
+**Como interpretar:** a presença de NodePool não prova provisionamento. Em ambientes já administrados com Karpenter, a prova funcional exigiria Pods elegíveis, NodeClaims criados e Nodes Ready. Esta aula não solicita instalação ou provisionamento.
 
 ### Limites e segurança
 
-**Este lab não funciona como autoscaling no Kind.** Não aplique configurações AWS fictícias em produção; o YAML inicial usa limites que impedem criação de nós. Exercício de provisionamento tem custo e requer aprovação.
+**Esta aula não inclui laboratório.** Kind padrão não simula o provisionamento de EC2 pelo Karpenter. Não aplique manifests de exemplo em produção: provisionamento em AWS gera custos e exige ambiente, permissões e aprovação apropriados.
 
 ## 🧪 Aplicação prática
 
-[🧪 Lab 04.05 — Karpenter](../labs/karpenter-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
+**Sem laboratório nesta etapa.** Examine um cenário conceitual com Pods `Pending`: diferencie restrições de agendamento de falta de capacidade, determine a responsabilidade de NodePool, EC2NodeClass e NodeClaim, e explique por que o HPA não cria nós. Não configure AWS, IAM nem recursos de provisionamento para esta aula.
 
-**Complementar opcional:** [Aprofundamento e diagnóstico](complementares/README.md) para decisões e falhas comuns, sem substituir a aula e o lab.
+**Complementar opcional:** [Aprofundamento e diagnóstico](complementares/README.md) para aprofundamento conceitual, sem depender de um lab.
 
 ## ✅ Revisão do aprendizado
 
@@ -67,4 +67,4 @@ kubectl get nodes -o wide
 
 ---
 
-[← Aula 04.04](../external-secrets-operator/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.05](../labs/karpenter-basico/README.md) · [Próxima: Aula 04.06 →](../cilium/README.md)
+[← Aula 04.04](../external-secrets-operator/README.md) · [↑ Camada 04](../README.md) · [Próxima: Aula 04.06 →](../cilium/README.md)
