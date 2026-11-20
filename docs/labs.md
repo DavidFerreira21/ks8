@@ -111,7 +111,7 @@ A criação de namespaces ausentes não imprime mais um erro esperado de `NotFou
 
 ## Camada 02 — Operação e Segurança
 
-Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incompleto e solução de referência separada. Os complementares só existem onde agregam aprofundamento. Os testes da CI atual não equivalem à homologação funcional dos 14 labs: o smoke Kind cobre **10 labs** (02.01–02.08, 02.10 e 02.11), enquanto 02.09, 02.12, 02.13 e 02.14 exigem validação específica e evidências próprias.
+Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incompleto e solução de referência separada. Os complementares só existem onde agregam aprofundamento. Os testes da CI atual não equivalem à homologação funcional dos 14 labs: o smoke Kind cobre **13 labs** (todos exceto 02.13). A CI agora verifica também PriorityClass, cordon/uncordon e recuperação de imagem em 02.09, 02.12 e 02.14. O isolamento da NetworkPolicy (02.13) exige CNI com enforcement e [experimento opcional dedicado](../trilhas/02-operacao-seguranca/labs/networkpolicy-basico/experiments/README.md).
 
 | ID | Prática | Lab |
 | --- | --- | --- |
@@ -134,7 +134,7 @@ Todos os 14 tópicos possuem **aula, lab e contrato YAML**, com starter incomple
 
 **Dependências:** os labs 02.07 e 02.12 pressupõem Kind com worker `dev-worker`. O 02.09 usa PriorityClass de escopo do cluster; limpe-a ao concluir. O 02.13 requer CNI compatível para comprovar isolamento; sem ele, somente a validação declarativa fica disponível. O 02.14 usa uma imagem inválida intencionalmente. Em qualquer lab, não confunda `make lab-test` com prova do experimento completo.
 
-**CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. Os labs 02.09, 02.12, 02.13 e 02.14 permanecem fora do smoke Kind geral por exigirem validação específica de PriorityClass, manutenção de nó, enforcement de NetworkPolicy ou diagnóstico de imagem inválida.
+**CI:** a automação `reject-pod` do lab 02.04 permanece disponível e exige rejeição específica por quota. O smoke Kind cobre 02.09, 02.12 e 02.14 com testes de comportamento. Somente 02.13 permanece sem prova de rede na CI Kind padrão, por exigir CNI com enforcement.
 **Experimentos adicionais:** 02.03 compara `warn` com `enforce` por dry-run de servidor, sem criar Pod privilegiado; 02.08 demonstra agendamento impossível com `minDomains: 3` e dois workers elegíveis; 02.10 compara QoS de um quarto Pod; 02.12 demonstra que cordon impede novos agendamentos. Os arquivos ficam em `experiments/` e exigem limpeza própria.
 
 ## Camada 03 — Arquitetura e infraestrutura
@@ -213,7 +213,7 @@ O script verifica o contexto antes de consultar recursos e não modifica o clust
 - `make down` remove o cluster Kind indicado por `CLUSTER_NAME`. Verifique esse valor antes da execução.
 - `make lab-down` **preserva o namespace** para evitar excluir recursos não relacionados.
 - `make validate` analisa todos os manifests declarados nos contratos e executa checks didáticos, **não substituindo a validação completa do schema Kubernetes**.
-- A pipeline do GitHub possui **job de integração com Kind descartável**, com cobertura declarada de 22 labs (12 da Camada 01 e 10 da Camada 02). A cobertura só pode ser considerada validada quando a execução correspondente terminar em `success`. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
+- A pipeline do GitHub possui **job de integração com Kind descartável**, com cobertura declarada de 25 labs (12 da Camada 01 e 13 da Camada 02). A cobertura só pode ser considerada validada quando a execução correspondente terminar em `success`. A existência do workflow não prova sucesso: consulte o status das execuções no GitHub Actions.
 - Os novos labs não foram executados manualmente durante a elaboração deste PR. A CI os valida conforme a cobertura descrita; os labs 01.13 e 01.14 exigem teste funcional em Kind com addons.
 
 
@@ -251,7 +251,7 @@ O gerador **não registra automaticamente o lab**: `lab.yaml.example` é um rasc
 
 ## CI: Kind descartável
 
-O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O smoke abrange 22 laboratórios sem addons (01.01–01.12 e 10 da Camada 02), valida os checks e exercita rollout, quota, PSA e agendamento por Topology Spread, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
+O workflow `.github/workflows/kind-integration.yml` cria um Kind chamado `dev` e executa `scripts/ci-kind-smoke.sh`. O smoke abrange 25 laboratórios sem addons (01.01–01.12 e 13 da Camada 02), valida os checks e exercita rollout, quota, PSA e agendamento por Topology Spread, e **remove os recursos declarados** ao terminar. Os namespaces são preservados até o runner descartável ser destruído.
 
 Na falha, o script grava Pods, eventos, describes e logs em `/tmp/kvg-lab-reports`; o workflow publica o artefato `kind-lab-diagnostics`. Esse teste exige Docker, pull de imagens e rede disponível no GitHub runner.
 

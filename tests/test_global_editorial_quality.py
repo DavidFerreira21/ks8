@@ -227,8 +227,8 @@ class GlobalEditorialQualityTests(unittest.TestCase):
         matrix = (ROOT / "docs/matriz-homologacao.md").read_text(encoding="utf-8")
         rows = [line for line in matrix.splitlines() if line.startswith("| [0")]
         self.assertEqual(len(rows), 52)
-        self.assertIn("39 labs", matrix)
-        self.assertIn("13 cenários", matrix)
+        self.assertIn("42 labs", matrix)
+        self.assertIn("10 cenários", matrix)
 
     def test_advanced_resources_have_coherent_dependencies(self):
         p = ROOT / "trilhas/04-platform-engineering/labs/crossplane-basico/examples/composition-avancada"
