@@ -35,6 +35,39 @@ spec:
 
 
 class CriticalLabSafetyTests(unittest.TestCase):
+    def test_existing_unowned_crd_refuses_apply_and_delete(self):
+        base = Path(__file__).resolve().parents[1]
+        metadata = base / "trilhas/03-arquitetura/labs/crds-custom-resources-basico"
+        lab = SimpleNamespace(identifier="03.06",
+                              setup=(metadata / "setup/crd.yaml",), apply=())
+        unowned = SimpleNamespace(returncode=0,
+                                  stdout='{"metadata":{"annotations":{}}}',
+                                  stderr="")
+        with patch.object(labctl.subprocess, "run", return_value=unowned):
+            self.assertEqual(labctl._check_global_resources_ownership(lab), 1)
+
+    def test_owned_crd_can_be_reused(self):
+        base = Path(__file__).resolve().parents[1]
+        metadata = base / "trilhas/03-arquitetura/labs/crds-custom-resources-basico"
+        lab = SimpleNamespace(identifier="03.06",
+                              setup=(metadata / "setup/crd.yaml",), apply=())
+        owned = SimpleNamespace(
+            returncode=0,
+            stdout='{"metadata":{"annotations":{"learning-path.example/lab-id":"03.06"}}}',
+            stderr="",
+        )
+        with patch.object(labctl.subprocess, "run", return_value=owned):
+            self.assertEqual(labctl._check_global_resources_ownership(lab), 0)
+
+    def test_api_unavailable_fails_closed_for_global_objects(self):
+        base = Path(__file__).resolve().parents[1]
+        metadata = base / "trilhas/04-platform-engineering/labs/crossplane-basico"
+        lab = SimpleNamespace(identifier="04.02", setup=(),
+                              apply=(metadata / "solution/resources.yaml",))
+        broken = SimpleNamespace(returncode=1, stdout="", stderr="forbidden")
+        with patch.object(labctl.subprocess, "run", return_value=broken):
+            self.assertEqual(labctl._check_global_resources_ownership(lab), 1)
+
     def test_karpenter_validates_student_yaml_not_reference(self):
         with tempfile.TemporaryDirectory() as td:
             file = Path(td) / "resources.yaml"

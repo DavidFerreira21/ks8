@@ -212,9 +212,58 @@ def perform_experiment(lab: Lab, experiment_id: str | None, confirm: bool) -> in
     return 2
 
 
+GLOBAL_LAB_KINDS = {"CustomResourceDefinition", "CompositeResourceDefinition", "PriorityClass"}
+GLOBAL_LAB_OWNER_ANNOTATION = "learning-path.example/lab-id"
+
+
+def _check_global_resources_ownership(lab: Lab) -> int:
+    """Impedir que um lab sobrescreva ou remova recurso global preexistente.
+
+    A anotação demonstra propriedade *didática*, não é um limite de segurança
+    contra administradores maliciosos. O uso continua restrito a Kind isolado.
+    """
+    for manifest in (*lab.setup, *lab.apply):
+        for obj in yaml.safe_load_all(manifest.read_text(encoding="utf-8")):
+            if not isinstance(obj, dict) or obj.get("kind") not in GLOBAL_LAB_KINDS:
+                continue
+            kind = obj["kind"]
+            metadata = obj.get("metadata") or {}
+            name = metadata.get("name")
+            owner = (metadata.get("annotations") or {}).get(GLOBAL_LAB_OWNER_ANNOTATION)
+            if not isinstance(name, str) or owner != lab.identifier:
+                print(f"FAIL: {kind}/{name} não declara propriedade do lab {lab.identifier}",
+                      file=sys.stderr)
+                return 1
+            response = subprocess.run(
+                ["kubectl", "get", kind.lower(), name,
+                 "--ignore-not-found", "-o", "json"],
+                capture_output=True, text=True, check=False,
+            )
+            if response.returncode:
+                print(f"FAIL: não foi possível verificar {kind}/{name}: "
+                      f"{response.stderr.strip()}", file=sys.stderr)
+                return 1
+            if response.stdout.strip():
+                try:
+                    existing = json.loads(response.stdout)
+                    current_owner = ((existing.get("metadata") or {})
+                                     .get("annotations") or {}).get(GLOBAL_LAB_OWNER_ANNOTATION)
+                except (ValueError, AttributeError, TypeError):
+                    print(f"FAIL: API retornou dados inválidos de {kind}/{name}", file=sys.stderr)
+                    return 1
+                if current_owner != lab.identifier:
+                    print(f"FAIL: {kind}/{name} já existe e pertence a outro uso. "
+                          "O laboratório não pode sobrescrever nem excluir esse recurso.",
+                          file=sys.stderr)
+                    return 1
+    return 0
+
+
 def prepare_lab(lab: Lab) -> int:
     """Prepara namespace, backends de apoio e arquivos locais sem aplicar a solucao."""
     if ensure_namespace(lab.namespace):
+        return 1
+    if _check_global_resources_ownership(lab):
         return 1
     for manifest in lab.setup:
         if kubectl("apply", "-f", str(manifest)).returncode:
@@ -297,6 +346,9 @@ def _verify_global_api_deletion_safety(lab: Lab) -> int:
 
 
 def remove_lab_objects(lab: Lab) -> int:
+    # Verificação antes de excluir qualquer objeto: evita limpeza parcial.
+    if _check_global_resources_ownership(lab):
+        return 1
     # Primeiro apaga recursos de solução namespaced (incluindo CRs), e só
     # depois considera exclusão das definições de API de escopo global.
     for manifest in reversed(lab.apply):
@@ -419,6 +471,8 @@ def execute_lab(lab: Lab, action: str) -> int:
         return prepare_lab(lab)
     if action == "lab-up":
         if ensure_namespace(lab.namespace):
+            return 1
+        if _check_global_resources_ownership(lab):
             return 1
         for manifest in (*lab.setup, *lab.apply):
             if kubectl("apply", "-f", str(manifest)).returncode:
