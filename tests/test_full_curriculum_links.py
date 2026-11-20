@@ -11,8 +11,8 @@ import unittest
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
-LINK = re.compile(r"!?(?:\\[[^\\]]*\\])\\(([^)]+)\\)")
-FENCE = re.compile(r"^\\s*(?:`{3,}|~{3,})")
+LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+FENCE = re.compile(r"^\s*(?:`{3,}|~{3,})")
 
 
 def curriculum_pages():
