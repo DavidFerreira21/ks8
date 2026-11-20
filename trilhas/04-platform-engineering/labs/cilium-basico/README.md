@@ -1,8 +1,8 @@
-# Lab 04.06 — Cilium
+# Lab 04.03 — Cilium
 
-[← Aula 04.06](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
+[← Aula 04.03](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO — Kind Cilium dedicado:** siga primeiro o [guia de preparação](../../../../docs/ambientes/04-cilium.md). No contexto `kind-cilium-lab`, use `make lab-prepare LAB=04.06 CLUSTER_NAME=cilium-lab`, complete o starter e aplique seu YAML. O motor de labs **não** deve ser executado contra cluster compartilhado.
+> **MODO DESAFIO — Kind Cilium dedicado:** siga primeiro o [guia de preparação](../../../../docs/ambientes/04-cilium.md). No contexto `kind-cilium-lab`, use `make lab-prepare LAB=04.03 CLUSTER_NAME=cilium-lab`, complete o starter e aplique seu YAML. O motor de labs **não** deve ser executado contra cluster compartilhado.
 
 ## Objetivo e hipótese
 
@@ -28,8 +28,8 @@ Defina sua hipótese antes de consultar `solution/`. Se o tipo não aparecer em 
 
 ```bash
 kubectl config current-context  # esperado kind-cilium-lab
-make lab-prepare LAB=04.06 CLUSTER_NAME=cilium-lab
-cat .labs/04.06/resources.yaml
+make lab-prepare LAB=04.03 CLUSTER_NAME=cilium-lab
+cat .labs/04.03/resources.yaml
 ```
 
 Confirme disponibilidade da API específica da ferramenta e o namespace alvo antes de aplicar.
@@ -39,10 +39,10 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 Complete os TODOs:
 
 ```bash
-kubectl apply --dry-run=server --validate=strict -f .labs/04.06/
-kubectl apply -f .labs/04.06/
-make lab-test LAB=04.06 CLUSTER_NAME=cilium-lab
-make lab-observe LAB=04.06 CLUSTER_NAME=cilium-lab
+kubectl apply --dry-run=server --validate=strict -f .labs/04.03/
+kubectl apply -f .labs/04.03/
+make lab-test LAB=04.03 CLUSTER_NAME=cilium-lab
+make lab-observe LAB=04.03 CLUSTER_NAME=cilium-lab
 ```
 
 Depois do apply, `kubectl get cnp -n lab-04-06` e `kubectl get pods -n lab-04-06 -o wide`; capture IP do backend.
@@ -64,8 +64,8 @@ Investigue CRDs, condições dos custom resources, logs do controller instalado 
 ## Fase 5 — Limpar com segurança
 
 ```bash
-make lab-down LAB=04.06 CLUSTER_NAME=cilium-lab
-make lab-status LAB=04.06 CLUSTER_NAME=cilium-lab
+make lab-down LAB=04.03 CLUSTER_NAME=cilium-lab
+make lab-status LAB=04.03 CLUSTER_NAME=cilium-lab
 ```
 
 A limpeza remove os objetos declarados neste contrato, **não desinstala automaticamente o addon**. Revise recursos filhos, credenciais e qualquer custo externo antes de excluir a instalação. Na ausência do addon, não tente remoção indiscriminada.
@@ -73,7 +73,7 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 ## Critérios de conclusão
 
 - [ ] Escrevi o manifesto principal sem copiar a solução e validei as APIs necessárias.
-- [ ] **Critério exclusivo 04.06:** registre IPs, selectors, status da CiliumNetworkPolicy e respostas distintas dos dois clientes; quando disponível, agregue evidências Hubble.
+- [ ] **Critério exclusivo 04.03:** registre IPs, selectors, status da CiliumNetworkPolicy e respostas distintas dos dois clientes; quando disponível, agregue evidências Hubble.
 - [ ] Diferenciei validação declarativa de comportamento funcional realmente observado.
 - [ ] Reverti mudanças temporárias e executei a limpeza segura.
 
@@ -85,8 +85,8 @@ A limpeza remove os objetos declarados neste contrato, **não desinstala automat
 
 ## Aprofunde seus conhecimentos
 
-[Documentação oficial](https://docs.cilium.io/en/stable/security/policy/layer3/) · [Aula 04.06](../../cilium/README.md)
+[Documentação oficial](https://docs.cilium.io/en/stable/security/policy/layer3/) · [Aula 04.03](../../cilium/README.md)
 
 ---
 
-[← Lab 04.05](../karpenter-basico/README.md) · [↑ Aula 04.06](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.07 →](../prometheus-grafana-basico/README.md)
+[← Lab 04.02](../kyverno-basico/README.md) · [↑ Aula 04.03](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [Próximo: Lab 04.04 →](../prometheus-grafana-basico/README.md)

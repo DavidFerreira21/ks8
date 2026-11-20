@@ -1,4 +1,4 @@
-# 04.07 · Prometheus + Grafana
+# 04.04 · Prometheus + Grafana
 
 [⌂ Início](../../../README.md) · [↑ Camada 04](../README.md) · [📚 Catálogo](../../../docs/catalogo.md)
 
@@ -6,7 +6,7 @@
 
 ## 🎨 Infográfico
 
-![04.07 — Prometheus + Grafana](images/prometheus-grafana.png)
+![04.04 — Prometheus + Grafana](images/prometheus-grafana.png)
 
 ## 📖 Aula teórica
 
@@ -51,7 +51,7 @@ Requer Prometheus Operator/stack e integração de datasource Grafana. Sem addon
 
 ## 🧪 Aplicação prática
 
-[🧪 Lab 04.07 — Prometheus + Grafana](../labs/prometheus-grafana-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
+[🧪 Lab 04.04 — Prometheus + Grafana](../labs/prometheus-grafana-basico/README.md): escreva o recurso da ferramenta e execute verificações com pré-requisitos explícitos. **Labs que exigem CRDs, controladores ou AWS não são homologados no Kind padrão.**
 
 **Complementar opcional:** [Aprofundamento e diagnóstico](complementares/README.md) para decisões e falhas comuns, sem substituir a aula e o lab.
 
@@ -67,4 +67,4 @@ Requer Prometheus Operator/stack e integração de datasource Grafana. Sem addon
 
 ---
 
-[← Aula 04.06](../cilium/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.07](../labs/prometheus-grafana-basico/README.md) · [↑ Catálogo de 52 aulas](../../../docs/catalogo.md)
+[← Aula 04.03](../cilium/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.04](../labs/prometheus-grafana-basico/README.md) · [↑ Catálogo de 49 aulas](../../../docs/catalogo.md)

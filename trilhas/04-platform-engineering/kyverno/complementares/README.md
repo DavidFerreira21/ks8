@@ -1,6 +1,6 @@
-# Complementar 04.03 — Validação CEL e migração de políticas
+# Complementar 04.02 — Validação CEL e migração de políticas
 
-[← Aula 04.03](../README.md) · [🧪 Lab 04.03](../../labs/kyverno-basico/README.md) · [↑ Camada 04](../../README.md)
+[← Aula 04.02](../README.md) · [🧪 Lab 04.02](../../labs/kyverno-basico/README.md) · [↑ Camada 04](../../README.md)
 
 > **Leitura opcional:** matriz de decisão e diagnóstico para consulta. Não é pré-requisito para executar o laboratório.
 
@@ -31,4 +31,4 @@ Kyverno 1.19 anunciou paridade de APIs CEL e depreciação das políticas legada
 
 ---
 
-[↑ Aula 04.03](../README.md) · [↑ Camada 04](../../README.md)
+[↑ Aula 04.02](../README.md) · [↑ Camada 04](../../README.md)

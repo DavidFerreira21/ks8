@@ -1,6 +1,6 @@
-# Preparação 04.07 — Prometheus Operator e Grafana
+# Preparação 04.04 — Prometheus Operator e Grafana
 
-[↑ Ambientes](README.md) · [🧪 Lab 04.07](../../trilhas/04-platform-engineering/labs/prometheus-grafana-basico/README.md)
+[↑ Ambientes](README.md) · [🧪 Lab 04.04](../../trilhas/04-platform-engineering/labs/prometheus-grafana-basico/README.md)
 
 > **Versão, Helm release e selectors importam.** A solução usa `ServiceMonitor.metadata.labels.release: prometheus`. Instale o Helm release com o nome **prometheus** ou atualize o label e o selector coerentemente.
 
@@ -24,8 +24,8 @@ A stack pode exigir recursos importantes de CPU/memória; verifique capacidade d
 ## Diferenciar recurso, scrape e visualização
 
 ```bash
-make lab-prepare LAB=04.07
-kubectl apply -f .labs/04.07/
+make lab-prepare LAB=04.04
+kubectl apply -f .labs/04.04/
 kubectl get servicemonitor metrics-demo -n lab-04-07 -o yaml
 kubectl get endpointslices -n lab-04-07
 kubectl get prometheus -n monitoring -o yaml

@@ -1,6 +1,6 @@
-# Complementar 04.06 — Cilium e enforcement: evidências
+# Complementar 04.03 — Cilium e enforcement: evidências
 
-[← Aula 04.06](../README.md) · [🧪 Lab 04.06](../../labs/cilium-basico/README.md) · [↑ Camada 04](../../README.md)
+[← Aula 04.03](../README.md) · [🧪 Lab 04.03](../../labs/cilium-basico/README.md) · [↑ Camada 04](../../README.md)
 
 > **Leitura opcional:** matriz de decisão e diagnóstico para consulta. Não é pré-requisito para executar o laboratório.
 
@@ -32,4 +32,4 @@ Não instale Cilium sobre CNI padrão de cluster compartilhado apenas para execu
 
 ---
 
-[↑ Aula 04.06](../README.md) · [↑ Camada 04](../../README.md)
+[↑ Aula 04.03](../README.md) · [↑ Camada 04](../../README.md)

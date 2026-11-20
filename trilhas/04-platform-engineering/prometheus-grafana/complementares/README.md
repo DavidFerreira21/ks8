@@ -1,6 +1,6 @@
-# Complementar 04.07 — Observabilidade: scrape, PromQL e dashboards
+# Complementar 04.04 — Observabilidade: scrape, PromQL e dashboards
 
-[← Aula 04.07](../README.md) · [🧪 Lab 04.07](../../labs/prometheus-grafana-basico/README.md) · [↑ Camada 04](../../README.md)
+[← Aula 04.04](../README.md) · [🧪 Lab 04.04](../../labs/prometheus-grafana-basico/README.md) · [↑ Camada 04](../../README.md)
 
 > **Leitura opcional:** matriz de decisão e diagnóstico para consulta. Não é pré-requisito para executar o laboratório.
 
@@ -29,4 +29,4 @@ Adapte labels ao target real descoberto; a presença de `up` depende do Promethe
 
 ---
 
-[↑ Aula 04.07](../README.md) · [↑ Camada 04](../../README.md)
+[↑ Aula 04.04](../README.md) · [↑ Camada 04](../../README.md)

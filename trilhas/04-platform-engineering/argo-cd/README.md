@@ -67,4 +67,4 @@ A Application é um recurso do Argo CD e requer CRD/controlador instalados. Appl
 
 ---
 
-[← Camada 03](../../03-arquitetura/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.01](../labs/argo-cd-basico/README.md) · [Próxima: Aula 04.02 →](../crossplane/README.md)
+[← Camada 03](../../03-arquitetura/README.md) · [↑ Camada 04](../README.md) · [🧪 Lab 04.01](../labs/argo-cd-basico/README.md) · [Próxima: Aula 04.02 →](../kyverno/README.md)
