@@ -14,6 +14,10 @@
 | 04.06 | Cilium CNI | [Preparar](04-cilium.md) | Ingress permitido e bloqueado |
 | 04.07 | Prometheus + Grafana | [Preparar](04-prometheus-grafana.md) | Target UP e consulta no Grafana |
 
+## Addons de Fundamentos (opcionais)
+
+Os labs **01.13** (Ingress) e **01.14** (HPA) exigem instalação separada. Consulte [Traefik no Kind](01-ingress-traefik.md) e [Metrics Server no Kind](01-hpa-metrics-server.md); esses cenários não fazem parte da CI Kind básica.
+
 ## Contrato de homologação
 
 1. Identifique cluster/contexto e registre versões do Kubernetes, Helm e addon.
