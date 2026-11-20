@@ -47,6 +47,12 @@ kubectl explain appenvironment.spec
 
 CRDs são cluster-scoped, ainda que as instâncias possam ser namespaced. Nunca reutilize nomes reais de CRDs de uma plataforma; exclua a definição apenas no Kind descartável e registre dependências.
 
+### API de plataforma não é implementação
+
+Registrar `AppEnvironment` faz a API reconhecer `learning.example/v1`, validar `spec.tier` e persistir a CR. **Nenhuma ação sobre Deployments ou contas cloud acontece** sem reconciler. Essa separação é fundamental para o design de APIs de plataforma: contrato de consumo e motor que executa são responsabilidades distintas.
+
+Ao desenhar uma CRD, defina **scope**, schema com tipos/required/enum, evolução de versões e propriedade de campos de status. A exclusão da CRD pode apagar instâncias existentes inclusive fora do namespace do lab. Use apenas o Kind descartável e o cleanup com proteção de instâncias.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.06 — CRDs e Custom Resources](../labs/crds-custom-resources-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.

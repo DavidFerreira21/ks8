@@ -47,6 +47,17 @@ kubectl get --raw /readyz
 
 `kubectl apply --dry-run=client` não valida políticas do servidor. Endpoints `/readyz` e `/livez` dependem de autorização e do cluster; não confunda um 403 com API fora do ar.
 
+### Interpretar respostas da API em vez de adivinhar
+
+| Sintoma | Etapa a verificar | O que não concluir |
+| --- | --- | --- |
+| Falha TLS/conexão | Endpoint, rede ou certificados | Não é necessariamente RBAC |
+| `Unauthorized` (401) | Identidade e autenticação | Não é falta de CPU no nó |
+| `Forbidden` (403) | RBAC ou política que negou a requisição | Não é Pod Pending |
+| Campo inválido/schema | Validação OpenAPI/admission | O YAML não foi persistido |
+
+A API controla a **admissão da intenção**, não o momento em que o kubelet conclui a execução. Compare um `kubectl apply --dry-run=server --validate=strict` com o estado vivo de um objeto existente antes de interpretar uma falha como problema de worker.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.02 — kube-apiserver](../labs/kube-apiserver-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.

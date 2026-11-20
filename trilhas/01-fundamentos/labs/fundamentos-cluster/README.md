@@ -111,6 +111,8 @@ make lab-status LAB=01.01
 
 **Evidências específicas:** capture o contexto e os nós do Kind, o objeto declarado e seu `spec`/`status` antes e depois da alteração manual. Explique a reconciliação observada.
 
+- Se um objeto aparece no API Server, mas sua condição ainda não mudou, qual evidência demonstra a etapa de reconciliação pendente?
+
 ## Aprofunde seus conhecimentos
 
 [Conceitos básicos e arquitetura](https://kubernetes.io/docs/concepts/overview/) · [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) · [Gerenciamento declarativo de objetos](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/declarative-config/).

@@ -141,6 +141,8 @@ O namespace é preservado; `lab-down` remove os recursos declarados no contrato.
 
 **Evidências específicas:** registre Service, selectors, EndpointSlices e resultado de conectividade antes e depois de alterar o selector; explique a mudança.
 
+- Qual caminho de diagnóstico você seguiria se os EndpointSlices apontassem para Pods prontos, mas o HTTP continuasse falhando?
+
 ## Aprofunde seus conhecimentos
 
 [Services](https://kubernetes.io/docs/concepts/services-networking/service/) · [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) · [DNS de Services e Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).

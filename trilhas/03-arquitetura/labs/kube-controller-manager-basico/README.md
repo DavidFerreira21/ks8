@@ -42,6 +42,19 @@ Identifique ReplicaSet, owners, UID e status de `kubectl get pods -n lab-03-05 -
 
 Registre o UID de um Pod, exclua-o manualmente e observe a recuperação via `kubectl rollout status deploy/controlador -n lab-03-05`. Compare ownerReferences e UIDs antes/depois.
 
+### Confirmar a ação do ReplicaSet
+
+```bash
+kubectl get rs,pods -n lab-03-05 -o wide
+POD=$(kubectl get pods -n lab-03-05 -l app=controlador -o jsonpath='{.items[0].metadata.name}')
+kubectl get pod "$POD" -n lab-03-05 -o jsonpath='{.metadata.uid}'
+kubectl delete pod "$POD" -n lab-03-05
+kubectl rollout status deploy/controlador -n lab-03-05 --timeout=120s
+kubectl get rs,pods -n lab-03-05 -o wide
+```
+
+**Prova:** o objeto pai mantém `replicas: 2` e o Pod substituto tem novo UID. Excluir um Pod **não equivale** a atualizar a especificação do Deployment.
+
 ## Resultado esperado e evidências
 
 O controlador restaura o número de Pods sem que o usuário reaplique o Deployment. O processo não garante a identidade original do Pod.

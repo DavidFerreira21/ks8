@@ -1,0 +1,7 @@
+apiVersion: learning.example/v1
+kind: AppEnvironment
+metadata:
+  name: cr-invalida
+  namespace: lab-03-06
+spec:
+  tier: 123

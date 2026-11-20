@@ -96,6 +96,8 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 
 **Evidências específicas:** registre Deployment/ReplicaSet/Pods e réplicas prontas antes e depois do experimento; explique qual controlador repôs os Pods.
 
+- Se as réplicas desejadas forem três e apenas duas estiverem prontas, quais campos ou eventos consultaria antes de aumentar recursos?
+
 ## Aprofunde seus conhecimentos
 
 [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) · [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) · [Operações de atualização](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).

@@ -103,6 +103,8 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 
 **Evidências específicas:** registre `MENSAGEM` no ConfigMap e nos logs antes e após o patch, e novamente depois do restart; explique por que o Pod existente manteve o valor anterior.
 
+- Em quais situações atualizar um ConfigMap montado como volume difere de atualizar uma variável de ambiente?
+
 ## Aprofunde seus conhecimentos
 
 [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap/) · [Configurar Pod com ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/) · [Variáveis de ambiente no Pod](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/).

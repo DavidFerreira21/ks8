@@ -64,7 +64,7 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 
 **🧪 Lab 01.05:** [🧪 Lab 01.05](../labs/services-basico/README.md). Exercício independente, com Deployment apenas como backend de teste.
 
-**Complementar opcional:** [Consultar material complementar](../../../7-services/README.md). Referência adicional para consulta após a aula e o lab.
+**Complementar opcional:** [Consultar material complementar](complementares/README.md). Referência adicional para consulta após a aula e o lab.
 
 ## ✅ Revisão do aprendizado
 
@@ -72,7 +72,7 @@ Os comandos de `web-svc` exigem que o Service tenha sido criado. Se não houver 
 - Qual a diferença entre `port`, `targetPort` e a porta realmente escutada pelo processo?
 - Por que um Service pode existir e ter DNS válido mesmo sem backends prontos?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 

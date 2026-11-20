@@ -48,6 +48,14 @@ kubectl describe svc web -n lab-03-13
 
 Não presuma que kube-proxy é um DaemonSet em todas as distribuições nem que eBPF substitui o dataplane no Kind padrão. Não altere regras de iptables no nó.
 
+### Decisão arquitetural e diagnóstico
+
+### Control Plane e dataplane de Service
+
+Um **Service** declara identidade estável e selectors; controladores publicam EndpointSlices a partir dos backends. O dataplane (kube-proxy, regras do kernel ou solução eBPF) interpreta essas mudanças e encaminha tráfego. A ausência de endpoints normalmente indica problema em seleção/readiness, não necessariamente um defeito na implementação do dataplane.
+
+**Comparação importante:** Cilium pode atuar como CNI e aplicar políticas usando eBPF sem necessariamente substituir kube-proxy em todas as configurações. O [experimento opcional em Kind com Cilium](../labs/kube-proxy-ebpf-basico/experiments/README.md) verifica conectividade e status real da CNI; só classifica `kubeProxyReplacement` como validado quando essa opção estiver explicitamente ativa.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.13](../labs/kube-proxy-ebpf-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.

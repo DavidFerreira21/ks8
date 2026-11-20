@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: appenv-reconciler
+  namespace: lab-03-07
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: appenv-reconciler
+  namespace: lab-03-07
+rules:
+  - apiGroups: ["learning.example"]
+    resources: [appenvironments]
+    verbs: [get, list, watch]
+  - apiGroups: [""]
+    resources: [configmaps]
+    verbs: [get, list, create, update, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: appenv-reconciler
+  namespace: lab-03-07
+subjects:
+  - kind: ServiceAccount
+    name: appenv-reconciler
+    namespace: lab-03-07
+roleRef:
+  kind: Role
+  name: appenv-reconciler
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appenv-reconciler
+  namespace: lab-03-07
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appenv-reconciler
+  template:
+    metadata:
+      labels:
+        app: appenv-reconciler
+    spec:
+      serviceAccountName: appenv-reconciler
+      containers:
+        - name: controller
+          image: python:3.12-slim
+          command: ["python", "-u", "/app/controller.py"]
+          resources:
+            requests:
+              cpu: 25m
+              memory: 40Mi
+            limits:
+              cpu: 150m
+              memory: 128Mi
+          volumeMounts:
+            - name: source
+              mountPath: /app
+              readOnly: true
+      volumes:
+        - name: source
+          configMap:
+            name: appenv-reconciler-source

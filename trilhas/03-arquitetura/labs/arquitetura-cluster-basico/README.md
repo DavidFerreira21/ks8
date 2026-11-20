@@ -42,6 +42,21 @@ Use `kubectl get deploy,rs,pods -n lab-03-01 -o wide`; compare nós, owners e ge
 
 Exclua somente um dos Pods gerenciados usando o nome retornado por `kubectl get pod -n lab-03-01`; observe a recriação e a volta para duas réplicas prontas. Não exclua o Deployment.
 
+### Linha do tempo de um Pod
+
+Antes de excluir qualquer coisa, identifique o ReplicaSet e anote um UID. Depois remova **somente um Pod desta aplicação**:
+
+```bash
+kubectl get deployment,rs,pods -n lab-03-01 -l app=percurso -o wide
+POD=$(kubectl get pods -n lab-03-01 -l app=percurso -o jsonpath='{.items[0].metadata.name}')
+kubectl get pod "$POD" -n lab-03-01 -o jsonpath='{.metadata.uid}'
+kubectl delete pod "$POD" -n lab-03-01
+kubectl rollout status deploy/percurso -n lab-03-01 --timeout=120s
+kubectl get pods -n lab-03-01 -l app=percurso -o wide
+```
+
+**Interprete:** o UID muda, o ReplicaSet mantém o número desejado e um novo `spec.nodeName` é atribuído quando houver capacidade. A criação do objeto no API Server ocorreu antes da convergência dos controllers.
+
 ## Resultado esperado e evidências
 
 O API Server aceita a declaração; um ReplicaSet mantém o número desejado e o scheduler registra os nós dos Pods. A identidade do Pod excluído muda.

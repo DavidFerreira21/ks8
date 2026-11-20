@@ -40,6 +40,18 @@ Veja `kubectl get svc,endpointslices -n lab-03-13 -o wide` e `kubectl describe s
 
 Altere o selector `kubectl patch svc web -n lab-03-13 -p '{"spec":{"selector":{"app":"nao-existe"}}}'`; compare EndpointSlices. Reaplique o YAML para restaurar o backend.
 
+### Verificar EndpointSlices, seletor e dataplane
+
+```bash
+kubectl get service web -n lab-03-13 -o jsonpath='{.spec.clusterIP}{"\n"}'
+kubectl get endpointslices -n lab-03-13 -l kubernetes.io/service-name=web -o wide
+kubectl patch service web -n lab-03-13 -p '{"spec":{"selector":{"app":"nao-existe"}}}'
+kubectl get endpointslices -n lab-03-13 -l kubernetes.io/service-name=web -o wide
+kubectl apply -f .labs/03.13/resources.yaml
+```
+
+**Evidência:** endpoints desaparecem/ficam vazios quando o selector não corresponde e voltam após a restauração. Para testar Cilium eBPF como dataplane real, use o [experimento avançado opcional em Kind com Cilium](experiments/README.md); somente esse segundo ambiente permite avaliar Cilium instalado, e substituição de kube-proxy exige configuração adicional.
+
 ## Resultado esperado e evidências
 
 Service continua existindo enquanto os endpoints deixam de corresponder; depois retornam. A API não informa se o dataplane usa kube-proxy ou alternativa eBPF.

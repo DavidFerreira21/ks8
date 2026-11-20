@@ -12,6 +12,8 @@ Escrever NodePool com NodeClass explícita e limites que impedem provisionamento
 
 ## Pré-requisitos da ferramenta
 
+**Guia de instalação, versões e reversão:** [🛠️ Preparar Karpenter](../../../../docs/ambientes/04-karpenter.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
+
 **Este lab exige cluster EKS de sandbox com Karpenter AWS provider instalado e autorização explícita.** Não execute no Kind padrão; um node pool com NodeClass não configurada e limits.nodes 0 é didático e não deve provisionar nós.
 
 **Segurança:** **Cloud-only e dependente de autorização.** O manifesto foi intencionalmente desarmado para não criar infraestrutura; não é homologação funcional de escala.

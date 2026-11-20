@@ -66,7 +66,7 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 
 **🧪 Lab 01.02:** [🧪 Lab 01.02](../labs/pods-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
-**Complementar opcional:** [Consultar material complementar](../../../2-pod/README.md). Referência adicional para consulta após a aula e o lab.
+**Complementar opcional:** [Consultar material complementar](complementares/README.md). Referência adicional para consulta após a aula e o lab.
 
 ## ✅ Revisão do aprendizado
 
@@ -74,7 +74,7 @@ Quando um Pod não inicia, siga a sequência: **fase → eventos → status dos 
 - Por que excluir um Pod avulso é diferente de excluir um Pod controlado por Deployment?
 - Que sinais diferenciam `Running`, prontidão e um container em `CrashLoopBackOff`?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
 

@@ -32,6 +32,8 @@ Siga o [contrato editorial](../../docs/padrao-editorial.md). Comece pela aula, p
 
 Os labs usam tipos de **API próprios das ferramentas**. Em geral, é necessário **instalar o controlador e as CRDs** antes do `kubectl apply`; `make lab-prepare LAB=04.XX` apenas cria o namespace local e copia o YAML incompleto. `make lab-up` é caminho da CI com addons, não do estudante. Para Karpenter há um **roteiro especial de análise offline** no Kind, porque o motor local bloqueia contextos não Kind.
 
+[🛠️ Preparar ambientes da Camada 04](../../docs/ambientes/README.md) · [📊 Matriz dos 52 labs](../../docs/matriz-homologacao.md)
+
 ## ⚠️ Matriz de dependências e homologação
 
 | Lab | Recurso real | Dependência para teste funcional | Kind padrão |

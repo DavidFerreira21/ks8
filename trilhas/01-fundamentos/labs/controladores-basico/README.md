@@ -96,6 +96,8 @@ O namespace é preservado. Não use `make down` para excluir um único lab.
 
 **Evidências específicas:** registre os nós elegíveis ao DaemonSet e os Pods com seus nós; compare nome e UID de `stateful-demo-0` antes e depois da recriação.
 
+- Por que o StatefulSet preserva a identidade ordinal `stateful-demo-0` mesmo quando seu Pod recebe um UID novo?
+
 ## Aprofunde seus conhecimentos
 
 [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) · [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) · [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/).

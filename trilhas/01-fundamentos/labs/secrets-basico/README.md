@@ -100,6 +100,8 @@ Namespace preservado; não use `make down` para limpar um único exercício.
 
 **Evidências específicas:** registre a criação e o consumo do Secret usando somente metadados, status e verificações que não revelem seu valor; explique por que base64 não é criptografia.
 
+- Qual risco existe ao imprimir `kubectl get secret -o yaml` no terminal de uma pipeline, mesmo sem decodificar base64?
+
 ## Aprofunde seus conhecimentos
 
 [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) · [Distribuir credenciais com segurança](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/) · [Boas práticas para Secrets](https://kubernetes.io/docs/concepts/security/secrets-good-practices/).

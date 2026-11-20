@@ -58,7 +58,7 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 
 **🧪 Lab 01.10:** [🧪 Lab 01.10](../labs/probes-basico/README.md). Aplique em Kind, observe o comportamento e execute o experimento com as orientações do roteiro.
 
-**Complementar opcional:** [Consultar material complementar](../../../5-probes/README.md). Referência adicional para consulta após a aula e o lab.
+**Complementar opcional:** [Consultar material complementar](complementares/README.md). Referência adicional para consulta após a aula e o lab.
 
 ## ✅ Revisão do aprendizado
 
@@ -66,7 +66,7 @@ Confira `Ready`, contagem de restarts, eventos `Unhealthy` e a prontidão dos en
 - Por que uma liveness dependente de serviço externo pode provocar reinícios desnecessários?
 - Como startupProbe protege aplicações com inicialização lenta?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Probes — Liveness, Readiness e Startup](https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/)
 

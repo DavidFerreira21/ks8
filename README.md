@@ -75,6 +75,10 @@ Os exercícios são executados em um **Kind local** com verificação de context
 
 > O motor automatiza tarefas repetitivas, mas mantém a análise de eventos, hipóteses e experimentos como parte essencial do aprendizado. Resultados de execução devem ser conferidos no GitHub Actions e no cluster local.
 
+## 📊 Homologação e cobertura
+
+A [matriz de homologação dos 52 labs](docs/matriz-homologacao.md) diferencia CI Kind, validação de contratos e execução funcional com addons; consulte antes de declarar uma camada inteiramente homologada.
+
 ## 🧪 Laboratórios disponíveis
 
 As **4 camadas reúnem 52 labs documentados** (14 + 14 + 17 + 7). A CI Kind cobre cenários selecionados das Camadas 01–03; a Camada 04 exige controllers e/ou cloud para homologação funcional. Consulte os pré-requisitos antes de executar. [**Camada 01**](trilhas/01-fundamentos/README.md) · [**Camada 02**](trilhas/02-operacao-seguranca/README.md) · [**Camada 03**](trilhas/03-arquitetura/README.md) · [**Camada 04**](trilhas/04-platform-engineering/README.md).
@@ -120,6 +124,8 @@ Os **complementares são opcionais**: fornecem exemplos adicionais, comparação
 - **Aprofundamento:** use as fontes oficiais vinculadas em cada módulo.
 
 [**Ver o roadmap completo →**](docs/roadmap.md) · [**Entender a convenção visual →**](docs/infograficos.md)
+
+**Manutenção contínua:** links internos são validados na CI, e um [workflow semanal](.github/workflows/external-links.yml) publica relatório de links externos com confirmação de 404/410. [Consulte o contrato editorial](docs/padrao-editorial.md).
 
 ## 🔗 Fontes oficiais
 

@@ -1,0 +1,7 @@
+apiVersion: learning.example/v1
+kind: AppEnvironment
+metadata:
+  name: demo
+  namespace: lab-03-07
+spec:
+  tier: sandbox

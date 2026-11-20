@@ -69,6 +69,10 @@ Não criar uma página vazia só para preencher a coluna `Complementares`.
 - Comandos de alteração de estado devem destacar impacto, namespace/contexto e limpeza segura.
 - Preferir documentação oficial estável e revisitar exemplos conforme novas versões do Kubernetes.
 
+**Checklist transversal da trilha:** todos os 52 temas precisam de objetivo e três perguntas específicas por aula, três questões de diagnóstico por lab, material complementar **somente quando houver ganho real** e links de retorno. A coluna Complementares deve usar a página curricular canônica e conservar o acesso ao histórico. Subtítulos internos podem variar quando isso melhora a didática, mas a seção final `## 🔗 Referências oficiais` é estável em todas as aulas.
+
+**Links e atualizações:** os links relativos/imagens são testados em todo PR; a [auditoria semanal de URLs externas](../.github/workflows/external-links.yml) confirma 404/410 e publica relatório, sem confundir rate-limit ou bloqueio antibot com link definitivamente quebrado.
+
 ## Qualidade e validação
 
 | Nível | Critério | O que comprova |

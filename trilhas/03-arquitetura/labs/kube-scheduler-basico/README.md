@@ -42,6 +42,17 @@ O Pod deve existir na API mesmo que não seja Ready. Use `kubectl describe pod s
 
 Sem alterar labels dos nós, identifique a condição `PodScheduled` e evento de scheduling. Para recuperar o Pod, apague a instância e reaplique uma cópia local sem o nodeSelector; antes do cleanup restaure e inspecione o YAML original.
 
+### Registrar o motivo de Pending
+
+```bash
+kubectl get nodes --show-labels
+kubectl get pod sem-no -n lab-03-08 -o wide
+kubectl describe pod sem-no -n lab-03-08
+kubectl get events -n lab-03-08 --sort-by=.lastTimestamp
+```
+
+**Evidência:** o `nodeSelector: estudo=inexistente` não combina com os labels dos nós; o Pod existe na API, mas não recebe `spec.nodeName`. O estado `Pending` é intencional. Não altere labels globais dos workers para forçar agendamento.
+
 ## Resultado esperado e evidências
 
 Pod Pending com motivo `Unschedulable` enquanto nenhum nó satisfaz a restrição. Um YAML válido não implica scheduling bem-sucedido.

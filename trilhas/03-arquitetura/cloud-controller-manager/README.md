@@ -50,6 +50,12 @@ kubectl describe service exposicao -n lab-03-09
 
 Não instale controlador cloud nem utilize credenciais de cloud para simular esse efeito no Kind. Não confunda cloud-controller-manager com autoscaler de nós ou Karpenter.
 
+### O que significa um Service LoadBalancer sem IP?
+
+Um Service `type: LoadBalancer` representa intenção. A API aceita o objeto; em seguida, uma integração de provedor pode solicitar o balanceador externo, descobrir endereços e atualizar `status.loadBalancer`. No Kind, geralmente não existe essa integração. O resultado esperado é **objeto válido sem IP externo**, não necessariamente falha da rede do cluster.
+
+É possível que o Service tenha ClusterIP e EndpointSlices saudáveis sem um LoadBalancer cloud. Compare o tipo, o status externo e os endpoints separadamente. O cloud-controller-manager não é o autoscaler de nós e não substitui controladores especializados como o Karpenter.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.09 — cloud-controller-manager](../labs/cloud-controller-manager-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.

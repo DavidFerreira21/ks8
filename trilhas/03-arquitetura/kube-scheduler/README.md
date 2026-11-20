@@ -50,6 +50,12 @@ kubectl get events -n lab-03-08 --sort-by=.lastTimestamp
 
 Um Pod Pending também pode aguardar PVC, quota ou outra dependência; não atribua toda pendência ao scheduler sem eventos. Use somente o Kind descartável.
 
+### Filtro de elegibilidade vem antes da preferência
+
+Regras rígidas como `nodeSelector`, required node affinity, taints não tolerados e falta de recursos podem eliminar todos os nós candidatos. **Scoring não conserta uma restrição impossível**: ele apenas prefere entre os nós elegíveis. Como resultado, o Pod permanece `Pending` e os eventos podem indicar `FailedScheduling`.
+
+Atribuir manualmente `spec.nodeName` não equivale a uma decisão normal do scheduler: remove do exercício o componente que você quer observar. Use o selector impossível do lab e compare a label exigida com `kubectl get nodes --show-labels`, sem alterar as labels de nós compartilhados.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.08 — kube-scheduler](../labs/kube-scheduler-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.

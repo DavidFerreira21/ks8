@@ -42,6 +42,19 @@ Inspecione `kubectl get deployment,replicaset,pods -n lab-03-07 -o wide` e owner
 
 Escalone temporariamente o Deployment para 3 com `kubectl scale deploy/operator-demo -n lab-03-07 --replicas=3`; observe o novo Pod e restaure `--replicas=2`, verificando status novamente.
 
+### Distinguir analogia de controller real
+
+```bash
+kubectl get deploy operator-demo -n lab-03-07 -o jsonpath='{.metadata.generation}{" "}{.status.observedGeneration}{"\n"}'
+kubectl scale deploy/operator-demo -n lab-03-07 --replicas=3
+kubectl rollout status deploy/operator-demo -n lab-03-07 --timeout=120s
+kubectl get rs,pods -n lab-03-07
+kubectl scale deploy/operator-demo -n lab-03-07 --replicas=2
+kubectl rollout status deploy/operator-demo -n lab-03-07 --timeout=120s
+```
+
+**Prova:** a convergência observada é de um **controlador nativo**, não de um Operator personalizado. Para implementar um reconciler de verdade, siga o [exercício avançado opcional de AppEnvironment](examples/reconciler-real/README.md), com RBAC restrito e alteração de Custom Resource.
+
 ## Resultado esperado e evidências
 
 A reconciliação nativa atualiza a quantidade de réplicas, sem instalar um Operator customizado. A observação é uma analogia do mecanismo de reconciliação.

@@ -40,6 +40,19 @@ Inspecione PVC, PV e StorageClass com `kubectl get pvc dados -n lab-03-15 -o wid
 
 Registre `kubectl exec -n lab-03-15 escritor -- cat /dados/marcador.txt`; exclua somente o Pod com `kubectl delete pod escritor -n lab-03-15` e reaplique o YAML. Compare arquivo e vínculo PVC.
 
+### Comprovar persistência, não apenas vínculo
+
+```bash
+kubectl get pvc dados -n lab-03-15 -o wide
+kubectl exec -n lab-03-15 escritor -- cat /dados/marcador.txt
+kubectl delete pod escritor -n lab-03-15
+kubectl apply -f .labs/03.15/resources.yaml
+kubectl wait pod/escritor -n lab-03-15 --for=condition=Ready --timeout=120s
+kubectl exec -n lab-03-15 escritor -- cat /dados/marcador.txt
+```
+
+Se o arquivo persistir, prove o comportamento de volume. **Não declare CSI funcional** sem confirmar `PV.spec.csi.driver`. Para utilizar um driver de exemplo realmente CSI, consulte o [experimento opcional com CSI Hostpath](experiments/README.md), exclusivo do Kind descartável.
+
 ## Resultado esperado e evidências
 
 Com provisionador local funcional, PVC chega a Bound e o marcador permanece após recriar apenas o Pod. Se não houver StorageClass, classifique como dependência não atendida.

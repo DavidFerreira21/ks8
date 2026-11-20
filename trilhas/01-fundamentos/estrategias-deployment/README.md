@@ -63,7 +63,7 @@ Os comandos pressupõem um Deployment existente. O laboratório de blue/green ou
 - Qual diferença existe entre um `rollout restart` e alterar a imagem do Deployment?
 - Que sinais mostram um rollout travado e quando um rollback ajuda?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Estratégias avançadas de Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
 

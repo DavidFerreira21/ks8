@@ -78,7 +78,7 @@ Se o endereço externo não foi atribuído, verifique controller, classe, Servic
 - Como uma regra com host específico muda o resultado de um `curl` com e sem cabeçalho `Host`?
 - Qual o papel de IngressClass e EndpointSlice no diagnóstico de falhas?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 

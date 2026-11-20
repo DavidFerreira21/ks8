@@ -55,6 +55,7 @@ validate: ## Validação estática dos manifests do lab (sem cluster)
 	@python3 scripts/labctl.py validate
 	@python3 scripts/validate_manifests.py
 	@python3 scripts/validate_lab_resources.py
+	@python3 scripts/validate_semantic_manifests.py
 
 lab-prepare: check-context ## Prepara namespace, apoio e arquivos para o aluno (sem aplicar a solução)
 	@CLUSTER_NAME="$(CLUSTER_NAME)" python3 scripts/labctl.py lab-prepare --lab "$(LAB)"

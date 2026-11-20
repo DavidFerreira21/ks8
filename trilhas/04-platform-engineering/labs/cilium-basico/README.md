@@ -2,15 +2,17 @@
 
 [← Aula 04.06](../../cilium/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.06` cria o namespace e copia um starter incompleto para `.labs/04.06/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.06/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO — Kind Cilium dedicado:** siga primeiro o [guia de preparação](../../../../docs/ambientes/04-cilium.md). No contexto `kind-cilium-lab`, use `make lab-prepare LAB=04.06 CLUSTER_NAME=cilium-lab`, complete o starter e aplique seu YAML. O motor de labs **não** deve ser executado contra cluster compartilhado.
 
 ## Objetivo e hipótese
 
 Permitir ingress ao Pod backend apenas de cliente rotulado, comprovando policy via tráfego se Cilium estiver instalado.
 
-**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-06`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
+**Contexto:** cluster Kind isolado `cilium-lab`, contexto `kind-cilium-lab`, namespace de estudo `lab-04-06`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
+
+**Guia de instalação, versões e reversão:** [🛠️ Preparar Cilium](../../../../docs/ambientes/04-cilium.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
 
 **Requer Kind dedicado com Cilium instalado e operando como CNI**, conforme guia oficial; Kind padrão não oferece `CiliumNetworkPolicy`. Instalar Cilium significa preparar cluster compatível, não adicionar policy sobre CNI desconhecida.
 
@@ -25,8 +27,8 @@ Defina sua hipótese antes de consultar `solution/`. Se o tipo não aparecer em 
 ## Fase 1 — Preparar e prever
 
 ```bash
-kubectl config current-context
-make lab-prepare LAB=04.06
+kubectl config current-context  # esperado kind-cilium-lab
+make lab-prepare LAB=04.06 CLUSTER_NAME=cilium-lab
 cat .labs/04.06/resources.yaml
 ```
 
@@ -37,9 +39,10 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 Complete os TODOs:
 
 ```bash
+kubectl apply --dry-run=server --validate=strict -f .labs/04.06/
 kubectl apply -f .labs/04.06/
-make lab-test LAB=04.06
-make lab-observe LAB=04.06
+make lab-test LAB=04.06 CLUSTER_NAME=cilium-lab
+make lab-observe LAB=04.06 CLUSTER_NAME=cilium-lab
 ```
 
 Depois do apply, `kubectl get cnp -n lab-04-06` e `kubectl get pods -n lab-04-06 -o wide`; capture IP do backend.
@@ -61,8 +64,8 @@ Investigue CRDs, condições dos custom resources, logs do controller instalado 
 ## Fase 5 — Limpar com segurança
 
 ```bash
-make lab-down LAB=04.06
-make lab-status LAB=04.06
+make lab-down LAB=04.06 CLUSTER_NAME=cilium-lab
+make lab-status LAB=04.06 CLUSTER_NAME=cilium-lab
 ```
 
 A limpeza remove os objetos declarados neste contrato, **não desinstala automaticamente o addon**. Revise recursos filhos, credenciais e qualquer custo externo antes de excluir a instalação. Na ausência do addon, não tente remoção indiscriminada.

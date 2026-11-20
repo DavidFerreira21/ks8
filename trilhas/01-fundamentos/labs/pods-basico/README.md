@@ -97,6 +97,8 @@ O namespace é preservado por segurança. Não use `make down` para limpar um ú
 
 **Evidências específicas:** registre o YAML do Pod, seu estado/eventos e o comportamento após exclusão ou alteração. Diferencie Pod avulso de Pod sob controlador.
 
+- Como distinguir um Pod `Running` mas não `Ready` de um Pod que sequer conseguiu iniciar o container?
+
 ## Aprofunde seus conhecimentos
 
 [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) · [Ciclo de vida do Pod](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/) · [Depuração de Pods](https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/).

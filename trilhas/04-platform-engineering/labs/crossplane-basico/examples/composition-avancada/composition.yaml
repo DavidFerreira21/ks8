@@ -1,0 +1,31 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xenvironment-configmap-lab
+spec:
+  compositeTypeRef:
+    apiVersion: platform.example.org/v1alpha1
+    kind: XEnvironment
+  mode: Pipeline
+  pipeline:
+    - step: render-configmap
+      functionRef:
+        name: crossplane-contrib-function-go-templating
+      input:
+        apiVersion: gotemplating.fn.crossplane.io/v1beta1
+        kind: GoTemplate
+        source: Inline
+        inline:
+          template: |
+            apiVersion: v1
+            kind: ConfigMap
+            metadata:
+              name: env-{{ .observed.composite.resource.metadata.name }}
+              namespace: {{ .observed.composite.resource.metadata.namespace }}
+              annotations:
+                gotemplating.fn.crossplane.io/composition-resource-name: ambiente-config
+                gotemplating.fn.crossplane.io/ready: "True"
+              labels:
+                learning.example/managed-by: crossplane-lab-04-02
+            data:
+              tier: {{ .observed.composite.resource.spec.tier | quote }}

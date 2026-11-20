@@ -46,6 +46,19 @@ kubectl get configmap -n lab-03-17
 
 Nunca execute `helm upgrade` de charts não revisados em clusters compartilhados. Separar renderização de execução facilita validar diferenças e proveniência.
 
+### Decisão arquitetural e diagnóstico
+
+### Renderização não é aplicação nem release
+
+| Etapa | Kustomize | Helm |
+| --- | --- | --- |
+| Composição | Bases, overlays e patches | Templates, values e charts |
+| Prévia de manifests | `kubectl kustomize` | `helm template` |
+| Aplicação | `kubectl apply -k` | `helm install/upgrade` |
+| Estado de release Helm | Não administra | Mantém histórico de release |
+
+Para o mesmo ConfigMap, o overlay pode renderizar `staging` sem modificar o objeto no cluster. A pergunta não é apenas "qual ferramenta gera YAML?", mas **quem controla a revisão, a promoção entre ambientes e o estado de release**. Preserve selectors e labels ao aplicar patches; uma transformação textual incorreta pode produzir erro de validação ou um workload sem backends.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.17](../labs/kustomize-helm-basico/README.md) — desafio YAML, observação e experimento com evidências. Quando um componente não está no Kind, o lab diferencia **analogia local** de teste da implementação real.

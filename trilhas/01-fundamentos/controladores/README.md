@@ -48,7 +48,7 @@ Verifique quantos Pods cada controlador deseja, onde executam e quais são suas 
 
 **🧪 Lab 01.04:** [🧪 Lab 01.04](../labs/controladores-basico/README.md). Execute as etapas no seu Kind, observe os eventos e registre sua hipótese antes do experimento.
 
-**Complementar opcional:** [Consultar material complementar](../../../4-replicaSet-daemonSet-statefulSet/README.md). Referência adicional para consulta após a aula e o lab.
+**Complementar opcional:** [Consultar material complementar](complementares/README.md). Referência adicional para consulta após a aula e o lab.
 
 ## ✅ Revisão do aprendizado
 
@@ -56,7 +56,7 @@ Verifique quantos Pods cada controlador deseja, onde executam e quais são suas 
 - O que torna a identidade de um Pod de StatefulSet diferente da identidade de um Pod de Deployment?
 - Por que StatefulSet não equivale automaticamente a banco de dados replicado ou backup?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — ReplicaSet, DaemonSet e StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/)
 

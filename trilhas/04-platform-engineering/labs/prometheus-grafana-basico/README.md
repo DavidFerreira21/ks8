@@ -2,7 +2,7 @@
 
 [← Aula 04.07](../../prometheus-grafana/README.md) · [↑ Camada 04](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=04.07` cria o namespace e copia um starter incompleto para `.labs/04.07/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.07/`. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
+> **MODO DESAFIO:** `make lab-prepare LAB=04.07` cria o namespace e copia um starter incompleto para `.labs/04.07/resources.yaml`. **Instale previamente o controlador/CRD do produto** de acordo com o procedimento documentado; complete o YAML e execute `kubectl apply -f .labs/04.07/` após validar no servidor. O comando `make lab-up` usa a solução e é exclusivo de CI com os addons adequados.
 
 ## Objetivo e hipótese
 
@@ -11,6 +11,8 @@ Criar endpoint de métricas e ServiceMonitor, distinguindo presença do recurso 
 **Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-07`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
+
+**Guia de instalação, versões e reversão:** [🛠️ Preparar Prometheus + Grafana](../../../../docs/ambientes/04-prometheus-grafana.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
 
 **Instale Prometheus Operator ou kube-prometheus-stack e Grafana** conforme as instruções oficiais, com descoberta de ServiceMonitors do namespace `lab-04-07`. A label `release: prometheus` é ilustrativa; o selector da instância Prometheus deve corresponder.
 
@@ -37,6 +39,7 @@ Confirme disponibilidade da API específica da ferramenta e o namespace alvo ant
 Complete os TODOs:
 
 ```bash
+kubectl apply --dry-run=server --validate=strict -f .labs/04.07/
 kubectl apply -f .labs/04.07/
 make lab-test LAB=04.07
 make lab-observe LAB=04.07

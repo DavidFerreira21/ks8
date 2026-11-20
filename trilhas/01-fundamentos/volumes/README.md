@@ -66,7 +66,7 @@ A última linha pressupõe um PVC existente. A escolha entre cache, volume efêm
 - Que relação existe entre PVC, PV e StorageClass no provisionamento dinâmico?
 - O que pode acontecer com os dados ao excluir um PVC e como a política de reclaim interfere?
 
-## 🔗 Referência oficial
+## 🔗 Referências oficiais
 
 [Documentação Kubernetes — Volumes](https://kubernetes.io/docs/concepts/storage/volumes/)
 

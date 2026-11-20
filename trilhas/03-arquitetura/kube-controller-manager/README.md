@@ -49,6 +49,12 @@ kubectl describe deployment controlador -n lab-03-05
 
 Não confunda o Deployment controller com o scheduler ou o kubelet. Aplicar `replicas: 2` é intenção, não garantia de duas réplicas prontas sob falha de imagem ou recursos.
 
+### Reconciliação é um processo, não uma única execução
+
+O controller reavalia o estado em várias passagens. Se um Pod de ReplicaSet some, ele não 'ressuscita' aquela instância: cria uma **nova** que atende ao selector e ao número de réplicas desejadas. O scheduler posteriormente escolhe um nó e o kubelet inicia os processos.
+
+**Decisão prática:** quando `spec.replicas=2` e `availableReplicas=1`, não aumente a quantidade de Pods sem primeiro avaliar `ReplicaFailure`, eventos, quota e readiness. A convergência pode estar impedida fora da lógica do controller, e o status explica em qual etapa a intenção não virou estado observado.
+
 ## 🧪 Aplicação prática
 
 [🧪 Lab 03.05 — kube-controller-manager](../labs/kube-controller-manager-basico/README.md): construa o YAML do desafio, compare estado declarado com observado e registre uma evidência do conceito. O lab é o caminho principal, independente do material opcional.
