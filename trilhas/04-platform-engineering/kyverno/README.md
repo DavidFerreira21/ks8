@@ -37,7 +37,7 @@ spec:
 kubectl config current-context
 kubectl api-resources --api-group=policies.kyverno.io
 kubectl get namespacedvalidatingpolicies -A
-kubectl get events -n lab-04-03
+kubectl get events -n lab-04-02
 ```
 
 **O que observar:** Com Kyverno instalado, o manifesto sem label definido deve ser rejeitado na admissão; o equivalente com label deve ser aceito.

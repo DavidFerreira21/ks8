@@ -39,8 +39,8 @@ spec:
 ```bash
 kubectl config current-context
 kubectl api-resources --api-group=monitoring.coreos.com
-kubectl get servicemonitor -n lab-04-07
-kubectl get svc -n lab-04-07
+kubectl get servicemonitor -n lab-04-04
+kubectl get svc -n lab-04-04
 ```
 
 **O que observar:** Valide o endpoint HTTP de métricas, o target `UP` no Prometheus e a consulta PromQL. Um ServiceMonitor aceito mas não selecionado não produz scrape.

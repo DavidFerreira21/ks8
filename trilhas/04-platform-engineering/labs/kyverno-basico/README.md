@@ -8,7 +8,7 @@
 
 Aplicar política namespaced CEL de validação e comprovar rejeição de um ConfigMap sem label obrigatória.
 
-**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-03`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
+**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-02`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
 
@@ -45,7 +45,7 @@ make lab-test LAB=04.02
 make lab-observe LAB=04.02
 ```
 
-Verifique `kubectl get namespacedvalidatingpolicy requer-equipe -n lab-04-03 -o yaml`. Compare com os testes em `examples/` por dry-run de servidor.
+Verifique `kubectl get namespacedvalidatingpolicy requer-equipe -n lab-04-02 -o yaml`. Compare com os testes em `examples/` por dry-run de servidor.
 
 ## Fase 3 — Experimento controlado
 

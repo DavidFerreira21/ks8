@@ -26,8 +26,8 @@ A stack pode exigir recursos importantes de CPU/memória; verifique capacidade d
 ```bash
 make lab-prepare LAB=04.04
 kubectl apply -f .labs/04.04/
-kubectl get servicemonitor metrics-demo -n lab-04-07 -o yaml
-kubectl get endpointslices -n lab-04-07
+kubectl get servicemonitor metrics-demo -n lab-04-04 -o yaml
+kubectl get endpointslices -n lab-04-04
 kubectl get prometheus -n monitoring -o yaml
 ```
 

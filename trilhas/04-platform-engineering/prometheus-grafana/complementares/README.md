@@ -18,7 +18,7 @@ Quando ServiceMonitor existe, mas o target não aparece no Prometheus ou o Grafa
 ## Exemplo de consulta
 
 ```promql
-up{namespace="lab-04-07"}
+up{namespace="lab-04-04"}
 ```
 
 Adapte labels ao target real descoberto; a presença de `up` depende do Prometheus configurado. Um ServiceMonitor pode estar válido na API, mas não ser selecionado por instância alguma. Grafana consulta séries e apresenta dashboards, não é o backend coletor.

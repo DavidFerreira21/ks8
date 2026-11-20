@@ -8,7 +8,7 @@
 
 Permitir ingress ao Pod backend apenas de cliente rotulado, comprovando policy via tráfego se Cilium estiver instalado.
 
-**Contexto:** cluster Kind isolado `cilium-lab`, contexto `kind-cilium-lab`, namespace de estudo `lab-04-06`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
+**Contexto:** cluster Kind isolado `cilium-lab`, contexto `kind-cilium-lab`, namespace de estudo `lab-04-03`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
 
@@ -45,11 +45,11 @@ make lab-test LAB=04.03 CLUSTER_NAME=cilium-lab
 make lab-observe LAB=04.03 CLUSTER_NAME=cilium-lab
 ```
 
-Depois do apply, `kubectl get cnp -n lab-04-06` e `kubectl get pods -n lab-04-06 -o wide`; capture IP do backend.
+Depois do apply, `kubectl get cnp -n lab-04-03` e `kubectl get pods -n lab-04-03 -o wide`; capture IP do backend.
 
 ## Fase 3 — Experimento controlado
 
-Teste `kubectl exec -n lab-04-06 frontend -- wget -T 3 -qO- http://BACKEND_POD_IP` e compare com `kubectl exec -n lab-04-06 externo -- wget -T 3 -qO- http://BACKEND_POD_IP`. O primeiro deve funcionar; o segundo deve falhar por policy quando todos os endpoints estiverem gerenciados pelo Cilium.
+Teste `kubectl exec -n lab-04-03 frontend -- wget -T 3 -qO- http://BACKEND_POD_IP` e compare com `kubectl exec -n lab-04-03 externo -- wget -T 3 -qO- http://BACKEND_POD_IP`. O primeiro deve funcionar; o segundo deve falhar por policy quando todos os endpoints estiverem gerenciados pelo Cilium.
 
 ## Resultado esperado e evidências
 

@@ -8,13 +8,13 @@
 
 Criar endpoint de métricas e ServiceMonitor, distinguindo presença do recurso de scrape e visualização reais.
 
-**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-07`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
+**Contexto:** `kind-dev` ou cluster de sandbox explicitamente autorizado, namespace de estudo `lab-04-04`. `make lab-test` verifica objetos, **não prova sozinho a funcionalidade do controller**.
 
 ## Pré-requisitos da ferramenta
 
 **Guia de instalação, versões e reversão:** [🛠️ Preparar Prometheus + Grafana](../../../../docs/ambientes/04-prometheus-grafana.md). Siga-o antes de aplicar Custom Resources; a CI padrão não instala esse controlador.
 
-**Instale Prometheus Operator ou kube-prometheus-stack e Grafana** conforme as instruções oficiais, com descoberta de ServiceMonitors do namespace `lab-04-07`. A label `release: prometheus` é ilustrativa; o selector da instância Prometheus deve corresponder.
+**Instale Prometheus Operator ou kube-prometheus-stack e Grafana** conforme as instruções oficiais, com descoberta de ServiceMonitors do namespace `lab-04-04`. A label `release: prometheus` é ilustrativa; o selector da instância Prometheus deve corresponder.
 
 **Segurança:** Requer Operator, Prometheus configurado e Grafana; Kind padrão não executa scrape por instalar só ServiceMonitor.
 
@@ -45,7 +45,7 @@ make lab-test LAB=04.04
 make lab-observe LAB=04.04
 ```
 
-`kubectl get servicemonitor -n lab-04-07`, `kubectl get endpointslices -n lab-04-07` e `kubectl port-forward -n lab-04-07 svc/metrics-demo 9100:9100` para verificar `/metrics` localmente.
+`kubectl get servicemonitor -n lab-04-04`, `kubectl get endpointslices -n lab-04-04` e `kubectl port-forward -n lab-04-04 svc/metrics-demo 9100:9100` para verificar `/metrics` localmente.
 
 ## Fase 3 — Experimento controlado
 

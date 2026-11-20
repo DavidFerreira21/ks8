@@ -2,7 +2,7 @@
 
 [↑ Ambientes](README.md) · [🧪 Lab 04.02](../../trilhas/04-platform-engineering/labs/kyverno-basico/README.md)
 
-> **Escopo:** policies em `lab-04-03`; nunca comece com validação `Deny` em todo o cluster. Use Kyverno **compatível com `policies.kyverno.io/v1`**.
+> **Escopo:** policies em `lab-04-02`; nunca comece com validação `Deny` em todo o cluster. Use Kyverno **compatível com `policies.kyverno.io/v1`**.
 
 ## Instalar controlador e CRDs
 
@@ -26,7 +26,7 @@ Verifique `NamespacedValidatingPolicy` em v1 e webhooks/controladores saudáveis
 ```bash
 make lab-prepare LAB=04.02
 kubectl apply -f .labs/04.02/
-kubectl get namespacedvalidatingpolicy requer-equipe -n lab-04-03
+kubectl get namespacedvalidatingpolicy requer-equipe -n lab-04-02
 kubectl apply --dry-run=server -f trilhas/04-platform-engineering/labs/kyverno-basico/examples/sem-label.yaml
 kubectl apply --dry-run=server -f trilhas/04-platform-engineering/labs/kyverno-basico/examples/com-label.yaml
 ```

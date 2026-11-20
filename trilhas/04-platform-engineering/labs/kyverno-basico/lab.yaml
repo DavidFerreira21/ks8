@@ -1,6 +1,6 @@
 id: "04.02"
 title: "Kyverno"
-namespace: lab-04-03
+namespace: lab-04-02
 apply:
   - solution/resources.yaml
 starter:
