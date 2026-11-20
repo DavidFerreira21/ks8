@@ -65,8 +65,11 @@ kubectl rollout status deployment/replicas -n lab-02-11 --timeout=180s
 kubectl get pdb disponibilidade -n lab-02-11 -o yaml > "$report_dir/pdb-02.11.yaml"
 
 # Labs adicionais com comportamento funcional determinístico no Kind.
-# 02.09: a classe é global, mas pertence explicitamente ao lab.
-make lab-up LAB=02.09
+# 02.09: testa também o caminho do aluno (lab-apply), com solução usada
+# apenas pela CI. O starter permanece incompleto para estudantes.
+make lab-prepare LAB=02.09
+cp trilhas/02-operacao-seguranca/labs/priorityclass-basico/solution/resources.yaml .labs/02.09/resources.yaml
+make lab-apply LAB=02.09
 make lab-test LAB=02.09
 test "$(kubectl get priorityclass lab-02-priority -o jsonpath='{.preemptionPolicy}')" = Never
 test "$(kubectl get pod prioritario -n lab-02-09 -o jsonpath='{.spec.priority}')" = 1000
