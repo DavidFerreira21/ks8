@@ -218,8 +218,8 @@ class GlobalEditorialQualityTests(unittest.TestCase):
                         meta = yaml.safe_load((root / "labs" / labslug / "lab.yaml").read_text(encoding="utf-8"))
                         self.assertEqual(meta["id"], cid)
                         self.assertTrue(meta.get("checks"))
-                        lessons += 1
                         labs += 1
+                    lessons += 1
                     comp = root / slug / "complementares" / "README.md"
                     self.assertEqual(comp.exists(), i in complement_indices)
                     self.assertEqual("complementares/README.md" in page, i in complement_indices)
