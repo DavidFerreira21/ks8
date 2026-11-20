@@ -1,4 +1,4 @@
-# Matriz de homologação dos 52 laboratórios
+# Matriz de homologação dos 50 laboratórios
 
 [⌂ Início](../README.md) · [🧪 Execução](labs.md) · [📜 Contrato](padrao-editorial.md)
 
@@ -6,9 +6,9 @@
 
 ## Status desta revisão
 
-- **52 aulas / 52 labs documentados:** estrutura editorial disponível nas quatro camadas.
+- **52 aulas / 50 labs documentados:** 04.04 (ESO) e 04.05 (Karpenter) permanecem aulas teóricas, sem lab; os outros 50 temas possuem contratos práticos.
 - **Cobertura CI de base:** 12 da Camada 01 + 13 da Camada 02 + 17 da Camada 03 = **42 labs**, conforme scripts `ci-kind-smoke.sh` e `ci-kind-layer03.sh`.
-- **10 cenários fora da CI básica:** 2 da Camada 01, 1 da Camada 02 (02.13: enforcement depende do CNI) e 7 labs de addons/cloud da Camada 04.
+- **8 labs fora da CI básica:** 2 da Camada 01, 1 da Camada 02 (02.13: enforcement depende do CNI) e 5 labs da Camada 04 que exigem addons. Os IDs 04.04/04.05 não são labs.
 - **¹ Base CI aprovada:** refere-se à execução concluída da base anterior à revisão pedagógica. **A ampliação 02.09/02.12/02.14 só será aprovada após executar o novo HEAD.** A CI do **HEAD da auditoria** deve passar novamente antes de afirmar aprovação desta versão. Mesmo CI verde não prova todos os passos manuais.
 - **Evidência pendente:** significa que ainda não há artefato reproduzível de execução funcional do cenário avançado no repositório; não significa necessariamente que o manifesto esteja incorreto.
 
@@ -70,8 +70,6 @@ Status sugeridos: `Editorial aprovado`, `Contrato validado`, `CI Kind aprovado`,
 | [04.01](../trilhas/04-platform-engineering/labs/argo-cd-basico/README.md) | Somente contrato estático | Argo CD instalado e AppProject | Application Synced/Healthy e drift | Funcional pendente: addon/ambiente específico |
 | [04.02](../trilhas/04-platform-engineering/labs/crossplane-basico/README.md) | Somente contrato estático | Crossplane v2 + Function + Composition | XRD, Function, XR e ConfigMap composto | Funcional pendente: addon/ambiente específico |
 | [04.03](../trilhas/04-platform-engineering/labs/kyverno-basico/README.md) | Somente contrato estático | Kyverno CEL/webhook | Policy CEL nega/admite | Funcional pendente: addon/ambiente específico |
-| [04.04](../trilhas/04-platform-engineering/labs/external-secrets-operator-basico/README.md) | Somente contrato estático | ESO controller + Fake Provider | Fake Provider sincroniza Secret | Funcional pendente: addon/ambiente específico |
-| [04.05](../trilhas/04-platform-engineering/labs/karpenter-basico/README.md) | Somente contrato estático | EKS sandbox autorizado; offline no Kind | NodePool sem provisionar AWS | Funcional pendente: addon/ambiente específico |
 | [04.06](../trilhas/04-platform-engineering/labs/cilium-basico/README.md) | Somente contrato estático | Kind Cilium dedicado | Cilium ingress permitido/negado | Funcional pendente: addon/ambiente específico |
 | [04.07](../trilhas/04-platform-engineering/labs/prometheus-grafana-basico/README.md) | Somente contrato estático | Prometheus Operator + Grafana | Target UP + PromQL + painel Grafana | Funcional pendente: addon/ambiente específico |
 
@@ -80,8 +78,8 @@ Status sugeridos: `Editorial aprovado`, `Contrato validado`, `CI Kind aprovado`,
 ## Prioridades para ampliar a homologação
 
 1. **Kind com addons:** Ingress, Metrics Server e Cilium NetworkPolicy.
-2. **Controladores em Kind dedicado:** Argo CD, Crossplane v2, Kyverno, ESO, Prometheus Operator/Grafana.
+2. **Controladores em Kind dedicado:** Argo CD, Crossplane v2, Kyverno e Prometheus Operator/Grafana (mais Cilium no cluster específico).
 3. **Avançados da Camada 03:** reconciler real, Cilium dataplane, CSI driver e Gateway Controller, cada qual com roteiro opcional.
-4. **AWS/EKS:** Karpenter apenas em sandbox autorizado e com orçamento — o validador offline não cria nós.
+4. **Conteúdo teórico:** ESO e Karpenter permanecem disponíveis nas aulas 04.04 e 04.05, sem tarefas de provisionamento, segredos ou recursos cloud.
 
-[Preparação dos sete ambientes da Camada 04](ambientes/README.md) · [Execução e segurança](labs.md)
+[Preparação dos cinco ambientes de labs da Camada 04](ambientes/README.md) · [Execução e segurança](labs.md)

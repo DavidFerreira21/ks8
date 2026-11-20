@@ -169,19 +169,17 @@ Os 17 labs seguem o [contrato editorial](padrao-editorial.md) e o [índice da Ca
 
 ## Camada 04 — Ferramentas do ecossistema
 
-Sete labs usam **APIs reais dos produtos**; não são simulações que aplicam um ConfigMap no lugar de Argo CD, Crossplane ou outro controlador. Os manifests de solução ficam separados dos starters incompletos.
+Cinco labs usam **APIs reais dos produtos**; não são simulações que aplicam um ConfigMap no lugar de Argo CD, Crossplane ou outro controlador. Os manifests de solução ficam separados dos starters incompletos.
 
 | ID | Laboratório | Dependência de execução |
 | --- | --- | --- |
 | 04.01 | [🧪 Lab 04.01](../trilhas/04-platform-engineering/labs/argo-cd-basico/README.md) | Argo CD instalado |
 | 04.02 | [🧪 Lab 04.02](../trilhas/04-platform-engineering/labs/crossplane-basico/README.md) | Crossplane v2 instalado |
 | 04.03 | [🧪 Lab 04.03](../trilhas/04-platform-engineering/labs/kyverno-basico/README.md) | Kyverno CEL instalado |
-| 04.04 | [🧪 Lab 04.04](../trilhas/04-platform-engineering/labs/external-secrets-operator-basico/README.md) | ESO + Fake Provider |
-| 04.05 | [🧪 Lab 04.05](../trilhas/04-platform-engineering/labs/karpenter-basico/README.md) | EKS/Karpenter autorizado (design offline no Kind) |
 | 04.06 | [🧪 Lab 04.06](../trilhas/04-platform-engineering/labs/cilium-basico/README.md) | Cilium como CNI |
 | 04.07 | [🧪 Lab 04.07](../trilhas/04-platform-engineering/labs/prometheus-grafana-basico/README.md) | Prometheus Operator e Grafana |
 
-**Atenção:** a CI Kind padrão **não instala esses addons nem configura AWS**. Os testes Python/manifestos comprovam contratos e sintaxe estrutural básica, mas não funcionamento da reconciliação de Argo CD, Crossplane, Kyverno, ESO, Karpenter, Cilium ou Prometheus. O lab 04.05 prepara o YAML somente em Kind; a execução opcional em EKS deve usar `kubectl --context` explícito, nunca o motor de lab que exige Kind.
+**Aulas sem laboratório:** [04.04 — External Secrets Operator](../trilhas/04-platform-engineering/external-secrets-operator/README.md) e [04.05 — Karpenter](../trilhas/04-platform-engineering/karpenter/README.md). Seus complementares continuam disponíveis, mas os IDs não são executáveis por `make lab-prepare`/`make lab-test`. **Os cinco labs listados acima** dependem dos controladores correspondentes; a CI Kind padrão não os instala. Testes Python/manifestos validam contratos, não a reconciliação real de Argo CD, Crossplane, Kyverno, Cilium ou Prometheus.
 
 Consulte [dependências e níveis de homologação](../trilhas/04-platform-engineering/README.md) para decidir o que pode ser concluído com segurança no seu ambiente.
 
@@ -195,7 +193,7 @@ Os experimentos têm **IDs pré-definidos** em `lab.yaml`, não aceitam comandos
 
 ## Evidências de homologação
 
-A [matriz de homologação de todos os 52 labs](matriz-homologacao.md) registra cobertura automática, dependências e evidências específicas, sem tratar CI de contrato como prova funcional.
+A [matriz de homologação dos 50 labs](matriz-homologacao.md) registra cobertura automática, dependências e evidências específicas, sem tratar CI de contrato como prova funcional.
 
 Classifique cada resultado como **declarativo** (objeto e campos aceitos), **funcional** (comportamento realmente observado no Kind) ou **diagnóstico** (falha reproduzida, causa identificada e reversão). `make lab-test` confirma os checks declarados, não a execução manual de todo o roteiro. Não declare aprovado um job de Kind apenas porque existe ou está em andamento.
 
