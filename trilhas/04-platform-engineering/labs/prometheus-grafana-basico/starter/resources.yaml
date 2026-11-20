@@ -1,4 +1,4 @@
-# EXERCÍCIO 04.07 — escreva os campos TODO sem consultar solution/
+# EXERCÍCIO 04.04 — escreva os campos TODO sem consultar solution/
 apiVersion: apps/v1
 kind: Deployment
 metadata:

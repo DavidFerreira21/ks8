@@ -7,15 +7,15 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 LAYER = ROOT / "trilhas" / "04-platform-engineering"
-SLUGS = ["argo-cd","crossplane","kyverno","external-secrets-operator","karpenter","cilium","prometheus-grafana"]
+SLUGS = ["argo-cd","kyverno","cilium","prometheus-grafana"]
 LINK_RE = re.compile(r"!?\[[^\]]+\]\(([^)]+)\)")
 
 
 class Layer04EditorialTests(unittest.TestCase):
-    def test_seven_lessons_and_labs(self):
+    def test_four_lessons_and_labs(self):
         catalog = (LAYER / "README.md").read_text(encoding="utf-8")
         curriculum = catalog.split("## 📚 Catálogo oficial da Camada 04", 1)[1].split("## 🧪 Como estudar", 1)[0]
-        self.assertEqual(len(re.findall(r"^\| 04\.\d{2} \|", curriculum, re.M)), 7)
+        self.assertEqual(len(re.findall(r"^\| 04\.\d{2} \|", curriculum, re.M)), 4)
         for i, slug in enumerate(SLUGS, 1):
             with self.subTest(i=i):
                 lesson = (LAYER / slug / "README.md").read_text(encoding="utf-8")
@@ -56,10 +56,7 @@ class Layer04EditorialTests(unittest.TestCase):
             path = LAYER / "labs" / f"{slug}-basico" / "solution/resources.yaml"
             return list(yaml.safe_load_all(path.read_text(encoding="utf-8")))
         self.assertEqual(documents("argo-cd")[0]["kind"], "Application")
-        self.assertEqual(documents("crossplane")[0]["apiVersion"], "apiextensions.crossplane.io/v2")
         self.assertEqual(documents("kyverno")[0]["kind"], "NamespacedValidatingPolicy")
-        self.assertEqual(documents("external-secrets-operator")[0]["spec"]["provider"].keys(), {"fake"})
-        self.assertEqual(documents("karpenter")[0]["spec"]["limits"]["nodes"], 0)
         self.assertEqual(documents("cilium")[-1]["kind"], "CiliumNetworkPolicy")
         self.assertEqual(documents("prometheus-grafana")[-1]["kind"], "ServiceMonitor")
         self.assertEqual(documents("prometheus-grafana")[-1]["spec"]["endpoints"][0]["port"], "metrics")

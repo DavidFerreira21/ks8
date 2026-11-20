@@ -149,19 +149,13 @@ LAYERS = {
         "04-platform-engineering",
         [
             "argo-cd",
-            "crossplane",
             "kyverno",
-            "external-secrets-operator",
-            "karpenter",
             "cilium",
             "prometheus-grafana"
         ],
         [
             "argo-cd-basico",
-            "crossplane-basico",
             "kyverno-basico",
-            "external-secrets-operator-basico",
-            "karpenter-basico",
             "cilium-basico",
             "prometheus-grafana-basico"
         ],
@@ -169,17 +163,14 @@ LAYERS = {
             1,
             2,
             3,
-            4,
-            5,
-            6,
-            7
+            4
         ]
     ]
 }
 
 
 class GlobalEditorialQualityTests(unittest.TestCase):
-    def test_fifty_two_lessons_labs_and_twenty_eight_optional_references(self):
+    def test_forty_nine_lessons_labs_and_twenty_five_optional_references(self):
         lessons = labs = refs = 0
         for layer_id, (folder, lesson_slugs, lab_slugs, complement_indices) in LAYERS.items():
             root = ROOT / "trilhas" / folder
@@ -216,31 +207,21 @@ class GlobalEditorialQualityTests(unittest.TestCase):
                     if comp.exists():
                         self.assertIn("Leitura opcional", comp.read_text(encoding="utf-8"))
                         refs += 1
-        self.assertEqual((lessons, labs, refs), (52, 52, 28))
+        self.assertEqual((lessons, labs, refs), (49, 49, 25))
 
     def test_legacy_complementaries_preserved(self):
         for folder in ("1-fundamentos", "2-pod", "3-deployment",
                        "4-replicaSet-daemonSet-statefulSet", "7-services", "5-probes"):
             self.assertTrue((ROOT / folder / "README.md").exists())
 
-    def test_coverage_matrix_has_exactly_52_curricular_rows(self):
+    def test_coverage_matrix_has_exactly_49_curricular_rows(self):
         matrix = (ROOT / "docs/matriz-homologacao.md").read_text(encoding="utf-8")
         rows = [line for line in matrix.splitlines() if line.startswith("| [0")]
-        self.assertEqual(len(rows), 52)
+        self.assertEqual(len(rows), 49)
         self.assertIn("39 labs", matrix)
-        self.assertIn("13 cenários", matrix)
+        self.assertIn("10 cenários", matrix)
 
     def test_advanced_resources_have_coherent_dependencies(self):
-        p = ROOT / "trilhas/04-platform-engineering/labs/crossplane-basico/examples/composition-avancada"
-        composition = yaml.safe_load((p / "composition.yaml").read_text(encoding="utf-8"))
-        xr = yaml.safe_load((p / "xr.yaml").read_text(encoding="utf-8"))
-        function = yaml.safe_load((p / "function.yaml").read_text(encoding="utf-8"))
-        self.assertEqual(composition["kind"], "Composition")
-        self.assertEqual(composition["spec"]["mode"], "Pipeline")
-        self.assertEqual(xr["spec"]["crossplane"]["compositionRef"]["name"],
-                         composition["metadata"]["name"])
-        self.assertEqual(composition["spec"]["pipeline"][0]["functionRef"]["name"],
-                         function["metadata"]["name"])
         c = ROOT / "trilhas/03-arquitetura/labs/custom-controllers-operators-basico/examples/reconciler-real"
         compile((c / "controller.py").read_text(encoding="utf-8"), str(c / "controller.py"), "exec")
         storage = ROOT / "trilhas/03-arquitetura/labs/csi-storage-basico/experiments"

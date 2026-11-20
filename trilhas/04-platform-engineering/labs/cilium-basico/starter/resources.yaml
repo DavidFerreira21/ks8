@@ -1,4 +1,4 @@
-# EXERCÍCIO 04.06 — escreva os campos TODO sem consultar solution/
+# EXERCÍCIO 04.03 — escreva os campos TODO sem consultar solution/
 apiVersion: v1
 kind: Pod
 metadata:
