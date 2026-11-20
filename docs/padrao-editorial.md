@@ -47,6 +47,8 @@ O aluno deve conseguir concluir a prática estudando a aula e usando documentaç
 
 **Evidências mínimas de conclusão:** (a) manifesto/recurso criado pelo aluno; (b) comportamento real observado; (c) explicação do motivo e, se falhou, diagnóstico. O laboratório pode ter mais de quatro fases quando o experimento justificar (Services, por exemplo). Não renumerar fases sem necessidade.
 
+**Propriedade de recursos cluster-scoped:** os labs 02.09, 03.06 e 04.02 usam `metadata.annotations.learning-path.example/lab-id` para identificar PriorityClass, CRD e XRD didáticas. `lab-prepare`, `lab-up` e `lab-down` recusam sobrescrever/excluir um recurso preexistente que não pertence ao lab; isso evita acidentes, mas **não** substitui isolamento de cluster ou RBAC.
+
 **Segurança de APIs globais:** CRDs/XRDs podem atender instâncias de múltiplos namespaces. Antes de excluir a definição, inventarie recursos dependentes; recuse a operação se houver instâncias não removidas. Não use um cleanup automático cego em objetos de escopo do cluster.
 
 **Evidência pedagógica:** além dos critérios genéricos, todo lab deve possuir ao menos um critério de aprovação exclusivo, verificável por observação. Para testes que alteram políticas, nós ou recursos temporários, inclua reversão explícita mesmo em caso de falha. Separe validação declarativa, comportamento real e diagnóstico.

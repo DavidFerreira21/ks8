@@ -16,6 +16,8 @@ O setup do lab registra uma CRD **somente no Kind descartável**. Depois escreva
 
 **Antes de começar:** escreva sua hipótese para cada etapa. A solução em `solution/` existe para conferência posterior, não para ser copiada.
 
+**Definição global:** o setup instala a CRD com a anotação didática `learning-path.example/lab-id: "03.06"`. Se ela já existir sem essa propriedade, a preparação será recusada. Não remova manualmente uma CRD compartilhada para contornar a proteção.
+
 ## Fase 1 — Preparar e prever
 
 ```bash

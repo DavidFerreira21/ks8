@@ -14,6 +14,8 @@ Criar uma PriorityClass de baixo valor sem preempção e observar sua associaç�
 
 Crie PriorityClass `lab-02-priority` com valor 1000, `globalDefault: false`, `preemptionPolicy: Never`, e Pod `prioritario` que referencia a classe. O Pod deve executar BusyBox com sleep.
 
+**Segurança de escopo global:** no YAML da PriorityClass, declare `metadata.annotations.learning-path.example/lab-id: "02.09"`. O motor verifica se já existe uma PriorityClass com o mesmo nome antes de aplicar ou excluir; se pertencer a outro uso, interrompe a operação sem sobrescrever.
+
 Preveja o que deve acontecer antes de abrir `solution/`. Use `kubectl explain` e a aula para esclarecer a API.
 
 ## Fase 1 — Preparar e prever

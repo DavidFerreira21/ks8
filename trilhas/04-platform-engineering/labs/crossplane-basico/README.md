@@ -22,6 +22,8 @@ Criar uma XRD v2 e comprovar registro da API sem confundir XR com infraestrutura
 
 Escreva uma CompositeResourceDefinition `xenvironments.platform.example.org` com `scope: Namespaced`, grupo e versão `v1alpha1`, tipo `XEnvironment` e schema exigindo `spec.tier` como string enum `sandbox/staging`.
 
+**Segurança de escopo global:** inclua `metadata.annotations.learning-path.example/lab-id: "04.02"` na XRD. Antes de aplicar/excluir a definição, o motor impede a reutilização de uma XRD preexistente sem essa anotação de propriedade. Mesmo com a anotação, a remoção é bloqueada se houver XRs dependentes.
+
 Defina sua hipótese antes de consultar `solution/`. Se o tipo não aparecer em `kubectl api-resources`, registre dependência ausente e não tente contornar com recursos fictícios.
 
 ## Fase 1 — Preparar e prever
