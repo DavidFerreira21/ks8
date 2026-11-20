@@ -35,6 +35,48 @@ spec:
 
 
 class CriticalLabSafetyTests(unittest.TestCase):
+    def test_student_apply_rejects_global_without_annotation(self):
+        base = Path(__file__).resolve().parents[1]
+        metadata = base / "trilhas/02-operacao-seguranca/labs/priorityclass-basico"
+        lab = labctl.Lab(
+            "02.09", "PriorityClass", "lab-02-09", metadata,
+            (metadata / "solution/resources.yaml",), (), (), (),
+            (metadata / "starter/resources.yaml",),
+        )
+        with tempfile.TemporaryDirectory() as td:
+            local_root = Path(td)
+            ws = local_root / ".labs" / "02.09"
+            ws.mkdir(parents=True)
+            (ws / "resources.yaml").write_text(
+                "apiVersion: scheduling.k8s.io/v1\n"
+                "kind: PriorityClass\nmetadata:\n  name: lab-02-priority\n"
+                "value: 1000\n", encoding="utf-8")
+            with patch.object(labctl, "ROOT", local_root), \
+                 patch.object(labctl, "kubectl") as kubectl:
+                self.assertEqual(labctl.apply_student_lab(lab), 1)
+                kubectl.assert_not_called()
+
+    def test_student_apply_rejects_cross_namespace(self):
+        base = Path(__file__).resolve().parents[1]
+        metadata = base / "trilhas/03-arquitetura/labs/kube-apiserver-basico"
+        lab = labctl.Lab(
+            "03.02", "API", "lab-03-02", metadata,
+            (metadata / "solution/resources.yaml",), (), (), (),
+            (metadata / "starter/resources.yaml",),
+        )
+        with tempfile.TemporaryDirectory() as td:
+            local_root = Path(td)
+            ws = local_root / ".labs" / "03.02"
+            ws.mkdir(parents=True)
+            (ws / "resources.yaml").write_text(
+                "apiVersion: v1\nkind: ConfigMap\n"
+                "metadata:\n  name: exemplo\n  namespace: default\n",
+                encoding="utf-8")
+            with patch.object(labctl, "ROOT", local_root), \
+                 patch.object(labctl, "kubectl") as kubectl:
+                self.assertEqual(labctl.apply_student_lab(lab), 1)
+                kubectl.assert_not_called()
+
     def test_existing_unowned_crd_refuses_apply_and_delete(self):
         base = Path(__file__).resolve().parents[1]
         metadata = base / "trilhas/03-arquitetura/labs/crds-custom-resources-basico"

@@ -216,13 +216,13 @@ GLOBAL_LAB_KINDS = {"CustomResourceDefinition", "CompositeResourceDefinition", "
 GLOBAL_LAB_OWNER_ANNOTATION = "learning-path.example/lab-id"
 
 
-def _check_global_resources_ownership(lab: Lab) -> int:
+def _check_global_resources_ownership(lab: Lab, manifests: tuple[Path, ...] | None = None) -> int:
     """Impedir que um lab sobrescreva ou remova recurso global preexistente.
 
     A anotação demonstra propriedade *didática*, não é um limite de segurança
     contra administradores maliciosos. O uso continua restrito a Kind isolado.
     """
-    for manifest in (*lab.setup, *lab.apply):
+    for manifest in (manifests if manifests is not None else (*lab.setup, *lab.apply)):
         for obj in yaml.safe_load_all(manifest.read_text(encoding="utf-8")):
             if not isinstance(obj, dict) or obj.get("kind") not in GLOBAL_LAB_KINDS:
                 continue
@@ -256,6 +256,52 @@ def _check_global_resources_ownership(lab: Lab) -> int:
                           "O laboratório não pode sobrescrever nem excluir esse recurso.",
                           file=sys.stderr)
                     return 1
+    return 0
+
+
+def apply_student_lab(lab: Lab) -> int:
+    """Aplica somente o YAML escrito pelo aluno após validar Kind e recursos globais."""
+    workspace = ROOT / ".labs" / lab.identifier
+    manifests = tuple(workspace / template.name for template in lab.starter)
+    if not manifests or any(not path.is_file() for path in manifests):
+        print(f"FAIL: execute make lab-prepare LAB={lab.identifier} e complete "
+              f"os arquivos em .labs/{lab.identifier}/", file=sys.stderr)
+        return 1
+    canonical_globals = {
+        (obj.get("kind"), (obj.get("metadata") or {}).get("name"))
+        for source in (*lab.setup, *lab.apply)
+        for obj in yaml.safe_load_all(source.read_text(encoding="utf-8"))
+        if isinstance(obj, dict) and obj.get("kind") in GLOBAL_LAB_KINDS
+    }
+    for source in manifests:
+        try:
+            documents = list(yaml.safe_load_all(source.read_text(encoding="utf-8")))
+        except yaml.YAMLError as exc:
+            print(f"FAIL: YAML do aluno inválido em {source}: {exc}", file=sys.stderr)
+            return 1
+        if not documents or not all(isinstance(obj, dict) and obj.get("kind")
+                                    and (obj.get("metadata") or {}).get("name")
+                                    for obj in documents):
+            print(f"FAIL: manifesto incompleto: {source}", file=sys.stderr)
+            return 1
+        for obj in documents:
+            kind = obj["kind"]
+            metadata = obj["metadata"]
+            if kind in GLOBAL_LAB_KINDS and (kind, metadata["name"]) not in canonical_globals:
+                print(f"FAIL: o lab não autoriza criar {kind}/{metadata['name']}",
+                      file=sys.stderr)
+                return 1
+            if kind not in GLOBAL_LAB_KINDS and metadata.get("namespace", lab.namespace) != lab.namespace:
+                print(f"FAIL: namespace fora do escopo do lab: {metadata.get('namespace')}",
+                      file=sys.stderr)
+                return 1
+    if _check_global_resources_ownership(lab, manifests):
+        return 1
+    if ensure_namespace(lab.namespace):
+        return 1
+    for source in manifests:
+        if kubectl("apply", "-f", str(source)).returncode:
+            return 1
     return 0
 
 
@@ -464,6 +510,8 @@ def execute_lab(lab: Lab, action: str) -> int:
                        lab.namespace, "--ignore-not-found", "-o", "wide").returncode
     if action == "lab-prepare":
         return prepare_lab(lab)
+    if action == "lab-apply":
+        return apply_student_lab(lab)
     if action == "lab-reset":
         if remove_lab_objects(lab):
             return 1
@@ -536,7 +584,7 @@ def execute_lab(lab: Lab, action: str) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Kubernetes Visual Guide — gerenciador de labs")
-    parser.add_argument("action", choices=("labs", "doctor", "validate", "lab-prepare", "lab-solution", "lab-reset", "lab-up", "lab-test", "lab-status", "lab-down", "lab-observe", "lab-experiment"))
+    parser.add_argument("action", choices=("labs", "doctor", "validate", "lab-prepare", "lab-apply", "lab-solution", "lab-reset", "lab-up", "lab-test", "lab-status", "lab-down", "lab-observe", "lab-experiment"))
     parser.add_argument("--lab", help="ID do lab, por exemplo 01.06")
     parser.add_argument("--experiment", help="ID do experimento definido no lab.yaml")
     parser.add_argument("--confirm", action="store_true", help="Confirma a mutação do experimento")

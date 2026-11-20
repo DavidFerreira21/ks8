@@ -2,7 +2,7 @@
 
 [← Aula 02.09](../../priorityclass-preemption/README.md) · [↑ Camada 02](../../README.md) · [🧪 Índice dos labs](../../../../docs/labs.md)
 
-> **MODO DESAFIO:** `make lab-prepare LAB=02.09` cria o namespace e copia o starter **incompleto** em `.labs/02.09/resources.yaml`. Complete-o, execute `kubectl apply -f .labs/02.09/`, depois `make lab-test LAB=02.09` e `make lab-observe LAB=02.09`. **`make lab-up` aplica a solução e é exclusivo da CI.**
+> **MODO DESAFIO:** `make lab-prepare LAB=02.09` cria o namespace e copia o starter **incompleto** em `.labs/02.09/resources.yaml`. Complete-o, execute `make lab-apply LAB=02.09`, depois `make lab-test LAB=02.09` e `make lab-observe LAB=02.09`. **`make lab-up` aplica a solução e é exclusivo da CI.**
 
 ## Objetivo e hipótese
 
@@ -26,12 +26,14 @@ make lab-prepare LAB=02.09
 cat .labs/02.09/resources.yaml
 ```
 
+**Por segurança, use `make lab-apply LAB=02.09` no lugar de `kubectl apply` direto. O comando verifica propriedade e escopo da definição global antes da aplicação.**
+
 ## Fase 2 — Aplicar e observar
 
 Complete os TODOs e execute:
 
 ```bash
-kubectl apply -f .labs/02.09/
+make lab-apply LAB=02.09
 make lab-test LAB=02.09
 make lab-observe LAB=02.09
 ```
