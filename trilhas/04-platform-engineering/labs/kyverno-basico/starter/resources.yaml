@@ -3,5 +3,5 @@ apiVersion: policies.kyverno.io/v1
 kind: NamespacedValidatingPolicy
 metadata:
   name: requer-equipe
-  namespace: lab-04-03
+  namespace: lab-04-02
 # TODO: validationActions, matchConstraints ConfigMaps e expressão CEL que exige label equipe
