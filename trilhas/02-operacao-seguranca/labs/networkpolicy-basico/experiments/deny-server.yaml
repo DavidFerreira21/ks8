@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-server
+  namespace: lab-02-13
+spec:
+  podSelector:
+    matchLabels:
+      app: policy-server
+  policyTypes: [Ingress]
+  ingress: []

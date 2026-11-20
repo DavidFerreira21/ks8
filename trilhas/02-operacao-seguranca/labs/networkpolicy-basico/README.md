@@ -40,6 +40,8 @@ make lab-observe LAB=02.13
 
 Compare os campos da política com a label do Pod e explique o tráfego que **seria** bloqueado com um CNI que implemente policies. Em Kind padrão, não afirme bloqueio sem instalar/verificar CNI apropriado e executar prova de conectividade.
 
+**Avançado com prova funcional:** depois da etapa declarativa, siga o [experimento opcional de NetworkPolicy nativa no Kind dedicado com Cilium](experiments/README.md), que exige testar conexões antes/depois do default-deny e da liberação seletiva. Esse exercício não é executado na CI Kind padrão.
+
 ## Resultado esperado e evidências
 
 O API Server aceita o objeto. **Isso não valida enforcement.** Com Kind padrão, o teste funcional de bloqueio fica pendente.
