@@ -69,7 +69,7 @@ class CriticalLabSafetyTests(unittest.TestCase):
             (ws / "resources.yaml").write_text(
                 "apiVersion: v1\\nkind: ConfigMap\\nmetadata:\\n  name: demo\\n",
                 encoding="utf-8")
-            with patch.object(labctl, "ROOT", local_root), \\
+            with patch.object(labctl, "ROOT", local_root), \
                  patch.object(labctl, "kubectl") as kubectl:
                 self.assertEqual(labctl.apply_student_lab(lab), 1)
                 kubectl.assert_not_called()
